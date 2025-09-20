@@ -3,25 +3,26 @@ import '../../view/screen/authentication_screen/email_verify/email_verify_screen
 import '../../view/screen/authentication_screen/forgot_screen/forgot_screen.dart';
 import '../../view/screen/authentication_screen/login_screen/login_screen.dart';
 import '../../view/screen/authentication_screen/otp_screeen/otp_screeen.dart';
-import '../../view/screen/dentist/add_case/view/add_case_screen.dart';
-import '../../view/screen/dentist/dentist_home/view/dentist_home/dentist_home_screen.dart';
-import '../../view/screen/dentist/dentist_home/view/view_case_screen/view_case_screen.dart';
-import '../../view/screen/dentist/my_case/view/my_case_screen.dart';
-import '../../view/screen/dentist/profile/view/profile_screen/account_settings/about_screen.dart';
-import '../../view/screen/dentist/profile/view/profile_screen/account_settings/account_settings_screen.dart';
-import '../../view/screen/dentist/profile/view/profile_screen/account_settings/change_pass_screen.dart';
-import '../../view/screen/dentist/profile/view/profile_screen/account_settings/privacy_screen.dart';
-import '../../view/screen/dentist/profile/view/profile_screen/account_settings/terms_services_screen.dart';
-import '../../view/screen/dentist/profile/view/profile_screen/edit_screen.dart';
-import '../../view/screen/dentist/profile/view/profile_screen/langauage_screen.dart';
-import '../../view/screen/dentist/profile/view/profile_screen/notification_screen.dart';
-import '../../view/screen/dentist/profile/view/profile_screen/profile_screen.dart';
 import '../../view/screen/onboarding_screen/view/onboarding_screen.dart';
+import '../../view/screen/role_screen/dentist/add_case/view/add_case_screen.dart';
+import '../../view/screen/role_screen/dentist/dentist_home/view/dentist/dentist_list_screen.dart';
+import '../../view/screen/role_screen/dentist/dentist_home/view/dentist_home/dentist_home_screen.dart';
+import '../../view/screen/role_screen/dentist/dentist_home/view/view_case_screen/view_case_screen.dart';
+import '../../view/screen/role_screen/dentist/my_case/view/my_case_screen.dart';
+import '../../view/screen/role_screen/dentist/profile/view/profile_screen/account_settings/about_screen.dart';
+import '../../view/screen/role_screen/dentist/profile/view/profile_screen/account_settings/account_settings_screen.dart';
+import '../../view/screen/role_screen/dentist/profile/view/profile_screen/account_settings/change_pass_screen.dart';
+import '../../view/screen/role_screen/dentist/profile/view/profile_screen/account_settings/privacy_screen.dart';
+import '../../view/screen/role_screen/dentist/profile/view/profile_screen/account_settings/terms_services_screen.dart';
+import '../../view/screen/role_screen/dentist/profile/view/profile_screen/edit_screen.dart';
+import '../../view/screen/role_screen/dentist/profile/view/profile_screen/langauage_screen.dart';
+import '../../view/screen/role_screen/dentist/profile/view/profile_screen/notification_screen.dart';
+import '../../view/screen/role_screen/dentist/profile/view/profile_screen/profile_screen.dart';
+import '../../view/screen/role_screen/technician/technician_chat_screen/view/technician_chat_screen.dart';
+import '../../view/screen/role_screen/technician/technician_home/view/technician_home/technician_home_screen.dart';
+import '../../view/screen/role_screen/technician/technician_my_case_screen/view/technician_my_case_screen.dart';
+import '../../view/screen/role_screen/technician/technician_profile_screen/view/technician_profile_screen.dart';
 import '../../view/screen/splash_screen/splash_screen.dart';
-import '../../view/screen/technician/technician_chat_screen/view/technician_chat_screen.dart';
-import '../../view/screen/technician/technician_home/view/technician_home/technician_home_screen.dart';
-import '../../view/screen/technician/technician_my_case_screen/view/technician_my_case_screen.dart';
-import '../../view/screen/technician/technician_profile_screen/view/technician_profile_screen.dart' hide MyCaseScreen;
 
 class AppRoutes {
   ///===========================Authentication==========================
@@ -35,6 +36,7 @@ class AppRoutes {
 
 
   ///===========================Dentist Part==========================
+  static const String dentistListScreen = "/DentistListScreen";
   static const String dentistHomeScreen = "/DentistHomeScreen";
   static const String myCaseScreen = "/MyCaseScreen";
   static const String addCaseScreen = "/AddCaseScreen";
@@ -66,6 +68,7 @@ class AppRoutes {
     // GetPage(name: setNewPassword, page: () => SetNewPassword()),
 
     ///===========================Dentist Part==================================
+    GetPage(name: dentistListScreen, page: () => DentistListScreen()),
     GetPage(name: dentistHomeScreen, page: () => DentistHomeScreen()),
     GetPage(name: myCaseScreen, page: () => MyCaseScreen()),
     GetPage(name: addCaseScreen, page: () => AddCaseScreen()),
