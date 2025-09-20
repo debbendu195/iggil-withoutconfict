@@ -1,13 +1,13 @@
-import 'package:event_platform/view/screen/technician/technician_my_case_screen/view/technician_my_case_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import '../../../utils/app_colors/app_colors.dart';
 import '../../../utils/app_icons/app_icons.dart';
-import '../../screen/technician/technician_chat_screen/view/technician_chat_screen.dart';
-import '../../screen/technician/technician_home/view/technician_home/technician_home_screen.dart';
-import '../../screen/technician/technician_profile_screen/view/technician_profile_screen.dart';
+import '../../screen/role_screen/technician/technician_chat_screen/view/technician_chat_screen.dart';
+import '../../screen/role_screen/technician/technician_home/view/technician_home/technician_home_screen.dart';
+import '../../screen/role_screen/technician/technician_my_case_screen/view/technician_my_case_screen.dart';
+import '../../screen/role_screen/technician/technician_profile_screen/view/technician_profile_screen.dart';
 import '../custom_text/custom_text.dart';
 
 class TechnicianNavbar extends StatefulWidget {
