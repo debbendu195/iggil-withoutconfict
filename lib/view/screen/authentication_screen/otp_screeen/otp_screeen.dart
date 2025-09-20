@@ -37,7 +37,7 @@ class OtpScreeen extends StatelessWidget {
               ),
               SizedBox(height: 40,),
               CustomButton(onTap: (){
-                Get.toNamed(AppRoutes.otpScreeen);
+                Get.toNamed(AppRoutes.forgotScreen);
               }, title: 'Verify', fontWeight: FontWeight.w600, fontSize: 16,)
             ],
           ),

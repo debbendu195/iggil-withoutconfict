@@ -28,7 +28,7 @@ class ForgotScreen extends StatelessWidget {
             CustomFormCard(title: 'Confirm New Password', controller: TextEditingController(), hintText: '********', isPassword: true,),
             SizedBox(height: 40,),
             CustomButton(onTap: (){
-              Get.toNamed(AppRoutes.otpScreeen);
+              Get.toNamed(AppRoutes.loginScreen);
             }, title: 'Update Password', fontWeight: FontWeight.w600, fontSize: 16,)
           ],
         ),

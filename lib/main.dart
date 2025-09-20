@@ -29,6 +29,7 @@ class MyApp extends StatelessWidget {
       designSize: const Size(393, 852),
       child: GetMaterialApp(
         theme: ThemeData(
+          scaffoldBackgroundColor: Colors.white,
           appBarTheme: const AppBarTheme(
             toolbarHeight: 65,
             elevation: 0,
