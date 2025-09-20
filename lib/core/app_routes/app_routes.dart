@@ -1,20 +1,32 @@
 import 'package:get/get.dart';
-
 import '../../view/screen/authentication_screen/email_verify/email_verify_screen.dart';
 import '../../view/screen/authentication_screen/forgot_screen/forgot_screen.dart';
 import '../../view/screen/authentication_screen/login_screen/login_screen.dart';
 import '../../view/screen/authentication_screen/otp_screeen/otp_screeen.dart';
-import '../../view/screen/onboarding_screen/onboarding1_screen.dart';
-import '../../view/screen/onboarding_screen/onboarding2_screen.dart';
-import '../../view/screen/onboarding_screen/onboarding3_screen.dart';
+import '../../view/screen/dentist/add_case/view/add_case_screen.dart';
+import '../../view/screen/dentist/dentist_home/view/dentist_home/dentist_home_screen.dart';
+import '../../view/screen/dentist/dentist_home/view/view_case_screen/view_case_screen.dart';
+import '../../view/screen/dentist/my_case/view/my_case_screen.dart';
+import '../../view/screen/dentist/profile/view/profile_screen/account_settings/about_screen.dart';
+import '../../view/screen/dentist/profile/view/profile_screen/account_settings/account_settings_screen.dart';
+import '../../view/screen/dentist/profile/view/profile_screen/account_settings/change_pass_screen.dart';
+import '../../view/screen/dentist/profile/view/profile_screen/account_settings/privacy_screen.dart';
+import '../../view/screen/dentist/profile/view/profile_screen/account_settings/terms_services_screen.dart';
+import '../../view/screen/dentist/profile/view/profile_screen/edit_screen.dart';
+import '../../view/screen/dentist/profile/view/profile_screen/langauage_screen.dart';
+import '../../view/screen/dentist/profile/view/profile_screen/notification_screen.dart';
+import '../../view/screen/dentist/profile/view/profile_screen/profile_screen.dart';
+import '../../view/screen/onboarding_screen/view/onboarding_screen.dart';
 import '../../view/screen/splash_screen/splash_screen.dart';
+import '../../view/screen/technician/technician_chat_screen/view/technician_chat_screen.dart';
+import '../../view/screen/technician/technician_home/view/technician_home/technician_home_screen.dart';
+import '../../view/screen/technician/technician_my_case_screen/view/technician_my_case_screen.dart';
+import '../../view/screen/technician/technician_profile_screen/view/technician_profile_screen.dart' hide MyCaseScreen;
 
 class AppRoutes {
   ///===========================Authentication==========================
   static const String splashScreen = "/SplashScreen";
-  static const String onboarding1Screen = "/Onboarding1Screen";
-  static const String onboarding2Screen = "/Onboarding2Screen";
-  static const String onboarding3Screen = "/Onboarding3Screen";
+  static const String onboardingScreen = "/OnboardingScreen";
   static const String loginScreen = "/LoginScreen";
   static const String emailVerify = "/EmailVerifyScreen";
   static const String otpScreeen = "/OtpScreeen";
@@ -22,23 +34,57 @@ class AppRoutes {
   // static const String setNewPassword = "/SetNewPassword";
 
 
-  ///===========================Host Part==========================
-  static const String homeScreen = "/HomeScreen";
+  ///===========================Dentist Part==========================
+  static const String dentistHomeScreen = "/DentistHomeScreen";
+  static const String myCaseScreen = "/MyCaseScreen";
+  static const String addCaseScreen = "/AddCaseScreen";
+  static const String profileScreen = "/ProfileScreen";
+  static const String viewCaseScreen = "/ViewCaseScreen";
+  static const String editScreen = "/EditScreen";
+  static const String accountSettingsScreen = "/AccountSettingsScreen";
+  static const String langauageScreen = "/LangauageScreen";
+  static const String notificationScreen = "/NotificationScreen";
+  static const String changePassScreen = "/ChangePassScreen";
+  static const String termsServicesScreen = "/TermsServicesScreen";
+  static const String privacyScreen = "/PrivacyScreen";
+  static const String aboutScreen = "/AboutScreen";
+
+  ///===========================Technician Part==================================
+  static const String technicianHomeScreen = "/TechnicianHomeScreen";
+  static const String technicianMyCaseScreen = "/TechnicianMyCaseScreen";
+  static const String technicianChatScreen = "/TechnicianChatScreen";
+  static const String technicianProfileScreen = "/TechnicianProfileScreen";
 
   static List<GetPage> routes = [
-    ///===========================Authentication==========================
+    ///===========================Authentication================================
     GetPage(name: splashScreen, page: () => SplashScreen()),
-    GetPage(name: onboarding1Screen, page: () => Onboarding1Screen()),
-    GetPage(name: onboarding2Screen, page: () => Onboarding2Screen()),
-    GetPage(name: onboarding3Screen, page: () => Onboarding3Screen()),
+    GetPage(name: onboardingScreen, page: () => OnboardingScreen()),
     GetPage(name: loginScreen, page: () => LoginScreen()),
     GetPage(name: emailVerify, page: () => EmailVerifyScreen()),
     GetPage(name: otpScreeen, page: () => OtpScreeen()),
     GetPage(name: forgotScreen, page: () => ForgotScreen()),
     // GetPage(name: setNewPassword, page: () => SetNewPassword()),
 
-    ///===========================Host Part==========================
-    // GetPage(name: homeScreen, page: () => HomeScreen()),
+    ///===========================Dentist Part==================================
+    GetPage(name: dentistHomeScreen, page: () => DentistHomeScreen()),
+    GetPage(name: myCaseScreen, page: () => MyCaseScreen()),
+    GetPage(name: addCaseScreen, page: () => AddCaseScreen()),
+    GetPage(name: profileScreen, page: () => ProfileScreen()),
+    GetPage(name: viewCaseScreen, page: () => ViewCaseScreen()),
+    GetPage(name: editScreen, page: () => EditScreen()),
+    GetPage(name: accountSettingsScreen, page: () => AccountSettingsScreen()),
+    GetPage(name: langauageScreen, page: () => LangauageScreen()),
+    GetPage(name: notificationScreen, page: () => NotificationScreen()),
+    GetPage(name: changePassScreen, page: () => ChangePassScreen()),
+    GetPage(name: termsServicesScreen, page: () => TermsServicesScreen()),
+    GetPage(name: privacyScreen, page: () => PrivacyScreen()),
+    GetPage(name: aboutScreen, page: () => AboutScreen()),
+
+    ///===========================Technician Part==================================
+    GetPage(name: technicianHomeScreen, page: () => TechnicianHomeScreen()),
+    GetPage(name: technicianMyCaseScreen, page: () => TechnicianMyCaseScreen()),
+    GetPage(name: technicianChatScreen, page: () => TechnicianChatScreen()),
+    GetPage(name: technicianProfileScreen, page: () => TechnicianProfileScreen()),
 
   ];
 }
