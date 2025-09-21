@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../../../../components/custom_button/custom_button.dart';
 import '../../../../../../components/custom_text/custom_text.dart';
+import '../custom_case_card_description/custom_case_card_description.dart';
 
 class CustomCaseCard extends StatelessWidget {
   const CustomCaseCard({
@@ -16,9 +17,9 @@ class CustomCaseCard extends StatelessWidget {
     this.onTap,
     this.status = "New",
     this.statusColor,
-    this.all=false,
-    this.inProgress=false,
-    this.complete=false,
+    this.all = false,
+    this.inProgress = false,
+    this.complete = false,
   });
 
   final String? title;
@@ -66,18 +67,19 @@ class CustomCaseCard extends StatelessWidget {
                 /// All Badge
                 all == false
                     ? Container(
-                  padding: EdgeInsets.symmetric(horizontal: 12, vertical: 4),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20),
-                    color: AppColors.red_01,
-                  ),
-                  child: CustomText(
-                    text: "New",
-                    fontSize: 12,
-                    fontWeight: FontWeight.w400,
-                    color: Colors.red,
-                  ),
-                )
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20),
+                          color: AppColors.red_01,
+                        ),
+                        child: CustomText(
+                          text: "New",
+                          fontSize: 12,
+                          fontWeight: FontWeight.w400,
+                          color: Colors.red,
+                        ),
+                      )
                     : SizedBox(),
 
                 SizedBox(width: 6),
@@ -85,18 +87,19 @@ class CustomCaseCard extends StatelessWidget {
                 /// In Progress Badge
                 inProgress == false
                     ? Container(
-                  padding: EdgeInsets.symmetric(horizontal: 12, vertical: 4),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20),
-                    color: Color(0xffDBEAFE),
-                  ),
-                  child: CustomText(
-                    text: "In Progress",
-                    fontSize: 12,
-                    fontWeight: FontWeight.w400,
-                    color: Colors.blue,
-                  ),
-                )
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20),
+                          color: Color(0xffDBEAFE),
+                        ),
+                        child: CustomText(
+                          text: "In Progress",
+                          fontSize: 12,
+                          fontWeight: FontWeight.w400,
+                          color: Colors.blue,
+                        ),
+                      )
                     : Container(),
 
                 SizedBox(width: 6),
@@ -104,18 +107,19 @@ class CustomCaseCard extends StatelessWidget {
                 /// Complete Badge
                 complete == false
                     ? Container(
-                  padding: EdgeInsets.symmetric(horizontal: 12, vertical: 4),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20),
-                    color: Color(0xffE0FFD5),
-                  ),
-                  child: CustomText(
-                    text: "Complete",
-                    fontSize: 12,
-                    fontWeight: FontWeight.w400,
-                    color: AppColors.primary,
-                  ),
-                )
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20),
+                          color: Color(0xffE0FFD5),
+                        ),
+                        child: CustomText(
+                          text: "Complete",
+                          fontSize: 12,
+                          fontWeight: FontWeight.w400,
+                          color: AppColors.primary,
+                        ),
+                      )
                     : Container(),
               ],
             ),
@@ -129,6 +133,15 @@ class CustomCaseCard extends StatelessWidget {
             ),
             SizedBox(height: 8),
 
+
+            // custom case card description call part
+            CustomCaseCardDescription(item1: 'Clinic',item2: 'MDC',),
+            CustomCaseCardDescription(item1: 'Patient Ref',item2: 'MDC',),
+            CustomCaseCardDescription(item1: 'Status',item2: 'MDC',),
+            CustomCaseCardDescription(item1: 'Return Date',item2:'10/09/2025',),
+
+
+
             /// Description
             CustomText(
               text: description ??
@@ -138,57 +151,17 @@ class CustomCaseCard extends StatelessWidget {
             ),
             SizedBox(height: 12),
 
-            /// Progress
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                CustomText(
-                  text: "Progress",
-                  fontSize: 12,
-                  color: Colors.black54,
-                ),
-                CustomText(
-                  text: "${(progress * 100).toInt()}%",
-                  fontSize: 12,
-                  color: Colors.black54,
-                ),
-              ],
-            ),
-            SizedBox(height: 4),
-            LinearProgressIndicator(
-              value: progress,
-              minHeight: 6,
-              borderRadius: BorderRadius.circular(6),
-              backgroundColor: Colors.grey[300],
-              color: statusColor,
-            ),
-            SizedBox(height: 12),
-
-            /// Time ago
-            Row(
-              children: [
-                Icon(Icons.access_time, size: 16, color: Colors.grey),
-                SizedBox(width: 6),
-                CustomText(
-                  text: timeAgo ?? "Just now",
-                  fontSize: 12,
-                  color: Colors.black54,
-                ),
-              ],
-            ),
-            SizedBox(height: 16),
-
             /// Button
             CustomButton(
               title: "View Case",
-              onTap: (){
+              onTap: () {
                 Get.toNamed(AppRoutes.viewCaseScreen);
               },
               textColor: Colors.white,
               borderRadius: 8,
               height: 45,
               width: double.infinity,
-              fillColor: statusColor??AppColors.primary,
+              fillColor: statusColor ?? AppColors.primary,
             ),
           ],
         ),
