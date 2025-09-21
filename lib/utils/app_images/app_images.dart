@@ -1,10 +1,22 @@
 class AppImages {
   static const String basePath = "assets/images";
+  // dentist-list - images
+  static const String basePath2 = 'assets/images/Dentist_list_icon';
 
   static const String logo = "$basePath/logo.svg";
 
   ///====================== SplashScreen =========================
   static const String splashScreenImage = "$basePath/splashScreenImage.png";
+
+  ///====================== dentist list images =========================
+  ///
+  static const String icon1 = "$basePath2/icon1.png";
+  static const String icon2 = "$basePath2/icon2.png";
+  static const String icon3 = "$basePath2/icon3.png";
+  static const String icon4 = "$basePath2/icon4.png";
+  static const String icon5 = "$basePath2/icon5.png";
+  static const String icon6 = "$basePath2/icon6.png";
+
 
 
   ///====================== Onborading =========================
