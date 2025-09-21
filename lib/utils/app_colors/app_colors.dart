@@ -18,6 +18,11 @@ class AppColors {
 
   static const Color black_80 = Color(0xff181818);
   static const Color navbarClr = Color(0xff1D1F24);
+  
+  
+  //  dentist list view color
+static const Color dentistListColor = Color(0xffFBF8F8);
+
 
 
 
