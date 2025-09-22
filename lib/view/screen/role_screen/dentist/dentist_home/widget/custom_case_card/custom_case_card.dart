@@ -150,7 +150,7 @@ class CustomCaseCard extends StatelessWidget {
             CustomText(
               textAlign: TextAlign.start,
               text: description ??
-                  "Complex endodontic case requiring specialized \n approach for molar restoration...",
+                  "Complex endodontic case requiring specialized\napproach for molar restoration...",
               fontSize: 13,
               color: Colors.black54,
 
