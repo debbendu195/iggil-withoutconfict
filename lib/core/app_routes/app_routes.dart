@@ -18,11 +18,14 @@ import '../../view/screen/role_screen/dentist/profile/view/profile_screen/edit_s
 import '../../view/screen/role_screen/dentist/profile/view/profile_screen/langauage_screen.dart';
 import '../../view/screen/role_screen/dentist/profile/view/profile_screen/notification_screen.dart';
 import '../../view/screen/role_screen/dentist/profile/view/profile_screen/profile_screen.dart';
+import '../../view/screen/role_screen/labscreen/lab_manager/lab_manager.dart';
 import '../../view/screen/role_screen/technician/technician_chat_screen/view/technician_chat_screen.dart';
 import '../../view/screen/role_screen/technician/technician_home/view/technician_home/technician_home_screen.dart';
 import '../../view/screen/role_screen/technician/technician_my_case_screen/view/technician_my_case_screen.dart';
 import '../../view/screen/role_screen/technician/technician_profile_screen/view/technician_profile_screen.dart';
 import '../../view/screen/splash_screen/splash_screen.dart';
+
+
 
 class AppRoutes {
   ///===========================Authentication==========================
@@ -57,6 +60,13 @@ class AppRoutes {
   static const String technicianChatScreen = "/TechnicianChatScreen";
   static const String technicianProfileScreen = "/TechnicianProfileScreen";
 
+  //========================= Lab_Part static constant variable================================//
+  static const String labManager ="/LabManager";
+
+
+
+
+
   static List<GetPage> routes = [
     ///===========================Authentication================================
     GetPage(name: splashScreen, page: () => SplashScreen()),
@@ -88,6 +98,18 @@ class AppRoutes {
     GetPage(name: technicianMyCaseScreen, page: () => TechnicianMyCaseScreen()),
     GetPage(name: technicianChatScreen, page: () => TechnicianChatScreen()),
     GetPage(name: technicianProfileScreen, page: () => TechnicianProfileScreen()),
+
+
+    //========================= Lab_Part================================//
+    GetPage(name: labManager, page: () => LabManager()),
+
+
+
+
+
+
+
+
 
 
 
