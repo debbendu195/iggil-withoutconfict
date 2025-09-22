@@ -136,18 +136,24 @@ class CustomCaseCard extends StatelessWidget {
 
             // custom case card description call part
             CustomCaseCardDescription(item1: 'Clinic',item2: 'MDC',),
-            CustomCaseCardDescription(item1: 'Patient Ref',item2: 'MDC',),
-            CustomCaseCardDescription(item1: 'Status',item2: 'MDC',),
+            SizedBox(height: 16),
+            CustomCaseCardDescription(item1: 'Patient Ref',item2: 'Mu0001',),
+            SizedBox(height: 16),
+            CustomCaseCardDescription(item1: 'Status',item2: 'Submitted',),
+            SizedBox(height: 16),
             CustomCaseCardDescription(item1: 'Return Date',item2:'10/09/2025',),
+            SizedBox(height: 16),
 
 
 
             /// Description
             CustomText(
+              textAlign: TextAlign.start,
               text: description ??
-                  "Complex case requiring specialized approach...",
+                  "Complex endodontic case requiring specialized \n approach for molar restoration...",
               fontSize: 13,
               color: Colors.black54,
+
             ),
             SizedBox(height: 12),
 
