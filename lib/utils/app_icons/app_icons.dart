@@ -8,9 +8,9 @@ class AppIcons {
 
   ///=========================Nab bar Icon ======================
   static const String home = "$basePath/home.svg";
-  static const String myCase = "$basePath/my_case.svg";
-  static const String addCase = "$basePath/add_case.svg";
-  static const String profile = "$basePath/profile.svg";
+  static const String myCase = "$basePath/lab_manager_my_case.svg";
+  static const String addCase = "$basePath/lab_manager_add_case.svg";
+  static const String profile = "$basePath/lab_manager_profile.svg";
   static const String editProfile = "$basePath/edit.svg";
   static const String accountSettings = "$basePath/account.svg";
   static const String language = "$basePath/language.svg";

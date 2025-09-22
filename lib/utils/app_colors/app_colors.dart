@@ -20,7 +20,7 @@ class AppColors {
   static const Color navbarClr = Color(0xff1D1F24);
   
   
-  //  dentist list view color
+  //  lab_manager list view color
 static const Color dentistListColor = Color(0xffFBF8F8);
 
 

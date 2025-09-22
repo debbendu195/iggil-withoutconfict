@@ -1,6 +1,6 @@
 class AppImages {
   static const String basePath = "assets/images";
-  // dentist-list - images
+  // lab_manager-list - images
   static const String basePath2 = 'assets/images/Dentist_list_icon';
 
   static const String logo = "$basePath/logo.svg";
@@ -8,7 +8,7 @@ class AppImages {
   ///====================== SplashScreen =========================
   static const String splashScreenImage = "$basePath/splashScreenImage.png";
 
-  ///====================== dentist list images =========================
+  ///====================== lab_manager list images =========================
   ///
   static const String icon1 = "$basePath2/icon1.png";
   static const String icon2 = "$basePath2/icon2.png";

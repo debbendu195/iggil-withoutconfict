@@ -18,7 +18,6 @@ import '../../view/screen/role_screen/dentist/profile/view/profile_screen/edit_s
 import '../../view/screen/role_screen/dentist/profile/view/profile_screen/langauage_screen.dart';
 import '../../view/screen/role_screen/dentist/profile/view/profile_screen/notification_screen.dart';
 import '../../view/screen/role_screen/dentist/profile/view/profile_screen/profile_screen.dart';
-import '../../view/screen/role_screen/labscreen/lab_manager/lab_manager.dart';
 import '../../view/screen/role_screen/technician/technician_chat_screen/view/technician_chat_screen.dart';
 import '../../view/screen/role_screen/technician/technician_home/view/technician_home/technician_home_screen.dart';
 import '../../view/screen/role_screen/technician/technician_my_case_screen/view/technician_my_case_screen.dart';
@@ -101,7 +100,7 @@ class AppRoutes {
 
 
     //========================= Lab_Part================================//
-    GetPage(name: labManager, page: () => LabManager()),
+    /*GetPage(name: labManager, page: () => LabManager()),*/
 
 
 
