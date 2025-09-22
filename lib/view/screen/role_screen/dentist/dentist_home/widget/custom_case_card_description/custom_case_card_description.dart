@@ -7,7 +7,7 @@ class CustomCaseCardDescription extends StatelessWidget {
   final String? item2;
 
   const CustomCaseCardDescription(
-      {super.key, this.item1, this.item2, this.item3});
+      {super.key, this.item1, this.item2,});
 
   @override
   Widget build(BuildContext context) {

@@ -7,6 +7,9 @@ import 'package:event_platform/view/components/custom_text/custom_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../role_screen/labscreen/lab_manager/lab_manager.dart';
+
+
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
 
@@ -35,6 +38,9 @@ class LoginScreen extends StatelessWidget {
                 CustomButton(onTap: (){
                   // Get.toNamed(AppRoutes.dentistListScreen);
                   Get.toNamed(AppRoutes.dentistHomeScreen);
+                  Get.toNamed(AppRoutes.labManager);
+                  // Get.toNamed(AppRoutes.dentistListScreen);
+                  // Get.toNamed(AppRoutes.dentistHomeScreen);
                   // Get.toNamed(AppRoutes.technicianHomeScreen);
                 },
                 title: 'Log in',)
