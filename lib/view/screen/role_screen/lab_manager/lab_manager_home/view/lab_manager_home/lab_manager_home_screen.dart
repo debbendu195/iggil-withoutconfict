@@ -1,60 +1,16 @@
-import 'package:event_platform/core/app_routes/app_routes.dart';
 import 'package:event_platform/view/components/custom_nav_bar/navbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import '../../../../../../../utils/app_colors/app_colors.dart';
 import '../../../../../../../utils/app_const/app_const.dart';
-import '../../../../../../../utils/app_images/app_images.dart';
-import '../../../../components/custom_button/custom_button.dart';
-import '../../../../components/custom_netwrok_image/custom_network_image.dart';
-import '../../../../components/custom_text/custom_text.dart';
+import '../../../../../../components/custom_button/custom_button.dart';
+import '../../../../../../components/custom_netwrok_image/custom_network_image.dart';
+import '../../../../../../components/custom_text/custom_text.dart';
+import '../../../../../../components/custom_text_field/custom_text_field.dart';
+import '../../widget/custom_case_card/custom_case_card.dart';
 
-class LabManager extends StatelessWidget {
-  const LabManager({super.key});
-
-  final List<Map<String, String>> items = const [
-    {
-      'image': AppImages.icon1,
-      'title': 'Profile',
-      'subtitle': 'Manage your account',
-      'route': AppRoutes.profileScreen,
-    },
-    {
-      'image': AppImages.icon2,
-      'title': 'Profile Management',
-      'subtitle': 'Manage user account',
-      'route': AppRoutes.myCaseScreen,
-    },
-    {
-      'image': AppImages.icon3,
-      'title': 'All Case List',
-      'subtitle': 'Active cases',
-      'route': AppRoutes.accountSettingsScreen,
-    },
-    {
-      'image': AppImages.icon4,
-      'title': 'All Archives',
-      'subtitle': 'Completed cases'
-    },
-    {
-      'image': AppImages.icon5,
-      'title': 'Downloads',
-      'subtitle': 'Forms & documents'
-    },
-    {
-      'image': AppImages.icon6,
-      'title': 'Downloads',
-      'subtitle': 'Forms & documents'
-    },
-    {
-      'image': AppImages.icon1,
-      'title': 'Contact Us',
-      'subtitle': 'Get in touch',
-      'route': AppRoutes.aboutScreen,
-    },
-  ];
+class DentistHomeScreen extends StatelessWidget {
+  const DentistHomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -63,7 +19,7 @@ class LabManager extends StatelessWidget {
         children: [
           /// Fixed Header
           Padding(
-            padding: const EdgeInsets.only(left: 10, right: 10, top: 24),
+            padding: const EdgeInsets.only(left: 10, right: 10, top: 30),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -128,13 +84,31 @@ class LabManager extends StatelessWidget {
                               content: Column(
                                 mainAxisSize: MainAxisSize.min,
                                 children: [
+                                  _buildCard(
+                                    icon: Icons.add_circle_outline,
+                                    title: "New case assigned",
+                                    msg:
+                                        "Veneer Set #12349 assigned by Dr. Robert Kim",
+                                    time: "15 minutes ago",
+                                    color: AppColors.primary,
+                                  ),
                                   const SizedBox(height: 10),
                                   _buildCard(
+                                    icon: Icons.update,
+                                    title: "Case Update",
+                                    msg:
+                                        "Crown Preparation #12346 marked 'In Progress'",
+                                    time: "1 hour ago",
+                                    color: AppColors.primary,
+                                  ),
+                                  const SizedBox(height: 10),
+                                  _buildCard(
+                                    icon: Icons.error_outline,
                                     title: "Urgent message",
                                     msg:
                                         "Dr. Sarah Johnson requests immediate consultation for Root Canal #12345",
                                     time: "2 hours ago",
-                                    color: Colors.green, icon: null,
+                                    color: Colors.red,
                                   ),
                                 ],
                               ),
@@ -145,7 +119,7 @@ class LabManager extends StatelessWidget {
                       child: Icon(
                         Icons.notifications,
                         color: AppColors.black,
-                        size: 27,
+                        size: 24,
                       ),
                     )
                   ],
@@ -153,56 +127,52 @@ class LabManager extends StatelessWidget {
               ],
             ),
           ),
+
           SizedBox(height: 24),
           Divider(thickness: 2),
-          SizedBox(height: 12),
+          SizedBox(height: 24),
 
-          /// List Items
+          /// Scrollable Body
           Expanded(
-            child: ListView.builder(
-              padding: EdgeInsets.symmetric(horizontal: 24.w),
-              itemCount: items.length,
-              itemBuilder: (context, index) {
-                final item = items[index];
-                return GestureDetector(
-                  onTap: () {
-                    if (item['route'] != null) {
-                      Get.toNamed(item['route']!);
-                    }
-                  },
-                  child: Card(
-                    color: AppColors.dentistListColor,
-                    margin: EdgeInsets.symmetric(vertical: 10.h),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8),
+            child: SingleChildScrollView(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 10),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    CustomTextField(
+                      hintText: 'Search by CaseTitle',
+                      hintStyle: TextStyle(color: AppColors.grey),
+                      fieldBorderRadius: 15,
+                      fieldBorderColor: AppColors.grey1,
+                      fillColor: AppColors.white,
+                      prefixIcon: Icon(Icons.search, color: AppColors.black),
                     ),
-                    child: ListTile(
-                      leading: ClipRRect(
-                        child: Image.asset(
-                          item['image']!,
-                          width: 57.w,
-                          height: 45.h,
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                      title: CustomText(
-                        text: item['title']!,
-                        fontSize: 20.sp,
-                        textAlign: TextAlign.start,
-                        fontWeight: FontWeight.w500,
-                        color: AppColors.primary,
-                      ),
-                      subtitle: CustomText(
-                        text: item['subtitle']!,
-                        fontSize: 14.sp,
-                        textAlign: TextAlign.start,
-                        fontWeight: FontWeight.w400,
-                        color: AppColors.grey,
-                      ),
+                    SizedBox(height: 24),
+                    CustomText(
+                      text: 'Recent Cases Posted by Dentists',
+                      color: AppColors.primary,
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
                     ),
-                  ),
-                );
-              },
+
+                    /// Card Section with vertical padding
+                    ListView.builder(
+                      padding: EdgeInsets.only(top: 20.h),
+                      physics: const NeverScrollableScrollPhysics(),
+                      shrinkWrap: true,
+                      itemCount: 10,
+                      itemBuilder: (context, index) {
+                        return CustomCaseCard(
+                          all: false,
+                          inProgress: true,
+                          complete: true,
+                        );
+                      },
+                    )
+                  ],
+                ),
+              ),
             ),
           ),
         ],
@@ -213,7 +183,7 @@ class LabManager extends StatelessWidget {
 }
 
 Widget _buildCard({
-  required IconData? icon,
+  required IconData icon,
   required String title,
   required String msg,
   required String time,
@@ -248,3 +218,4 @@ Widget _buildCard({
     ),
   );
 }
+
