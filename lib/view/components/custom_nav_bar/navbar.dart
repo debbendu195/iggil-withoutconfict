@@ -129,7 +129,7 @@ class _UserNavBarState extends State<NavBar> {
           Get.to(() => const MyCaseScreen());
           break;
         case 2:
-          Get.to(() => const AddCaseScreen());
+          Get.to(() => AddCaseScreen());
           break;
         case 3:
           Get.to(() => const ProfileScreen());

@@ -7,52 +7,167 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../../components/custom_nav_bar/navbar.dart';
 import '../../../../../components/custom_text/custom_text.dart';
+import '../widget/custom_dropdown.dart';
 
-class AddCaseScreen extends StatelessWidget {
+class AddCaseScreen extends StatefulWidget {
   const AddCaseScreen({super.key});
+
+  @override
+  State<AddCaseScreen> createState() => _AddCaseScreenState();
+}
+
+class _AddCaseScreenState extends State<AddCaseScreen> {
+  String? caseType;
+  String? patientId;
+  String? gender;
+  String? age;
+  String? scanNumber;
+  String? tier;
+
+  /// Standard & Crown/Bridge
+  String? standardType;
+  String? crownType;
+
+  /// PFM (NP) sub-option
+  String? pfmOption;
+
+  /// Show new dropdown for Single Unit Crown
+  bool showSingleUnitDropdown = false;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomRoyelAppbar(leftIcon: true, titleName: 'Create New Case', color: AppColors.primary,),
+      appBar: CustomRoyelAppbar(
+        leftIcon: true,
+        titleName: 'Create New Case',
+        color: AppColors.primary,
+      ),
       body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 10),
-          child: Column(
-            children: [
-              CustomFormCard(title: 'Case Title', hintText: 'Enter case title', controller: TextEditingController()),
-              CustomFormCard(title: 'Patient Name', hintText: 'Type Patient’s full name', controller: TextEditingController()),
-              CustomFormCard(title: 'Issue Type', hintText: 'Select issue type', controller: TextEditingController()),
-              CustomFormCard(title: 'Order Type', hintText: 'Select order type', controller: TextEditingController()),
-              CustomFormCard(title: 'Case Notes', hintText: 'Provide a description of the case and patient’s needs', maxLine: 3, controller: TextEditingController()),
-              Container(
-                height: 120,
-                width: double.infinity,
-                decoration: BoxDecoration(
-                  color: Colors.transparent,
-                  border: Border.all(color: AppColors.grey1),
-                  borderRadius: BorderRadius.circular(15),
-                ),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(Icons.upload_file,
-                        size: 50, color: AppColors.grey1),
-                    CustomText(
-                      top: 10.h,
-                      text: 'Upload a photo or video',
-                      fontWeight: FontWeight.w400,
-                      fontSize: 16,
-                      color: AppColors.grey1,
-                    ),
-                  ],
-                ),
+        padding: const EdgeInsets.all(12),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            /// Case Type
+            CustomDropdown(
+              label: "Case Type",
+              hint: "Select case type",
+              items: ["New Case", "Continue Case", "Remake"],
+              onChanged: (val) => setState(() => caseType = val),
+            ),
+            SizedBox(height: 20.h),
+
+            if (caseType == "New Case") ...[
+              /// Patient ID
+              CustomFormCard(title: 'Patient ID', controller: TextEditingController()),
+
+              /// Patient Gender
+              CustomDropdown(
+                label: "Patient Gender",
+                hint: "Select M/F",
+                items: ["M", "F"],
+                onChanged: (val) => setState(() => gender = val),
               ),
-              SizedBox(height: 10,),
-              CustomButton(onTap: (){}, title: 'Submit Case', fontSize: 16, fontWeight: FontWeight.w400, borderRadius: 10,),
-              SizedBox(height: 20,),
-            ],
-          ),
+              SizedBox(height: 15.h),
+
+              /// Age
+              CustomFormCard(title: 'Age', controller: TextEditingController()),
+
+              /// Scan Number
+              CustomFormCard(title: 'Scan Number', controller: TextEditingController()),
+
+              /// Product Tier
+              CustomDropdown(
+                label: "Product Tier",
+                hint: "Select product tier",
+                items: ["Standard", "Premium"],
+                onChanged: (val) => setState(() => tier = val),
+              ),
+              SizedBox(height: 20.h),
+
+              /// If tier == Standard
+              if (tier == "Standard") ...[
+                CustomDropdown(
+                  label: "Standard Type",
+                  hint: "Select Type",
+                  items: ["CROWN/BRIDGE", "DENTURES", "MISC"],
+                  onChanged: (val) => setState(() => standardType = val),
+                ),
+                SizedBox(height: 20.h),
+
+                /// If Standard Type == CROWN/BRIDGE
+                if (standardType == "CROWN/BRIDGE") ...[
+                  CustomDropdown(
+                    label: "Crown / BRIDGE Type",
+                    hint: "Select Crown Type",
+                    items: ["PFM (NP)", "FULL CAST", "METAL"],
+                    onChanged: (val) => setState(() => crownType = val),
+                  ),
+                  SizedBox(height: 20.h),
+
+                  /// If Crown Type == PFM (NP)
+                  if (crownType == "PFM (NP)") ...[
+                    CustomDropdown(
+                      label: "PFM (NP) Type",
+                      hint: "Select option",
+                      items: ["Single unit crown", "Maryiand bridge", "Conventional Bridge"],
+                      onChanged: (val) => setState(() {
+                        pfmOption = val;
+                        showSingleUnitDropdown = val == "Single unit crown";
+                      }),
+                    ),
+                    SizedBox(height: 20.h),
+
+                    /// New dropdown for Single Unit Crown
+                    if (showSingleUnitDropdown) ...[
+                      CustomDropdown(
+                        label: "Porcelain Butt Margin",
+                        hint: "Select detail",
+                        items: ["360", "Buccal Only"], // customize as needed
+                        onChanged: (val) {},
+                      ),
+                      SizedBox(height: 20.h),
+                    ],
+                  ],
+
+                  /// If Crown Type == FULL CAST
+                  if (crownType == "FULL CAST") ...[
+                    CustomDropdown(
+                      label: "NP (silver coloured)",
+                      hint: "Select option",
+                      items: ["Option A", "Option B", "Option C"],
+                      onChanged: (val) {},
+                    ),
+                    SizedBox(height: 20.h),
+                  ],
+
+                  /// If Crown Type == METAL
+                  if (crownType == "METAL") ...[
+                    CustomDropdown(
+                      label: "METAL Options",
+                      hint: "Select option",
+                      items: ["Option X", "Option Y", "Option Z"],
+                      onChanged: (val) {},
+                    ),
+                    SizedBox(height: 20.h),
+                  ],
+                ],
+              ],
+
+              /// If tier == Premium
+              if (tier == "Premium") ...[
+                CustomDropdown(
+                  label: "Premium Type",
+                  hint: "Select type",
+                  items: ["T2-X", "T2-Y", "T2-Z"],
+                  onChanged: (val) {},
+                ),
+                SizedBox(height: 20.h),
+              ],
+
+              /// Submit Button
+              CustomButton(onTap: () {}, title: 'Submit Case'),
+            ]
+          ],
         ),
       ),
       bottomNavigationBar: NavBar(currentIndex: 2),
