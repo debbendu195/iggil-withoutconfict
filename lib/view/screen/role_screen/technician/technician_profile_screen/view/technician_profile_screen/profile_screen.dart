@@ -3,14 +3,13 @@ import 'package:event_platform/utils/app_colors/app_colors.dart';
 import 'package:event_platform/utils/app_const/app_const.dart';
 import 'package:event_platform/utils/app_icons/app_icons.dart';
 import 'package:event_platform/view/components/custom_image/custom_image.dart';
+import 'package:event_platform/view/components/custom_nav_bar/technician_navbar.dart';
 import 'package:event_platform/view/components/custom_netwrok_image/custom_network_image.dart';
 import 'package:event_platform/view/components/custom_royel_appbar/custom_royel_appbar.dart';
 import 'package:event_platform/view/components/custom_text/custom_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-
-import '../../../../../../components/custom_nav_bar/navbar.dart';
 
 
 class ProfileScreen extends StatelessWidget {
@@ -313,7 +312,7 @@ class ProfileScreen extends StatelessWidget {
           ],
         ),
       ),
-      bottomNavigationBar: NavBar(currentIndex: 3),
+      bottomNavigationBar: TechnicianNavbar(currentIndex: 3),
     );
   }
 }

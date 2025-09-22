@@ -33,8 +33,8 @@ class LoginScreen extends StatelessWidget {
                 InkWell(onTap: (){Get.toNamed(AppRoutes.emailVerify);}, child: CustomText(text: 'Forgot Password?', fontSize: 16, fontWeight: FontWeight.w700, color: AppColors.primary,)),
                 SizedBox(height: 50),
                 CustomButton(onTap: (){
-                  Get.toNamed(AppRoutes.dentistListScreen);
-                  // Get.toNamed(AppRoutes.dentistHomeScreen);
+                  // Get.toNamed(AppRoutes.dentistListScreen);
+                  Get.toNamed(AppRoutes.dentistHomeScreen);
                   // Get.toNamed(AppRoutes.technicianHomeScreen);
                 },
                 title: 'Log in',)

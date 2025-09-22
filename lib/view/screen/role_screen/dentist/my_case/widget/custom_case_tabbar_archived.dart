@@ -1,4 +1,3 @@
-import 'package:event_platform/view/components/custom_text/custom_text.dart';
 import 'package:flutter/material.dart';
 
 class CustomCaseTabbarArchived extends StatelessWidget {
