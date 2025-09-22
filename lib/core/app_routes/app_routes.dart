@@ -89,5 +89,10 @@ class AppRoutes {
     GetPage(name: technicianChatScreen, page: () => TechnicianChatScreen()),
     GetPage(name: technicianProfileScreen, page: () => TechnicianProfileScreen()),
 
+
+
+
+
+
   ];
 }

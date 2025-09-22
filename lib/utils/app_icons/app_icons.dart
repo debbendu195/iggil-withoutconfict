@@ -1,8 +1,10 @@
 class AppIcons {
   static const String basePath = "assets/icons";
 
+
   static const String eye = "$basePath/eye.svg";
   static const String eyeOff = "$basePath/eyeOff.svg";
+
 
   ///=========================Nab bar Icon ======================
   static const String home = "$basePath/home.svg";
@@ -14,5 +16,10 @@ class AppIcons {
   static const String language = "$basePath/language.svg";
   static const String notification = "$basePath/notification.svg";
   static const String logout = "$basePath/logout.svg";
+
+
+
+
+
 
 }
