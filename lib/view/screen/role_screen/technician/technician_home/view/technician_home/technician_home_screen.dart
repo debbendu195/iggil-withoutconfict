@@ -1,4 +1,3 @@
-import 'package:event_platform/view/components/custom_nav_bar/navbar.dart';
 import 'package:event_platform/view/components/custom_nav_bar/technician_navbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';

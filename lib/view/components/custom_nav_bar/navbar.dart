@@ -1,4 +1,5 @@
-
+import 'package:event_platform/view/screen/role_screen/dentist/dentist_home/view/dentist/dentist_list_screen.dart';
+import 'package:event_platform/view/screen/role_screen/dentist/dentist_home/view/dentist_home/dentist_home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -6,7 +7,7 @@ import 'package:get/get.dart';
 import '../../../utils/app_colors/app_colors.dart';
 import '../../../utils/app_icons/app_icons.dart';
 import '../../screen/role_screen/dentist/add_case/view/add_case_screen.dart';
-import '../../screen/role_screen/dentist/dentist_home/view/dentist_home/dentist_home_screen.dart';
+import '../../screen/role_screen/dentist/dentist_home/view/dentist_message/dentist_message.dart';
 import '../../screen/role_screen/dentist/my_case/view/my_case_screen.dart';
 import '../../screen/role_screen/dentist/profile/view/profile_screen/profile_screen.dart';
 import '../custom_text/custom_text.dart';
@@ -17,30 +18,30 @@ class NavBar extends StatefulWidget {
   const NavBar({required this.currentIndex, super.key});
 
   @override
-  State<NavBar> createState() => _UserNavBarState();
+  State<NavBar> createState() => _NavBarState();
 }
 
-class _UserNavBarState extends State<NavBar> {
+class _NavBarState extends State<NavBar> {
   late int bottomNavIndex;
 
   final List<String> navbarNameList = [
     "Home".tr,
-    "My Case".tr,
-    "Add Case".tr,
+    "My Search".tr,
+    "Message".tr,
     "Profile".tr,
   ];
 
   final List<String> selectedIcon = [
     AppIcons.home,
-    AppIcons.myCase,
-    AppIcons.addCase,
+    AppIcons.search,
+    AppIcons.message,
     AppIcons.profile,
   ];
 
   final List<String> unselectedIcon = [
     AppIcons.home,
-    AppIcons.myCase,
-    AppIcons.addCase,
+    AppIcons.search,
+    AppIcons.message,
     AppIcons.profile,
   ];
 
@@ -123,13 +124,13 @@ class _UserNavBarState extends State<NavBar> {
 
       switch (index) {
         case 0:
-          Get.offAll(() => const DentistHomeScreen());
+          Get.offAll(() => const DentistListScreen());
           break;
         case 1:
-          Get.to(() => const MyCaseScreen());
+          Get.to(() => const DentistHomeScreen());
           break;
         case 2:
-          Get.to(() => AddCaseScreen());
+          Get.to(() => DentistMessage());
           break;
         case 3:
           Get.to(() => const ProfileScreen());

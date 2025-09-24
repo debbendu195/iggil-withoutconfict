@@ -1,14 +1,12 @@
-import 'package:event_platform/core/app_routes/app_routes.dart';
-import 'package:event_platform/utils/app_strings/app_strings.dart';
-import 'package:event_platform/view/components/custom_nav_bar/navbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
+import '../../../../../../../core/app_routes/app_routes.dart';
 import '../../../../../../../utils/app_colors/app_colors.dart';
 import '../../../../../../../utils/app_const/app_const.dart';
 import '../../../../../../../utils/app_images/app_images.dart';
 import '../../../../../../components/custom_button/custom_button.dart';
+import '../../../../../../components/custom_nav_bar/navbar.dart';
 import '../../../../../../components/custom_netwrok_image/custom_network_image.dart';
 import '../../../../../../components/custom_text/custom_text.dart';
 
@@ -27,31 +25,33 @@ class DentistListScreen extends StatelessWidget {
       'image': AppImages.icon2,
       'title': 'My Case List',
       'subtitle': 'Active cases',
-      'route' : AppRoutes.myCaseScreen,
+      'route' : AppRoutes.dentistHomeScreen,
     },
     {
       'image': AppImages.icon3,
       'title': 'Start/Continue Case',
       'subtitle': 'Create or resume work',
-      'route' : AppRoutes.accountSettingsScreen,
+      'route' : AppRoutes.addCaseScreen,
 
     },{
       'image': AppImages.icon4,
       'title': 'Archives',
-      'subtitle': 'Completed cases'
-    },    {
+      'subtitle': 'Completed cases',
+      'route' : AppRoutes.myCaseScreen,
+    },{
       'image': AppImages.icon5,
       'title': 'Invoices',
       'subtitle': 'Billings & payments'
     },    {
       'image': AppImages.icon6,
       'title': 'Downloads',
-      'subtitle': 'Forms & documents'
+      'subtitle': 'Forms & documents',
+      'route' : AppRoutes.downloadsScreen,
     }, {
       'image': AppImages.icon1,
       'title': 'Contact Us',
       'subtitle': 'Get in touch',
-      'route' : AppRoutes.aboutScreen,
+      'route' : AppRoutes.contactUsScreen,
     },
   ];
 
@@ -219,28 +219,11 @@ class DentistListScreen extends StatelessWidget {
                     ),
                   ),
                 );
-
-
               },
             ),
-
-
-
           ),
         ],
       ),
-
-
-
-
-
-
-
-
-
-
-
-
       bottomNavigationBar: NavBar(currentIndex: 0),
     );
   }

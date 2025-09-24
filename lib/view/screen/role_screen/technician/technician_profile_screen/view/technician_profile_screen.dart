@@ -11,6 +11,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
+import '../../../../../components/custom_nav_bar/lab_manager_navbar.dart';
+
 class TechnicianProfileScreen extends StatelessWidget {
   const TechnicianProfileScreen({super.key});
 
@@ -311,7 +313,7 @@ class TechnicianProfileScreen extends StatelessWidget {
           ],
         ),
       ),
-      bottomNavigationBar: TechnicianNavbar(currentIndex: 3),
+      bottomNavigationBar: LabManagerNavbar(currentIndex: 3),
     );
   }
 }
