@@ -40,30 +40,6 @@ class NotificationScreen extends StatelessWidget {
                 ),
               ),
             ),
-            Container(
-              height: 60,
-              width: double.infinity,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                color: AppColors.white_50,
-              ),
-              child: Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: Row(
-                  children: [
-                    CustomText(
-                      text: 'General notification',
-                      fontSize: 14,
-                      fontWeight: FontWeight.w500,
-                    ),
-                    Spacer(),
-                    Switch(
-                        activeColor: AppColors.primary, value: true, onChanged: (value) {}
-                    )
-                  ],
-                ),
-              ),
-            ),
             SizedBox(height: 15,),
             Container(
               height: 60,
@@ -164,7 +140,31 @@ class NotificationScreen extends StatelessWidget {
                 ),
               ),
             ),
-
+            SizedBox(height: 15,),
+            Container(
+              height: 60,
+              width: double.infinity,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                color: AppColors.white_50,
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: Row(
+                  children: [
+                    CustomText(
+                      text: 'General notification',
+                      fontSize: 14,
+                      fontWeight: FontWeight.w500,
+                    ),
+                    Spacer(),
+                    Switch(
+                        activeColor: AppColors.primary, value: true, onChanged: (value) {}
+                    )
+                  ],
+                ),
+              ),
+            ),
           ],
         ),
       ),

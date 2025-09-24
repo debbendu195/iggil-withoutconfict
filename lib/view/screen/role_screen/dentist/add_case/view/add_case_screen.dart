@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../../components/custom_nav_bar/navbar.dart';
-import '../../../../../components/custom_text/custom_text.dart';
 import '../widget/custom_dropdown.dart';
 
 class AddCaseScreen extends StatefulWidget {
@@ -170,7 +169,6 @@ class _AddCaseScreenState extends State<AddCaseScreen> {
           ],
         ),
       ),
-      bottomNavigationBar: NavBar(currentIndex: 2),
     );
   }
 }

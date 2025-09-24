@@ -177,7 +177,7 @@ class DentistHomeScreen extends StatelessWidget {
           ),
         ],
       ),
-      bottomNavigationBar: NavBar(currentIndex: 0),
+      bottomNavigationBar: NavBar(currentIndex: 1),
     );
   }
 }
