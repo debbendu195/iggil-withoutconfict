@@ -1,11 +1,11 @@
 import 'package:event_platform/view/components/custom_nav_bar/navbar.dart';
-import 'package:event_platform/view/screen/role_screen/dentist/dentist_home/view/dentist_message/widgets/custom_message_list_card.dart';
+import 'package:event_platform/view/screen/role_screen/dentist/dentist_message/widgets/custom_message_list_card.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../../../utils/app_colors/app_colors.dart';
 import '../../../../../../../utils/app_strings/app_strings.dart';
-import '../../../../../../components/custom_royel_appbar/custom_royel_appbar.dart';
-import '../../../../../../components/custom_text_field/custom_text_field.dart';
+import '../../../../components/custom_royel_appbar/custom_royel_appbar.dart';
+import '../../../../components/custom_text_field/custom_text_field.dart';
 
 class DentistMessage extends StatelessWidget {
   const DentistMessage({super.key});
@@ -13,7 +13,7 @@ class DentistMessage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomRoyelAppbar(leftIcon: false, titleName: "Messages"),
+      appBar: CustomRoyelAppbar(leftIcon: false, titleName: "Messages asdfasdfasdf"),
 
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

@@ -6,12 +6,12 @@ import '../../../../../../../utils/app_colors/app_colors.dart';
 import '../../../../../../../utils/app_const/app_const.dart';
 import '../../../../../../../utils/app_images/app_images.dart';
 import '../../../../../../components/custom_button/custom_button.dart';
-import '../../../../../../components/custom_nav_bar/navbar.dart';
+import '../../../../../../components/custom_nav_bar/lab_manager_navbar.dart';
 import '../../../../../../components/custom_netwrok_image/custom_network_image.dart';
 import '../../../../../../components/custom_text/custom_text.dart';
 
 class LabManagerListScreen extends StatelessWidget {
-  const LabManagerListScreen({super.key});
+   const LabManagerListScreen({super.key});
 
 
   final List<Map<String, String>> items = const [
@@ -19,37 +19,35 @@ class LabManagerListScreen extends StatelessWidget {
       'image':AppImages.icon1,
       'title': 'Profile',
       'subtitle': 'Manage your account',
-      'route' : AppRoutes.profileScreen,
+      'route' : AppRoutes.labManagerProfileScreen,
     },
     {
       'image': AppImages.icon2,
-      'title': 'My Case List',
-      'subtitle': 'Active cases',
-      'route' : AppRoutes.myCaseScreen,
+      'title': 'Profile Management',
+      'subtitle': 'Manager user account',
+      'route' : AppRoutes.labProfileManagment,
     },
     {
       'image': AppImages.icon3,
-      'title': 'Start/Continue Case',
+      'title': 'All Case List',
       'subtitle': 'Create or resume work',
-      'route' : AppRoutes.accountSettingsScreen,
+      'route' : AppRoutes.labManagmentAllCase,
 
     },{
       'image': AppImages.icon4,
-      'title': 'Archives',
-      'subtitle': 'Completed cases'
-    },    {
-      'image': AppImages.icon5,
-      'title': 'Invoices',
-      'subtitle': 'Billings & payments'
-    },    {
+      'title': 'All Archives',
+      'subtitle': 'Completed cases',
+      'route' : AppRoutes.labManagmentArchives,
+    },{
       'image': AppImages.icon6,
       'title': 'Downloads',
-      'subtitle': 'Forms & documents'
+      'subtitle': 'Forms & documents',
+      'route' : AppRoutes.labManagerDownload,
     }, {
       'image': AppImages.icon1,
       'title': 'Contact Us',
       'subtitle': 'Get in touch',
-      'route' : AppRoutes.aboutScreen,
+      'route' : AppRoutes.labManagerContact,
     },
   ];
 
@@ -227,7 +225,7 @@ class LabManagerListScreen extends StatelessWidget {
           ),
         ],
       ),
-      bottomNavigationBar: NavBar(currentIndex: 0),
+      bottomNavigationBar: LabManagerNavbar(currentIndex: 0),
     );
   }
 }

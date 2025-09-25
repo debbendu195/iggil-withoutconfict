@@ -176,12 +176,6 @@ class _MyCaseScreenState extends State<LabManagerMyCase> {
                       );
                     }),
                   ),
-                if (caseController.currentIndex.value == 3)
-                  Column(
-                      children: List.generate(2, (value){
-                        return CustomCaseTabbarArchived();
-                      })
-                  ),
               ],
             ),
           ),

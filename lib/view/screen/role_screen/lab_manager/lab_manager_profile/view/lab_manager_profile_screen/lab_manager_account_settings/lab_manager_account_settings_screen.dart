@@ -5,8 +5,8 @@ import 'package:event_platform/view/components/custom_text/custom_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class AccountSettingsScreen extends StatelessWidget {
-  const AccountSettingsScreen({super.key});
+class LabManagerAccountSettingsScreen extends StatelessWidget {
+  const LabManagerAccountSettingsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +18,7 @@ class AccountSettingsScreen extends StatelessWidget {
           children: [
             InkWell(
               onTap: (){
-                Get.toNamed(AppRoutes.changePassScreen);
+                Get.toNamed(AppRoutes.labManagerChangePassScreen);
               },
               child: Container(
                 height: 50,
@@ -34,7 +34,7 @@ class AccountSettingsScreen extends StatelessWidget {
             ),
             InkWell(
               onTap: (){
-                Get.toNamed(AppRoutes.termsServicesScreen);
+                Get.toNamed(AppRoutes.labManagerTermsServicesScreen);
               },
               child: Container(
                 height: 50,
@@ -50,7 +50,7 @@ class AccountSettingsScreen extends StatelessWidget {
             ),
             InkWell(
               onTap: (){
-                Get.toNamed(AppRoutes.aboutScreen);
+                Get.toNamed(AppRoutes.labManagerPrivacyScreen);
               },
               child: Container(
                 height: 50,
@@ -66,7 +66,7 @@ class AccountSettingsScreen extends StatelessWidget {
             ),
             InkWell(
               onTap: (){
-                Get.toNamed(AppRoutes.aboutScreen);
+                Get.toNamed(AppRoutes.labManagerAboutScreen);
               },
               child: Container(
                 height: 50,
@@ -94,7 +94,6 @@ class AccountSettingsScreen extends StatelessWidget {
                 ),
               ),
             ),
-
           ],
         ),
       ),

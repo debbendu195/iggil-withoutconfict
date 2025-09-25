@@ -41,7 +41,8 @@ class DentistListScreen extends StatelessWidget {
     },{
       'image': AppImages.icon5,
       'title': 'Invoices',
-      'subtitle': 'Billings & payments'
+      'subtitle': 'Billings & payments',
+      'route' : AppRoutes.invoiceListView,
     },    {
       'image': AppImages.icon6,
       'title': 'Downloads',

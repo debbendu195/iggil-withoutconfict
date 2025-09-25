@@ -5,8 +5,8 @@ import '../../../../../../../utils/app_colors/app_colors.dart';
 import '../../../../../../components/custom_text/custom_text.dart';
 
 
-class NotificationScreen extends StatelessWidget {
-  const NotificationScreen({super.key});
+class LabManagerNotificationScreen extends StatelessWidget {
+  const LabManagerNotificationScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -165,7 +165,6 @@ class NotificationScreen extends StatelessWidget {
                 ),
               ),
             ),
-
           ],
         ),
       ),

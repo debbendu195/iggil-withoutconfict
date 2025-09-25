@@ -5,8 +5,8 @@ import '../../../../../../../utils/app_colors/app_colors.dart';
 import '../../../../../../components/custom_text/custom_text.dart';
 
 
-class LangauageScreen extends StatelessWidget {
-  const LangauageScreen({super.key});
+class LabManagerLangauageScreen extends StatelessWidget {
+  const LabManagerLangauageScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

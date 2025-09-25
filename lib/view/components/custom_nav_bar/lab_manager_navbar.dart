@@ -1,4 +1,6 @@
 import 'package:event_platform/view/screen/role_screen/lab_manager/lab_manager_home_screen/view/lab_manager_home_screen.dart';
+import 'package:event_platform/view/screen/role_screen/lab_manager/lab_manager_home_screen/view/lab_managet_list/lab_manager_list_screen.dart';
+import 'package:event_platform/view/screen/role_screen/lab_manager/lab_managment_massage/lab_massage_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -7,7 +9,7 @@ import '../../../utils/app_colors/app_colors.dart';
 import '../../../utils/app_icons/app_icons.dart';
 import '../../screen/role_screen/lab_manager/lab_manager_add_case_screen/lab_manager_add_case_screen.dart';
 import '../../screen/role_screen/lab_manager/lab_manager_my_case/lab_manager_my_case.dart';
-import '../../screen/role_screen/lab_manager/lab_manager_profile/view/lab_profile_screen.dart';
+import '../../screen/role_screen/lab_manager/lab_manager_profile/view/lab_manager_profile_screen.dart';
 import '../custom_text/custom_text.dart';
 
 class LabManagerNavbar extends StatefulWidget {
@@ -31,15 +33,15 @@ class _NavBarState extends State<LabManagerNavbar> {
 
   final List<String> selectedIcon = [
     AppIcons.home,
-    AppIcons.myCase,
-    AppIcons.addCase,
+    AppIcons.search,
+    AppIcons.message,
     AppIcons.profile,
   ];
 
   final List<String> unselectedIcon = [
     AppIcons.home,
-    AppIcons.myCase,
-    AppIcons.addCase,
+    AppIcons.search,
+    AppIcons.message,
     AppIcons.profile,
   ];
 
@@ -122,16 +124,16 @@ class _NavBarState extends State<LabManagerNavbar> {
 
       switch (index) {
         case 0:
-          Get.offAll(() => const LabManagerHomeScreen());
+          Get.offAll(() => LabManagerListScreen());
           break;
         case 1:
           Get.to(() => const LabManagerMyCase());
           break;
         case 2:
-          Get.to(() => LabManagerMyCaseScreen());
+          Get.to(() => LabMassageList());
           break;
         case 3:
-          Get.to(() => const LabProfileScreen());
+          Get.to(() => const LabManagerProfileScreen());
           break;
       }
     }

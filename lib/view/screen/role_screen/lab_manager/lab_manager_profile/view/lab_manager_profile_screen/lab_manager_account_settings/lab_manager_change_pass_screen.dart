@@ -4,8 +4,8 @@ import 'package:event_platform/view/components/custom_from_card/custom_from_card
 import 'package:event_platform/view/components/custom_royel_appbar/custom_royel_appbar.dart';
 import 'package:flutter/material.dart';
 
-class ChangePassScreen extends StatelessWidget {
-  const ChangePassScreen({super.key});
+class LabManagerChangePassScreen extends StatelessWidget {
+  const LabManagerChangePassScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
