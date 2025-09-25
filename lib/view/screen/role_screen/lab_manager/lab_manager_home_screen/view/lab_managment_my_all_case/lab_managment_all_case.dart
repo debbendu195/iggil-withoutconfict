@@ -1,27 +1,29 @@
+import 'package:event_platform/view/components/custom_nav_bar/lab_manager_navbar.dart';
 import 'package:event_platform/view/components/custom_nav_bar/navbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
-import '../../../../../../utils/app_colors/app_colors.dart';
-import '../../../../../../utils/app_const/app_const.dart';
-import '../../../../../components/custom_button/custom_button.dart';
-import '../../../../../components/custom_netwrok_image/custom_network_image.dart';
-import '../../../../../components/custom_text/custom_text.dart';
-import '../../../../../components/custom_text_field/custom_text_field.dart';
-import '../../../lab_manager/lab_manager_home_screen/widget/custom_case_card/lab_manager_custom_case_card.dart';
-import '../controller/case_controller.dart';
-import '../widget/custom_case_tabbar.dart';
-import '../widget/custom_case_tabbar_archived.dart';
+import '../../../../../../../utils/app_colors/app_colors.dart';
+import '../../../../../../../utils/app_const/app_const.dart';
+import '../../../../../../components/custom_button/custom_button.dart';
+import '../../../../../../components/custom_netwrok_image/custom_network_image.dart';
+import '../../../../../../components/custom_text/custom_text.dart';
+import '../../../../../../components/custom_text_field/custom_text_field.dart';
+import '../../../../dentist/dentist_home/widget/custom_case_card/custom_case_card.dart';
+import '../../../../dentist/my_case/controller/case_controller.dart';
+import '../../../../dentist/my_case/widget/custom_case_tabbar.dart';
+import '../../../../dentist/my_case/widget/custom_case_tabbar_archived.dart';
 
-class MyCaseScreen extends StatefulWidget {
-  const MyCaseScreen({super.key});
+
+class LabManagmentAllCase extends StatefulWidget {
+  const LabManagmentAllCase({super.key});
 
   @override
-  State<MyCaseScreen> createState() => _MyCaseScreenState();
+  State<LabManagmentAllCase> createState() => _MyCaseScreenState();
 }
 
-class _MyCaseScreenState extends State<MyCaseScreen> {
+class _MyCaseScreenState extends State<LabManagmentAllCase> {
   final CaseController caseController = Get.find<CaseController>();
 
   @override
@@ -122,7 +124,6 @@ class _MyCaseScreenState extends State<MyCaseScreen> {
                 SizedBox(height: 24),
 
                 /// ============= Custom Tab Bar =============
-
                 CustomCaseTabbar(
                   textColor: AppColors.white,
                   tabs: caseController.tabNamelist,
@@ -147,7 +148,7 @@ class _MyCaseScreenState extends State<MyCaseScreen> {
                 if (caseController.currentIndex.value == 0)
                   Column(
                     children: List.generate(2, (value) {
-                      return CustomLabManagerCaseCard(
+                      return CustomCaseCard(
                         all: false,
                         inProgress: true,
                         complete: true,
@@ -157,7 +158,7 @@ class _MyCaseScreenState extends State<MyCaseScreen> {
                 if (caseController.currentIndex.value == 1)
                   Column(
                     children: List.generate(2, (value) {
-                      return CustomLabManagerCaseCard(
+                      return CustomCaseCard(
                         all: true,
                         inProgress: false,
                         complete: true,
@@ -168,7 +169,7 @@ class _MyCaseScreenState extends State<MyCaseScreen> {
                 if (caseController.currentIndex.value == 2)
                   Column(
                     children: List.generate(2, (value) {
-                      return CustomLabManagerCaseCard(
+                      return CustomCaseCard(
                         all: true,
                         inProgress: true,
                         complete: false,
@@ -176,12 +177,18 @@ class _MyCaseScreenState extends State<MyCaseScreen> {
                       );
                     }),
                   ),
+                if (caseController.currentIndex.value == 3)
+                  Column(
+                      children: List.generate(2, (value){
+                        return CustomCaseTabbarArchived();
+                      })
+                  ),
               ],
             ),
           ),
         ],
       ),
-      bottomNavigationBar: NavBar(currentIndex: 1),
+      bottomNavigationBar: LabManagerNavbar(currentIndex: 1),
     );
   }
 }

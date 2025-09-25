@@ -4,11 +4,13 @@ import '../../view/screen/authentication_screen/forgot_screen/forgot_screen.dart
 import '../../view/screen/authentication_screen/login_screen/login_screen.dart';
 import '../../view/screen/authentication_screen/otp_screeen/otp_screeen.dart';
 import '../../view/screen/onboarding_screen/view/onboarding_screen.dart';
-import '../../view/screen/role_screen/dentist/add_case/view/add_case_screen.dart';
+import '../../view/screen/role_screen/dentist/dentist_home/view/add_case/view/add_case_screen.dart';
 import '../../view/screen/role_screen/dentist/dentist_home/view/dentist/dentist_list_screen.dart';
 import '../../view/screen/role_screen/dentist/dentist_home/view/dentist_contract/contract_page.dart';
 import '../../view/screen/role_screen/dentist/dentist_home/view/dentist_download/downloads.dart';
 import '../../view/screen/role_screen/dentist/dentist_home/view/dentist_home/dentist_home_screen.dart';
+import '../../view/screen/role_screen/dentist/dentist_home/view/invoice/invoice_controller/invoice_controller.dart';
+import '../../view/screen/role_screen/dentist/dentist_home/view/invoice/iuvoice_list_view/invoice_list_view.dart';
 import '../../view/screen/role_screen/dentist/dentist_home/view/view_case_screen/view_case_screen.dart';
 import '../../view/screen/role_screen/dentist/my_case/view/my_case_screen.dart';
 import '../../view/screen/role_screen/dentist/profile/view/profile_screen/account_settings/about_screen.dart';
@@ -20,8 +22,24 @@ import '../../view/screen/role_screen/dentist/profile/view/profile_screen/edit_s
 import '../../view/screen/role_screen/dentist/profile/view/profile_screen/langauage_screen.dart';
 import '../../view/screen/role_screen/dentist/profile/view/profile_screen/notification_screen.dart';
 import '../../view/screen/role_screen/dentist/profile/view/profile_screen/profile_screen.dart';
+import '../../view/screen/role_screen/lab_manager/lab_manager_home_screen/view/lab_manager_contact/lab_manager_contact.dart';
 import '../../view/screen/role_screen/lab_manager/lab_manager_home_screen/view/lab_manager_home_screen.dart';
 import '../../view/screen/role_screen/lab_manager/lab_manager_home_screen/view/lab_managet_list/lab_manager_list_screen.dart';
+import '../../view/screen/role_screen/lab_manager/lab_manager_home_screen/view/lab_managment_archives/lab_managment_archives.dart';
+import '../../view/screen/role_screen/lab_manager/lab_manager_home_screen/view/lab_managment_download/lab_manager_download.dart';
+import '../../view/screen/role_screen/lab_manager/lab_manager_home_screen/view/lab_managment_my_all_case/lab_managment_all_case.dart';
+import '../../view/screen/role_screen/lab_manager/lab_manager_home_screen/view/lab_profile_managment/controller/create_technician_profile.dart';
+import '../../view/screen/role_screen/lab_manager/lab_manager_home_screen/view/lab_profile_managment/lab_profile_managment.dart';
+import '../../view/screen/role_screen/lab_manager/lab_manager_profile/view/lab_manager_profile_screen/lab_manager_account_settings/lab_manager_about_screen.dart' hide AboutScreen;
+import '../../view/screen/role_screen/lab_manager/lab_manager_profile/view/lab_manager_profile_screen/lab_manager_account_settings/lab_manager_account_settings_screen.dart';
+import '../../view/screen/role_screen/lab_manager/lab_manager_profile/view/lab_manager_profile_screen/lab_manager_account_settings/lab_manager_change_pass_screen.dart';
+import '../../view/screen/role_screen/lab_manager/lab_manager_profile/view/lab_manager_profile_screen/lab_manager_account_settings/lab_manager_privacy_screen.dart';
+import '../../view/screen/role_screen/lab_manager/lab_manager_profile/view/lab_manager_profile_screen/lab_manager_account_settings/lab_manager_terms_services_screen.dart';
+import '../../view/screen/role_screen/lab_manager/lab_manager_profile/view/lab_manager_profile_screen/lab_manager_edit_screen.dart';
+import '../../view/screen/role_screen/lab_manager/lab_manager_profile/view/lab_manager_profile_screen/lab_manager_langauage_screen.dart';
+import '../../view/screen/role_screen/lab_manager/lab_manager_profile/view/lab_manager_profile_screen.dart';
+import '../../view/screen/role_screen/lab_manager/lab_manager_profile/view/lab_manager_profile_screen/lab_manager_notification_screen.dart';
+import '../../view/screen/role_screen/lab_manager/lab_managment_massage/lab_massage_list.dart';
 import '../../view/screen/role_screen/nurse/nurse_home_screen/nurse_home_screen.dart';
 import '../../view/screen/role_screen/practice_manager/practice_manager_home_screen/view/practice_manager_home_screen.dart';
 import '../../view/screen/role_screen/technician/technician_chat_screen/view/technician_chat_screen.dart';
@@ -70,6 +88,23 @@ class AppRoutes {
   //========================= Lab Part ================================//
   static const String labManagerListScreen ="/LabManagerListScreen";
   static const String labManagerHomeScreen ="/LabManagerHomeScreen";
+  static const String labManagerProfileScreen ="/LabManagerProfileScreen";
+  static const String labManagerLangauageScreen ="/LabManagerLangauageScreen";
+  static const String labManagmentAllCase ="/LabManagmentAllCase";
+  static const String labMassageList ="/LabMassageList";
+  static const String labManagmentArchives ="/LabManagmentArchives";
+  static const String createTechnicianProfile ="/CreateTechnicianProfile";
+  static const String invoiceListView ="/InvoiceListView";
+  static const String labManagerDownload ="/LabManagerDownload";
+  static const String labManagerContact ="/LabManagerContact";
+  static const String labProfileManagment ="/LabProfileManagment";
+  static const String labManagerNotificationScreen ="/LabManagerNotificationScreen";
+  static const String labManagerEditScreen ="/LabManagerEditScreen";
+  static const String labManagerAccountSettingsScreen ="/LabManagerAccountSettingsScreen";
+  static const String labManagerAboutScreen ="/LabManagerAboutScreen";
+  static const String labManagerChangePassScreen ="/LabManagerChangePassScreen";
+  static const String labManagerTermsServicesScreen ="/labManagerTermsServicesScreen";
+  static const String labManagerPrivacyScreen ="/LabManagerPrivacyScreen";
 
   //========================= Practice Part ================================//
   static const String practiceManagerHomeScreen ="/PracticeManagerHomeScreen";
@@ -115,6 +150,23 @@ class AppRoutes {
     //========================= Lab Part================================//
     GetPage(name: labManagerListScreen, page: () => LabManagerListScreen()),
     GetPage(name: labManagerHomeScreen, page: () => LabManagerHomeScreen()),
+    GetPage(name: labManagerProfileScreen, page: () => LabManagerProfileScreen()),
+    GetPage(name: labManagmentAllCase, page: () => LabManagmentAllCase()),
+    GetPage(name: labManagerLangauageScreen, page: () => LabManagerLangauageScreen()),
+    GetPage(name: labManagmentArchives, page: () => LabManagmentArchives()),
+    GetPage(name: createTechnicianProfile, page: () => CreateTechnicianProfile()),
+    GetPage(name: invoiceListView, page: () => InvoiceListView()),
+    GetPage(name: labMassageList, page: () => LabMassageList()),
+    GetPage(name: labManagerDownload, page: () => LabManagerDownload()),
+    GetPage(name: labManagerContact, page: () => LabManagerContact()),
+    GetPage(name: labProfileManagment, page: () => LabProfileManagment()),
+    GetPage(name: labManagerNotificationScreen, page: () => LabManagerNotificationScreen()),
+    GetPage(name: labManagerEditScreen, page: () => LabManagerEditScreen()),
+    GetPage(name: labManagerAccountSettingsScreen, page: () => LabManagerAccountSettingsScreen()),
+    GetPage(name: labManagerAboutScreen, page: () => LabManagerAboutScreen()),
+    GetPage(name: labManagerChangePassScreen, page: () => LabManagerChangePassScreen()),
+    GetPage(name: labManagerTermsServicesScreen, page: () => LabManagerTermsServicesScreen()),
+    GetPage(name: labManagerPrivacyScreen, page: () => LabManagerPrivacyScreen()),
 
 
     //========================= Practice Part================================//

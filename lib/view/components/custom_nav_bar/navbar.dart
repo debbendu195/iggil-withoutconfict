@@ -6,9 +6,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import '../../../utils/app_colors/app_colors.dart';
 import '../../../utils/app_icons/app_icons.dart';
-import '../../screen/role_screen/dentist/add_case/view/add_case_screen.dart';
-import '../../screen/role_screen/dentist/dentist_home/view/dentist_message/dentist_message.dart';
-import '../../screen/role_screen/dentist/my_case/view/my_case_screen.dart';
+import '../../screen/role_screen/dentist/dentist_message/dentist_message.dart';
 import '../../screen/role_screen/dentist/profile/view/profile_screen/profile_screen.dart';
 import '../custom_text/custom_text.dart';
 

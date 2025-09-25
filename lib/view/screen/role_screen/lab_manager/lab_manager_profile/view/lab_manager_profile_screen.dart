@@ -1,26 +1,26 @@
-import 'package:event_platform/core/app_routes/app_routes.dart';
-import 'package:event_platform/utils/app_colors/app_colors.dart';
-import 'package:event_platform/utils/app_const/app_const.dart';
-import 'package:event_platform/utils/app_icons/app_icons.dart';
-import 'package:event_platform/view/components/custom_image/custom_image.dart';
-import 'package:event_platform/view/components/custom_netwrok_image/custom_network_image.dart';
-import 'package:event_platform/view/components/custom_royel_appbar/custom_royel_appbar.dart';
-import 'package:event_platform/view/components/custom_text/custom_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
-import '../../../../../../components/custom_nav_bar/navbar.dart';
+import '../../../../../../core/app_routes/app_routes.dart';
+import '../../../../../../utils/app_colors/app_colors.dart';
+import '../../../../../../utils/app_const/app_const.dart';
+import '../../../../../../utils/app_icons/app_icons.dart';
+import '../../../../../components/custom_image/custom_image.dart';
+import '../../../../../components/custom_nav_bar/lab_manager_navbar.dart';
+import '../../../../../components/custom_netwrok_image/custom_network_image.dart';
+import '../../../../../components/custom_royel_appbar/custom_royel_appbar.dart';
+import '../../../../../components/custom_text/custom_text.dart';
 
-class ProfileScreen extends StatelessWidget {
-  const ProfileScreen({super.key});
+class LabManagerProfileScreen extends StatelessWidget {
+  const LabManagerProfileScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomRoyelAppbar(
         leftIcon: false,
-        titleName: 'My Profile asfsfasfd',
+        titleName: 'My Profile',
         color: AppColors.primary,
       ),
       body: Padding(
@@ -68,7 +68,7 @@ class ProfileScreen extends StatelessWidget {
               ),
               GestureDetector(
                 onTap: (){
-                  Get.toNamed(AppRoutes.editScreen);
+                  Get.toNamed(AppRoutes.labManagerEditScreen);
                 },
                 child: Container(
                   height: 60,
@@ -117,7 +117,7 @@ class ProfileScreen extends StatelessWidget {
               ),
               GestureDetector(
                 onTap: (){
-                  Get.toNamed(AppRoutes.accountSettingsScreen);
+                  Get.toNamed(AppRoutes.labManagerAccountSettingsScreen);
                 },
                 child: Container(
                   height: 60,
@@ -166,7 +166,7 @@ class ProfileScreen extends StatelessWidget {
               ),
               GestureDetector(
                 onTap: (){
-                  Get.toNamed(AppRoutes.langauageScreen);
+                  Get.toNamed(AppRoutes.labManagerLangauageScreen);
                 },
                 child: Container(
                   height: 60,
@@ -210,12 +210,13 @@ class ProfileScreen extends StatelessWidget {
                   ),
                 ),
               ),
+          
               SizedBox(
                 height: 15,
               ),
               GestureDetector(
                 onTap: (){
-                  Get.toNamed(AppRoutes.notificationScreen);
+                  Get.toNamed(AppRoutes.labManagerNotificationScreen);
                 },
                 child: Container(
                   height: 60,
@@ -314,7 +315,7 @@ class ProfileScreen extends StatelessWidget {
           ),
         ),
       ),
-      bottomNavigationBar: NavBar(currentIndex: 3),
+      bottomNavigationBar: LabManagerNavbar(currentIndex: 3),
     );
   }
 }

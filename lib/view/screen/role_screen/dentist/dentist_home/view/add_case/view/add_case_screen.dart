@@ -4,8 +4,6 @@ import 'package:event_platform/view/components/custom_from_card/custom_from_card
 import 'package:event_platform/view/components/custom_royel_appbar/custom_royel_appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
-import '../../../../../components/custom_nav_bar/navbar.dart';
 import '../widget/custom_dropdown.dart';
 
 class AddCaseScreen extends StatefulWidget {
