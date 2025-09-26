@@ -50,7 +50,7 @@ class AccountSettingsScreen extends StatelessWidget {
             ),
             InkWell(
               onTap: (){
-                Get.toNamed(AppRoutes.aboutScreen);
+                Get.toNamed(AppRoutes.privacyScreen);
               },
               child: Container(
                 height: 50,

@@ -9,7 +9,7 @@ class PracticeManagerAddCaseScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Add Case"),
+        title: const Text("Add Case practice"),
         centerTitle: true,
       ),
       body: const Center(

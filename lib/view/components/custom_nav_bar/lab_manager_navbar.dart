@@ -27,7 +27,7 @@ class _NavBarState extends State<LabManagerNavbar> {
   final List<String> navbarNameList = [
     "Home".tr,
     "My Case".tr,
-    "Add Case".tr,
+    "Message".tr,
     "Profile".tr,
   ];
 

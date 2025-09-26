@@ -1,3 +1,4 @@
+import 'package:event_platform/view/screen/role_screen/technician/technician_home/view/technician_home/technician/technician_list_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -24,22 +25,22 @@ class _UserNavBarState extends State<TechnicianNavbar> {
 
   final List<String> navbarNameList = [
     "Home".tr,
-    "My Case".tr,
-    "Add Case".tr,
+    "Search".tr,
+    // "Add Case".tr,
     "Profile".tr,
   ];
 
   final List<String> selectedIcon = [
     AppIcons.home,
-    AppIcons.myCase,
-    AppIcons.addCase,
+    AppIcons.search,
+    // AppIcons.addCase,
     AppIcons.profile,
   ];
 
   final List<String> unselectedIcon = [
     AppIcons.home,
-    AppIcons.myCase,
-    AppIcons.addCase,
+    AppIcons.search,
+    // AppIcons.addCase,
     AppIcons.profile,
   ];
 
@@ -122,15 +123,15 @@ class _UserNavBarState extends State<TechnicianNavbar> {
 
       switch (index) {
         case 0:
-          Get.offAll(() => const TechnicianHomeScreen());
+          Get.offAll(() => TechnicianListScreen());
           break;
         case 1:
-          Get.to(() => const TechnicianMyCaseScreen());
+          Get.to(() =>  TechnicianHomeScreen());
           break;
-        case 2:
+        /*case 2:
           Get.to(() => const TechnicianChatScreen());
-          break;
-        case 3:
+          break;*/
+        case 2:
           Get.to(() => const TechnicianProfileScreen());
           break;
       }

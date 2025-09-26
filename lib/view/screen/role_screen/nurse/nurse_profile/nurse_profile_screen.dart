@@ -26,294 +26,296 @@ class NurseProfileScreen extends StatelessWidget {
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                CustomNetworkImage(
-                  imageUrl: AppConstants.profileImage,
-                  boxShape: BoxShape.circle,
-                  height: 96.h,
-                  width: 96.w,
-                ),
-                SizedBox(
-                  width: 15,
-                ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    CustomText(
-                      text: 'Debbendu Paul',
-                      fontSize: 16,
-                      fontWeight: FontWeight.w600,
+        child: SafeArea(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  CustomNetworkImage(
+                    imageUrl: AppConstants.profileImage,
+                    boxShape: BoxShape.circle,
+                    height: 96.h,
+                    width: 96.w,
+                  ),
+                  SizedBox(
+                    width: 15,
+                  ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      CustomText(
+                        text: 'Debbendu Paul',
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,
+                      ),
+                      CustomText(text: 'Dentist')
+                    ],
+                  )
+                ],
+              ),
+              SizedBox(
+                height: 24,
+              ),
+              CustomText(
+                text: 'Profile Information',
+                fontWeight: FontWeight.w500,
+                fontSize: 18,
+              ),
+              SizedBox(
+                height: 24,
+              ),
+              GestureDetector(
+                onTap: (){
+                  Get.toNamed(AppRoutes.editScreen);
+                },
+                child: Container(
+                  height: 60,
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    color: AppColors.white_50,
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: Row(
+                      children: [
+                        CustomImage(
+                          imageSrc: AppIcons.editProfile,
+                          height: 24,
+                          width: 24,
+                        ),
+                        SizedBox(
+                          width: 15,
+                        ),
+                        CustomText(
+                          text: 'Edit Profile',
+                          fontSize: 14,
+                          fontWeight: FontWeight.w500,
+                        ),
+                        Spacer(),
+                        Container(
+                          height: 45,
+                          width: 40,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            color: AppColors.primary,
+                          ),
+                          child: Icon(
+                            Icons.keyboard_arrow_right,
+                            color: AppColors.white,
+                          ),
+                        )
+                      ],
                     ),
-                    CustomText(text: 'Dentist')
-                  ],
-                )
-              ],
-            ),
-            SizedBox(
-              height: 24,
-            ),
-            CustomText(
-              text: 'Profile Information',
-              fontWeight: FontWeight.w500,
-              fontSize: 18,
-            ),
-            SizedBox(
-              height: 24,
-            ),
-            GestureDetector(
-              onTap: (){
-                Get.toNamed(AppRoutes.editScreen);
-              },
-              child: Container(
-                height: 60,
-                width: double.infinity,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  color: AppColors.white_50,
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: Row(
-                    children: [
-                      CustomImage(
-                        imageSrc: AppIcons.editProfile,
-                        height: 24,
-                        width: 24,
-                      ),
-                      SizedBox(
-                        width: 15,
-                      ),
-                      CustomText(
-                        text: 'Edit Profile',
-                        fontSize: 14,
-                        fontWeight: FontWeight.w500,
-                      ),
-                      Spacer(),
-                      Container(
-                        height: 45,
-                        width: 40,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          color: AppColors.primary,
-                        ),
-                        child: Icon(
-                          Icons.keyboard_arrow_right,
-                          color: AppColors.white,
-                        ),
-                      )
-                    ],
                   ),
                 ),
               ),
-            ),
-            SizedBox(
-              height: 15,
-            ),
-            GestureDetector(
-              onTap: (){
-                Get.toNamed(AppRoutes.accountSettingsScreen);
-              },
-              child: Container(
-                height: 60,
-                width: double.infinity,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  color: AppColors.white_50,
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: Row(
-                    children: [
-                      CustomImage(
-                        imageSrc: AppIcons.accountSettings,
-                        height: 24,
-                        width: 24,
-                      ),
-                      SizedBox(
-                        width: 15,
-                      ),
-                      CustomText(
-                        text: 'Account Settings',
-                        fontSize: 14,
-                        fontWeight: FontWeight.w500,
-                      ),
-                      Spacer(),
-                      Container(
-                        height: 45,
-                        width: 40,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          color: AppColors.primary,
+              SizedBox(
+                height: 15,
+              ),
+              GestureDetector(
+                onTap: (){
+                  Get.toNamed(AppRoutes.accountSettingsScreen);
+                },
+                child: Container(
+                  height: 60,
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    color: AppColors.white_50,
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: Row(
+                      children: [
+                        CustomImage(
+                          imageSrc: AppIcons.accountSettings,
+                          height: 24,
+                          width: 24,
                         ),
-                        child: Icon(
-                          Icons.keyboard_arrow_right,
-                          color: AppColors.white,
+                        SizedBox(
+                          width: 15,
                         ),
-                      )
-                    ],
+                        CustomText(
+                          text: 'Account Settings',
+                          fontSize: 14,
+                          fontWeight: FontWeight.w500,
+                        ),
+                        Spacer(),
+                        Container(
+                          height: 45,
+                          width: 40,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            color: AppColors.primary,
+                          ),
+                          child: Icon(
+                            Icons.keyboard_arrow_right,
+                            color: AppColors.white,
+                          ),
+                        )
+                      ],
+                    ),
                   ),
                 ),
               ),
-            ),
-            SizedBox(
-              height: 15,
-            ),
-            GestureDetector(
-              onTap: (){
-                Get.toNamed(AppRoutes.langauageScreen);
-              },
-              child: Container(
-                height: 60,
-                width: double.infinity,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  color: AppColors.white_50,
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: Row(
-                    children: [
-                      CustomImage(
-                        imageSrc: AppIcons.language,
-                        height: 24,
-                        width: 24,
-                      ),
-                      SizedBox(
-                        width: 15,
-                      ),
-                      CustomText(
-                        text: 'Language Settings',
-                        fontSize: 14,
-                        fontWeight: FontWeight.w500,
-                      ),
-                      Spacer(),
-                      Container(
-                        height: 45,
-                        width: 40,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          color: AppColors.primary,
+              SizedBox(
+                height: 15,
+              ),
+              GestureDetector(
+                onTap: (){
+                  Get.toNamed(AppRoutes.langauageScreen);
+                },
+                child: Container(
+                  height: 60,
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    color: AppColors.white_50,
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: Row(
+                      children: [
+                        CustomImage(
+                          imageSrc: AppIcons.language,
+                          height: 24,
+                          width: 24,
                         ),
-                        child: Icon(
-                          Icons.keyboard_arrow_right,
-                          color: AppColors.white,
+                        SizedBox(
+                          width: 15,
                         ),
-                      )
-                    ],
+                        CustomText(
+                          text: 'Language Settings',
+                          fontSize: 14,
+                          fontWeight: FontWeight.w500,
+                        ),
+                        Spacer(),
+                        Container(
+                          height: 45,
+                          width: 40,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            color: AppColors.primary,
+                          ),
+                          child: Icon(
+                            Icons.keyboard_arrow_right,
+                            color: AppColors.white,
+                          ),
+                        )
+                      ],
+                    ),
                   ),
                 ),
               ),
-            ),
-            SizedBox(
-              height: 15,
-            ),
-            GestureDetector(
-              onTap: (){
-                Get.toNamed(AppRoutes.notificationScreen);
-              },
-              child: Container(
-                height: 60,
-                width: double.infinity,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  color: AppColors.white_50,
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: Row(
-                    children: [
-                      CustomImage(
-                        imageSrc: AppIcons.notification,
-                        height: 24,
-                        width: 24,
-                      ),
-                      SizedBox(
-                        width: 15,
-                      ),
-                      CustomText(
-                        text: 'Notification',
-                        fontSize: 14,
-                        fontWeight: FontWeight.w500,
-                      ),
-                      Spacer(),
-                      Container(
-                        height: 45,
-                        width: 40,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          color: AppColors.primary,
+              SizedBox(
+                height: 15,
+              ),
+              GestureDetector(
+                onTap: (){
+                  Get.toNamed(AppRoutes.notificationScreen);
+                },
+                child: Container(
+                  height: 60,
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    color: AppColors.white_50,
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: Row(
+                      children: [
+                        CustomImage(
+                          imageSrc: AppIcons.notification,
+                          height: 24,
+                          width: 24,
                         ),
-                        child: Icon(
-                          Icons.keyboard_arrow_right,
-                          color: AppColors.white,
+                        SizedBox(
+                          width: 15,
                         ),
-                      )
-                    ],
+                        CustomText(
+                          text: 'Notification',
+                          fontSize: 14,
+                          fontWeight: FontWeight.w500,
+                        ),
+                        Spacer(),
+                        Container(
+                          height: 45,
+                          width: 40,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            color: AppColors.primary,
+                          ),
+                          child: Icon(
+                            Icons.keyboard_arrow_right,
+                            color: AppColors.white,
+                          ),
+                        )
+                      ],
+                    ),
                   ),
                 ),
               ),
-            ),
-            SizedBox(
-              height: 15,
-            ),
-            GestureDetector(
-              onTap: (){
-                // Get.toNamed(AppRoutes.editScreen);
-              },
-              child: Container(
-                height: 60,
-                width: double.infinity,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  color: AppColors.white_50,
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: Row(
-                    children: [
-                      CustomImage(
-                        imageSrc: AppIcons.logout,
-                        height: 24,
-                        width: 24,
-                      ),
-                      SizedBox(
-                        width: 15,
-                      ),
-                      CustomText(
-                        text: 'Logout',
-                        fontSize: 14,
-                        fontWeight: FontWeight.w500,
-                        color: AppColors.red,
-                      ),
-                      Spacer(),
-                      Container(
-                        height: 45,
-                        width: 40,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          color: AppColors.primary,
+              SizedBox(
+                height: 15,
+              ),
+              GestureDetector(
+                onTap: (){
+                  // Get.toNamed(AppRoutes.editScreen);
+                },
+                child: Container(
+                  height: 60,
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    color: AppColors.white_50,
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: Row(
+                      children: [
+                        CustomImage(
+                          imageSrc: AppIcons.logout,
+                          height: 24,
+                          width: 24,
                         ),
-                        child: Icon(
-                          Icons.keyboard_arrow_right,
-                          color: AppColors.white,
+                        SizedBox(
+                          width: 15,
                         ),
-                      )
-                    ],
+                        CustomText(
+                          text: 'Logout',
+                          fontSize: 14,
+                          fontWeight: FontWeight.w500,
+                          color: AppColors.red,
+                        ),
+                        Spacer(),
+                        Container(
+                          height: 45,
+                          width: 40,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            color: AppColors.primary,
+                          ),
+                          child: Icon(
+                            Icons.keyboard_arrow_right,
+                            color: AppColors.white,
+                          ),
+                        )
+                      ],
+                    ),
                   ),
                 ),
               ),
-            ),
-
-          ],
+          
+            ],
+          ),
         ),
       ),
-      bottomNavigationBar: NurseNavbar(currentIndex: 3),
+      bottomNavigationBar: NurseNavbar(currentIndex: 2),
     );
   }
 }

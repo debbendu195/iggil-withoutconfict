@@ -1,4 +1,5 @@
 import 'package:event_platform/view/components/custom_nav_bar/technician_navbar.dart';
+import 'package:event_platform/view/screen/role_screen/dentist/dentist_home/widget/custom_case_card/custom_case_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -129,9 +130,9 @@ class TechnicianHomeScreen extends StatelessWidget {
             ),
           ),
 
-          SizedBox(height: 24),
+          SizedBox(height: 12),
           Divider(thickness: 2),
-          SizedBox(height: 24),
+          SizedBox(height: 5),
 
           /// Scrollable Body
           Expanded(
@@ -164,7 +165,7 @@ class TechnicianHomeScreen extends StatelessWidget {
                       shrinkWrap: true,
                       itemCount: 10,
                       itemBuilder: (context, index) {
-                        return CustomTechnicianCaseCard(
+                        return CustomCaseCard(
                           all: false,
                           inProgress: true,
                           complete: true,
@@ -178,7 +179,7 @@ class TechnicianHomeScreen extends StatelessWidget {
           ),
         ],
       ),
-      bottomNavigationBar: TechnicianNavbar(currentIndex: 0),
+      bottomNavigationBar: TechnicianNavbar(currentIndex: 1),
     );
   }
 }

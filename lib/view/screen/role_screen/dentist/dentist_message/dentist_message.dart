@@ -13,38 +13,40 @@ class DentistMessage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomRoyelAppbar(leftIcon: false, titleName: "Messages asdfasdfasdf"),
+      appBar: CustomRoyelAppbar(leftIcon: false, titleName: "Messages", color: AppColors.primary,),
 
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: CustomTextField(
-              hintText: AppStrings.search,
-              fillColor: Colors.transparent,
-              hintStyle: TextStyle(color: AppColors.black_80,),
-              textEditingController: TextEditingController(),
-              fieldBorderColor: AppColors.grey,
+      body: SafeArea(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: CustomTextField(
+                hintText: AppStrings.search,
+                fillColor: Colors.transparent,
+                hintStyle: TextStyle(color: AppColors.black_80,),
+                textEditingController: TextEditingController(),
+                fieldBorderColor: AppColors.grey,
+              ),
             ),
-          ),
-          Expanded(
-            child: ListView.separated(
-              shrinkWrap: true,
-              padding: EdgeInsets.zero,
-              itemCount: 20,
-              separatorBuilder: (context, index) =>
-                  SizedBox(height: 20),
-              itemBuilder: (context, index) {
-                return CustomMessageList(
-                  title: 'Chat with Andrew',
-                  subtitle: 'This is a subtitle for user',
-                  time: '10:00 AM',
-                );
-              },
+            Expanded(
+              child: ListView.separated(
+                shrinkWrap: true,
+                padding: EdgeInsets.zero,
+                itemCount: 20,
+                separatorBuilder: (context, index) =>
+                    SizedBox(height: 20),
+                itemBuilder: (context, index) {
+                  return CustomMessageList(
+                    title: 'Chat with Andrew',
+                    subtitle: 'This is a subtitle for user',
+                    time: '10:00 AM',
+                  );
+                },
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
       bottomNavigationBar: NavBar(currentIndex: 2,),
     );

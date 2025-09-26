@@ -1,13 +1,12 @@
+import 'package:event_platform/view/screen/role_screen/practice_manager/practice_manager_home_screen/view/practice_manager_list/practice_manager_list_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import '../../../utils/app_colors/app_colors.dart';
 import '../../../utils/app_icons/app_icons.dart';
-import '../../screen/role_screen/dentist/profile/view/profile_screen/profile_screen.dart';
-import '../../screen/role_screen/practice_manager/practice_manager_add_case_screen/practice_manager_add_case_screen.dart';
-import '../../screen/role_screen/practice_manager/practice_manager_home_screen/view/practice_manager_home_screen.dart';
-import '../../screen/role_screen/practice_manager/practice_manager_my_case/practice_manager_my_case.dart';
+import '../../screen/role_screen/practice_manager/practice_manager_home_screen/view/practice_manager_my_case/practice_manager_my_case.dart';
+import '../../screen/role_screen/practice_manager/practice_manager_profile/view/practice_manager_profile_screen/practice_manager_profile_screen.dart';
 import '../custom_text/custom_text.dart';
 
 class PracticeManagetNavbar extends StatefulWidget {
@@ -24,22 +23,23 @@ class _NavBarState extends State<PracticeManagetNavbar> {
 
   final List<String> navbarNameList = [
     "Home".tr,
-    "My Case".tr,
-    "Add Case".tr,
+    "Search".tr,
+    // "Add Case".tr,
     "Profile".tr,
+
   ];
 
   final List<String> selectedIcon = [
     AppIcons.home,
-    AppIcons.myCase,
-    AppIcons.addCase,
+    AppIcons.search,
+    // AppIcons.addCase,
     AppIcons.profile,
   ];
 
   final List<String> unselectedIcon = [
     AppIcons.home,
-    AppIcons.myCase,
-    AppIcons.addCase,
+    AppIcons.search,
+    // AppIcons.addCase,
     AppIcons.profile,
   ];
 
@@ -122,16 +122,16 @@ class _NavBarState extends State<PracticeManagetNavbar> {
 
       switch (index) {
         case 0:
-          Get.offAll(() => const PracticeManagerHomeScreen());
+          Get.offAll(() => const PracticeManagerListScreen());
           break;
         case 1:
           Get.to(() => const PracticeManagerMyCase());
           break;
-        case 2:
+        /*case 2:
           Get.to(() => PracticeManagerAddCaseScreen());
-          break;
-        case 3:
-          Get.to(() => const ProfileScreen());
+          break;*/
+        case 2:
+          Get.to(() => const PracticeManagerProfileScreen());
           break;
       }
     }

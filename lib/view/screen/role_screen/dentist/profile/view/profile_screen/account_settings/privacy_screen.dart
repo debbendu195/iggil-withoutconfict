@@ -11,7 +11,7 @@ class PrivacyScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: CustomRoyelAppbar(leftIcon: true, titleName: 'Terms of Conditions', color: AppColors.primary,),
+        appBar: CustomRoyelAppbar(leftIcon: true, titleName: 'Privacy Policy', color: AppColors.primary,),
         body: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 20),
           child: CustomText(

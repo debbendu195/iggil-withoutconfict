@@ -122,10 +122,10 @@ class _NavBarState extends State<NavBar> {
 
       switch (index) {
         case 0:
-          Get.offAll(() => const DentistListScreen());
+          Get.offAll(() => DentistListScreen());
           break;
         case 1:
-          Get.to(() => const DentistHomeScreen());
+          Get.to(() => DentistHomeScreen());
           break;
         case 2:
           Get.to(() => DentistMessage());
