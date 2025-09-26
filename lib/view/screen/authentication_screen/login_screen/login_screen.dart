@@ -43,14 +43,7 @@ class LoginScreen extends StatelessWidget {
                   // Get.toNamed(AppRoutes.dentistHomeScreen);
                   // Get.toNamed(AppRoutes.technicianHomeScreen);
                 },
-                title: 'Log in',),
-                SizedBox(height: 10),
-                CustomButton(onTap: (){
-                  // Get.toNamed(AppRoutes.labManagerHomeScreen);
-                  Get.toNamed(AppRoutes.labManagerListScreen);
-                },
-                title: 'Lab manager',
-                )
+                title: 'Login',),
               ],
             ),
           ),

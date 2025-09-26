@@ -5,7 +5,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import '../../../utils/app_colors/app_colors.dart';
 import '../../../utils/app_icons/app_icons.dart';
-import '../../screen/role_screen/nurse/nurse_add_case/nurse_add_case_screen.dart';
+import '../../screen/role_screen/nurse/nurse_home_screen/nurse/nurse_list_screen.dart';
 import '../../screen/role_screen/nurse/nurse_my_case/nurse_my_case_screen.dart';
 import '../../screen/role_screen/nurse/nurse_profile/nurse_profile_screen.dart';
 import '../custom_text/custom_text.dart';
@@ -24,22 +24,22 @@ class _NavBarState extends State<NurseNavbar> {
 
   final List<String> navbarNameList = [
     "Home".tr,
-    "My Case".tr,
-    "Add Case".tr,
+    "Search".tr,
+    // "Add Case".tr,
     "Profile".tr,
   ];
 
   final List<String> selectedIcon = [
     AppIcons.home,
-    AppIcons.myCase,
-    AppIcons.addCase,
+    AppIcons.search,
+    // AppIcons.addCase,
     AppIcons.profile,
   ];
 
   final List<String> unselectedIcon = [
     AppIcons.home,
-    AppIcons.myCase,
-    AppIcons.addCase,
+    AppIcons.search,
+    // AppIcons.addCase,
     AppIcons.profile,
   ];
 
@@ -122,15 +122,15 @@ class _NavBarState extends State<NurseNavbar> {
 
       switch (index) {
         case 0:
-          Get.offAll(() => const NurseHomeScreen());
+          Get.offAll(() => NurseListScreen());
           break;
         case 1:
-          Get.to(() => const NurseMyCaseScreen());
+          Get.to(() => const NurseHomeScreen());
           break;
+        // case 2:
+        //   Get.to(() => NurseAddCaseScreen());
+        //   break;
         case 2:
-          Get.to(() => NurseAddCaseScreen());
-          break;
-        case 3:
           Get.to(() => const NurseProfileScreen());
           break;
       }

@@ -53,7 +53,7 @@ class CustomCaseCard extends StatelessWidget {
               children: [
                 Expanded(
                   child: CustomText(
-                    text: title ?? "Case Title",
+                    text: title ?? "Root Canal Treatment #12345",
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
                     color: Colors.green,
@@ -127,7 +127,7 @@ class CustomCaseCard extends StatelessWidget {
 
             /// Doctor Name
             CustomText(
-              text: doctorName ?? "Doctor Name",
+              text: doctorName ?? "Debbendu Paul",
               fontSize: 14,
               fontWeight: FontWeight.w500,
             ),

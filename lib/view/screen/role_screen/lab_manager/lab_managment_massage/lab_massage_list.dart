@@ -13,7 +13,7 @@ class LabMassageList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomRoyelAppbar(leftIcon: false, titleName: "Messages"),
+      appBar: CustomRoyelAppbar(leftIcon: false, titleName: "Messages", color: AppColors.primary,),
 
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

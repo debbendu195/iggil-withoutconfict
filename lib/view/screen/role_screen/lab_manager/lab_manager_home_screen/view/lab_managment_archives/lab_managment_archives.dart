@@ -11,10 +11,15 @@ class LabManagmentArchives extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomRoyelAppbar(leftIcon: true, titleName: 'Archived', color: AppColors.primary,),
-      body: Column(
-        children: List.generate(2, (value) {
-          return CustomLabManagmentArchived();
-        }),
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.all(20),
+          child: Column(
+            children: List.generate(2, (value) {
+              return CustomLabManagmentArchived();
+            }),
+          ),
+        ),
       ),
     );
   }

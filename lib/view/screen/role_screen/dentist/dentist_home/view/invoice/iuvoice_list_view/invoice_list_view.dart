@@ -19,52 +19,54 @@ class InvoiceListView extends StatelessWidget {
         titleName: 'Invoice',
         color: AppColors.primary,
       ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: TextField(
-              decoration: InputDecoration(
-                hintText: 'Search by Patient ID or Case No.',
-                prefixIcon: const Icon(Icons.search),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(10),
-                  borderSide: BorderSide.none,
+      body: SafeArea(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: TextField(
+                decoration: InputDecoration(
+                  hintText: 'Search by Patient ID or Case No.',
+                  prefixIcon: const Icon(Icons.search),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                    borderSide: BorderSide.none,
+                  ),
+                  filled: true,
+                  fillColor: Colors.grey[200],
                 ),
-                filled: true,
-                fillColor: Colors.grey[200],
               ),
             ),
-          ),
-
-          const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 16.0),
-            child: Text(
-              'Invoice List',
-              style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-                color: Colors.green,
+        
+            const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 16.0),
+              child: Text(
+                'Invoice List',
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.green,
+                ),
               ),
             ),
-          ),
-
-          // ===============================
-
-          const SizedBox(height: 10),
-          Expanded(
-            child: Obx(
-              () => ListView.builder(
-                itemCount: controller.invoiceList.length,
-                itemBuilder: (context, index) {
-                  final invoice = controller.invoiceList[index];
-                  return InvoiceItem(invoice: invoice);
-                },
+        
+            // ===============================
+        
+            const SizedBox(height: 10),
+            Expanded(
+              child: Obx(
+                () => ListView.builder(
+                  itemCount: controller.invoiceList.length,
+                  itemBuilder: (context, index) {
+                    final invoice = controller.invoiceList[index];
+                    return InvoiceItem(invoice: invoice);
+                  },
+                ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

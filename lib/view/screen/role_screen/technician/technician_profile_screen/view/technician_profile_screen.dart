@@ -313,7 +313,7 @@ class TechnicianProfileScreen extends StatelessWidget {
           ],
         ),
       ),
-      bottomNavigationBar: LabManagerNavbar(currentIndex: 3),
+      bottomNavigationBar: TechnicianNavbar(currentIndex: 2),
     );
   }
 }

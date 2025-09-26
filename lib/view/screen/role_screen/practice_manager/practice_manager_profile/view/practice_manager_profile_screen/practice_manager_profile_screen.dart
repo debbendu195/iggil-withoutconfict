@@ -3,6 +3,7 @@ import 'package:event_platform/utils/app_colors/app_colors.dart';
 import 'package:event_platform/utils/app_const/app_const.dart';
 import 'package:event_platform/utils/app_icons/app_icons.dart';
 import 'package:event_platform/view/components/custom_image/custom_image.dart';
+import 'package:event_platform/view/components/custom_nav_bar/practice_managet_navbar.dart';
 import 'package:event_platform/view/components/custom_nav_bar/technician_navbar.dart';
 import 'package:event_platform/view/components/custom_netwrok_image/custom_network_image.dart';
 import 'package:event_platform/view/components/custom_royel_appbar/custom_royel_appbar.dart';
@@ -14,15 +15,15 @@ import 'package:get/get.dart';
 import '../../../../../../components/custom_nav_bar/lab_manager_navbar.dart';
 
 
-class ProfileScreen extends StatelessWidget {
-  const ProfileScreen({super.key});
+class PracticeManagerProfileScreen extends StatelessWidget {
+  const PracticeManagerProfileScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomRoyelAppbar(
         leftIcon: false,
-        titleName: 'My Profile hi',
+        titleName: 'My Profile practice',
         color: AppColors.primary,
       ),
       body: Padding(
@@ -314,7 +315,7 @@ class ProfileScreen extends StatelessWidget {
           ],
         ),
       ),
-      bottomNavigationBar: LabManagerNavbar(currentIndex: 3),
+      bottomNavigationBar: PracticeManagetNavbar(currentIndex: 2),
     );
   }
 }
