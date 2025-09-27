@@ -12,6 +12,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 import '../../../../../components/custom_nav_bar/lab_manager_navbar.dart';
+import '../../../../../components/custom_show_popup/custom_show_popup.dart';
 
 class TechnicianProfileScreen extends StatelessWidget {
   const TechnicianProfileScreen({super.key});
@@ -50,7 +51,7 @@ class TechnicianProfileScreen extends StatelessWidget {
                       fontSize: 16,
                       fontWeight: FontWeight.w600,
                     ),
-                    CustomText(text: 'Dentist')
+                    CustomText(text: 'Lab Technician')
                   ],
                 )
               ],
@@ -263,8 +264,29 @@ class TechnicianProfileScreen extends StatelessWidget {
               height: 15,
             ),
             GestureDetector(
-              onTap: (){
-                // Get.toNamed(AppRoutes.editScreen);
+              onTap: () {
+                showDialog(
+                  context: context,
+                  builder: (ctx) => AlertDialog(
+                    backgroundColor: AppColors.white,
+                    insetPadding: EdgeInsets.all(8),
+                    contentPadding: EdgeInsets.all(8),
+                    content: SizedBox(
+                      width: MediaQuery.sizeOf(context).width,
+                      child: CustomShowDialog(
+                        textColor: AppColors.black,
+                        title: "Logout Your Account",
+                        discription: "Are you sure you want to Logout ?",
+                        showColumnButton: true,
+                        showCloseButton: true,
+                        rightOnTap: () {
+                          Get.back(); // cancel
+                        },
+                        leftOnTap: () => Get.toNamed(AppRoutes.loginScreen), // confirm logout
+                      ),
+                    ),
+                  ),
+                );
               },
               child: Container(
                 height: 60,
@@ -282,9 +304,7 @@ class TechnicianProfileScreen extends StatelessWidget {
                         height: 24,
                         width: 24,
                       ),
-                      SizedBox(
-                        width: 15,
-                      ),
+                      SizedBox(width: 15),
                       CustomText(
                         text: 'Logout',
                         fontSize: 14,
@@ -303,12 +323,12 @@ class TechnicianProfileScreen extends StatelessWidget {
                           Icons.keyboard_arrow_right,
                           color: AppColors.white,
                         ),
-                      )
+                      ),
                     ],
                   ),
                 ),
               ),
-            ),
+            )
 
           ],
         ),

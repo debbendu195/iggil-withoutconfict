@@ -25,7 +25,7 @@ class DentistListScreen extends StatelessWidget {
       'image': AppImages.icon2,
       'title': 'My Case List',
       'subtitle': 'Active cases',
-      'route' : AppRoutes.dentistCaseList,
+      'route' : AppRoutes.dentistHomeScreen,
     },
     {
       'image': AppImages.icon3,

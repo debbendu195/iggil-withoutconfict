@@ -1,13 +1,11 @@
-
+import 'package:event_platform/core/app_routes/app_routes.dart';
+import 'package:event_platform/utils/app_colors/app_colors.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
-import '../../../../../../core/app_routes/app_routes.dart';
-import '../../../../../../utils/app_colors/app_colors.dart';
-import '../../../../../../utils/app_images/app_images.dart';
+import 'package:get/get.dart';
 import '../../../../../components/custom_button/custom_button.dart';
-import '../../../../../components/custom_image/custom_image.dart';
 import '../../../../../components/custom_text/custom_text.dart';
+import '../../../dentist/dentist_home/widget/custom_case_card_description/custom_case_card_description.dart';
 
 
 class CustomTechnicianCaseCard extends StatelessWidget {
@@ -21,9 +19,9 @@ class CustomTechnicianCaseCard extends StatelessWidget {
     this.onTap,
     this.status = "New",
     this.statusColor,
-    this.all=false,
-    this.inProgress=false,
-    this.complete=false,
+    this.all = false,
+    this.inProgress = false,
+    this.complete = false,
   });
 
   final String? title;
@@ -57,7 +55,7 @@ class CustomTechnicianCaseCard extends StatelessWidget {
               children: [
                 Expanded(
                   child: CustomText(
-                    text: title ?? "Bridge Work - Patient Zhou",
+                    text: title ?? "Root Canal Treatment #12345",
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
                     color: Colors.green,
@@ -71,7 +69,8 @@ class CustomTechnicianCaseCard extends StatelessWidget {
                 /// All Badge
                 all == false
                     ? Container(
-                  padding: EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+                  padding:
+                  EdgeInsets.symmetric(horizontal: 12, vertical: 4),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(20),
                     color: AppColors.red_01,
@@ -90,7 +89,8 @@ class CustomTechnicianCaseCard extends StatelessWidget {
                 /// In Progress Badge
                 inProgress == false
                     ? Container(
-                  padding: EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+                  padding:
+                  EdgeInsets.symmetric(horizontal: 12, vertical: 4),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(20),
                     color: Color(0xffDBEAFE),
@@ -109,7 +109,8 @@ class CustomTechnicianCaseCard extends StatelessWidget {
                 /// Complete Badge
                 complete == false
                     ? Container(
-                  padding: EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+                  padding:
+                  EdgeInsets.symmetric(horizontal: 12, vertical: 4),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(20),
                     color: Color(0xffE0FFD5),
@@ -124,52 +125,51 @@ class CustomTechnicianCaseCard extends StatelessWidget {
                     : Container(),
               ],
             ),
-            SizedBox(height: 15),
+            SizedBox(height: 8),
 
             /// Doctor Name
             CustomText(
-              text: doctorName ?? "Dr. Debbendu Paul",
+              text: doctorName ?? "Debbendu Paul",
               fontSize: 14,
               fontWeight: FontWeight.w500,
             ),
             SizedBox(height: 8),
 
+
+            // custom case card description call part
+            CustomCaseCardDescription(item1: 'Clinic',item2: 'MDC',),
+            SizedBox(height: 16),
+            CustomCaseCardDescription(item1: 'Patient Ref',item2: 'Mu0001',),
+            SizedBox(height: 16),
+            CustomCaseCardDescription(item1: 'Status',item2: 'Submitted',),
+            SizedBox(height: 16),
+            CustomCaseCardDescription(item1: 'Return Date',item2:'10/09/2025',),
+            SizedBox(height: 16),
+
+
+
             /// Description
             CustomText(
+              textAlign: TextAlign.start,
               text: description ??
-                  "Assigned: Jan 27,2025",
-              fontSize: 14,
-              fontWeight: FontWeight.w600,
+                  "Complex endodontic case requiring specialized\napproach for molar restoration...",
+              fontSize: 13,
               color: Colors.black54,
-            ),
 
-            SizedBox(height: 16),
-            
-            Row(
-              children: [
-                CustomImage(imageSrc: AppImages.gallery,),
-                SizedBox(width: 10,),
-                CustomText(text: '5', fontWeight: FontWeight.w400, fontSize: 12,),
-                SizedBox(width: 20,),
-                CustomImage(imageSrc: AppImages.pdf,),
-                SizedBox(width: 10,),
-                CustomText(text: '5', fontWeight: FontWeight.w400, fontSize: 12,),
-              ],
             ),
-            
-            SizedBox(height: 16),
+            SizedBox(height: 12),
 
             /// Button
             CustomButton(
-              title: "Accept Case",
-              onTap: (){
-                Get.toNamed(AppRoutes.viewCaseScreen);
+              title: "View Case",
+              onTap: () {
+                Get.toNamed(AppRoutes.technicianViewCaseScreen);
               },
               textColor: Colors.white,
               borderRadius: 8,
               height: 45,
               width: double.infinity,
-              fillColor: statusColor??AppColors.primary,
+              fillColor: statusColor ?? AppColors.primary,
             ),
           ],
         ),

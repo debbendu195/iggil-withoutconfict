@@ -26,7 +26,7 @@ class PracticeManagerListScreen extends StatelessWidget {
       'image': AppImages.icon2,
       'title': 'All Case List',
       'subtitle': 'Active cases',
-      'route' : AppRoutes.practiceManagerMyCase,
+      'route' : AppRoutes.practiceManagerHomeScreen,
     },{
       'image': AppImages.icon4,
       'title': 'Archives',
@@ -75,7 +75,7 @@ class PracticeManagerListScreen extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           CustomText(
-                            text: "Welcome practice,",
+                            text: "Welcome,",
                             fontSize: 16.w,
                             fontWeight: FontWeight.w700,
                             color: AppColors.primary,

@@ -1,4 +1,5 @@
 import 'package:event_platform/view/components/custom_nav_bar/navbar.dart';
+import 'package:event_platform/view/components/custom_royel_appbar/custom_royel_appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -21,74 +22,10 @@ class DentistMyCaseScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: CustomRoyelAppbar(leftIcon: true, titleName: 'My Case List',),
       body: SafeArea(
         child: Column(
           children: [
-            /// ================= Top Profile Section =================
-            Padding(
-              padding: const EdgeInsets.only(left: 10, right: 10, top: 30),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Row(
-                    children: [
-                      CustomNetworkImage(
-                        imageUrl: AppConstants.profileImage,
-                        boxShape: BoxShape.circle,
-                        height: 60.h,
-                        width: 60.w,
-                      ),
-                      SizedBox(width: 10.w),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          CustomText(
-                            text: "Welcome,",
-                            fontSize: 16.w,
-                            fontWeight: FontWeight.w700,
-                            color: AppColors.primary,
-                          ),
-                          CustomText(
-                            text: "Debbendu Paul",
-                            fontSize: 14.w,
-                            fontWeight: FontWeight.w500,
-                            color: AppColors.primary,
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      CustomButton(
-                        title: "EN",
-                        fontSize: 14,
-                        fontWeight: FontWeight.w500,
-                        onTap: () {},
-                        fillColor: AppColors.green,
-                        textColor: AppColors.primary,
-                        borderRadius: 30,
-                        height: 40,
-                        width: 60,
-                      ),
-                      SizedBox(width: 16.w),
-                      GestureDetector(
-                        onTap: () {},
-                        child: Icon(
-                          Icons.notifications,
-                          color: AppColors.black,
-                          size: 24,
-                        ),
-                      )
-                    ],
-                  ),
-                ],
-              ),
-            ),
-
-            SizedBox(height: 24),
-            Divider(thickness: 2),
-            SizedBox(height: 24),
 
             /// ================= Search + Tabs =================
             Padding(
@@ -179,7 +116,6 @@ class DentistMyCaseScreen extends StatelessWidget {
           ],
         ),
       ),
-      bottomNavigationBar: NavBar(currentIndex: 1),
     );
   }
 }

@@ -1,3 +1,4 @@
+import 'package:event_platform/view/screen/role_screen/practice_manager/practice_manager_home_screen/view/practice_manager_home_screen.dart';
 import 'package:event_platform/view/screen/role_screen/practice_manager/practice_manager_home_screen/view/practice_manager_list/practice_manager_list_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -125,7 +126,7 @@ class _NavBarState extends State<PracticeManagetNavbar> {
           Get.offAll(() => const PracticeManagerListScreen());
           break;
         case 1:
-          Get.to(() => const PracticeManagerMyCase());
+          Get.to(() => const PracticeManagerHomeScreen());
           break;
         /*case 2:
           Get.to(() => PracticeManagerAddCaseScreen());

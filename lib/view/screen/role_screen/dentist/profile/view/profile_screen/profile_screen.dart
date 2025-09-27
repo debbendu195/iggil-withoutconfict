@@ -11,6 +11,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 import '../../../../../../components/custom_nav_bar/navbar.dart';
+import '../../../../../../components/custom_show_popup/custom_show_popup.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -263,55 +264,73 @@ class ProfileScreen extends StatelessWidget {
                 SizedBox(
                   height: 15,
                 ),
-                GestureDetector(
-                  onTap: (){
-                    // Get.toNamed(AppRoutes.editScreen);
-                  },
-                  child: Container(
-                    height: 60,
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      color: AppColors.white_50,
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(10.0),
-                      child: Row(
-                        children: [
-                          CustomImage(
-                            imageSrc: AppIcons.logout,
-                            height: 24,
-                            width: 24,
-                          ),
-                          SizedBox(
-                            width: 15,
-                          ),
-                          CustomText(
-                            text: 'Logout',
-                            fontSize: 14,
-                            fontWeight: FontWeight.w500,
-                            color: AppColors.red,
-                          ),
-                          Spacer(),
-                          Container(
-                            height: 45,
-                            width: 40,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              color: AppColors.primary,
-                            ),
-                            child: Icon(
-                              Icons.keyboard_arrow_right,
-                              color: AppColors.white,
-                            ),
-                          )
-                        ],
+            GestureDetector(
+              onTap: () {
+                showDialog(
+                  context: context,
+                  builder: (ctx) => AlertDialog(
+                    backgroundColor: AppColors.white,
+                    insetPadding: EdgeInsets.all(8),
+                    contentPadding: EdgeInsets.all(8),
+                    content: SizedBox(
+                      width: MediaQuery.sizeOf(context).width,
+                      child: CustomShowDialog(
+                        textColor: AppColors.black,
+                        title: "Logout Your Account",
+                        discription: "Are you sure you want to Logout ?",
+                        showColumnButton: true,
+                        showCloseButton: true,
+                        rightOnTap: () {
+                          Get.back(); // cancel
+                        },
+                        leftOnTap: () => Get.toNamed(AppRoutes.loginScreen), // confirm logout
                       ),
                     ),
                   ),
+                );
+              },
+              child: Container(
+                height: 60,
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  color: AppColors.white_50,
                 ),
-            
-              ],
+                child: Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: Row(
+                    children: [
+                      CustomImage(
+                        imageSrc: AppIcons.logout,
+                        height: 24,
+                        width: 24,
+                      ),
+                      SizedBox(width: 15),
+                      CustomText(
+                        text: 'Logout',
+                        fontSize: 14,
+                        fontWeight: FontWeight.w500,
+                        color: AppColors.red,
+                      ),
+                      Spacer(),
+                      Container(
+                        height: 45,
+                        width: 40,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          color: AppColors.primary,
+                        ),
+                        child: Icon(
+                          Icons.keyboard_arrow_right,
+                          color: AppColors.white,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            )
+            ],
             ),
           ),
         ),

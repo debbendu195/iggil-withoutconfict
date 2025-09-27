@@ -11,8 +11,8 @@ import 'package:get/get.dart';
 import '../../../../../../../core/app_routes/app_routes.dart';
 import '../../../../../../components/custom_button/custom_button.dart';
 
-class ViewCaseScreen extends StatelessWidget {
-  const ViewCaseScreen({super.key});
+class LabManagerViewCaseScreen extends StatelessWidget {
+  const LabManagerViewCaseScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -142,19 +142,28 @@ class ViewCaseScreen extends StatelessWidget {
                         fontWeight: FontWeight.bold,
                         color: AppColors.black,
                       ),
-                      Container(
-                        padding: EdgeInsets.symmetric(
-                            horizontal: 10.w, vertical: 5.h),
-                        decoration: BoxDecoration(
-                          color: AppColors.green_01,
-                          borderRadius: BorderRadius.circular(8.r),
-                        ),
-                        child: CustomText(
-                          text: "Submitted",
-                          fontSize: 12.sp,
-                          fontWeight: FontWeight.w400,
-                          color: AppColors.primary,
-                        ),
+                      Row(
+                        children: [
+                          Container(
+                            padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 5.h),
+                            decoration: BoxDecoration(
+                              color: AppColors.primary,
+                              borderRadius: BorderRadius.circular(30.r),
+                            ),
+                            child: CustomText(text: 'Accept', color: Colors.white,),
+                          ),
+                          SizedBox(width: 5,),
+                          Container(
+                            padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 4.h),
+                            decoration: BoxDecoration(
+                              color: Colors.transparent,
+                              border: Border.all(color: AppColors.red),
+                              borderRadius: BorderRadius.circular(30.r),
+                            ),
+                            child: CustomText(text: 'Decline', color: AppColors.red,),
+                          ),
+
+                        ],
                       ),
                     ],
                   ),

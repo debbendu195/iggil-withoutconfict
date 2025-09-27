@@ -161,7 +161,7 @@ class CustomLabManagerCaseCard extends StatelessWidget {
             CustomButton(
               title: "View Case",
               onTap: () {
-                Get.toNamed(AppRoutes.viewCaseScreen);
+                Get.toNamed(AppRoutes.labManagerViewCaseScreen);
               },
               textColor: Colors.white,
               borderRadius: 8,

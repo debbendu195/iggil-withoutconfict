@@ -127,7 +127,7 @@ class _NavBarState extends State<LabManagerNavbar> {
           Get.offAll(() => LabManagerListScreen());
           break;
         case 1:
-          Get.to(() => const LabManagerMyCase());
+          Get.to(() => const LabManagerHomeScreen());
           break;
         case 2:
           Get.to(() => LabMassageList());

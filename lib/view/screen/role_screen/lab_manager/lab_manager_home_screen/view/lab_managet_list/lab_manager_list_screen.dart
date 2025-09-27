@@ -22,16 +22,16 @@ class LabManagerListScreen extends StatelessWidget {
       'route' : AppRoutes.labManagerProfileScreen,
     },
     {
-      'image': AppImages.icon2,
+      'image': AppImages.icon7,
       'title': 'Profile Management',
       'subtitle': 'Manager user account',
       'route' : AppRoutes.labProfileManagment,
     },
     {
-      'image': AppImages.icon3,
+      'image': AppImages.icon2,
       'title': 'All Case List',
       'subtitle': 'Create or resume work',
-      'route' : AppRoutes.labManagmentAllCase,
+      'route' : AppRoutes.labManagerHomeScreen,
 
     },{
       'image': AppImages.icon4,
@@ -167,10 +167,10 @@ class LabManagerListScreen extends StatelessWidget {
                 ],
               ),
             ),
-            SizedBox(height: 24),
-            Divider(thickness: 2),
             SizedBox(height: 12),
-        
+            Divider(thickness: 2),
+            SizedBox(height: 5),
+
             /// List Items
             Expanded(
               child: ListView.builder(
@@ -216,13 +216,13 @@ class LabManagerListScreen extends StatelessWidget {
                       ),
                     ),
                   );
-        
-        
+
+
                 },
               ),
-        
-        
-        
+
+
+
             ),
           ],
         ),
