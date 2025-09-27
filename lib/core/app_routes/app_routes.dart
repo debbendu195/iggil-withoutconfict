@@ -107,7 +107,7 @@ class AppRoutes {
   static const String technicianListScreen = "/TechnicianListScreen";
   static const String technicianHomeScreen = "/TechnicianHomeScreen";
   static const String technicianMyCaseScreen = "/TechnicianMyCaseScreen";
-  static const String technicianViewCaseScreen = "/TechnicianMyCaseScreen";
+  static const String technicianViewCaseScreen = "/TechnicianViewCaseScreen";
   static const String technicianChatScreen = "/TechnicianChatScreen";
   static const String technicianContractPage = "/TechnicianContractPage";
   static const String technicianDownloads = "/TechnicianDownloads";

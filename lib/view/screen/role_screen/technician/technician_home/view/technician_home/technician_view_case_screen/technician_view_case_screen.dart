@@ -10,9 +10,11 @@ import 'package:get/get.dart';
 
 import '../../../../../../../../core/app_routes/app_routes.dart';
 import '../../../../../../../components/custom_button/custom_button.dart';
+import '../../../../../dentist/dentist_home/view/view_case_screen/widgets_dropdown/dropdown.dart';
 
 class TechnicianViewCaseScreen extends StatelessWidget {
-  const TechnicianViewCaseScreen({super.key});
+      TechnicianViewCaseScreen({super.key});
+
 
   @override
   Widget build(BuildContext context) {
@@ -133,31 +135,9 @@ class TechnicianViewCaseScreen extends StatelessWidget {
                   color: AppColors.green.withOpacity(0.2),
                   borderRadius: BorderRadius.circular(12.r),
                 ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    CustomText(
-                      text: "Case Status",
-                      fontSize: 14.sp,
-                      fontWeight: FontWeight.bold,
-                      color: AppColors.black,
-                    ),
-                    Container(
-                      padding: EdgeInsets.symmetric(
-                          horizontal: 10.w, vertical: 5.h),
-                      decoration: BoxDecoration(
-                        color: AppColors.green_01,
-                        borderRadius: BorderRadius.circular(8.r),
-                      ),
-                      child: CustomText(
-                        text: "Submitted",
-                        fontSize: 12.sp,
-                        fontWeight: FontWeight.w400,
-                        color: AppColors.primary,
-                      ),
-                    ),
-                  ],
-                ),
+//=============================================================================//
+                child: CaseStatusDropdown(),
+// ===========================================================//
               ),
               SizedBox(height: 10.h),
 
@@ -208,42 +188,6 @@ class TechnicianViewCaseScreen extends StatelessWidget {
                   },
                 ),
               ),
-
-              SizedBox(height: 10.h),
-
-              CustomText(
-                text: "Write your notes",
-                fontSize: 16.sp,
-                fontWeight: FontWeight.w500,
-              ),
-              SizedBox(height: 10.h),
-              CustomTextField(
-                hintText: 'Enter any notes or updates about the case',
-                maxLines: 3,
-              ),
-              SizedBox(height: 10.h),
-              Container(
-                height: 120,
-                width: double.infinity,
-                decoration: BoxDecoration(
-                  color: Colors.transparent,
-                  border: Border.all(color: AppColors.grey1),
-                  borderRadius: BorderRadius.circular(15),
-                ),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(Icons.attachment_rounded, size: 50, color: AppColors.grey1),
-                    CustomText(
-                      top: 10.h,
-                      text: 'Upload Attachments',
-                      fontWeight: FontWeight.w400,
-                      fontSize: 16,
-                      color: AppColors.grey1,
-                    ),
-                  ],
-                ),
-              ),
               SizedBox(height: 10.h),
               CustomText(text: 'Quality Check Image/Video', fontWeight: FontWeight.w500, fontSize: 16,),
               SizedBox(height: 10.h),
@@ -261,7 +205,7 @@ class TechnicianViewCaseScreen extends StatelessWidget {
                     Icon(Icons.upload_file, size: 50, color: AppColors.grey1),
                     CustomText(
                       top: 10.h,
-                      text: 'No Quality Check photo/video',
+                      text: 'Add Quality Check photo/video',
                       fontWeight: FontWeight.w400,
                       fontSize: 16,
                       color: AppColors.grey1,
@@ -270,6 +214,13 @@ class TechnicianViewCaseScreen extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 10,),
+
+
+
+
+
+
+
               CustomButton(onTap: (){}, title: 'Submit Case', fontSize: 16, fontWeight: FontWeight.w400, borderRadius: 10,),
               SizedBox(height: 20,),
             ],
