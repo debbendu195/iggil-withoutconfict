@@ -1,6 +1,7 @@
 import 'package:event_platform/core/app_routes/app_routes.dart';
 import 'package:event_platform/utils/app_colors/app_colors.dart';
 import 'package:flutter/material.dart';
+
 import 'package:get/get.dart';
 import '../../../../../../components/custom_button/custom_button.dart';
 import '../../../../../../components/custom_text/custom_text.dart';

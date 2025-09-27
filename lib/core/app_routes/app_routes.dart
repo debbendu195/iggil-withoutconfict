@@ -6,15 +6,14 @@ import '../../view/screen/authentication_screen/login_screen/login_screen.dart';
 import '../../view/screen/authentication_screen/otp_screeen/otp_screeen.dart';
 import '../../view/screen/onboarding_screen/view/onboarding_screen.dart';
 import '../../view/screen/role_screen/dentist/dentist_home/view/add_case/view/add_case_screen.dart';
+import '../../view/screen/role_screen/dentist/dentist_home/view/case_page/case_page.dart';
 import '../../view/screen/role_screen/dentist/dentist_home/view/dentist/dentist_list_screen.dart';
 import '../../view/screen/role_screen/dentist/dentist_home/view/dentist_archives/dentist_archives.dart';
-import '../../view/screen/role_screen/dentist/dentist_home/view/dentist_case_list/dentist_case_list.dart';
 import '../../view/screen/role_screen/dentist/dentist_home/view/dentist_contract/contract_page.dart';
 import '../../view/screen/role_screen/dentist/dentist_home/view/dentist_download/downloads.dart';
 import '../../view/screen/role_screen/dentist/dentist_home/view/dentist_home/dentist_home_screen.dart';
-import '../../view/screen/role_screen/dentist/dentist_home/view/invoice/iuvoice_list_view/invoice_list_view.dart';
+import '../../view/screen/role_screen/dentist/dentist_home/view/invoice/invoice_list_view/invoice_list_view.dart';
 import '../../view/screen/role_screen/dentist/dentist_home/view/view_case_screen/view_case_screen.dart';
-import '../../view/screen/role_screen/dentist/dentist_home/widget/dntist_archives/custom_dentist_archived.dart';
 import '../../view/screen/role_screen/dentist/my_case/view/dentist_my_case_screen.dart';
 import '../../view/screen/role_screen/dentist/profile/view/profile_screen/account_settings/about_screen.dart';
 import '../../view/screen/role_screen/dentist/profile/view/profile_screen/account_settings/account_settings_screen.dart';
@@ -27,6 +26,7 @@ import '../../view/screen/role_screen/dentist/profile/view/profile_screen/notifi
 import '../../view/screen/role_screen/dentist/profile/view/profile_screen/profile_screen.dart';
 import '../../view/screen/role_screen/lab_manager/lab_manager_home_screen/view/lab_manager_contact/lab_manager_contact.dart';
 import '../../view/screen/role_screen/lab_manager/lab_manager_home_screen/view/lab_manager_home_screen.dart';
+import '../../view/screen/role_screen/lab_manager/lab_manager_home_screen/view/lab_manager_view_case_screen/lab_manager_view_case_screen.dart';
 import '../../view/screen/role_screen/lab_manager/lab_manager_home_screen/view/lab_managet_list/lab_manager_list_screen.dart';
 import '../../view/screen/role_screen/lab_manager/lab_manager_home_screen/view/lab_managment_archives/lab_managment_archives.dart';
 import '../../view/screen/role_screen/lab_manager/lab_manager_home_screen/view/lab_managment_download/lab_manager_download.dart';
@@ -49,7 +49,7 @@ import '../../view/screen/role_screen/nurse/nurse_home_screen/nurse_contract/nur
 import '../../view/screen/role_screen/nurse/nurse_home_screen/nurse_download/nurse_downloads.dart';
 import '../../view/screen/role_screen/nurse/nurse_home_screen/nurse_home_screen.dart';
 import '../../view/screen/role_screen/nurse/nurse_profile/nurse_profile_screen.dart';
-import '../../view/screen/role_screen/practice_manager/practice_manager_home_screen/view/invoice/practice_manager_iuvoice_list_view/practice_manager_invoice_list_view.dart';
+import '../../view/screen/role_screen/practice_manager/practice_manager_home_screen/view/invoice/invoice_list_view/invoice_list_view.dart';
 import '../../view/screen/role_screen/practice_manager/practice_manager_home_screen/view/practice_manager_contact/practice_manager_contact.dart';
 import '../../view/screen/role_screen/practice_manager/practice_manager_home_screen/view/practice_manager_home_screen.dart';
 import '../../view/screen/role_screen/practice_manager/practice_manager_home_screen/view/practice_manager_list/practice_manager_list_screen.dart';
@@ -62,6 +62,7 @@ import '../../view/screen/role_screen/technician/technician_home/view/technician
 import '../../view/screen/role_screen/technician/technician_home/view/technician_home/technician_contract/technician_contract_page.dart';
 import '../../view/screen/role_screen/technician/technician_home/view/technician_home/technician_download/technician_downloads.dart';
 import '../../view/screen/role_screen/technician/technician_home/view/technician_home/technician_home_screen.dart';
+import '../../view/screen/role_screen/technician/technician_home/view/technician_home/technician_view_case_screen/technician_view_case_screen.dart';
 import '../../view/screen/role_screen/technician/technician_my_case_screen/view/technician_my_case_screen.dart';
 import '../../view/screen/role_screen/technician/technician_profile_screen/view/technician_profile_screen.dart';
 import '../../view/screen/splash_screen/splash_screen.dart';
@@ -86,13 +87,14 @@ class AppRoutes {
   static const String dentistHomeScreen = "/DentistHomeScreen";
   static const String dentistMyCaseScreen = "/DentistMyCaseScreen";
   static const String addCaseScreen = "/AddCaseScreen";
-  static const String dentistCaseList = "/DentistCaseList";
+  // static const String dentistCaseList = "/DentistCaseList";
   static const String dentistArchives = "/DentistArchives";
   static const String downloadsScreen = "/DownloadsScreen";
   static const String contactUsScreen = "/ContactUsScreen";
   static const String profileScreen = "/ProfileScreen";
   static const String viewCaseScreen = "/ViewCaseScreen";
   static const String editScreen = "/EditScreen";
+  static const String caseDocumentScreen = "/CaseDocumentScreen";
   static const String accountSettingsScreen = "/AccountSettingsScreen";
   static const String langauageScreen = "/LangauageScreen";
   static const String notificationScreen = "/NotificationScreen";
@@ -105,6 +107,7 @@ class AppRoutes {
   static const String technicianListScreen = "/TechnicianListScreen";
   static const String technicianHomeScreen = "/TechnicianHomeScreen";
   static const String technicianMyCaseScreen = "/TechnicianMyCaseScreen";
+  static const String technicianViewCaseScreen = "/TechnicianMyCaseScreen";
   static const String technicianChatScreen = "/TechnicianChatScreen";
   static const String technicianContractPage = "/TechnicianContractPage";
   static const String technicianDownloads = "/TechnicianDownloads";
@@ -114,6 +117,7 @@ class AppRoutes {
   static const String labManagerListScreen ="/LabManagerListScreen";
   static const String labManagerHomeScreen ="/LabManagerHomeScreen";
   static const String labManagerProfileScreen ="/LabManagerProfileScreen";
+  static const String labManagerViewCaseScreen ="/LabManagerViewCaseScreen";
   static const String labManagerLangauageScreen ="/LabManagerLangauageScreen";
   static const String labManagmentAllCase ="/LabManagmentAllCase";
   static const String labMassageList ="/LabMassageList";
@@ -166,8 +170,9 @@ class AppRoutes {
     GetPage(name: dentistHomeScreen, page: () => DentistHomeScreen()),
     GetPage(name: dentistMyCaseScreen, page: () => DentistMyCaseScreen()),
     GetPage(name: addCaseScreen, page: () => AddCaseScreen()),
-    GetPage(name: dentistCaseList, page: () => DentistCaseList()),
+    // GetPage(name: dentistCaseList, page: () => DentistCaseList()),
     GetPage(name: dentistArchives, page: () => DentistArchives()),
+    GetPage(name: caseDocumentScreen, page: () => CaseDocumentScreen()),
     GetPage(name: downloadsScreen, page: () => DownloadsScreen()),
     GetPage(name: contactUsScreen, page: () => ContactUsScreen()),
     GetPage(name: profileScreen, page: () => ProfileScreen()),
@@ -185,6 +190,7 @@ class AppRoutes {
     GetPage(name: technicianListScreen, page: () => TechnicianListScreen()),
     GetPage(name: technicianHomeScreen, page: () => TechnicianHomeScreen()),
     GetPage(name: technicianMyCaseScreen, page: () => TechnicianMyCaseScreen()),
+    GetPage(name: technicianViewCaseScreen, page: () => TechnicianViewCaseScreen()),
     GetPage(name: technicianChatScreen, page: () => TechnicianChatScreen()),
     GetPage(name: technicianContractPage, page: () => TechnicianContractPage()),
     GetPage(name: technicianDownloads, page: () => TechnicianDownloads()),
@@ -194,6 +200,7 @@ class AppRoutes {
     //========================= Lab Part ================================//
     GetPage(name: labManagerListScreen, page: () => LabManagerListScreen()),
     GetPage(name: labManagerHomeScreen, page: () => LabManagerHomeScreen()),
+    GetPage(name: labManagerViewCaseScreen, page: () => LabManagerViewCaseScreen()),
     GetPage(name: labManagerProfileScreen, page: () => LabManagerProfileScreen()),
     GetPage(name: labManagmentAllCase, page: () => LabManagmentAllCase()),
     GetPage(name: labManagerLangauageScreen, page: () => LabManagerLangauageScreen()),

@@ -47,7 +47,7 @@ class DentistHomeScreen extends StatelessWidget {
                           GestureDetector(onTap: (){
                             Get.toNamed(AppRoutes.dentistMyCaseScreen);
                           },
-                          child: CustomText(text: 'view', fontSize: 13, fontWeight: FontWeight.w700, color: AppColors.primary)
+                          child: CustomText(text: 'view all', fontSize: 13, fontWeight: FontWeight.w700, color: AppColors.primary)
                           )
                         ],
                       ),

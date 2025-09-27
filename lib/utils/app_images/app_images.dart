@@ -16,6 +16,7 @@ class AppImages {
   static const String icon4 = "$basePath2/icon4.png";
   static const String icon5 = "$basePath2/icon5.png";
   static const String icon6 = "$basePath2/icon6.png";
+  static const String icon7 = "$basePath2/icon7.png";
 
 
 

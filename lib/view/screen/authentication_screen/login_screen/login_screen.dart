@@ -13,30 +13,31 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomRoyelAppbar(leftIcon: true),
       body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(),
+        child: SafeArea(
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                CustomText(text: 'Welcome !', fontSize: 32, fontWeight: FontWeight.w600, color: AppColors.primary,),
-                SizedBox(height: 8),
-                CustomText(text: 'Please Enter Your Personal Data', fontWeight: FontWeight.w400, fontSize: 16,),
-                SizedBox(height: 40),
-                CustomFormCard(title: 'E-mail', controller: TextEditingController(), hintText: 'debbendupaul195@gmail.com',),
-                SizedBox(height: 24),
-                CustomFormCard(title: 'Password', controller: TextEditingController(), hintText: '************', isPassword: true,),
-                SizedBox(height: 24),
-                InkWell(onTap: (){Get.toNamed(AppRoutes.emailVerify);}, child: CustomText(text: 'Forgot Password?', fontSize: 16, fontWeight: FontWeight.w700, color: AppColors.primary,)),
-                SizedBox(height: 50),
-                CustomButton(onTap: (){
-                  Get.toNamed(AppRoutes.demo);
-                },
-                title: 'Login',),
-              ],
+            padding: const EdgeInsets.symmetric(),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  CustomText(text: 'Welcome !', fontSize: 32, fontWeight: FontWeight.w600, color: AppColors.primary,),
+                  SizedBox(height: 8),
+                  CustomText(text: 'Please Enter Your Personal Data', fontWeight: FontWeight.w400, fontSize: 16,),
+                  SizedBox(height: 40),
+                  CustomFormCard(title: 'E-mail', controller: TextEditingController(), hintText: 'debbendupaul195@gmail.com',),
+                  SizedBox(height: 24),
+                  CustomFormCard(title: 'Password', controller: TextEditingController(), hintText: '************', isPassword: true,),
+                  SizedBox(height: 24),
+                  InkWell(onTap: (){Get.toNamed(AppRoutes.emailVerify);}, child: CustomText(text: 'Forgot Password?', fontSize: 16, fontWeight: FontWeight.w700, color: AppColors.primary,)),
+                  SizedBox(height: 50),
+                  CustomButton(onTap: (){
+                    Get.toNamed(AppRoutes.demo);
+                  },
+                  title: 'Login',),
+                ],
+              ),
             ),
           ),
         ),

@@ -52,7 +52,7 @@ class CustomDentistArchived extends StatelessWidget {
                     color: Colors.black,
                   ),
                 ),
-                SizedBox(height: 4),
+                SizedBox(width: 25,),
                 Icon(
                   Icons.more_vert,
                   size: 20,

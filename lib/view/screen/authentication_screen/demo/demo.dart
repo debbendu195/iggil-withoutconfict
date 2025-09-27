@@ -17,7 +17,7 @@ class Demo extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            CustomText(text: 'This is the demo screen for frontend', fontSize: 20, textAlign: TextAlign.center,),
+            CustomText(text: 'This is the demo screen for frontend test the all role. This page is testing purpose', fontSize: 20, textAlign: TextAlign.center, maxLines: 3,),
             SizedBox(height: 50),
             CustomButton(onTap: (){
               Get.toNamed(AppRoutes.dentistListScreen);
