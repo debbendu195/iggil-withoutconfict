@@ -1,3 +1,4 @@
+import 'package:event_platform/utils/app_strings/app_strings.dart';
 import 'package:event_platform/view/components/custom_pin_code/custom_pin_code.dart';
 import 'package:event_platform/view/components/custom_royel_appbar/custom_royel_appbar.dart';
 import 'package:flutter/material.dart';
@@ -23,22 +24,22 @@ class OtpScreeen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              CustomText(text: 'Verify OTP', fontWeight: FontWeight.w600, fontSize: 32, color: AppColors.primary,),
+              CustomText(text: AppStrings.verifyOTP, fontWeight: FontWeight.w600, fontSize: 32, color: AppColors.primary,),
               SizedBox(height: 16,),
-              CustomText(text: 'Please check your email. We have sent a code to contact @gmail.com',fontWeight: FontWeight.w400, fontSize: 16, maxLines: 2, textAlign: TextAlign.start,),
+              CustomText(text: AppStrings.checkYourEmail,fontWeight: FontWeight.w400, fontSize: 16, maxLines: 2, textAlign: TextAlign.start,),
               SizedBox(height: 24,),
               CustomPinCode(controller: TextEditingController()),
               Row(
                 children: [
-                  CustomText(text: 'Didn’t receive code?', fontWeight: FontWeight.w400, fontSize: 16,),
+                  CustomText(text: AppStrings.didntreceiveCode, fontWeight: FontWeight.w400, fontSize: 16,),
                   Spacer(),
-                  CustomText(text: 'Resend code', fontWeight: FontWeight.w400, fontSize: 16, color: AppColors.primary,),
+                  CustomText(text: AppStrings.resendCode, fontWeight: FontWeight.w400, fontSize: 16, color: AppColors.primary,),
                 ],
               ),
               SizedBox(height: 40,),
               CustomButton(onTap: (){
                 Get.toNamed(AppRoutes.forgotScreen);
-              }, title: 'Verify', fontWeight: FontWeight.w600, fontSize: 16,)
+              }, title: AppStrings.verify, fontWeight: FontWeight.w600, fontSize: 16,)
             ],
           ),
         ),

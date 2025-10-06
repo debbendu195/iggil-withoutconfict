@@ -131,7 +131,7 @@ class _NavBarState extends State<NavBar> {
           Get.to(() => DentistMessage());
           break;
         case 3:
-          Get.to(() => const ProfileScreen());
+          Get.to(() => ProfileScreen());
           break;
       }
     }

@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import '../../../../../../../core/app_routes/app_routes.dart';
 import '../../../../../../../utils/app_colors/app_colors.dart';
+import '../../../../../../../utils/app_strings/app_strings.dart';
 import '../../../../../../components/custom_text/custom_text.dart';
 import '../../../../../../components/custom_text_field/custom_text_field.dart';
 import '../../widget/custom_case_card/custom_case_card.dart';
@@ -18,6 +19,7 @@ class DentistHomeScreen extends StatelessWidget {
         child: Column(
           children: [
             SizedBox(height: 20.h),
+
             /// Scrollable Body
             Expanded(
               child: SingleChildScrollView(
@@ -27,7 +29,7 @@ class DentistHomeScreen extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       CustomTextField(
-                        hintText: 'Search by CaseTitle',
+                        hintText: 'searchByCaseTitle'.tr, // ✅ localization
                         hintStyle: TextStyle(color: AppColors.grey),
                         fieldBorderRadius: 15,
                         fieldBorderColor: AppColors.grey1,
@@ -39,16 +41,22 @@ class DentistHomeScreen extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           CustomText(
-                            text: 'Recent Cases Posted by Dentists',
+                            text: 'recentCasesPostedByDentists'.tr, // ✅ localization
                             color: AppColors.primary,
                             fontSize: 16,
                             fontWeight: FontWeight.w600,
                           ),
-                          GestureDetector(onTap: (){
-                            Get.toNamed(AppRoutes.dentistMyCaseScreen);
-                          },
-                          child: CustomText(text: 'view all', fontSize: 13, fontWeight: FontWeight.w700, color: AppColors.primary)
-                          )
+                          GestureDetector(
+                            onTap: () {
+                              Get.toNamed(AppRoutes.dentistMyCaseScreen);
+                            },
+                            child: CustomText(
+                              text: 'viewAll'.tr, // ✅ localization
+                              fontSize: 13,
+                              fontWeight: FontWeight.w700,
+                              color: AppColors.primary,
+                            ),
+                          ),
                         ],
                       ),
 
@@ -115,4 +123,3 @@ Widget _buildCard({
     ),
   );
 }
-

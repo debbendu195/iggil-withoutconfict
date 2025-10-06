@@ -5,53 +5,56 @@ import '../../../../../../../core/app_routes/app_routes.dart';
 import '../../../../../../../utils/app_colors/app_colors.dart';
 import '../../../../../../../utils/app_const/app_const.dart';
 import '../../../../../../../utils/app_images/app_images.dart';
+import '../../../../../../../view/multi_lag/app_translations.dart';
 import '../../../../../../components/custom_button/custom_button.dart';
 import '../../../../../../components/custom_nav_bar/navbar.dart';
 import '../../../../../../components/custom_netwrok_image/custom_network_image.dart';
 import '../../../../../../components/custom_text/custom_text.dart';
 
 class DentistListScreen extends StatelessWidget {
-   DentistListScreen({super.key});
-
+  const DentistListScreen({super.key});
 
   final List<Map<String, String>> items = const [
     {
       'image':AppImages.icon1,
-      'title': 'Profile',
-      'subtitle': 'Manage your account',
+      'title': 'profile',
+      'subtitle': 'manageYourAccount',
       'route' : AppRoutes.profileScreen,
     },
     {
       'image': AppImages.icon2,
-      'title': 'My Case List',
-      'subtitle': 'Active cases',
+      'title': 'myCaseList',
+      'subtitle': 'activeCases',
       'route' : AppRoutes.dentistHomeScreen,
     },
     {
       'image': AppImages.icon3,
-      'title': 'Start/Continue Case',
-      'subtitle': 'Create or resume work',
+      'title': 'startCase',
+      'subtitle': 'createOrResumeWork',
       'route' : AppRoutes.addCaseScreen,
-
-    },{
+    },
+    {
       'image': AppImages.icon4,
-      'title': 'Archives',
-      'subtitle': 'Completed cases',
+      'title': 'archives',
+      'subtitle': 'completedCases',
       'route' : AppRoutes.dentistArchives,
-    },{
+    },
+    {
       'image': AppImages.icon5,
-      'title': 'Invoices',
-      'subtitle': 'Billings & payments',
+      'title': 'invoices',
+      'subtitle': 'billingsAndPayments',
       'route' : AppRoutes.invoiceListView,
-    },    {
+    },
+    {
       'image': AppImages.icon6,
-      'title': 'Downloads',
-      'subtitle': 'Forms & documents',
+      'title': 'downloads',
+      'subtitle': 'formsAndDocuments',
       'route' : AppRoutes.downloadsScreen,
-    }, {
+    },
+    {
       'image': AppImages.icon1,
-      'title': 'Contact Us',
-      'subtitle': 'Get in touch',
+      'title': 'contactUs',
+      'subtitle': 'getInTouch',
       'route' : AppRoutes.contactUsScreen,
     },
   ];
@@ -81,7 +84,7 @@ class DentistListScreen extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           CustomText(
-                            text: "Welcome,",
+                            text: 'welcomeBack'.tr,
                             fontSize: 16.w,
                             fontWeight: FontWeight.w700,
                             color: AppColors.primary,
@@ -120,7 +123,7 @@ class DentistListScreen extends StatelessWidget {
                                   borderRadius: BorderRadius.circular(12),
                                 ),
                                 title: CustomText(
-                                  text: "Notifications",
+                                  text: 'notification'.tr,
                                   fontSize: 18,
                                   fontWeight: FontWeight.w600,
                                   color: AppColors.primary,
@@ -131,28 +134,25 @@ class DentistListScreen extends StatelessWidget {
                                   children: [
                                     _buildCard(
                                       icon: Icons.add_circle_outline,
-                                      title: "New case assigned",
-                                      msg:
-                                      "Veneer Set #12349 assigned by Dr. Robert Kim",
-                                      time: "15 minutes ago",
+                                      title: 'newCaseAssigned'.tr,
+                                      msg: 'veneerSetAssignedByDrRobertKim'.tr,
+                                      time: 'minutesAgo'.tr,
                                       color: AppColors.primary,
                                     ),
                                     const SizedBox(height: 10),
                                     _buildCard(
                                       icon: Icons.update,
-                                      title: "Case Update",
-                                      msg:
-                                      "Crown Preparation #12346 marked 'In Progress'",
-                                      time: "1 hour ago",
+                                      title: 'caseUpdate'.tr,
+                                      msg: 'crownPreparationMarkedInProgress'.tr,
+                                      time: 'hourAgo'.tr,
                                       color: AppColors.primary,
                                     ),
                                     const SizedBox(height: 10),
                                     _buildCard(
                                       icon: Icons.error_outline,
-                                      title: "Urgent message",
-                                      msg:
-                                      "Dr. Sarah Johnson requests immediate consultation for Root Canal #12345",
-                                      time: "2 hours ago",
+                                      title: 'urgentMessage'.tr,
+                                      msg: 'drSarahJohnson'.tr,
+                                      time: 'minutesAgo'.tr,
                                       color: Colors.red,
                                     ),
                                   ],
@@ -175,7 +175,7 @@ class DentistListScreen extends StatelessWidget {
             SizedBox(height: 12),
             Divider(thickness: 2),
             SizedBox(height: 5),
-        
+
             /// List Items
             Expanded(
               child: ListView.builder(
@@ -185,9 +185,9 @@ class DentistListScreen extends StatelessWidget {
                   final item = items[index];
                   return GestureDetector(
                     onTap: () {
-                        if (item['route'] != null) {
-                          Get.toNamed(item['route']!);
-                        }
+                      if (item['route'] != null) {
+                        Get.toNamed(item['route']!);
+                      }
                     },
                     child: Card(
                       color: AppColors.dentistListColor,
@@ -205,14 +205,14 @@ class DentistListScreen extends StatelessWidget {
                           ),
                         ),
                         title: CustomText(
-                          text: item['title']!,
+                          text: item['title']!.tr,
                           fontSize: 20.sp,
                           textAlign:  TextAlign.start,
                           fontWeight: FontWeight.w500,
                           color: AppColors.primary,
                         ),
                         subtitle: CustomText(
-                          text: item['subtitle']!,
+                          text: item['subtitle']!.tr,
                           fontSize: 14.sp,
                           textAlign: TextAlign.start,
                           fontWeight: FontWeight.w400,
@@ -253,7 +253,7 @@ Widget _buildCard({
             Icon(icon, color: color, size: 18),
             const SizedBox(width: 6),
             CustomText(
-              text: title,
+              text: title.tr,
               fontSize: 14,
               fontWeight: FontWeight.w600,
               color: color,
@@ -261,9 +261,9 @@ Widget _buildCard({
           ],
         ),
         const SizedBox(height: 6),
-        CustomText(text: msg, fontSize: 13, color: AppColors.black),
+        CustomText(text: msg.tr, fontSize: 13, color: AppColors.black),
         const SizedBox(height: 4),
-        CustomText(text: time, fontSize: 11, color: AppColors.grey),
+        CustomText(text: time.tr, fontSize: 11, color: AppColors.grey),
       ],
     ),
   );

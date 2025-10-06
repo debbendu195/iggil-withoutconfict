@@ -1,8 +1,8 @@
 import 'package:event_platform/core/app_routes/app_routes.dart';
 import 'package:event_platform/utils/app_colors/app_colors.dart';
 import 'package:flutter/material.dart';
-
 import 'package:get/get.dart';
+import '../../../../../../../utils/app_strings/app_strings.dart';
 import '../../../../../../components/custom_button/custom_button.dart';
 import '../../../../../../components/custom_text/custom_text.dart';
 import '../custom_case_card_description/custom_case_card_description.dart';
@@ -45,7 +45,7 @@ class CustomCaseCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(12),
       ),
       child: Padding(
-        padding: EdgeInsets.all(16),
+        padding: const EdgeInsets.all(16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -54,7 +54,7 @@ class CustomCaseCard extends StatelessWidget {
               children: [
                 Expanded(
                   child: CustomText(
-                    text: title ?? "Root Canal Treatment #12345",
+                    text: (title ?? AppStrings.rootCanalTreatment).tr,
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
                     color: Colors.green,
@@ -63,104 +63,108 @@ class CustomCaseCard extends StatelessWidget {
                     textAlign: TextAlign.start,
                   ),
                 ),
-                SizedBox(width: 6),
+                const SizedBox(width: 6),
 
                 /// All Badge
                 all == false
                     ? Container(
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 12, vertical: 4),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20),
-                          color: AppColors.red_01,
-                        ),
-                        child: CustomText(
-                          text: "New",
-                          fontSize: 12,
-                          fontWeight: FontWeight.w400,
-                          color: Colors.red,
-                        ),
-                      )
-                    : SizedBox(),
+                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20),
+                    color: AppColors.red_01,
+                  ),
+                  child: CustomText(
+                    text: AppStrings.new1.tr,
+                    fontSize: 12,
+                    fontWeight: FontWeight.w400,
+                    color: Colors.red,
+                  ),
+                )
+                    : const SizedBox(),
 
-                SizedBox(width: 6),
+                const SizedBox(width: 6),
 
                 /// In Progress Badge
                 inProgress == false
                     ? Container(
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 12, vertical: 4),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20),
-                          color: Color(0xffDBEAFE),
-                        ),
-                        child: CustomText(
-                          text: "In Progress",
-                          fontSize: 12,
-                          fontWeight: FontWeight.w400,
-                          color: Colors.blue,
-                        ),
-                      )
+                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20),
+                    color: const Color(0xffDBEAFE),
+                  ),
+                  child: CustomText(
+                    text: AppStrings.inProgress.tr,
+                    fontSize: 12,
+                    fontWeight: FontWeight.w400,
+                    color: Colors.blue,
+                  ),
+                )
                     : Container(),
 
-                SizedBox(width: 6),
+                const SizedBox(width: 6),
 
                 /// Complete Badge
                 complete == false
                     ? Container(
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 12, vertical: 4),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20),
-                          color: Color(0xffE0FFD5),
-                        ),
-                        child: CustomText(
-                          text: "Complete",
-                          fontSize: 12,
-                          fontWeight: FontWeight.w400,
-                          color: AppColors.primary,
-                        ),
-                      )
+                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20),
+                    color: const Color(0xffE0FFD5),
+                  ),
+                  child: CustomText(
+                    text: AppStrings.complete.tr,
+                    fontSize: 12,
+                    fontWeight: FontWeight.w400,
+                    color: AppColors.primary,
+                  ),
+                )
                     : Container(),
               ],
             ),
-            SizedBox(height: 8),
+            const SizedBox(height: 8),
 
             /// Doctor Name
             CustomText(
-              text: doctorName ?? "Debbendu Paul",
+              text: (doctorName ?? "Debbendu Paul").tr,
               fontSize: 14,
               fontWeight: FontWeight.w500,
             ),
-            SizedBox(height: 8),
+            const SizedBox(height: 8),
 
-
-            // custom case card description call part
-            CustomCaseCardDescription(item1: 'Clinic',item2: 'MDC',),
-            SizedBox(height: 16),
-            CustomCaseCardDescription(item1: 'Patient Ref',item2: 'Mu0001',),
-            SizedBox(height: 16),
-            CustomCaseCardDescription(item1: 'Status',item2: 'Submitted',),
-            SizedBox(height: 16),
-            CustomCaseCardDescription(item1: 'Return Date',item2:'10/09/2025',),
-            SizedBox(height: 16),
-
-
+            /// custom case card description call part
+            CustomCaseCardDescription(
+              item1: AppStrings.clinic.tr,
+              item2: AppStrings.mdc.tr,
+            ),
+            const SizedBox(height: 16),
+            CustomCaseCardDescription(
+              item1: AppStrings.patientRef.tr,
+              item2: AppStrings.mu0001.tr,
+            ),
+            const SizedBox(height: 16),
+            CustomCaseCardDescription(
+              item1: AppStrings.status.tr,
+              item2: status.tr,
+            ),
+            const SizedBox(height: 16),
+            CustomCaseCardDescription(
+              item1: AppStrings.returnDate.tr,
+              item2: AppStrings.tenSeptember2025.tr,
+            ),
+            const SizedBox(height: 16),
 
             /// Description
             CustomText(
               textAlign: TextAlign.start,
-              text: description ??
-                  "Complex endodontic case requiring specialized\napproach for molar restoration...",
+              text: (description ?? AppStrings.complexEndodonticCase).tr,
               fontSize: 13,
               color: Colors.black54,
-
             ),
-            SizedBox(height: 12),
+            const SizedBox(height: 12),
 
             /// Button
             CustomButton(
-              title: "View Case",
+              title: 'viewCase'.tr,
               onTap: () {
                 Get.toNamed(AppRoutes.viewCaseScreen);
               },
