@@ -13,7 +13,7 @@ class LabManagerHomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      /*body: SafeArea(
+      body: SafeArea(
         child: Column(
           children: [
             /// Scrollable Body
@@ -72,7 +72,7 @@ class LabManagerHomeScreen extends StatelessWidget {
           ],
         ),
       ),
-      bottomNavigationBar: LabManagerNavbar(currentIndex: 1),*/
+      bottomNavigationBar: LabManagerNavbar(currentIndex: 1),
     );
   }
 }

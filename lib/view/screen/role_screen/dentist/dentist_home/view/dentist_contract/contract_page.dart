@@ -2,6 +2,7 @@ import 'package:event_platform/utils/app_colors/app_colors.dart';
 import 'package:event_platform/view/components/custom_royel_appbar/custom_royel_appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:get/get.dart';
 
 class ContactUsScreen extends StatelessWidget {
   const ContactUsScreen({super.key});
@@ -9,7 +10,11 @@ class ContactUsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomRoyelAppbar(leftIcon: true, titleName: 'Contact Us', color: AppColors.primary,),
+      appBar: CustomRoyelAppbar(
+        leftIcon: true,
+        titleName: 'contactUs'.tr, // translation key
+        color: AppColors.primary,
+      ),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
@@ -48,7 +53,12 @@ class ContactUsScreen extends StatelessWidget {
                 // WhatsApp Row
                 Row(
                   children: const [
-                    Icon(FontAwesomeIcons.whatsapp, color: Colors.black, size: 24, weight: 24,),
+                    Icon(
+                      FontAwesomeIcons.whatsapp,
+                      color: Colors.black,
+                      size: 24,
+                      weight: 24,
+                    ),
                     SizedBox(width: 15),
                     Text(
                       "+4401622231389",

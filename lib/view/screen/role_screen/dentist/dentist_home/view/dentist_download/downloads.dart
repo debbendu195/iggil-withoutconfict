@@ -3,42 +3,46 @@ import 'package:event_platform/utils/app_icons/app_icons.dart';
 import 'package:event_platform/view/components/custom_image/custom_image.dart';
 import 'package:event_platform/view/components/custom_royel_appbar/custom_royel_appbar.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class DownloadsScreen extends StatelessWidget {
   const DownloadsScreen({super.key});
 
   final List<String> downloadItems = const [
-    "Terms and Conditions",
-    "Lab Forms",
-    "Price List",
-    "Lab Certificates",
-    "Lab Guides for Procedures",
-    "Price Guide",
-    "Sports Guard Colours",
-    "Freepost Labels",
-    "Cross Infection Policy",
+    "termsAndConditions",
+    "labForms",
+    "priceList",
+    "labCertificates",
+    "labGuidesForProcedures",
+    "priceGuide",
+    "sportsGuardColours",
+    "freepostLabels",
+    "crossInfectionPolicy",
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomRoyelAppbar(leftIcon: true, titleName: 'Downloads', color: AppColors.primary,),
+      appBar: CustomRoyelAppbar(
+        leftIcon: true,
+        titleName: 'downloads'.tr, // translation key
+        color: AppColors.primary,
+      ),
       body: SafeArea(
         child: ListView.builder(
           itemCount: downloadItems.length,
           itemBuilder: (context, index) {
             return ListTile(
               title: Text(
-                downloadItems[index],
+                downloadItems[index].tr,
                 style: const TextStyle(fontSize: 16),
               ),
               trailing: IconButton(
                 icon: CustomImage(imageSrc: AppIcons.download),
                 onPressed: () {
-                  // your onPressed code
+                  // download action
                 },
               ),
-        
             );
           },
         ),

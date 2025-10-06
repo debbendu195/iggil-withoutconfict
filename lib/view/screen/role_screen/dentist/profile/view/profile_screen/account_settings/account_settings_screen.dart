@@ -11,13 +11,17 @@ class AccountSettingsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomRoyelAppbar(leftIcon: true, titleName: 'Account Settings', color: AppColors.primary,),
+      appBar: CustomRoyelAppbar(
+        leftIcon: true,
+        titleName: 'accountSettings'.tr,
+        color: AppColors.primary,
+      ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20),
         child: Column(
           children: [
             InkWell(
-              onTap: (){
+              onTap: () {
                 Get.toNamed(AppRoutes.changePassScreen);
               },
               child: Container(
@@ -25,15 +29,19 @@ class AccountSettingsScreen extends StatelessWidget {
                 width: double.infinity,
                 child: Row(
                   children: [
-                    CustomText(text: 'Change Password', fontSize: 14, fontWeight: FontWeight.w400,),
-                    Spacer(),
-                    Icon(Icons.keyboard_arrow_right)
+                    CustomText(
+                      text: 'changePassword'.tr,
+                      fontSize: 14,
+                      fontWeight: FontWeight.w400,
+                    ),
+                    const Spacer(),
+                    const Icon(Icons.keyboard_arrow_right),
                   ],
                 ),
               ),
             ),
             InkWell(
-              onTap: (){
+              onTap: () {
                 Get.toNamed(AppRoutes.termsServicesScreen);
               },
               child: Container(
@@ -41,15 +49,19 @@ class AccountSettingsScreen extends StatelessWidget {
                 width: double.infinity,
                 child: Row(
                   children: [
-                    CustomText(text: 'Terms of services', fontSize: 14, fontWeight: FontWeight.w400,),
-                    Spacer(),
-                    Icon(Icons.keyboard_arrow_right)
+                    CustomText(
+                      text: 'termsOfServices'.tr,
+                      fontSize: 14,
+                      fontWeight: FontWeight.w400,
+                    ),
+                    const Spacer(),
+                    const Icon(Icons.keyboard_arrow_right),
                   ],
                 ),
               ),
             ),
             InkWell(
-              onTap: (){
+              onTap: () {
                 Get.toNamed(AppRoutes.privacyScreen);
               },
               child: Container(
@@ -57,15 +69,19 @@ class AccountSettingsScreen extends StatelessWidget {
                 width: double.infinity,
                 child: Row(
                   children: [
-                    CustomText(text: 'Privacy Policy', fontSize: 14, fontWeight: FontWeight.w400,),
-                    Spacer(),
-                    Icon(Icons.keyboard_arrow_right)
+                    CustomText(
+                      text: 'privacyPolicy'.tr,
+                      fontSize: 14,
+                      fontWeight: FontWeight.w400,
+                    ),
+                    const Spacer(),
+                    const Icon(Icons.keyboard_arrow_right),
                   ],
                 ),
               ),
             ),
             InkWell(
-              onTap: (){
+              onTap: () {
                 Get.toNamed(AppRoutes.aboutScreen);
               },
               child: Container(
@@ -73,28 +89,36 @@ class AccountSettingsScreen extends StatelessWidget {
                 width: double.infinity,
                 child: Row(
                   children: [
-                    CustomText(text: 'About us', fontSize: 14, fontWeight: FontWeight.w400,),
-                    Spacer(),
-                    Icon(Icons.keyboard_arrow_right)
+                    CustomText(
+                      text: 'aboutUs'.tr,
+                      fontSize: 14,
+                      fontWeight: FontWeight.w400,
+                    ),
+                    const Spacer(),
+                    const Icon(Icons.keyboard_arrow_right),
                   ],
                 ),
               ),
             ),
             InkWell(
-              onTap: (){},
+              onTap: () {},
               child: Container(
                 height: 50,
                 width: double.infinity,
                 child: Row(
                   children: [
-                    CustomText(text: 'Delete Account', color: AppColors.red, fontSize: 14, fontWeight: FontWeight.w400,),
-                    Spacer(),
-                    Icon(Icons.keyboard_arrow_right)
+                    CustomText(
+                      text: 'deleteAccount'.tr,
+                      color: AppColors.red,
+                      fontSize: 14,
+                      fontWeight: FontWeight.w400,
+                    ),
+                    const Spacer(),
+                    const Icon(Icons.keyboard_arrow_right),
                   ],
                 ),
               ),
             ),
-
           ],
         ),
       ),

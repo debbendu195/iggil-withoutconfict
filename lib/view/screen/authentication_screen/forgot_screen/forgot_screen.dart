@@ -1,3 +1,4 @@
+import 'package:event_platform/utils/app_strings/app_strings.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -21,15 +22,15 @@ class ForgotScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            CustomText(text: 'Set a new password', fontWeight: FontWeight.w600, fontSize: 32, color: AppColors.primary,),
+            CustomText(text: AppStrings.setANewPassword, fontWeight: FontWeight.w600, fontSize: 32, color: AppColors.primary,),
             SizedBox(height: 16,),
-            CustomFormCard(title: 'New Password', controller: TextEditingController(), hintText: '********', isPassword: true,),
+            CustomFormCard(title: AppStrings.newPassword, controller: TextEditingController(), hintText: AppStrings.passwordHint, isPassword: true,),
             SizedBox(height: 16,),
-            CustomFormCard(title: 'Confirm New Password', controller: TextEditingController(), hintText: '********', isPassword: true,),
+            CustomFormCard(title: AppStrings.confirmPassword, controller: TextEditingController(), hintText: AppStrings.passwordHint, isPassword: true,),
             SizedBox(height: 40,),
             CustomButton(onTap: (){
               Get.toNamed(AppRoutes.loginScreen);
-            }, title: 'Update Password', fontWeight: FontWeight.w600, fontSize: 16,)
+            }, title: AppStrings.updatePassword, fontWeight: FontWeight.w600, fontSize: 16,)
           ],
         ),
       ),

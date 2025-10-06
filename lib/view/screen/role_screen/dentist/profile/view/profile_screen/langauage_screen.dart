@@ -1,8 +1,10 @@
+import 'package:event_platform/utils/app_colors/app_colors.dart';
 import 'package:event_platform/view/components/custom_royel_appbar/custom_royel_appbar.dart';
+import 'package:event_platform/view/components/custom_text/custom_text.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
-import '../../../../../../../utils/app_colors/app_colors.dart';
-import '../../../../../../components/custom_text/custom_text.dart';
+import 'controller/language_controller.dart';
 
 class LangauageScreen extends StatefulWidget {
   const LangauageScreen({super.key});
@@ -12,14 +14,21 @@ class LangauageScreen extends StatefulWidget {
 }
 
 class _LanguageScreenState extends State<LangauageScreen> {
+  final LanguageController langController = Get.put(LanguageController());
   String selectedLang = "English";
+
+  @override
+  void initState() {
+    super.initState();
+    selectedLang = langController.locale.value == 'en' ? "English" : "Chinese";
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomRoyelAppbar(
         leftIcon: true,
-        titleName: 'Language Settings',
+        titleName: langController.getText('languageSettings'),
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
@@ -27,13 +36,11 @@ class _LanguageScreenState extends State<LangauageScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             CustomText(
-              text: 'Language',
+              text: langController.getText('language'),
               fontWeight: FontWeight.w500,
               fontSize: 16,
             ),
             const SizedBox(height: 10),
-
-            /// Dropdown inside styled container
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 12),
               height: 60,
@@ -45,9 +52,7 @@ class _LanguageScreenState extends State<LangauageScreen> {
               child: DropdownButtonFormField<String>(
                 value: selectedLang,
                 icon: const Icon(Icons.keyboard_arrow_down),
-                decoration: const InputDecoration(
-                  border: InputBorder.none, // Remove underline
-                ),
+                decoration: const InputDecoration(border: InputBorder.none),
                 style: TextStyle(
                   color: AppColors.primary,
                   fontSize: 14,
@@ -57,6 +62,8 @@ class _LanguageScreenState extends State<LangauageScreen> {
                 onChanged: (String? newValue) {
                   setState(() {
                     selectedLang = newValue!;
+                    langController.changeLanguage(
+                        newValue == 'English' ? 'en' : 'zh');
                   });
                 },
                 items: <String>['English', 'Chinese']

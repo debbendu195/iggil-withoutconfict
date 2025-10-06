@@ -4,6 +4,7 @@ import 'package:event_platform/view/components/custom_text/custom_text.dart';
 import 'package:flutter/material.dart';
 
 import '../../widget/dntist_archives/custom_dentist_archived.dart';
+import 'package:get/get.dart';
 
 class DentistArchives extends StatelessWidget {
   const DentistArchives({super.key});
@@ -11,7 +12,11 @@ class DentistArchives extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomRoyelAppbar(leftIcon: true, titleName: 'Archived', color: AppColors.primary,),
+      appBar: CustomRoyelAppbar(
+        leftIcon: true,
+        titleName: 'archived'.tr, // translation key
+        color: AppColors.primary,
+      ),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
@@ -23,12 +28,27 @@ class DentistArchives extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      CustomText(text: 'Case Title', fontSize: 16, fontWeight: FontWeight.w400, color: AppColors.primary,),
+                      CustomText(
+                        text: 'caseTitle'.tr,
+                        fontSize: 16,
+                        fontWeight: FontWeight.w400,
+                        color: AppColors.primary,
+                      ),
                       Row(
                         children: [
-                          CustomText(text: 'Date', fontSize: 16, fontWeight: FontWeight.w400, color: AppColors.primary,),
-                          SizedBox(width: 10,),
-                          CustomText(text: 'Action', fontSize: 16, fontWeight: FontWeight.w400, color: AppColors.primary,),
+                          CustomText(
+                            text: 'date'.tr,
+                            fontSize: 16,
+                            fontWeight: FontWeight.w400,
+                            color: AppColors.primary,
+                          ),
+                          SizedBox(width: 10),
+                          CustomText(
+                            text: 'action'.tr,
+                            fontSize: 16,
+                            fontWeight: FontWeight.w400,
+                            color: AppColors.primary,
+                          ),
                         ],
                       )
                     ],
@@ -41,7 +61,7 @@ class DentistArchives extends StatelessWidget {
                 ),
               ],
             ),
-          )
+          ),
         ),
       ),
     );
