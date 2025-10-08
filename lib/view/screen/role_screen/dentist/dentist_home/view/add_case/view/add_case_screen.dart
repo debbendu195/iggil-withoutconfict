@@ -28,8 +28,31 @@ class _AddCaseScreenState extends State<AddCaseScreen> {
   /// PFM (NP) sub-option
   String? pfmOption;
 
-  /// Show new dropdown for Single Unit Crown
+  /// Full Cast sub-option
+  String? fullCastOption;
+
+  /// Denture sub-option
+  String? dentureOption;
+  String? dentureConstructionOption;
+
+  /// METAL sub-option
+  String? metalOption;
+
+  /// Show dropdown control
   bool showSingleUnitDropdown = false;
+  bool showMarylandBridgeDropdown = false;
+  bool showConventionalBridgeDropdown = false;
+
+  bool showFullCastSingleUnit = false;
+  bool showFullCastBridge = false;
+  bool showFullCastPostCore = false;
+
+  bool showDentureConstruction = false;
+  bool showDentureOther = false;
+
+  bool showEmaxDropdown = false;
+  bool showZirconiaDropdown = false;
+  bool showCompositeDropdown = false;
 
   @override
   Widget build(BuildContext context) {
@@ -91,7 +114,9 @@ class _AddCaseScreenState extends State<AddCaseScreen> {
                 ),
                 SizedBox(height: 20.h),
 
-                /// If Standard Type == CROWN/BRIDGE
+                /// ===========================
+                /// CROWN / BRIDGE SECTION
+                /// ===========================
                 if (standardType == "CROWN/BRIDGE") ...[
                   CustomDropdown(
                     label: "Crown / BRIDGE Type",
@@ -101,43 +126,107 @@ class _AddCaseScreenState extends State<AddCaseScreen> {
                   ),
                   SizedBox(height: 20.h),
 
-                  /// If Crown Type == PFM (NP)
+                  /// ---------- PFM (NP) ----------
                   if (crownType == "PFM (NP)") ...[
                     CustomDropdown(
                       label: "PFM (NP) Type",
                       hint: "Select option",
-                      items: ["Single unit crown", "Maryiand bridge", "Conventional Bridge"],
+                      items: ["Single unit crown", "Maryland bridge", "Conventional Bridge"],
                       onChanged: (val) => setState(() {
                         pfmOption = val;
                         showSingleUnitDropdown = val == "Single unit crown";
+                        showMarylandBridgeDropdown = val == "Maryland bridge";
+                        showConventionalBridgeDropdown = val == "Conventional Bridge";
                       }),
                     ),
                     SizedBox(height: 20.h),
 
-                    /// New dropdown for Single Unit Crown
                     if (showSingleUnitDropdown) ...[
                       CustomDropdown(
                         label: "Porcelain Butt Margin",
                         hint: "Select detail",
-                        items: ["360", "Buccal Only"], // customize as needed
+                        items: ["360", "Buccal Only"],
+                        onChanged: (val) {},
+                      ),
+                      SizedBox(height: 20.h),
+                    ],
+
+                    if (showMarylandBridgeDropdown) ...[
+                      CustomDropdown(
+                        label: "Maryland Bridge Type",
+                        hint: "Select option",
+                        items: [
+                          "Full pontic support",
+                          "Modified ridge lap pontic",
+                          "No contact pontic",
+                          "Point contact pontic",
+                          "Ovate pontic",
+                        ],
+                        onChanged: (val) {},
+                      ),
+                      SizedBox(height: 20.h),
+                    ],
+
+                    if (showConventionalBridgeDropdown) ...[
+                      CustomDropdown(
+                        label: "Conventional Bridge Type",
+                        hint: "Select option",
+                        items: [
+                          "Full Ridge",
+                          "Modified ridge lap",
+                          "No contact",
+                          "Point contact",
+                          "Point in socket",
+                        ],
                         onChanged: (val) {},
                       ),
                       SizedBox(height: 20.h),
                     ],
                   ],
 
-                  /// If Crown Type == FULL CAST
+                  /// ---------- FULL CAST ----------
                   if (crownType == "FULL CAST") ...[
                     CustomDropdown(
-                      label: "NP (silver coloured)",
+                      label: "FULL CAST Parent Option",
                       hint: "Select option",
-                      items: ["Option A", "Option B", "Option C"],
-                      onChanged: (val) {},
+                      items: ["Single Unit Bridge", "Bridge"], // Post & Core removed
+                      onChanged: (val) => setState(() {
+                        fullCastOption = val;
+                        showFullCastSingleUnit = val == "Single Unit Bridge";
+                        showFullCastBridge = val == "Bridge";
+                        showFullCastPostCore = false;
+                      }),
                     ),
                     SizedBox(height: 20.h),
+
+                    if (showFullCastSingleUnit) ...[
+                      CustomDropdown(
+                        label: "Single Unit Detail",
+                        hint: "Select option",
+                        items: ["360", "Buccal Only"],
+                        onChanged: (val) {},
+                      ),
+                      SizedBox(height: 20.h),
+                    ],
+
+                    if (showFullCastBridge) ...[
+                      CustomDropdown(
+                        label: "Bridge Type",
+                        hint: "Select option",
+                        items: [
+                          "Full Ridge",
+                          "Modified ridge lap",
+                          "No contact",
+                          "Point contact",
+                          "Point in socket",
+                        ],
+                        onChanged: (val) {},
+                      ),
+                      SizedBox(height: 20.h),
+                    ],
                   ],
 
-                  /// If Crown Type == METAL
+                  /// ---------- METAL for Standard ----------
                   if (crownType == "METAL") ...[
                     CustomDropdown(
                       label: "METAL Options",
@@ -148,17 +237,304 @@ class _AddCaseScreenState extends State<AddCaseScreen> {
                     SizedBox(height: 20.h),
                   ],
                 ],
+
+                /// ===========================
+                /// DENTURE SECTION
+                /// ===========================
+                if (standardType == "DENTURES") ...[
+                  CustomDropdown(
+                    label: "Denture Type",
+                    hint: "Select option",
+                    items: ["Denture Construction", "Denture Other"],
+                    onChanged: (val) => setState(() {
+                      dentureOption = val;
+                      showDentureConstruction = val == "Denture Construction";
+                      showDentureOther = val == "Denture Other";
+                    }),
+                  ),
+                  SizedBox(height: 20.h),
+
+                  if (showDentureConstruction) ...[
+                    CustomDropdown(
+                      label: "Denture Construction Options",
+                      hint: "Select stage",
+                      items: [
+                        "Bite Block",
+                        "Special Tray",
+                        "Clasps",
+                        "Mesh Reinforcement",
+                        "Try In",
+                        "Re-Try In",
+                        "Finish",
+                      ],
+                      onChanged: (val) => setState(() {
+                        dentureConstructionOption = val;
+                      }),
+                    ),
+                    SizedBox(height: 20.h),
+
+                    if (dentureConstructionOption == "Re-Try In" ||
+                        dentureConstructionOption == "Finish") ...[
+                      CustomDropdown(
+                        label: "Select Teeth",
+                        hint: "Select Teeth",
+                        items: ["Anterior", "Posterior", "Full Arch"],
+                        onChanged: (val) {},
+                      ),
+                      SizedBox(height: 15.h),
+                      CustomDropdown(
+                        label: "Select Shade",
+                        hint: "Select Shade",
+                        items: ["A1", "A2", "A3", "B1", "B2", "B3"],
+                        onChanged: (val) {},
+                      ),
+                      SizedBox(height: 15.h),
+                    ],
+                  ],
+
+                  if (showDentureOther) ...[
+                    CustomDropdown(
+                      label: "Denture Other Options",
+                      hint: "Select option",
+                      items: ["Repair", "Reline", "Rebase"],
+                      onChanged: (val) {},
+                    ),
+                    SizedBox(height: 20.h),
+                  ],
+                ],
               ],
 
-              /// If tier == Premium
+              /// ===========================
+              /// Premium Tier
+              /// ===========================
               if (tier == "Premium") ...[
                 CustomDropdown(
                   label: "Premium Type",
-                  hint: "Select type",
-                  items: ["T2-X", "T2-Y", "T2-Z"],
-                  onChanged: (val) {},
+                  hint: "Select Type",
+                  items: ["CROWN/BRIDGE", "DENTURES", "IMPLANTS", "ORTHODONTIC", "MISC"],
+                  onChanged: (val) => setState(() => standardType = val),
                 ),
                 SizedBox(height: 20.h),
+
+                /// Premium: CROWN / BRIDGE
+                if (standardType == "CROWN/BRIDGE") ...[
+                  CustomDropdown(
+                    label: "Crown / BRIDGE Type",
+                    hint: "Select Crown Type",
+                    items: ["PFM (NP)", "FULL CAST", "METAL"],
+                    onChanged: (val) => setState(() => crownType = val),
+                  ),
+                  SizedBox(height: 20.h),
+
+                  /// PFM (NP)
+                  if (crownType == "PFM (NP)") ...[
+                    CustomDropdown(
+                      label: "PFM (NP) Type",
+                      hint: "Select option",
+                      items: ["Single unit crown", "Maryland bridge", "Conventional Bridge"],
+                      onChanged: (val) => setState(() {
+                        pfmOption = val;
+                        showSingleUnitDropdown = val == "Single unit crown";
+                        showMarylandBridgeDropdown = val == "Maryland bridge";
+                        showConventionalBridgeDropdown = val == "Conventional Bridge";
+                      }),
+                    ),
+                    SizedBox(height: 20.h),
+
+                    if (showSingleUnitDropdown) ...[
+                      CustomDropdown(
+                        label: "Porcelain Butt Margin",
+                        hint: "Select detail",
+                        items: ["360", "Buccal Only"],
+                        onChanged: (val) {},
+                      ),
+                      SizedBox(height: 20.h),
+                    ],
+
+                    if (showMarylandBridgeDropdown) ...[
+                      CustomDropdown(
+                        label: "Maryland Bridge Type",
+                        hint: "Select option",
+                        items: [
+                          "Full pontic support",
+                          "Modified ridge lap pontic",
+                          "No contact pontic",
+                          "Point contact pontic",
+                          "Ovate pontic",
+                        ],
+                        onChanged: (val) {},
+                      ),
+                      SizedBox(height: 20.h),
+                    ],
+
+                    if (showConventionalBridgeDropdown) ...[
+                      CustomDropdown(
+                        label: "Conventional Bridge Type",
+                        hint: "Select option",
+                        items: [
+                          "Full Ridge",
+                          "Modified ridge lap",
+                          "No contact",
+                          "Point contact",
+                          "Point in socket",
+                        ],
+                        onChanged: (val) {},
+                      ),
+                      SizedBox(height: 20.h),
+                    ],
+                  ],
+
+                  /// FULL CAST
+                  if (crownType == "FULL CAST") ...[
+                    CustomDropdown(
+                      label: "FULL CAST Parent Option",
+                      hint: "Select option",
+                      items: ["Single Unit Bridge", "Bridge"], // Post & Core removed
+                      onChanged: (val) => setState(() {
+                        fullCastOption = val;
+                        showFullCastSingleUnit = val == "Single Unit Bridge";
+                        showFullCastBridge = val == "Bridge";
+                        showFullCastPostCore = false;
+                      }),
+                    ),
+                    SizedBox(height: 20.h),
+
+                    if (showFullCastSingleUnit) ...[
+                      CustomDropdown(
+                        label: "Single Unit Detail",
+                        hint: "Select option",
+                        items: ["360", "Buccal Only"],
+                        onChanged: (val) {},
+                      ),
+                      SizedBox(height: 20.h),
+                    ],
+
+                    if (showFullCastBridge) ...[
+                      CustomDropdown(
+                        label: "Bridge Type",
+                        hint: "Select option",
+                        items: [
+                          "Full Ridge",
+                          "Modified ridge lap",
+                          "No contact",
+                          "Point contact",
+                          "Point in socket",
+                        ],
+                        onChanged: (val) {},
+                      ),
+                      SizedBox(height: 20.h),
+                    ],
+                  ],
+
+                  /// METAL for Premium with sub-dropdown
+                  if (crownType == "METAL") ...[
+                    CustomDropdown(
+                      label: "METAL Options",
+                      hint: "Select option",
+                      items: ["Emax", "Zirconia", "Composite Onlay"],
+                      onChanged: (val) => setState(() {
+                        metalOption = val;
+                        showEmaxDropdown = val == "Emax";
+                        showZirconiaDropdown = val == "Zirconia";
+                        showCompositeDropdown = val == "Composite Onlay";
+                      }),
+                    ),
+                    SizedBox(height: 20.h),
+
+                    if (showEmaxDropdown) ...[
+                      CustomDropdown(
+                        label: "Emax Type",
+                        hint: "Select type",
+                        items: ["Single Unit Crown", "Veneer", "Maryland bridge", "Conventional Bridge"],
+                        onChanged: (val) {},
+                      ),
+                      SizedBox(height: 20.h),
+                    ],
+
+                    if (showZirconiaDropdown) ...[
+                      CustomDropdown(
+                        label: "Zirconia Type",
+                        hint: "Select type",
+                        items: ["Single Unit Crown", "Veneer", "Maryland bridge", "Conventional Bridge"],
+                        onChanged: (val) {},
+                      ),
+                      SizedBox(height: 20.h),
+                    ],
+
+                    if (showCompositeDropdown) ...[
+                      CustomDropdown(
+                        label: "Composite Onlay Type",
+                        hint: "Select type",
+                        items: ["Hybrid Composite", "Nano Composite", "Microfilled Composite"],
+                        onChanged: (val) {},
+                      ),
+                      SizedBox(height: 20.h),
+                    ],
+                  ],
+                ],
+
+                /// DENTURE section Premium
+                if (standardType == "DENTURES") ...[
+                  CustomDropdown(
+                    label: "Denture Type",
+                    hint: "Select option",
+                    items: ["Denture Construction", "Denture Other"],
+                    onChanged: (val) => setState(() {
+                      dentureOption = val;
+                      showDentureConstruction = val == "Denture Construction";
+                      showDentureOther = val == "Denture Other";
+                    }),
+                  ),
+                  SizedBox(height: 20.h),
+
+                  if (showDentureConstruction) ...[
+                    CustomDropdown(
+                      label: "Denture Construction Options",
+                      hint: "Select stage",
+                      items: [
+                        "Bite Block",
+                        "Special Tray",
+                        "Clasps",
+                        "Mesh Reinforcement",
+                        "Try In",
+                        "Re-Try In",
+                        "Finish",
+                      ],
+                      onChanged: (val) => setState(() {
+                        dentureConstructionOption = val;
+                      }),
+                    ),
+                    SizedBox(height: 20.h),
+
+                    if (dentureConstructionOption == "Re-Try In" ||
+                        dentureConstructionOption == "Finish") ...[
+                      CustomDropdown(
+                        label: "Select Teeth",
+                        hint: "Select Teeth",
+                        items: ["Anterior", "Posterior", "Full Arch"],
+                        onChanged: (val) {},
+                      ),
+                      SizedBox(height: 15.h),
+                      CustomDropdown(
+                        label: "Select Shade",
+                        hint: "Select Shade",
+                        items: ["A1", "A2", "A3", "B1", "B2", "B3"],
+                        onChanged: (val) {},
+                      ),
+                      SizedBox(height: 15.h),
+                    ],
+                  ],
+
+                  if (showDentureOther) ...[
+                    CustomDropdown(
+                      label: "Denture Other Options",
+                      hint: "Select option",
+                      items: ["Repair", "Reline", "Rebase"],
+                      onChanged: (val) {},
+                    ),
+                    SizedBox(height: 20.h),
+                  ],
+                ],
               ],
 
               /// Submit Button
