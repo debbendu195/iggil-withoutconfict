@@ -661,6 +661,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.6"
+  multiselect_field:
+    dependency: "direct main"
+    description:
+      name: multiselect_field
+      sha256: "19b96d6f99f53b127d4ff175813c30d4bac2566672bcd832856309d72e94eb3b"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.6.8"
   nested:
     dependency: transitive
     description:

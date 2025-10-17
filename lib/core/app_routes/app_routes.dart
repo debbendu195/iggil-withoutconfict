@@ -79,7 +79,6 @@ class AppRoutes {
   static const String forgotScreen = "/ForgotScreen";
   // static const String setNewPassword = "/SetNewPassword";
 
-
   static const String demo = "/Demo";
 
   ///=========================== Dentist Part ==========================

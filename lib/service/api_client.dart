@@ -392,6 +392,10 @@ class ApiClient extends GetxService {
   }
 }
 
+
+
+
+
 class MultipartBody {
   String key;
   File file;

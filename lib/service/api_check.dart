@@ -12,7 +12,11 @@ class ApiChecker {
       await SharePrefsHelper.remove(AppConstants.bearerToken);
       Get.offAllNamed(AppRoutes.loginScreen);
     } else {
-      showCustomSnackBar(response.body['error']);
+      // Safely get error message or fallback
+      String errorMessage = response.body != null && response.body['error'] != null
+          ? response.body['error'].toString()
+          : 'Something went wrong';
+      showCustomSnackBar(errorMessage);
     }
   }
 }

@@ -12,12 +12,14 @@ import '../../../../../../components/custom_netwrok_image/custom_network_image.d
 import '../../../../../../components/custom_royel_appbar/custom_royel_appbar.dart';
 import '../../../../../../components/custom_show_popup/custom_show_popup.dart';
 import '../../../../../../components/custom_text/custom_text.dart';
+import '../../../../../authentication_screen/controller/login_controller.dart';
 import 'controller/language_controller.dart';
 
 class ProfileScreen extends StatelessWidget {
   ProfileScreen({super.key});
 
   final LanguageController langController = Get.put(LanguageController());
+  final LoginController loginController = Get.put(LoginController());
 
   @override
   Widget build(BuildContext context) {
@@ -106,7 +108,7 @@ class ProfileScreen extends StatelessWidget {
                             showColumnButton: true,
                             showCloseButton: true,
                             rightOnTap: () => Get.back(),
-                            leftOnTap: () => Get.toNamed(AppRoutes.loginScreen),
+                            leftOnTap: () => loginController.logout(),
                           ),
                         ),
                       ),

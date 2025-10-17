@@ -1,3 +1,4 @@
+/*
 import 'package:flutter/foundation.dart';
 import 'package:socket_io_client/socket_io_client.dart' as io;
 import '../helper/shared_prefe/shared_prefe.dart';
@@ -138,3 +139,4 @@ class SocketApi {
   // Static instance of the class
   static final SocketApi _socketApi = SocketApi._internal();
 }
+*/

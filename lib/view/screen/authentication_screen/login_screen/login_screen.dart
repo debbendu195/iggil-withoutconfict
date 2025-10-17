@@ -6,9 +6,9 @@ import 'package:event_platform/view/components/custom_text/custom_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../components/custom_loader/custom_loader.dart';
-import '../../controller/login_controller.dart';
+import '../controller/login_controller.dart';
 
-import '../../role_screen/labscreen/lab_manager/lab_manager.dart';
+
 
 
 class LoginScreen extends StatelessWidget {

@@ -8,8 +8,12 @@ import 'package:event_platform/view/components/custom_text/custom_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../controller/login_controller.dart';
+
 class EmailVerifyScreen extends StatelessWidget {
-  const EmailVerifyScreen({super.key});
+  EmailVerifyScreen({super.key});
+  TextEditingController emailController = TextEditingController();
+  LoginController loginController = Get.put(LoginController());
 
   @override
   Widget build(BuildContext context) {
@@ -25,10 +29,10 @@ class EmailVerifyScreen extends StatelessWidget {
             SizedBox(height: 16,),
             CustomText(text: AppStrings.enterYourEmailForVerification, fontWeight: FontWeight.w400, fontSize: 16,),
             SizedBox(height: 16,),
-            CustomFormCard(title: AppStrings.email, controller: TextEditingController(), hintText: 'Type your email',),
+            CustomFormCard(title: AppStrings.email, controller: emailController, hintText: 'Type your email',),
             SizedBox(height: 40,),
-            CustomButton(onTap: (){
-              Get.toNamed(AppRoutes.otpScreeen);
+            CustomButton(onTap: () async {
+              await loginController.forgotPassword(email: emailController.text);
             }, title: AppStrings.sendVerificationCode, fontWeight: FontWeight.w600, fontSize: 16,)
           ],
         ),

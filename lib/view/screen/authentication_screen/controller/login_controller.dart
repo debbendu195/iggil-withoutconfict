@@ -17,6 +17,8 @@ class LoginController extends GetxController {
 
   ///====================== Loading State ========================
   RxBool loginLoading = false.obs;
+  RxBool isSignupLoading = false.obs;
+
 
   ///====================== Login Function =======================
   Future<void> loginUser() async {
@@ -34,9 +36,13 @@ class LoginController extends GetxController {
       refresh();
 
       if (response.statusCode == 200 || response.statusCode == 201) {
-        Map<String, dynamic> jsonResponse =
-        response.body is String ? jsonDecode(response.body) : response.body;
+        Map<String, dynamic>
+        jsonResponse = response.body is String ? jsonDecode(response.body) : response.body;
 
+        print(jsonResponse);
+        // jsonResponse['sucess']
+        //json['accessToken']
+        //profile
         showCustomSnackBar(
           jsonResponse['message']?.toString() ?? "Login successful",
           isError: false,
@@ -83,4 +89,45 @@ class LoginController extends GetxController {
       debugPrint("Login Error: $e");
     }
   }
+
+  /// =====================================================
+  ///  LOGOUT
+  /// =====================================================
+  Future<void> logout() async {
+    await SharePrefsHelper.remove(AppConstants.bearerToken);
+    Get.offAllNamed(AppRoutes.loginScreen);
+    showCustomSnackBar("Logged out successfully", isError: false);
+  }
+
+  /// =====================================================
+  ///  FORGOT PASSWORD (Send Email)
+  /// =====================================================
+  Future<void> forgotPassword({required String email}) async {
+    if (email.isEmpty) {
+      showCustomSnackBar("Please enter your email", isError: true);
+      return;
+    }
+
+    isSignupLoading.value = true;
+    final body = {
+      "email": email.trim(),
+    };
+
+    try {
+      final response = await ApiClient.postData(ApiUrl.forgetPassword, jsonEncode(body));
+      isSignupLoading.value = false;
+
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        showCustomSnackBar("Email sent successfully! Check your inbox.", isError: false);
+        Get.toNamed(AppRoutes.otpScreeen);
+      } else {
+        final msg = response.body['message'] ?? 'Failed to send email';
+        showCustomSnackBar(msg, isError: true);
+      }
+    } catch (e) {
+      isSignupLoading.value = false;
+      showCustomSnackBar("Network error. Try again.", isError: true);
+    }
+  }
+
 }
