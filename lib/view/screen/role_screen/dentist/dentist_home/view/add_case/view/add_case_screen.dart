@@ -391,7 +391,6 @@ class AddCaseScreen extends StatelessWidget {
                     ],
 
                     /// FULL CAST Options
-                    /// ========= FULL CAST Options =========
                     if (controller.crownType.value == "FULL CAST") ...[
                       CustomDropdown(
                         label: "Full Cast Type",
@@ -585,7 +584,7 @@ class AddCaseScreen extends StatelessWidget {
                       ],
 
                       /// Post and Core
-                      if (controller.showPostAndCore.value) ...[
+                      /*if (controller.showPostAndCore.value) ...[
                         CustomDropdown(
                           label: "Post Type",
                           hint: "Select detail",
@@ -673,15 +672,105 @@ class AddCaseScreen extends StatelessWidget {
                             ),
                           );
                         }),
-                      ],
+                      ],*/
                     ],
 
+                    /// ========== METAL Options ==========
+                    /*if (controller.crownType.value == "METAL") ...[
+                      CustomDropdown(
+                        label: "Pontic Design",
+                        hint: "Select teeth",
+                        items: ["Full ridge", "Modify", "No contact", "Point contact", "Point in socket (ovate)"],
+                        onChanged: (val) {},
+                      ),
+                      Wrap(
+                        spacing: 8,
+                        children: ["A1", "A2", "A3", "B1", "C1"].map((shade) {
+                          return Obx(() => FilterChip(
+                            label: Text(shade),
+                            selected: controller.metalBridgeTeeth.contains(shade),
+                            onSelected: (selected) {
+                              if (selected) {
+                                controller.metalBridgeTeeth.add(shade);
+                              } else {
+                                controller.metalBridgeTeeth.remove(shade);
+                              }
+                            },
+                          ));
+                        }).toList(),
+                      ),
+                      CustomFormCard(
+                        title: "Description",
+                        hintText: "Describe your case",
+                        maxLine: 4,
+                        controller: TextEditingController(),
+                      ),
+                      Align(
+                        alignment: Alignment.topLeft,
+                        child: CustomText(
+                          text: "Upload Attachments",
+                          fontSize: 16.w,
+                          fontWeight: FontWeight.w500,
+                          bottom: 8.h,
+                        ),
+                      ),
+                      Obx(() {
+                        return GestureDetector(
+                          onTap: () async {
+                            await controller.pickFiles();
+                          },
+                          child: Container(
+                            width: double.infinity,
+                            padding: const EdgeInsets.all(8),
+                            decoration: BoxDecoration(
+                              color: Colors.transparent,
+                              border: Border.all(color: AppColors.grey1),
+                              borderRadius: BorderRadius.circular(15),
+                            ),
+                            child: controller.selectedFiles.isNotEmpty
+                                ? Wrap(
+                              spacing: 8,
+                              runSpacing: 8,
+                              children: controller.selectedFiles.map((file) {
+                                String fileName = file.path.split('/').last;
+                                return Chip(
+                                  label: Text(fileName, overflow: TextOverflow.ellipsis),
+                                  avatar: Icon(
+                                    file.path.endsWith(".pdf") ? Icons.picture_as_pdf : Icons.image,
+                                    size: 20,
+                                    color: AppColors.primary,
+                                  ),
+                                  onDeleted: () {
+                                    controller.selectedFiles.remove(file);
+                                  },
+                                );
+                              }).toList(),
+                            )
+                                : Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                SizedBox(height: 40.h),
+                                Icon(Icons.upload_file, size: 50, color: AppColors.grey1),
+                                SizedBox(height: 10.h),
+                                CustomText(
+                                  text: 'Upload a video and photo',
+                                  fontWeight: FontWeight.w400,
+                                  fontSize: 16,
+                                  color: AppColors.black,
+                                ),
+                                SizedBox(height: 40.h),
+                              ],
+                            ),
+                          ),
+                        );
+                      }),
+                    ],*/
 
 
                   ],
 
                   /// Dentures
-                  if (controller.standardType.value == "DENTURES") ...[
+                  /*if (controller.standardType.value == "DENTURES") ...[
                     CustomDropdown(
                       label: "Denture Type",
                       hint: "Select option",
@@ -690,30 +779,800 @@ class AddCaseScreen extends StatelessWidget {
                           controller.onDentureTypeChange(val),
                     ),
                     SizedBox(height: 20.h),
-                    if (controller.showDentureConstruction.value)
-                      CustomDropdown(
-                        label: "Denture Construction Options",
-                        hint: "Select stage",
-                        items: [
-                          "Bite Block",
-                          "Special Tray",
-                          "Clasps",
-                          "Mesh Reinforcement",
-                          "Try In",
-                          "Re-Try In",
-                          "Finish",
+                    /// DENTURE → Denture Construction
+                    if (controller.showDentureConstruction.value) ...[
+                      /// Bite Block Section
+                      Align(
+                        alignment: Alignment.topLeft,
+                        child: CustomText(
+                          text: "Bite Block",
+                          fontSize: 16.w,
+                          fontWeight: FontWeight.w500,
+                          bottom: 8.h,
+                        ),
+                      ),
+                      Obx(() => Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            children: [
+                              Checkbox(
+                                value: controller.biteBlockUpper.value,
+                                activeColor: AppColors.primary,
+                                onChanged: (val) {
+                                  controller.biteBlockUpper.value = val ?? false;
+                                },
+                              ),
+                              CustomText(
+                                text: "Upper",
+                                fontSize: 14.w,
+                                fontWeight: FontWeight.w400,
+                              ),
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              Checkbox(
+                                value: controller.biteBlockLower.value,
+                                activeColor: AppColors.primary,
+                                onChanged: (val) {
+                                  controller.biteBlockLower.value = val ?? false;
+                                },
+                              ),
+                              CustomText(
+                                text: "Lower",
+                                fontSize: 14.w,
+                                fontWeight: FontWeight.w400,
+                              ),
+                            ],
+                          ),
                         ],
-                        onChanged: (val) =>
-                            controller.onDentureConstructionChange(val),
+                      )),
+                      SizedBox(height: 15.h),
+                      /// Special Tray Selection (Upper & Lower side by side)
+                      Align(
+                        alignment: Alignment.topLeft,
+                        child: CustomText(
+                          text: "Special Tray",
+                          fontSize: 16.w,
+                          fontWeight: FontWeight.w500,
+                          bottom: 8.h,
+                        ),
                       ),
-                    if (controller.showDentureOther.value)
+                      Obx(() => Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            children: [
+                              Checkbox(
+                                value: controller.specialTrayUpper.value,
+                                activeColor: AppColors.primary,
+                                onChanged: (val) {
+                                  controller.specialTrayUpper.value = val ?? false;
+                                },
+                              ),
+                              CustomText(
+                                text: "Upper",
+                                fontSize: 14.w,
+                                fontWeight: FontWeight.w400,
+                              ),
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              Checkbox(
+                                value: controller.specialTrayLower.value,
+                                activeColor: AppColors.primary,
+                                onChanged: (val) {
+                                  controller.specialTrayLower.value = val ?? false;
+                                },
+                              ),
+                              CustomText(
+                                text: "Lower",
+                                fontSize: 14.w,
+                                fontWeight: FontWeight.w400,
+                              ),
+                            ],
+                          ),
+                        ],
+                      )),
+                      SizedBox(height: 15.h),
+                      Wrap(
+                        spacing: 8,
+                        children: ["A1", "A2", "A3", "B1", "C1"].map((shade) {
+                          return Obx(() => FilterChip(
+                            label: Text(shade),
+                            selected: controller.singleUnitTeeth.contains(shade),
+                            onSelected: (selected) {
+                              if (selected) {
+                                controller.singleUnitTeeth.add(shade);
+                              } else {
+                                controller.singleUnitTeeth.remove(shade);
+                              }
+                            },
+                          ));
+                        }).toList(),
+                      ),
+                      SizedBox(height: 15.h),
+
+                      /// Porcelain Butt Margin Dropdown
                       CustomDropdown(
-                        label: "Denture Other Options",
-                        hint: "Select option",
-                        items: ["Repair", "Reline", "Rebase"],
-                        onChanged: (val) {},
+                        label: "Porcelain Butt Margin",
+                        hint: "Select detail",
+                        items: ["Try In", "Re-try In", "Finish"],
+                        onChanged: (val) => controller.porcelainButtMargin.value = val ?? '',
                       ),
-                  ],
+
+                      SizedBox(height: 20.h),
+
+                      /// Try In Section
+                      if (controller.porcelainButtMargin.value == "Try In") ...[
+                        Wrap(
+                          spacing: 8,
+                          children: ["A1", "A2", "A3", "B1", "C1"].map((shade) {
+                            return Obx(() => FilterChip(
+                              label: Text(shade),
+                              selected: controller.tryInTeeth.contains(shade),
+                              onSelected: (selected) {
+                                if (selected) {
+                                  controller.tryInTeeth.add(shade);
+                                } else {
+                                  controller.tryInTeeth.remove(shade);
+                                }
+                              },
+                            ));
+                          }).toList(),
+                        ),
+                        SizedBox(height: 15.h),
+
+                        CustomFormCard(
+                          title: "Description",
+                          hintText: "Describe your Try In",
+                          maxLine: 4,
+                          controller: controller.tryInDescriptionController,
+                        ),
+                        SizedBox(height: 15.h),
+
+                        Align(
+                          alignment: Alignment.topLeft,
+                          child: CustomText(
+                            text: "Upload Try In Attachments",
+                            fontSize: 16.w,
+                            fontWeight: FontWeight.w500,
+                            bottom: 8.h,
+                          ),
+                        ),
+
+                        Obx(() {
+                          return GestureDetector(
+                            onTap: () async {
+                              await controller.pickTryInFiles();
+                            },
+                            child: Container(
+                              width: double.infinity,
+                              padding: const EdgeInsets.all(8),
+                              decoration: BoxDecoration(
+                                color: Colors.transparent,
+                                border: Border.all(color: AppColors.grey1),
+                                borderRadius: BorderRadius.circular(15),
+                              ),
+                              child: controller.tryInAttachments.isNotEmpty
+                                  ? Wrap(
+                                spacing: 8,
+                                runSpacing: 8,
+                                children: controller.tryInAttachments.map((file) {
+                                  String fileName = file.path.split('/').last;
+                                  return Chip(
+                                    label: Text(fileName, overflow: TextOverflow.ellipsis),
+                                    avatar: Icon(
+                                      file.path.endsWith(".pdf")
+                                          ? Icons.picture_as_pdf
+                                          : Icons.image,
+                                      size: 20,
+                                      color: AppColors.primary,
+                                    ),
+                                    onDeleted: () {
+                                      controller.tryInAttachments.remove(file);
+                                    },
+                                  );
+                                }).toList(),
+                              )
+                                  : Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  SizedBox(height: 40.h),
+                                  Icon(Icons.upload_file, size: 50, color: AppColors.grey1),
+                                  SizedBox(height: 10.h),
+                                  CustomText(
+                                    text: 'Upload images or PDFs',
+                                    fontWeight: FontWeight.w400,
+                                    fontSize: 16,
+                                    color: AppColors.black,
+                                  ),
+                                  SizedBox(height: 40.h),
+                                ],
+                              ),
+                            ),
+                          );
+                        }),
+                      ],
+
+                      /// Re-Try In Section (Same as Try In)
+                      if (controller.porcelainButtMargin.value == "Re-try In") ...[
+                        Wrap(
+                          spacing: 8,
+                          children: ["A1", "A2", "A3", "B1", "C1"].map((shade) {
+                            return Obx(() => FilterChip(
+                              label: Text(shade),
+                              selected: controller.reTryTeeth.contains(shade),
+                              onSelected: (selected) {
+                                if (selected) {
+                                  controller.reTryTeeth.add(shade);
+                                } else {
+                                  controller.reTryTeeth.remove(shade);
+                                }
+                              },
+                            ));
+                          }).toList(),
+                        ),
+                        SizedBox(height: 15.h),
+
+                        CustomFormCard(
+                          title: "Description",
+                          hintText: "Describe your Re-Try In",
+                          maxLine: 4,
+                          controller: controller.reTryDescriptionController,
+                        ),
+                        SizedBox(height: 15.h),
+
+                        Align(
+                          alignment: Alignment.topLeft,
+                          child: CustomText(
+                            text: "Upload Re-Try In Attachments",
+                            fontSize: 16.w,
+                            fontWeight: FontWeight.w500,
+                            bottom: 8.h,
+                          ),
+                        ),
+
+                        Obx(() {
+                          return GestureDetector(
+                            onTap: () async {
+                              await controller.pickReTryFiles();
+                            },
+                            child: Container(
+                              width: double.infinity,
+                              padding: const EdgeInsets.all(8),
+                              decoration: BoxDecoration(
+                                color: Colors.transparent,
+                                border: Border.all(color: AppColors.grey1),
+                                borderRadius: BorderRadius.circular(15),
+                              ),
+                              child: controller.reTryAttachments.isNotEmpty
+                                  ? Wrap(
+                                spacing: 8,
+                                runSpacing: 8,
+                                children: controller.reTryAttachments.map((file) {
+                                  String fileName = file.path.split('/').last;
+                                  return Chip(
+                                    label: Text(fileName, overflow: TextOverflow.ellipsis),
+                                    avatar: Icon(
+                                      file.path.endsWith(".pdf")
+                                          ? Icons.picture_as_pdf
+                                          : Icons.image,
+                                      size: 20,
+                                      color: AppColors.primary,
+                                    ),
+                                    onDeleted: () {
+                                      controller.reTryAttachments.remove(file);
+                                    },
+                                  );
+                                }).toList(),
+                              )
+                                  : Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  SizedBox(height: 40.h),
+                                  Icon(Icons.upload_file, size: 50, color: AppColors.grey1),
+                                  SizedBox(height: 10.h),
+                                  CustomText(
+                                    text: 'Upload images or PDFs',
+                                    fontWeight: FontWeight.w400,
+                                    fontSize: 16,
+                                    color: AppColors.black,
+                                  ),
+                                  SizedBox(height: 40.h),
+                                ],
+                              ),
+                            ),
+                          );
+                        }),
+                      ],
+
+                      /// Finish Section (as it was)
+                      if (controller.porcelainButtMargin.value == "Finish") ...[
+                        Wrap(
+                          spacing: 8,
+                          children: ["A1", "A2", "A3", "B1", "C1"].map((shade) {
+                            return Obx(() => FilterChip(
+                              label: Text(shade),
+                              selected: controller.finishTeeth.contains(shade),
+                              onSelected: (selected) {
+                                if (selected) {
+                                  controller.finishTeeth.add(shade);
+                                } else {
+                                  controller.finishTeeth.remove(shade);
+                                }
+                              },
+                            ));
+                          }).toList(),
+                        ),
+                        SizedBox(height: 15.h),
+
+                        CustomFormCard(
+                          title: "Description",
+                          hintText: "Describe your Finish",
+                          maxLine: 4,
+                          controller: controller.finishDescriptionController,
+                        ),
+                        SizedBox(height: 15.h),
+
+                        Align(
+                          alignment: Alignment.topLeft,
+                          child: CustomText(
+                            text: "Upload Finish Attachments",
+                            fontSize: 16.w,
+                            fontWeight: FontWeight.w500,
+                            bottom: 8.h,
+                          ),
+                        ),
+
+                        Obx(() {
+                          return GestureDetector(
+                            onTap: () async {
+                              await controller.pickFinishFiles();
+                            },
+                            child: Container(
+                              width: double.infinity,
+                              padding: const EdgeInsets.all(8),
+                              decoration: BoxDecoration(
+                                color: Colors.transparent,
+                                border: Border.all(color: AppColors.grey1),
+                                borderRadius: BorderRadius.circular(15),
+                              ),
+                              child: controller.finishAttachments.isNotEmpty
+                                  ? Wrap(
+                                spacing: 8,
+                                runSpacing: 8,
+                                children: controller.finishAttachments.map((file) {
+                                  String fileName = file.path.split('/').last;
+                                  return Chip(
+                                    label: Text(fileName, overflow: TextOverflow.ellipsis),
+                                    avatar: Icon(
+                                      file.path.endsWith(".pdf")
+                                          ? Icons.picture_as_pdf
+                                          : Icons.image,
+                                      size: 20,
+                                      color: AppColors.primary,
+                                    ),
+                                    onDeleted: () {
+                                      controller.finishAttachments.remove(file);
+                                    },
+                                  );
+                                }).toList(),
+                              )
+                                  : Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  SizedBox(height: 40.h),
+                                  Icon(Icons.upload_file, size: 50, color: AppColors.grey1),
+                                  SizedBox(height: 10.h),
+                                  CustomText(
+                                    text: 'Upload images or PDFs',
+                                    fontWeight: FontWeight.w400,
+                                    fontSize: 16,
+                                    color: AppColors.black,
+                                  ),
+                                  SizedBox(height: 40.h),
+                                ],
+                              ),
+                            ),
+                          );
+                        }),
+                      ],
+
+                    ],
+
+                    if (controller.showDentureOther.value) ...[
+                      /// Bite Block Section
+                      Align(
+                        alignment: Alignment.topLeft,
+                        child: CustomText(
+                          text: "Bite Block",
+                          fontSize: 16.w,
+                          fontWeight: FontWeight.w500,
+                          bottom: 8.h,
+                        ),
+                      ),
+                      Obx(() => Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            children: [
+                              Checkbox(
+                                value: controller.biteBlockUpper.value,
+                                activeColor: AppColors.primary,
+                                onChanged: (val) {
+                                  controller.biteBlockUpper.value = val ?? false;
+                                },
+                              ),
+                              CustomText(
+                                text: "Upper",
+                                fontSize: 14.w,
+                                fontWeight: FontWeight.w400,
+                              ),
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              Checkbox(
+                                value: controller.biteBlockLower.value,
+                                activeColor: AppColors.primary,
+                                onChanged: (val) {
+                                  controller.biteBlockLower.value = val ?? false;
+                                },
+                              ),
+                              CustomText(
+                                text: "Lower",
+                                fontSize: 14.w,
+                                fontWeight: FontWeight.w400,
+                              ),
+                            ],
+                          ),
+                        ],
+                      )),
+                      SizedBox(height: 15.h),
+
+                      /// Special Tray Section
+                      Align(
+                        alignment: Alignment.topLeft,
+                        child: CustomText(
+                          text: "Special Tray",
+                          fontSize: 16.w,
+                          fontWeight: FontWeight.w500,
+                          bottom: 8.h,
+                        ),
+                      ),
+                      Obx(() => Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            children: [
+                              Checkbox(
+                                value: controller.specialTrayUpper.value,
+                                activeColor: AppColors.primary,
+                                onChanged: (val) {
+                                  controller.specialTrayUpper.value = val ?? false;
+                                },
+                              ),
+                              CustomText(
+                                text: "Upper",
+                                fontSize: 14.w,
+                                fontWeight: FontWeight.w400,
+                              ),
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              Checkbox(
+                                value: controller.specialTrayLower.value,
+                                activeColor: AppColors.primary,
+                                onChanged: (val) {
+                                  controller.specialTrayLower.value = val ?? false;
+                                },
+                              ),
+                              CustomText(
+                                text: "Lower",
+                                fontSize: 14.w,
+                                fontWeight: FontWeight.w400,
+                              ),
+                            ],
+                          ),
+                        ],
+                      )),
+                      SizedBox(height: 15.h),
+
+                      /// Teeth Shade Selection
+                      Wrap(
+                        spacing: 8,
+                        children: ["A1", "A2", "A3", "B1", "C1"].map((shade) {
+                          return Obx(() => FilterChip(
+                            label: Text(shade),
+                            selected: controller.singleUnitTeeth.contains(shade),
+                            onSelected: (selected) {
+                              if (selected) {
+                                controller.singleUnitTeeth.add(shade);
+                              } else {
+                                controller.singleUnitTeeth.remove(shade);
+                              }
+                            },
+                          ));
+                        }).toList(),
+                      ),
+                      SizedBox(height: 15.h),
+
+                      /// Porcelain Butt Margin Dropdown
+                      CustomDropdown(
+                        label: "Porcelain Butt Margin",
+                        hint: "Select detail",
+                        items: ["Try In", "Re-try In", "Finish"],
+                        onChanged: (val) => controller.porcelainButtMargin.value = val ?? '',
+                      ),
+                      SizedBox(height: 20.h),
+
+                      /// Try In Section
+                      if (controller.porcelainButtMargin.value == "Try In") ...[
+                        Wrap(
+                          spacing: 8,
+                          children: ["A1", "A2", "A3", "B1", "C1"].map((shade) {
+                            return Obx(() => FilterChip(
+                              label: Text(shade),
+                              selected: controller.tryInTeeth.contains(shade),
+                              onSelected: (selected) {
+                                if (selected) {
+                                  controller.tryInTeeth.add(shade);
+                                } else {
+                                  controller.tryInTeeth.remove(shade);
+                                }
+                              },
+                            ));
+                          }).toList(),
+                        ),
+                        SizedBox(height: 15.h),
+                        CustomFormCard(
+                          title: "Description",
+                          hintText: "Describe your Try In",
+                          maxLine: 4,
+                          controller: controller.tryInDescriptionController,
+                        ),
+                        SizedBox(height: 15.h),
+                        Align(
+                          alignment: Alignment.topLeft,
+                          child: CustomText(
+                            text: "Upload Try In Attachments",
+                            fontSize: 16.w,
+                            fontWeight: FontWeight.w500,
+                            bottom: 8.h,
+                          ),
+                        ),
+                        Obx(() {
+                          return GestureDetector(
+                            onTap: () async {
+                              await controller.pickTryInFiles();
+                            },
+                            child: Container(
+                              width: double.infinity,
+                              padding: const EdgeInsets.all(8),
+                              decoration: BoxDecoration(
+                                color: Colors.transparent,
+                                border: Border.all(color: AppColors.grey1),
+                                borderRadius: BorderRadius.circular(15),
+                              ),
+                              child: controller.tryInAttachments.isNotEmpty
+                                  ? Wrap(
+                                spacing: 8,
+                                runSpacing: 8,
+                                children: controller.tryInAttachments.map((file) {
+                                  String fileName = file.path.split('/').last;
+                                  return Chip(
+                                    label: Text(fileName, overflow: TextOverflow.ellipsis),
+                                    avatar: Icon(
+                                      file.path.endsWith(".pdf") ? Icons.picture_as_pdf : Icons.image,
+                                      size: 20,
+                                      color: AppColors.primary,
+                                    ),
+                                    onDeleted: () {
+                                      controller.tryInAttachments.remove(file);
+                                    },
+                                  );
+                                }).toList(),
+                              )
+                                  : Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  SizedBox(height: 40.h),
+                                  Icon(Icons.upload_file, size: 50, color: AppColors.grey1),
+                                  SizedBox(height: 10.h),
+                                  CustomText(
+                                    text: 'Upload images or PDFs',
+                                    fontWeight: FontWeight.w400,
+                                    fontSize: 16,
+                                    color: AppColors.black,
+                                  ),
+                                  SizedBox(height: 40.h),
+                                ],
+                              ),
+                            ),
+                          );
+                        }),
+                      ],
+
+                      /// Re-Try In Section
+                      if (controller.porcelainButtMargin.value == "Re-try In") ...[
+                        Wrap(
+                          spacing: 8,
+                          children: ["A1", "A2", "A3", "B1", "C1"].map((shade) {
+                            return Obx(() => FilterChip(
+                              label: Text(shade),
+                              selected: controller.reTryTeeth.contains(shade),
+                              onSelected: (selected) {
+                                if (selected) {
+                                  controller.reTryTeeth.add(shade);
+                                } else {
+                                  controller.reTryTeeth.remove(shade);
+                                }
+                              },
+                            ));
+                          }).toList(),
+                        ),
+                        SizedBox(height: 15.h),
+                        CustomFormCard(
+                          title: "Description",
+                          hintText: "Describe your Re-Try In",
+                          maxLine: 4,
+                          controller: controller.reTryDescriptionController,
+                        ),
+                        SizedBox(height: 15.h),
+                        Align(
+                          alignment: Alignment.topLeft,
+                          child: CustomText(
+                            text: "Upload Re-Try In Attachments",
+                            fontSize: 16.w,
+                            fontWeight: FontWeight.w500,
+                            bottom: 8.h,
+                          ),
+                        ),
+                        Obx(() {
+                          return GestureDetector(
+                            onTap: () async {
+                              await controller.pickReTryFiles();
+                            },
+                            child: Container(
+                              width: double.infinity,
+                              padding: const EdgeInsets.all(8),
+                              decoration: BoxDecoration(
+                                color: Colors.transparent,
+                                border: Border.all(color: AppColors.grey1),
+                                borderRadius: BorderRadius.circular(15),
+                              ),
+                              child: controller.reTryAttachments.isNotEmpty
+                                  ? Wrap(
+                                spacing: 8,
+                                runSpacing: 8,
+                                children: controller.reTryAttachments.map((file) {
+                                  String fileName = file.path.split('/').last;
+                                  return Chip(
+                                    label: Text(fileName, overflow: TextOverflow.ellipsis),
+                                    avatar: Icon(
+                                      file.path.endsWith(".pdf") ? Icons.picture_as_pdf : Icons.image,
+                                      size: 20,
+                                      color: AppColors.primary,
+                                    ),
+                                    onDeleted: () {
+                                      controller.reTryAttachments.remove(file);
+                                    },
+                                  );
+                                }).toList(),
+                              )
+                                  : Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  SizedBox(height: 40.h),
+                                  Icon(Icons.upload_file, size: 50, color: AppColors.grey1),
+                                  SizedBox(height: 10.h),
+                                  CustomText(
+                                    text: 'Upload images or PDFs',
+                                    fontWeight: FontWeight.w400,
+                                    fontSize: 16,
+                                    color: AppColors.black,
+                                  ),
+                                  SizedBox(height: 40.h),
+                                ],
+                              ),
+                            ),
+                          );
+                        }),
+                      ],
+
+                      /// Finish Section
+                      if (controller.porcelainButtMargin.value == "Finish") ...[
+                        Wrap(
+                          spacing: 8,
+                          children: ["A1", "A2", "A3", "B1", "C1"].map((shade) {
+                            return Obx(() => FilterChip(
+                              label: Text(shade),
+                              selected: controller.finishTeeth.contains(shade),
+                              onSelected: (selected) {
+                                if (selected) {
+                                  controller.finishTeeth.add(shade);
+                                } else {
+                                  controller.finishTeeth.remove(shade);
+                                }
+                              },
+                            ));
+                          }).toList(),
+                        ),
+                        SizedBox(height: 15.h),
+                        CustomFormCard(
+                          title: "Description",
+                          hintText: "Describe your Finish",
+                          maxLine: 4,
+                          controller: controller.finishDescriptionController,
+                        ),
+                        SizedBox(height: 15.h),
+                        Align(
+                          alignment: Alignment.topLeft,
+                          child: CustomText(
+                            text: "Upload Finish Attachments",
+                            fontSize: 16.w,
+                            fontWeight: FontWeight.w500,
+                            bottom: 8.h,
+                          ),
+                        ),
+                        Obx(() {
+                          return GestureDetector(
+                            onTap: () async {
+                              await controller.pickFinishFiles();
+                            },
+                            child: Container(
+                              width: double.infinity,
+                              padding: const EdgeInsets.all(8),
+                              decoration: BoxDecoration(
+                                color: Colors.transparent,
+                                border: Border.all(color: AppColors.grey1),
+                                borderRadius: BorderRadius.circular(15),
+                              ),
+                              child: controller.finishAttachments.isNotEmpty
+                                  ? Wrap(
+                                spacing: 8,
+                                runSpacing: 8,
+                                children: controller.finishAttachments.map((file) {
+                                  String fileName = file.path.split('/').last;
+                                  return Chip(
+                                    label: Text(fileName, overflow: TextOverflow.ellipsis),
+                                    avatar: Icon(
+                                      file.path.endsWith(".pdf") ? Icons.picture_as_pdf : Icons.image,
+                                      size: 20,
+                                      color: AppColors.primary,
+                                    ),
+                                    onDeleted: () {
+                                      controller.finishAttachments.remove(file);
+                                    },
+                                  );
+                                }).toList(),
+                              )
+                                  : Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  SizedBox(height: 40.h),
+                                  Icon(Icons.upload_file, size: 50, color: AppColors.grey1),
+                                  SizedBox(height: 10.h),
+                                  CustomText(
+                                    text: 'Upload images or PDFs',
+                                    fontWeight: FontWeight.w400,
+                                    fontSize: 16,
+                                    color: AppColors.black,
+                                  ),
+                                  SizedBox(height: 40.h),
+                                ],
+                              ),
+                            ),
+                          );
+                        }),
+                      ],
+                    ],
+
+                  ],*/
                 ],
 
                 /// ================= Premium Section =================

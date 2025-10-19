@@ -24,13 +24,14 @@ class AddCaseController extends GetxController {
   var dentureConstructionOption = ''.obs;
   var isLoading = false.obs;
 
+
+
   /// ========= Visibility Flags =========
   var showSingleUnitDropdown = false.obs;
   var showMarylandBridgeDropdown = false.obs;
   var showConventionalBridgeDropdown = false.obs;
   var showFullCastSingleUnit = false.obs;
   var showFullCastBridge = false.obs;
-  var showPostAndCore = false.obs;
   var showDentureConstruction = false.obs;
   var showDentureOther = false.obs;
 
@@ -38,17 +39,10 @@ class AddCaseController extends GetxController {
   var singleUnitTeeth = <String>[].obs;
   var singleUnitAttachments = <File>[].obs;
 
+  /// Maryland Bridge teeth & attachments
   var marylandPonticTeeth = <String>[].obs;
   var marylandWingTeeth = <String>[].obs;
   var marylandAttachments = <File>[].obs;
-
-  /// ========= Conventional Bridge =========
-  var conventionalBridgeTeeth = <String>[].obs;
-  var conventionalBridgeAttachments = <File>[].obs;
-
-  /// ========= Full Cast Post & Core =========
-  var postAndCoreTeeth = <String>[].obs;
-  var postAndCoreAttachments = <File>[].obs;
 
   /// ========= Multi-file Upload =========
   var selectedFiles = <File>[].obs;
@@ -59,8 +53,6 @@ class AddCaseController extends GetxController {
     singleUnitTeeth.assignAll([]);
     marylandPonticTeeth.assignAll([]);
     marylandWingTeeth.assignAll([]);
-    conventionalBridgeTeeth.assignAll([]);
-    postAndCoreTeeth.assignAll([]);
   }
 
   /// ========= Dropdown Logic =========
@@ -83,7 +75,6 @@ class AddCaseController extends GetxController {
     showConventionalBridgeDropdown.value = false;
   }
 
-  /// ========= PFM Option =========
   void onPFMOptionChange(String? val) {
     pfmOption.value = val ?? '';
     showSingleUnitDropdown.value = pfmOption.value == "Single unit crown";
@@ -91,12 +82,9 @@ class AddCaseController extends GetxController {
     showConventionalBridgeDropdown.value = pfmOption.value == "Conventional Bridge";
   }
 
-  /// ========= Full Cast =========
   void onFullCastChange(String? val) {
-    fullCastOption.value = val ?? '';
-    showFullCastSingleUnit.value = val == "Single unit crown";
+    showFullCastSingleUnit.value = val == "Single Unit Bridge";
     showFullCastBridge.value = val == "Bridge";
-    showPostAndCore.value = val == "Post and Core";
   }
 
   void onDentureTypeChange(String? val) {
@@ -120,20 +108,6 @@ class AddCaseController extends GetxController {
     if (result != null) {
       selectedFiles.clear();
       selectedFiles.addAll(result.paths.map((p) => File(p!)));
-    }
-  }
-
-  /// ========= Pick Conventional Bridge Files =========
-  Future<void> pickConventionalBridgeFiles() async {
-    FilePickerResult? result = await FilePicker.platform.pickFiles(
-      type: FileType.custom,
-      allowMultiple: true,
-      allowedExtensions: ['jpg', 'jpeg', 'png', 'pdf'],
-    );
-
-    if (result != null) {
-      conventionalBridgeAttachments.clear();
-      conventionalBridgeAttachments.addAll(result.paths.map((p) => File(p!)));
     }
   }
 
@@ -170,7 +144,6 @@ class AddCaseController extends GetxController {
       "standard_type": standardType.value,
       "crown_type": crownType.value,
       "pfm_option": pfmOption.value,
-      "full_cast_option": fullCastOption.value,
       "case_type": caseType.value,
     };
 
@@ -193,20 +166,12 @@ class AddCaseController extends GetxController {
             "wingTeeth": marylandWingTeeth.toList(),
             "attachments": marylandAttachments.map((f) => f.path).toList()
           },
-          "conventionalBridge": {
-            "enabled": showConventionalBridgeDropdown.value,
-            "teeth": conventionalBridgeTeeth.toList(),
-            "attachments": conventionalBridgeAttachments.map((f) => f.path).toList()
-          },
+          "conventionalBridge": {"enabled": false, "teeth": [], "attachments": []},
         },
         "fullCast": {
           "singleUnitCrown": {"teeth": [], "attachments": []},
           "bridge": {"teeth": [], "attachments": []},
-          "postAndCore": {
-            "enabled": showPostAndCore.value,
-            "teeth": postAndCoreTeeth.toList(),
-            "attachments": postAndCoreAttachments.map((f) => f.path).toList()
-          },
+          "postAndCore": {"teeth": [], "attachments": []},
           "conventionalBridge": {"teeth": [], "attachments": []}
         },
         "metalFree": {"teeth": [], "attachments": []},
@@ -275,17 +240,12 @@ class AddCaseController extends GetxController {
         standardType.value = '';
         crownType.value = '';
         pfmOption.value = '';
-        fullCastOption.value = '';
         caseType.value = '';
         singleUnitTeeth.clear();
         singleUnitAttachments.clear();
         marylandPonticTeeth.clear();
         marylandWingTeeth.clear();
         marylandAttachments.clear();
-        conventionalBridgeTeeth.clear();
-        conventionalBridgeAttachments.clear();
-        postAndCoreTeeth.clear();
-        postAndCoreAttachments.clear();
         selectedFiles.clear();
       } else {
         showMessage(jsonResponse['message']?.toString() ?? "Failed to create case", isError: true);
