@@ -387,7 +387,6 @@ class AddCaseScreen extends StatelessWidget {
                         }),
                       ],
 
-
                     ],
 
                     /// FULL CAST Options
@@ -584,7 +583,7 @@ class AddCaseScreen extends StatelessWidget {
                       ],
 
                       /// Post and Core
-                      /*if (controller.showPostAndCore.value) ...[
+                      if (controller.showPostAndCore.value) ...[
                         CustomDropdown(
                           label: "Post Type",
                           hint: "Select detail",
@@ -672,7 +671,7 @@ class AddCaseScreen extends StatelessWidget {
                             ),
                           );
                         }),
-                      ],*/
+                      ],
                     ],
 
                     /// ========== METAL Options ==========

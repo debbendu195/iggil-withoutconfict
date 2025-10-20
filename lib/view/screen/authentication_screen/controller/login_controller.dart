@@ -30,7 +30,7 @@ class LoginController extends GetxController {
     };
 
     try {
-      var response = await ApiClient.postData(ApiUrl.signIn, jsonEncode(body));
+      var response = await ApiClient.postData(ApiUrl.login, jsonEncode(body));
 
       loginLoading.value = false;
       refresh();
@@ -61,14 +61,17 @@ class LoginController extends GetxController {
 
         await SharePrefsHelper.setString(AppConstants.userId, userId);
         await SharePrefsHelper.setString(AppConstants.role, userRole);
+        final role = await SharePrefsHelper.getString(AppConstants.role);
 
-        Get.offAllNamed(AppRoutes.dentistListScreen);
+        // print('==================================== $role');
+
+        // Get.offAllNamed(AppRoutes.dentistListScreen);
         // Navigate based on role
-        // if (userRole.toLowerCase() == "host") {
-        //   Get.offAllNamed(AppRoutes.dentistListScreen);
-        // } else {
-        //   Get.offAllNamed(AppRoutes.labManagerListScreen);
-        // }
+        if (userRole.toLowerCase() == "dentist") {
+          Get.offAllNamed(AppRoutes.dentistListScreen);
+        } else {
+          Get.offAllNamed(AppRoutes.labManagerListScreen);
+        }
       } else {
         Map<String, dynamic> errorResponse =
         response.body is String ? jsonDecode(response.body) : response.body;
