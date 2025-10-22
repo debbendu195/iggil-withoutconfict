@@ -193,8 +193,7 @@ class ProfileController extends GetxController {
       "newPassword": newPasswordController.value.text,
       "confirmPassword": confirmPasswordController.value.text,
     };
-    var response =
-    await ApiClient.postData(ApiUrl.changePassword, jsonEncode(body));
+    var response = await ApiClient.patchData(ApiUrl.changePassword, jsonEncode(body));
     if (response.statusCode == 200 || response.statusCode == 201) {
       showCustomSnackBar(response.body['message']!, isError: false);
       Get.back();
