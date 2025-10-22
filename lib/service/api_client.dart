@@ -81,11 +81,11 @@ class ApiClient extends GetxService {
     var mainHeaders = isContentType
         ? {
       'Content-Type': 'application/json',
-      'Authorization': bearerToken
+      'Authorization': 'Bearer $bearerToken'
     }
         : {
       'Accept': 'application/json',
-      'Authorization': bearerToken
+      'Authorization': 'Bearer $bearerToken'
     };
     try {
       debugPrint('====> API Call: $uri\nHeader: ${headers ?? mainHeaders}');
@@ -106,9 +106,141 @@ class ApiClient extends GetxService {
     }
   }
 
+  static Future<Response> patchMultipartData(String uri, dynamic body,
+      {List<MultipartBody>? multipartBody,
+        Map<String, String>? headers}) async {
+    try {
+      bearerToken = await SharePrefsHelper.getString(AppConstants.bearerToken);
+
+      var mainHeaders = {
+        'Accept': 'application/json',
+        'Authorization': 'Bearer $bearerToken'
+      };
+
+      debugPrint('====> API Call: $uri\nHeader: ${headers ?? mainHeaders}');
+      debugPrint('====> API Body: $body with ${multipartBody?.length} picture');
+
+      var request =
+      http.MultipartRequest('PATCH', Uri.parse(ApiUrl.baseUrl + uri));
+      request.fields.addAll(body);
+
+      if (multipartBody!.isNotEmpty) {
+        // ignore: avoid_function_literals_in_foreach_calls
+        multipartBody.forEach((element) async {
+          debugPrint("path : ${element.file.path}");
+
+          var mimeType = lookupMimeType(element.file.path);
+
+          debugPrint("MimeType================$mimeType");
+
+          var multipartImg = await http.MultipartFile.fromPath(
+            element.key,
+            element.file.path,
+            contentType: MediaType.parse(mimeType!),
+          );
+          request.files.add(multipartImg);
+          //request.files.add(await http.MultipartFile.fromPath(element.key, element.file.path,contentType: MediaType('video', 'mp4')));
+        });
+      }
+
+      request.headers.addAll(mainHeaders);
+      http.StreamedResponse response = await request.send();
+      final content = await response.stream.bytesToString();
+      debugPrint(
+          '====> API Response: [${response.statusCode}}] $uri\n$content');
+
+      return Response(
+          statusCode: response.statusCode,
+          statusText: somethingWentWrong,
+          body: content);
+    } catch (e) {
+      debugPrint('------------${e.toString()}');
+
+      return const Response(statusCode: 1, statusText: somethingWentWrong);
+    }
+  }
+
+  //
+  // static Future<Response> patchMultipartData(String uri, dynamic body,
+  //     {List<MultipartBody>? multipartBody,
+  //       Map<String, String>? headers}) async {
+  //   try {
+  //     bearerToken = await SharePrefsHelper.getString(AppConstants.bearerToken);
+  //
+  //     var mainHeaders = {
+  //       'Accept': 'application/json',
+  //       "Content-Type": "multipart/form-data",
+  //       'Authorization': bearerToken
+  //     };
+  //     //
+  //     // var mainHeaders = isContentType
+  //     //     ? {
+  //     //   'Content-Type': 'multipart/form-data',
+  //     //   'Authorization': bearerToken
+  //     // }
+  //     //     : {
+  //     //   'Accept': 'application/json',
+  //     //   'Authorization': bearerToken
+  //     // };
+  //
+  //     debugPrint('====> API Call: $uri\nHeader: ${headers ?? mainHeaders}');
+  //     debugPrint('====> API Body: $body with ${multipartBody?.length} picture');
+  //
+  //     var request =
+  //     http.MultipartRequest('PATCH', Uri.parse(ApiUrl.baseUrl + uri));
+  //     request.fields.addAll(body);
+  //
+  //     if (multipartBody!.isNotEmpty) {
+  //       // ignore: avoid_function_literals_in_foreach_calls
+  //       multipartBody.forEach((element) async {
+  //         debugPrint("path : ${element.file.path}");
+  //
+  //         var mimeType = lookupMimeType(element.file.path);
+  //
+  //         debugPrint("MimeType================$mimeType");
+  //
+  //         var multipartImg = await http.MultipartFile.fromPath(
+  //           element.key,
+  //           element.file.path,
+  //           contentType: MediaType.parse(mimeType!),
+  //         );
+  //         request.files.add(multipartImg);
+  //         //request.files.add(await http.MultipartFile.fromPath(element.key, element.file.path,contentType: MediaType('video', 'mp4')));
+  //       });
+  //     }
+  //
+  //     request.headers.addAll(mainHeaders);
+  //     http.StreamedResponse response = await request.send();
+  //     final content = await response.stream.bytesToString();
+  //     debugPrint(
+  //         '====> API Response: [${response.statusCode}}] $uri\n$content');
+  //
+  //     return Response(
+  //         statusCode: response.statusCode,
+  //         statusText: somethingWentWrong,
+  //         body: content);
+  //   } catch (e) {
+  //     debugPrint('------------${e.toString()}');
+  //
+  //     return const Response(statusCode: 1, statusText: somethingWentWrong);
+  //   }
+  // }
+  //
+
+
+
+
+
+
+
+
+
+
+
+
   static Future<Response> putData(String uri, dynamic body,
       {Map<String, String>? headers}) async {
-    bearerToken = await SharePrefsHelper.getString(AppConstants.bearerToken);
+      bearerToken = await SharePrefsHelper.getString(AppConstants.bearerToken);
 
     var mainHeaders = {
       'Content-Type': 'application/x-www-form-urlencoded',
@@ -188,60 +320,7 @@ class ApiClient extends GetxService {
 
 
 
-  static Future<Response> patchMultipartData(String uri, dynamic body,
-      {List<MultipartBody>? multipartBody,
-        Map<String, String>? headers}) async {
-    try {
-      bearerToken = await SharePrefsHelper.getString(AppConstants.bearerToken);
 
-      var mainHeaders = {
-        'Accept': 'application/json',
-        "Content-Type": "multipart/form-data",
-        'Authorization': bearerToken
-      };
-
-      debugPrint('====> API Call: $uri\nHeader: ${headers ?? mainHeaders}');
-      debugPrint('====> API Body: $body with ${multipartBody?.length} picture');
-
-      var request =
-      http.MultipartRequest('PATCH', Uri.parse(ApiUrl.baseUrl + uri));
-      request.fields.addAll(body);
-
-      if (multipartBody!.isNotEmpty) {
-        // ignore: avoid_function_literals_in_foreach_calls
-        multipartBody.forEach((element) async {
-          debugPrint("path : ${element.file.path}");
-
-          var mimeType = lookupMimeType(element.file.path);
-
-          debugPrint("MimeType================$mimeType");
-
-          var multipartImg = await http.MultipartFile.fromPath(
-            element.key,
-            element.file.path,
-            contentType: MediaType.parse(mimeType!),
-          );
-          request.files.add(multipartImg);
-          //request.files.add(await http.MultipartFile.fromPath(element.key, element.file.path,contentType: MediaType('video', 'mp4')));
-        });
-      }
-
-      request.headers.addAll(mainHeaders);
-      http.StreamedResponse response = await request.send();
-      final content = await response.stream.bytesToString();
-      debugPrint(
-          '====> API Response: [${response.statusCode}}] $uri\n$content');
-
-      return Response(
-          statusCode: response.statusCode,
-          statusText: somethingWentWrong,
-          body: content);
-    } catch (e) {
-      debugPrint('------------${e.toString()}');
-
-      return const Response(statusCode: 1, statusText: somethingWentWrong);
-    }
-  }
 
   static Future<Response> putMultipartData(String uri, Map<String, String> body,
       {List<MultipartBody>? multipartBody,

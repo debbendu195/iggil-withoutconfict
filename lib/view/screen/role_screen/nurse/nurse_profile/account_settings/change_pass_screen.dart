@@ -1,3 +1,4 @@
+/*
 import 'package:event_platform/utils/app_colors/app_colors.dart';
 import 'package:event_platform/view/components/custom_button/custom_button.dart';
 import 'package:event_platform/view/components/custom_from_card/custom_from_card.dart';
@@ -25,3 +26,4 @@ class ChangePassScreen extends StatelessWidget {
     );
   }
 }
+*/

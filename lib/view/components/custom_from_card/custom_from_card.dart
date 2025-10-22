@@ -68,7 +68,7 @@ class CustomFormCard extends StatelessWidget {
           hintStyle: GoogleFonts.roboto(
               fontWeight: FontWeight.w400,
               fontSize: 14,
-              color: AppColors.black_02),
+              color: AppColors.grey1),
           suffixIcon: suffixIcon,
           isPassword: isPassword,
           textEditingController: controller,

@@ -48,6 +48,7 @@ import '../../view/screen/role_screen/nurse/nurse_home_screen/nurse_archives/nur
 import '../../view/screen/role_screen/nurse/nurse_home_screen/nurse_contract/nurse_contract_page.dart';
 import '../../view/screen/role_screen/nurse/nurse_home_screen/nurse_download/nurse_downloads.dart';
 import '../../view/screen/role_screen/nurse/nurse_home_screen/nurse_home_screen.dart';
+import '../../view/screen/role_screen/nurse/nurse_profile/account_settings/change_pass_screen.dart';
 import '../../view/screen/role_screen/nurse/nurse_profile/nurse_profile_screen.dart';
 import '../../view/screen/role_screen/practice_manager/practice_manager_home_screen/view/invoice/invoice_list_view/invoice_list_view.dart';
 import '../../view/screen/role_screen/practice_manager/practice_manager_home_screen/view/practice_manager_contact/practice_manager_contact.dart';
