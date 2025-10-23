@@ -80,16 +80,6 @@ class AddCaseController extends GetxController {
   /// ========= File Attachments =========
   var dentureAttachments = <File>[].obs;
 
-  /// ========= New Separate TryIn / ReTryIn / Finish Lists =========
-  var tryInTeeth = <String>[].obs;
-  var tryInAttachments = <File>[].obs;
-
-  var reTryInTeeth = <String>[].obs;
-  var reTryInAttachments = <File>[].obs;
-
-  var finishTeeth = <String>[].obs;
-  var finishAttachments = <File>[].obs;
-
   /// ========= Multi-file Upload =========
   var selectedFiles = <File>[].obs;
 
@@ -280,31 +270,18 @@ class AddCaseController extends GetxController {
           "biteBlock": {"upper": biteBlockUpper.value, "lower": biteBlockLower.value},
           "specialTray": {"upper": specialTrayUpper.value, "lower": specialTrayLower.value},
           "meshReinforcement": meshReinforcement.value,
-
-          "tryIn": {
-            "enabled": tryInSelected.value,
-            "teethSelection": tryInTeeth.toList(),
-            "attachments": tryInAttachments.map((f) => f.path).toList(),
-          },
-          "reTryIn": {
-            "enabled": reTryInSelected.value,
-            "teethSelection": reTryInTeeth.toList(),
-            "attachments": reTryInAttachments.map((f) => f.path).toList(),
-          },
-          "finish": {
-            "enabled": finishSelected.value,
-            "teethSelection": finishTeeth.toList(),
-            "attachments": finishAttachments.map((f) => f.path).toList(),
-          },
+          "tryIn": tryInSelected.value,
+          "reTryIn": reTryInSelected.value,
+          "finish": finishSelected.value,
+          "teethSelection": dentureTeeth.toList(),
+          "attachments": dentureAttachments.map((f) => f.path).toList()
         },
-
         "other": {
           "enabled": dentureType.value == "Denture Other",
           "teethSelection": dentureTeeth.toList(),
-          "attachments": dentureAttachments.map((f) => f.path).toList(),
+          "attachments": dentureAttachments.map((f) => f.path).toList()
         }
       }
-
     };
 
     isLoading.value = true;

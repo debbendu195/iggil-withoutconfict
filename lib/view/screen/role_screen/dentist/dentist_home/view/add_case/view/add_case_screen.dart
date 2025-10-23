@@ -910,12 +910,12 @@ class AddCaseScreen extends StatelessWidget {
                           children: ["A1", "A2", "A3", "B1", "C1"].map((shade) {
                             return Obx(() => FilterChip(
                               label: Text(shade),
-                              selected: controller.tryInTeeth .contains(shade),
+                              selected: controller.dentureTeeth.contains(shade),
                               onSelected: (selected) {
                                 if (selected) {
-                                  controller.tryInTeeth .add(shade);
+                                  controller.dentureTeeth.add(shade);
                                 } else {
-                                  controller.tryInTeeth .remove(shade);
+                                  controller.dentureTeeth.remove(shade);
                                 }
                               },
                             ));
@@ -954,11 +954,11 @@ class AddCaseScreen extends StatelessWidget {
                                 border: Border.all(color: AppColors.grey1),
                                 borderRadius: BorderRadius.circular(15),
                               ),
-                              child: controller.tryInAttachments .isNotEmpty
+                              child: controller.dentureAttachments.isNotEmpty
                                   ? Wrap(
                                 spacing: 8,
                                 runSpacing: 8,
-                                children: controller.tryInAttachments .map((file) {
+                                children: controller.dentureAttachments.map((file) {
                                   String fileName = file.path.split('/').last;
                                   return Chip(
                                     label: Text(fileName, overflow: TextOverflow.ellipsis),
@@ -970,7 +970,7 @@ class AddCaseScreen extends StatelessWidget {
                                       color: AppColors.primary,
                                     ),
                                     onDeleted: () {
-                                      controller.tryInAttachments .remove(file);
+                                      controller.dentureAttachments.remove(file);
                                     },
                                   );
                                 }).toList(),
@@ -1002,12 +1002,12 @@ class AddCaseScreen extends StatelessWidget {
                           children: ["A1", "A2", "A3", "B1", "C1"].map((shade) {
                             return Obx(() => FilterChip(
                               label: Text(shade),
-                              selected: controller.reTryInTeeth .contains(shade),
+                              selected: controller.dentureTeeth.contains(shade),
                               onSelected: (selected) {
                                 if (selected) {
-                                  controller.reTryInTeeth .add(shade);
+                                  controller.dentureTeeth.add(shade);
                                 } else {
-                                  controller.reTryInTeeth .remove(shade);
+                                  controller.dentureTeeth.remove(shade);
                                 }
                               },
                             ));
@@ -1046,11 +1046,11 @@ class AddCaseScreen extends StatelessWidget {
                                 border: Border.all(color: AppColors.grey1),
                                 borderRadius: BorderRadius.circular(15),
                               ),
-                              child: controller.reTryInAttachments .isNotEmpty
+                              child: controller.dentureAttachments.isNotEmpty
                                   ? Wrap(
                                 spacing: 8,
                                 runSpacing: 8,
-                                children: controller.reTryInAttachments .map((file) {
+                                children: controller.dentureAttachments.map((file) {
                                   String fileName = file.path.split('/').last;
                                   return Chip(
                                     label: Text(fileName, overflow: TextOverflow.ellipsis),
@@ -1062,7 +1062,7 @@ class AddCaseScreen extends StatelessWidget {
                                       color: AppColors.primary,
                                     ),
                                     onDeleted: () {
-                                      controller.reTryInAttachments .remove(file);
+                                      controller.dentureAttachments.remove(file);
                                     },
                                   );
                                 }).toList(),
@@ -1094,12 +1094,12 @@ class AddCaseScreen extends StatelessWidget {
                           children: ["A1", "A2", "A3", "B1", "C1"].map((shade) {
                             return Obx(() => FilterChip(
                               label: Text(shade),
-                              selected: controller.finishTeeth .contains(shade),
+                              selected: controller.dentureTeeth.contains(shade),
                               onSelected: (selected) {
                                 if (selected) {
-                                  controller.finishTeeth .add(shade);
+                                  controller.dentureTeeth.add(shade);
                                 } else {
-                                  controller.finishTeeth .remove(shade);
+                                  controller.dentureTeeth.remove(shade);
                                 }
                               },
                             ));
@@ -1138,11 +1138,11 @@ class AddCaseScreen extends StatelessWidget {
                                 border: Border.all(color: AppColors.grey1),
                                 borderRadius: BorderRadius.circular(15),
                               ),
-                              child: controller.finishAttachments .isNotEmpty
+                              child: controller.dentureAttachments.isNotEmpty
                                   ? Wrap(
                                 spacing: 8,
                                 runSpacing: 8,
-                                children: controller.finishAttachments .map((file) {
+                                children: controller.dentureAttachments.map((file) {
                                   String fileName = file.path.split('/').last;
                                   return Chip(
                                     label: Text(fileName, overflow: TextOverflow.ellipsis),
@@ -1154,7 +1154,7 @@ class AddCaseScreen extends StatelessWidget {
                                       color: AppColors.primary,
                                     ),
                                     onDeleted: () {
-                                      controller.finishAttachments .remove(file);
+                                      controller.dentureAttachments.remove(file);
                                     },
                                   );
                                 }).toList(),
@@ -1315,12 +1315,12 @@ class AddCaseScreen extends StatelessWidget {
                           children: ["A1", "A2", "A3", "B1", "C1"].map((shade) {
                             return Obx(() => FilterChip(
                               label: Text(shade),
-                              selected: controller.tryInTeeth.contains(shade),
+                              selected: controller.dentureTeeth.contains(shade),
                               onSelected: (selected) {
                                 if (selected) {
-                                  controller.tryInTeeth.add(shade);
+                                  controller.dentureTeeth.add(shade);
                                 } else {
-                                  controller.tryInTeeth.remove(shade);
+                                  controller.dentureTeeth.remove(shade);
                                 }
                               },
                             ));
@@ -1346,7 +1346,7 @@ class AddCaseScreen extends StatelessWidget {
                         Obx(() {
                           return GestureDetector(
                             onTap: () async {
-                              await controller.tryInAttachments ();
+                              await controller.dentureAttachments();
                             },
                             child: Container(
                               width: double.infinity,
@@ -1356,11 +1356,11 @@ class AddCaseScreen extends StatelessWidget {
                                 border: Border.all(color: AppColors.grey1),
                                 borderRadius: BorderRadius.circular(15),
                               ),
-                              child: controller.tryInAttachments .isNotEmpty
+                              child: controller.dentureAttachments.isNotEmpty
                                   ? Wrap(
                                 spacing: 8,
                                 runSpacing: 8,
-                                children: controller.tryInAttachments .map((file) {
+                                children: controller.dentureAttachments.map((file) {
                                   String fileName = file.path.split('/').last;
                                   return Chip(
                                     label: Text(fileName, overflow: TextOverflow.ellipsis),
@@ -1402,12 +1402,12 @@ class AddCaseScreen extends StatelessWidget {
                           children: ["A1", "A2", "A3", "B1", "C1"].map((shade) {
                             return Obx(() => FilterChip(
                               label: Text(shade),
-                              selected: controller.reTryInTeeth .contains(shade),
+                              selected: controller.dentureTeeth.contains(shade),
                               onSelected: (selected) {
                                 if (selected) {
-                                  controller.reTryInTeeth .add(shade);
+                                  controller.dentureTeeth.add(shade);
                                 } else {
-                                  controller.reTryInTeeth .remove(shade);
+                                  controller.dentureTeeth.remove(shade);
                                 }
                               },
                             ));
@@ -1443,11 +1443,11 @@ class AddCaseScreen extends StatelessWidget {
                                 border: Border.all(color: AppColors.grey1),
                                 borderRadius: BorderRadius.circular(15),
                               ),
-                              child: controller.reTryInAttachments .isNotEmpty
+                              child: controller.dentureAttachments.isNotEmpty
                                   ? Wrap(
                                 spacing: 8,
                                 runSpacing: 8,
-                                children: controller.reTryInAttachments .map((file) {
+                                children: controller.dentureAttachments.map((file) {
                                   String fileName = file.path.split('/').last;
                                   return Chip(
                                     label: Text(fileName, overflow: TextOverflow.ellipsis),
@@ -1457,7 +1457,7 @@ class AddCaseScreen extends StatelessWidget {
                                       color: AppColors.primary,
                                     ),
                                     onDeleted: () {
-                                      controller.reTryInAttachments .remove(file);
+                                      controller.dentureAttachments.remove(file);
                                     },
                                   );
                                 }).toList(),
@@ -1489,12 +1489,12 @@ class AddCaseScreen extends StatelessWidget {
                           children: ["A1", "A2", "A3", "B1", "C1"].map((shade) {
                             return Obx(() => FilterChip(
                               label: Text(shade),
-                              selected: controller.finishTeeth .contains(shade),
+                              selected: controller.dentureTeeth.contains(shade),
                               onSelected: (selected) {
                                 if (selected) {
-                                  controller.finishTeeth .add(shade);
+                                  controller.dentureTeeth.add(shade);
                                 } else {
-                                  controller.finishTeeth .remove(shade);
+                                  controller.dentureTeeth.remove(shade);
                                 }
                               },
                             ));
@@ -1530,11 +1530,11 @@ class AddCaseScreen extends StatelessWidget {
                                 border: Border.all(color: AppColors.grey1),
                                 borderRadius: BorderRadius.circular(15),
                               ),
-                              child: controller.finishAttachments .isNotEmpty
+                              child: controller.dentureAttachments.isNotEmpty
                                   ? Wrap(
                                 spacing: 8,
                                 runSpacing: 8,
-                                children: controller.finishAttachments .map((file) {
+                                children: controller.dentureAttachments.map((file) {
                                   String fileName = file.path.split('/').last;
                                   return Chip(
                                     label: Text(fileName, overflow: TextOverflow.ellipsis),
@@ -1544,7 +1544,7 @@ class AddCaseScreen extends StatelessWidget {
                                       color: AppColors.primary,
                                     ),
                                     onDeleted: () {
-                                      controller.finishAttachments .remove(file);
+                                      controller.dentureAttachments.remove(file);
                                     },
                                   );
                                 }).toList(),
@@ -1579,7 +1579,7 @@ class AddCaseScreen extends StatelessWidget {
                   CustomDropdown(
                     label: "Premium Type",
                     hint: "Select Type",
-                    items: ["CROWN/BRIDGE", "IMPLANTS", "ORTHO", "DENTURES"],
+                    items: ["CROWN/BRIDGE", "DENTURES", "IMPLANTS", "ORTHODONTIC"],
                     onChanged: (val) =>
                         controller.onStandardTypeChange(val ?? ''),
                   ),
@@ -1587,14 +1587,13 @@ class AddCaseScreen extends StatelessWidget {
 
                   /// Premium Crown/Bridge
                   if (controller.standardType.value == "CROWN/BRIDGE") ...[
-                    CustomDropdown(
+                    /*CustomDropdown(
                       label: "Premium Crown Type",
                       hint: "Select Crown Type",
                       items: ["Zirconia", "E-max", "Layered Zirconia"],
                       onChanged: (val) => controller.onCrownTypeChange(val),
                     ),
                     SizedBox(height: 20.h),
-
                     /// Zirconia Options
                     if (controller.crownType.value == "Zirconia") ...[
                       CustomDropdown(
@@ -1604,7 +1603,6 @@ class AddCaseScreen extends StatelessWidget {
                         onChanged: (val) {},
                       ),
                     ],
-
                     /// E-max Options
                     if (controller.crownType.value == "E-max") ...[
                       CustomDropdown(
@@ -1614,7 +1612,6 @@ class AddCaseScreen extends StatelessWidget {
                         onChanged: (val) {},
                       ),
                     ],
-
                     /// Layered Zirconia Options
                     if (controller.crownType.value == "Layered Zirconia") ...[
                       CustomDropdown(
@@ -1623,7 +1620,689 @@ class AddCaseScreen extends StatelessWidget {
                         items: ["Single", "Multi Layer"],
                         onChanged: (val) {},
                       ),
+                    ],*/
+
+                    CustomDropdown(
+                      label: "Crown / BRIDGE Type",
+                      hint: "Select Crown Type",
+                      items: ["PFM (NP)", "FULL CAST", "METAL"],
+                      onChanged: (val) => controller.onCrownTypeChange(val),
+                    ),
+                    SizedBox(height: 20.h),
+                    /// PFM Options
+                    if (controller.crownType.value == "PFM (NP)") ...[
+                      CustomDropdown(
+                        label: "PFM (NP) Type",
+                        hint: "Select option",
+                        items: [
+                          "Single unit crown",
+                          "Maryland bridge",
+                          "Conventional Bridge"
+                        ],
+                        onChanged: (val) =>
+                            controller.onPFMOptionChange(val),
+                      ),
+                      SizedBox(height: 20.h),
+
+                      /// Single Unit Crown
+                      if (controller.showSingleUnitDropdown.value) ...[
+                        CustomDropdown(
+                          label: "Porcelain Butt Margin",
+                          hint: "Select detail",
+                          items: ["360", "Buccal Only"],
+                          onChanged: (val) {},
+                        ),
+                        Wrap(
+                          spacing: 8,
+                          children: ["A1", "A2", "A3", "B1", "C1"].map((shade) {
+                            return Obx(() => FilterChip(
+                              label: Text(shade),
+                              selected: controller.singleUnitTeeth.contains(shade),
+                              onSelected: (selected) {
+                                if (selected) {
+                                  controller.singleUnitTeeth.add(shade);
+                                } else {
+                                  controller.singleUnitTeeth.remove(shade);
+                                }
+                              },
+                            ));
+                          }).toList(),
+                        ),
+                        CustomFormCard(
+                          title: "Special Instructions",
+                          hintText: "Describe Your Instructions",
+                          maxLine: 4,
+                          controller: TextEditingController(),
+                        ),
+                        Align(
+                          alignment: Alignment.topLeft,
+                          child: CustomText(
+                            textAlign: TextAlign.start,
+                            text: "Upload Cover Image",
+                            fontSize: 16.w,
+                            fontWeight: FontWeight.w500,
+                            bottom: 8.h,
+                          ),
+                        ),
+                        Obx(() {
+                          return GestureDetector(
+                            onTap: () async {
+                              await controller.pickFiles(); // Multi-file picker
+                            },
+                            child: Container(
+                              width: double.infinity,
+                              padding: const EdgeInsets.all(8),
+                              decoration: BoxDecoration(
+                                color: Colors.transparent,
+                                border: Border.all(color: AppColors.grey1),
+                                borderRadius: BorderRadius.circular(15),
+                              ),
+                              child: controller.selectedFiles.isNotEmpty
+                                  ? Wrap(
+                                spacing: 8,
+                                runSpacing: 8,
+                                children: controller.selectedFiles.map((file) {
+                                  String fileName = file.path.split('/').last;
+                                  return Chip(
+                                    label: Text(
+                                      fileName,
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
+                                    avatar: Icon(
+                                      file.path.endsWith(".pdf") ? Icons.picture_as_pdf : Icons.image,
+                                      size: 20,
+                                      color: AppColors.primary,
+                                    ),
+                                    onDeleted: () {
+                                      controller.selectedFiles.remove(file);
+                                    },
+                                  );
+                                }).toList(),
+                              )
+                                  : Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  SizedBox(height: 40.h),
+                                  Icon(Icons.upload_file, size: 50, color: AppColors.grey1),
+                                  SizedBox(height: 10.h),
+                                  CustomText(
+                                    text: 'Upload a video and photo',
+                                    fontWeight: FontWeight.w400,
+                                    fontSize: 16,
+                                    color: AppColors.black,
+                                  ),
+                                  SizedBox(height: 40.h),
+                                ],
+                              ),
+                            ),
+                          );
+                        }),
+
+                      ],
+                      /// Maryland Bridge
+                      if (controller.showMarylandBridgeDropdown.value) ...[
+                        CustomDropdown(
+                          label: "Select Pontic Teeth",
+                          hint: "Select teeth",
+                          items: ["Full ridge","Modify","No contract","Point contact","Point in socket (ovate)"],
+                          onChanged: (val) {},
+                        ),
+                        CustomDropdown(
+                          label: "Select Wing Teeth",
+                          hint: "Select teeth",
+                          items: ["A1","A2","B1","C1"],
+                          onChanged: (val) {},
+                        ),
+                        Wrap(
+                          spacing: 8,
+                          children: ["A1", "A2", "A3", "B1", "C1"].map((shade) {
+                            return Obx(() => FilterChip(
+                              label: Text(shade),
+                              selected: controller.singleUnitTeeth.contains(shade),
+                              onSelected: (selected) {
+                                if (selected) {
+                                  controller.singleUnitTeeth.add(shade);
+                                } else {
+                                  controller.singleUnitTeeth.remove(shade);
+                                }
+                              },
+                            ));
+                          }).toList(),
+                        ),
+                        CustomFormCard(
+                          title: "Special Instructions",
+                          hintText: "Describe Your Instructions",
+                          maxLine: 4,
+                          controller: TextEditingController(),
+                        ),
+                        Align(
+                          alignment: Alignment.topLeft,
+                          child: CustomText(
+                            text: "Upload Attachments",
+                            fontSize: 16.w,
+                            fontWeight: FontWeight.w500,
+                            bottom: 8.h,
+                          ),
+                        ),
+                        Obx(() {
+                          return GestureDetector(
+                            onTap: () async {
+                              await controller.pickFiles(); // Multi-file picker
+                            },
+                            child: Container(
+                              width: double.infinity,
+                              padding: const EdgeInsets.all(8),
+                              decoration: BoxDecoration(
+                                color: Colors.transparent,
+                                border: Border.all(color: AppColors.grey1),
+                                borderRadius: BorderRadius.circular(15),
+                              ),
+                              child: controller.selectedFiles.isNotEmpty
+                                  ? Wrap(
+                                spacing: 8,
+                                runSpacing: 8,
+                                children: controller.selectedFiles.map((file) {
+                                  String fileName = file.path.split('/').last;
+                                  return Chip(
+                                    label: Text(fileName, overflow: TextOverflow.ellipsis),
+                                    avatar: Icon(
+                                      file.path.endsWith(".pdf") ? Icons.picture_as_pdf : Icons.image,
+                                      size: 20,
+                                      color: AppColors.primary,
+                                    ),
+                                    onDeleted: () {
+                                      controller.selectedFiles.remove(file);
+                                    },
+                                  );
+                                }).toList(),
+                              )
+                                  : Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  SizedBox(height: 40.h),
+                                  Icon(Icons.upload_file, size: 50, color: AppColors.grey1),
+                                  SizedBox(height: 10.h),
+                                  CustomText(
+                                    text: 'Upload a video and photo',
+                                    fontWeight: FontWeight.w400,
+                                    fontSize: 16,
+                                    color: AppColors.black,
+                                  ),
+                                  SizedBox(height: 40.h),
+                                ],
+                              ),
+                            ),
+                          );
+                        }),
+                      ],
+                      /// Conventional Bridge
+                      if (controller.showConventionalBridgeDropdown.value) ...[
+                        CustomDropdown(
+                          label: "Pontic Design",
+                          hint: "Select teeth",
+                          items: ["Full ridge", "Modify", "No contact", "Point contact", "Point in socket (ovate)"],
+                          onChanged: (val) {},
+                        ),
+                        Wrap(
+                          spacing: 8,
+                          children: ["A1", "A2", "A3", "B1", "C1"].map((shade) {
+                            return Obx(() => FilterChip(
+                              label: Text(shade),
+                              selected: controller.conventionalBridgeTeeth.contains(shade),
+                              onSelected: (selected) {
+                                if (selected) {
+                                  controller.conventionalBridgeTeeth.add(shade);
+                                } else {
+                                  controller.conventionalBridgeTeeth.remove(shade);
+                                }
+                              },
+                            ));
+                          }).toList(),
+                        ),
+                        CustomFormCard(
+                          title: "Description",
+                          hintText: "Describe your case",
+                          maxLine: 4,
+                          controller: TextEditingController(),
+                        ),
+                        Align(
+                          alignment: Alignment.topLeft,
+                          child: CustomText(
+                            text: "Upload Attachments",
+                            fontSize: 16.w,
+                            fontWeight: FontWeight.w500,
+                            bottom: 8.h,
+                          ),
+                        ),
+                        Obx(() {
+                          return GestureDetector(
+                            onTap: () async {
+                              await controller.pickFiles(); // Multi-file picker
+                            },
+                            child: Container(
+                              width: double.infinity,
+                              padding: const EdgeInsets.all(8),
+                              decoration: BoxDecoration(
+                                color: Colors.transparent,
+                                border: Border.all(color: AppColors.grey1),
+                                borderRadius: BorderRadius.circular(15),
+                              ),
+                              child: controller.selectedFiles.isNotEmpty
+                                  ? Wrap(
+                                spacing: 8,
+                                runSpacing: 8,
+                                children: controller.selectedFiles.map((file) {
+                                  String fileName = file.path.split('/').last;
+                                  return Chip(
+                                    label: Text(fileName, overflow: TextOverflow.ellipsis),
+                                    avatar: Icon(
+                                      file.path.endsWith(".pdf") ? Icons.picture_as_pdf : Icons.image,
+                                      size: 20,
+                                      color: AppColors.primary,
+                                    ),
+                                    onDeleted: () {
+                                      controller.selectedFiles.remove(file);
+                                    },
+                                  );
+                                }).toList(),
+                              )
+                                  : Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  SizedBox(height: 40.h),
+                                  Icon(Icons.upload_file, size: 50, color: AppColors.grey1),
+                                  SizedBox(height: 10.h),
+                                  CustomText(
+                                    text: 'Upload a video and photo',
+                                    fontWeight: FontWeight.w400,
+                                    fontSize: 16,
+                                    color: AppColors.black,
+                                  ),
+                                  SizedBox(height: 40.h),
+                                ],
+                              ),
+                            ),
+                          );
+                        }),
+                      ],
+
                     ],
+                    /// FULL CAST Options
+                    if (controller.crownType.value == "FULL CAST") ...[
+                      CustomDropdown(
+                        label: "Full Cast Type",
+                        hint: "Select option",
+                        items: ["Single unit crown", "Bridge", "Post and Core"],
+                        onChanged: (val) => controller.onFullCastChange(val),
+                      ),
+                      SizedBox(height: 20.h),
+
+                      /// Single Unit Crown
+                      if (controller.showFullCastSingleUnit.value) ...[
+                        CustomDropdown(
+                          label: "Porcelain Butt Margin",
+                          hint: "Select detail",
+                          items: ["360", "Buccal Only"],
+                          onChanged: (val) {},
+                        ),
+                        Wrap(
+                          spacing: 8,
+                          children: ["A1", "A2", "A3", "B1", "C1"].map((shade) {
+                            return Obx(() => FilterChip(
+                              label: Text(shade),
+                              selected: controller.fullCastSingleUnitTeeth.contains(shade),
+                              onSelected: (selected) {
+                                if (selected) {
+                                  controller.fullCastSingleUnitTeeth.add(shade);
+                                } else {
+                                  controller.fullCastSingleUnitTeeth.remove(shade);
+                                }
+                              },
+                            ));
+                          }).toList(),
+                        ),
+                        CustomFormCard(
+                          title: "Special Instructions",
+                          hintText: "Describe Your Instructions",
+                          maxLine: 4,
+                          controller: TextEditingController(),
+                        ),
+                        Align(
+                          alignment: Alignment.topLeft,
+                          child: CustomText(
+                            textAlign: TextAlign.start,
+                            text: "Upload Cover Image",
+                            fontSize: 16.w,
+                            fontWeight: FontWeight.w500,
+                            bottom: 8.h,
+                          ),
+                        ),
+                        Obx(() {
+                          return GestureDetector(
+                            onTap: () async {
+                              await controller.pickFiles();
+                            },
+                            child: Container(
+                              width: double.infinity,
+                              padding: const EdgeInsets.all(8),
+                              decoration: BoxDecoration(
+                                color: Colors.transparent,
+                                border: Border.all(color: AppColors.grey1),
+                                borderRadius: BorderRadius.circular(15),
+                              ),
+                              child: controller.selectedFiles.isNotEmpty
+                                  ? Wrap(
+                                spacing: 8,
+                                runSpacing: 8,
+                                children: controller.selectedFiles.map((file) {
+                                  String fileName = file.path.split('/').last;
+                                  return Chip(
+                                    label: Text(fileName, overflow: TextOverflow.ellipsis),
+                                    avatar: Icon(
+                                      file.path.endsWith(".pdf") ? Icons.picture_as_pdf : Icons.image,
+                                      size: 20,
+                                      color: AppColors.primary,
+                                    ),
+                                    onDeleted: () {
+                                      controller.selectedFiles.remove(file);
+                                    },
+                                  );
+                                }).toList(),
+                              )
+                                  : Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  SizedBox(height: 40.h),
+                                  Icon(Icons.upload_file, size: 50, color: AppColors.grey1),
+                                  SizedBox(height: 10.h),
+                                  CustomText(
+                                    text: 'Upload a video and photo',
+                                    fontWeight: FontWeight.w400,
+                                    fontSize: 16,
+                                    color: AppColors.black,
+                                  ),
+                                  SizedBox(height: 40.h),
+                                ],
+                              ),
+                            ),
+                          );
+                        }),
+                      ],
+
+                      /// Bridge
+                      if (controller.showFullCastBridge.value) ...[
+                        CustomDropdown(
+                          label: "Pontic Design",
+                          hint: "Select teeth",
+                          items: ["Full ridge", "Modify", "No contact", "Point contact", "Point in socket (ovate)"],
+                          onChanged: (val) {},
+                        ),
+                        Wrap(
+                          spacing: 8,
+                          children: ["A1", "A2", "A3", "B1", "C1"].map((shade) {
+                            return Obx(() => FilterChip(
+                              label: Text(shade),
+                              selected: controller.bridgeTeeth.contains(shade),
+                              onSelected: (selected) {
+                                if (selected) {
+                                  controller.bridgeTeeth.add(shade);
+                                } else {
+                                  controller.bridgeTeeth.remove(shade);
+                                }
+                              },
+                            ));
+                          }).toList(),
+                        ),
+                        CustomFormCard(
+                          title: "Description",
+                          hintText: "Describe your case",
+                          maxLine: 4,
+                          controller: TextEditingController(),
+                        ),
+                        Align(
+                          alignment: Alignment.topLeft,
+                          child: CustomText(
+                            text: "Upload Attachments",
+                            fontSize: 16.w,
+                            fontWeight: FontWeight.w500,
+                            bottom: 8.h,
+                          ),
+                        ),
+                        Obx(() {
+                          return GestureDetector(
+                            onTap: () async {
+                              await controller.pickFiles();
+                            },
+                            child: Container(
+                              width: double.infinity,
+                              padding: const EdgeInsets.all(8),
+                              decoration: BoxDecoration(
+                                color: Colors.transparent,
+                                border: Border.all(color: AppColors.grey1),
+                                borderRadius: BorderRadius.circular(15),
+                              ),
+                              child: controller.selectedFiles.isNotEmpty
+                                  ? Wrap(
+                                spacing: 8,
+                                runSpacing: 8,
+                                children: controller.selectedFiles.map((file) {
+                                  String fileName = file.path.split('/').last;
+                                  return Chip(
+                                    label: Text(fileName, overflow: TextOverflow.ellipsis),
+                                    avatar: Icon(
+                                      file.path.endsWith(".pdf") ? Icons.picture_as_pdf : Icons.image,
+                                      size: 20,
+                                      color: AppColors.primary,
+                                    ),
+                                    onDeleted: () {
+                                      controller.selectedFiles.remove(file);
+                                    },
+                                  );
+                                }).toList(),
+                              )
+                                  : Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  SizedBox(height: 40.h),
+                                  Icon(Icons.upload_file, size: 50, color: AppColors.grey1),
+                                  SizedBox(height: 10.h),
+                                  CustomText(
+                                    text: 'Upload a video and photo',
+                                    fontWeight: FontWeight.w400,
+                                    fontSize: 16,
+                                    color: AppColors.black,
+                                  ),
+                                  SizedBox(height: 40.h),
+                                ],
+                              ),
+                            ),
+                          );
+                        }),
+                      ],
+
+                      /// Post and Core
+                      if (controller.showPostAndCore.value) ...[
+                        CustomDropdown(
+                          label: "Post Type",
+                          hint: "Select detail",
+                          items: ["Custom", "Prefabricated"],
+                          onChanged: (val) {},
+                        ),
+                        Wrap(
+                          spacing: 8,
+                          children: ["A1", "A2", "A3", "B1", "C1"].map((shade) {
+                            return Obx(() => FilterChip(
+                              label: Text(shade),
+                              selected: controller.postAndCoreTeeth.contains(shade),
+                              onSelected: (selected) {
+                                if (selected) {
+                                  controller.postAndCoreTeeth.add(shade);
+                                } else {
+                                  controller.postAndCoreTeeth.remove(shade);
+                                }
+                              },
+                            ));
+                          }).toList(),
+                        ),
+                        CustomFormCard(
+                          title: "Instructions",
+                          hintText: "Describe your Post & Core",
+                          maxLine: 4,
+                          controller: TextEditingController(),
+                        ),
+                        Align(
+                          alignment: Alignment.topLeft,
+                          child: CustomText(
+                            text: "Upload Attachments",
+                            fontSize: 16.w,
+                            fontWeight: FontWeight.w500,
+                            bottom: 8.h,
+                          ),
+                        ),
+                        Obx(() {
+                          return GestureDetector(
+                            onTap: () async {
+                              await controller.pickFiles();
+                            },
+                            child: Container(
+                              width: double.infinity,
+                              padding: const EdgeInsets.all(8),
+                              decoration: BoxDecoration(
+                                color: Colors.transparent,
+                                border: Border.all(color: AppColors.grey1),
+                                borderRadius: BorderRadius.circular(15),
+                              ),
+                              child: controller.selectedFiles.isNotEmpty
+                                  ? Wrap(
+                                spacing: 8,
+                                runSpacing: 8,
+                                children: controller.selectedFiles.map((file) {
+                                  String fileName = file.path.split('/').last;
+                                  return Chip(
+                                    label: Text(fileName, overflow: TextOverflow.ellipsis),
+                                    avatar: Icon(
+                                      file.path.endsWith(".pdf") ? Icons.picture_as_pdf : Icons.image,
+                                      size: 20,
+                                      color: AppColors.primary,
+                                    ),
+                                    onDeleted: () {
+                                      controller.selectedFiles.remove(file);
+                                    },
+                                  );
+                                }).toList(),
+                              )
+                                  : Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  SizedBox(height: 40.h),
+                                  Icon(Icons.upload_file, size: 50, color: AppColors.grey1),
+                                  SizedBox(height: 10.h),
+                                  CustomText(
+                                    text: 'Upload a video and photo',
+                                    fontWeight: FontWeight.w400,
+                                    fontSize: 16,
+                                    color: AppColors.black,
+                                  ),
+                                  SizedBox(height: 40.h),
+                                ],
+                              ),
+                            ),
+                          );
+                        }),
+                      ],
+                    ],
+                    /// ========== METAL Options ==========
+                    if (controller.crownType.value == "METAL") ...[
+                      CustomDropdown(
+                        label: "Pontic Design",
+                        hint: "Select teeth",
+                        items: ["Full ridge", "Modify", "No contact", "Point contact", "Point in socket (ovate)"],
+                        onChanged: (val) {},
+                      ),
+                      Wrap(
+                        spacing: 8,
+                        children: ["A1", "A2", "A3", "B1", "C1"].map((shade) {
+                          return Obx(() => FilterChip(
+                            label: Text(shade),
+                            selected: controller.metalBridgeTeeth.contains(shade),
+                            onSelected: (selected) {
+                              if (selected) {
+                                controller.metalBridgeTeeth.add(shade);
+                              } else {
+                                controller.metalBridgeTeeth.remove(shade);
+                              }
+                            },
+                          ));
+                        }).toList(),
+                      ),
+                      CustomFormCard(
+                        title: "Description",
+                        hintText: "Describe your case",
+                        maxLine: 4,
+                        controller: TextEditingController(),
+                      ),
+                      Align(
+                        alignment: Alignment.topLeft,
+                        child: CustomText(
+                          text: "Upload Attachments",
+                          fontSize: 16.w,
+                          fontWeight: FontWeight.w500,
+                          bottom: 8.h,
+                        ),
+                      ),
+                      Obx(() {
+                        return GestureDetector(
+                          onTap: () async {
+                            await controller.pickFiles();
+                          },
+                          child: Container(
+                            width: double.infinity,
+                            padding: const EdgeInsets.all(8),
+                            decoration: BoxDecoration(
+                              color: Colors.transparent,
+                              border: Border.all(color: AppColors.grey1),
+                              borderRadius: BorderRadius.circular(15),
+                            ),
+                            child: controller.selectedFiles.isNotEmpty
+                                ? Wrap(
+                              spacing: 8,
+                              runSpacing: 8,
+                              children: controller.selectedFiles.map((file) {
+                                String fileName = file.path.split('/').last;
+                                return Chip(
+                                  label: Text(fileName, overflow: TextOverflow.ellipsis),
+                                  avatar: Icon(
+                                    file.path.endsWith(".pdf") ? Icons.picture_as_pdf : Icons.image,
+                                    size: 20,
+                                    color: AppColors.primary,
+                                  ),
+                                  onDeleted: () {
+                                    controller.selectedFiles.remove(file);
+                                  },
+                                );
+                              }).toList(),
+                            )
+                                : Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                SizedBox(height: 40.h),
+                                Icon(Icons.upload_file, size: 50, color: AppColors.grey1),
+                                SizedBox(height: 10.h),
+                                CustomText(
+                                  text: 'Upload a video and photo',
+                                  fontWeight: FontWeight.w400,
+                                  fontSize: 16,
+                                  color: AppColors.black,
+                                ),
+                                SizedBox(height: 40.h),
+                              ],
+                            ),
+                          ),
+                        );
+                      }),
+                    ],
+
+
                   ],
 
                   /// Premium Implants
@@ -1642,10 +2321,10 @@ class AddCaseScreen extends StatelessWidget {
                     ),
                   ],
 
-                  /// Premium Ortho
-                  if (controller.standardType.value == "ORTHO") ...[
+                  /// Premium ORTHODONTIC
+                  if (controller.standardType.value == "ORTHODONTIC") ...[
                     CustomDropdown(
-                      label: "Ortho Appliance Type",
+                      label: "ORTHODONTIC Appliance Type",
                       hint: "Select option",
                       items: ["Aligner", "Retainer", "Space Maintainer"],
                       onChanged: (val) {},
