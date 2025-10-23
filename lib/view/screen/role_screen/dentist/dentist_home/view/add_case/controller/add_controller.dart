@@ -17,9 +17,11 @@ class AddCaseController extends GetxController {
   var gender = ''.obs;
   var tier = ''.obs;
   var standardType = ''.obs;
+  var porcelainButtMargin = ''.obs;
   var crownType = ''.obs;
   var pfmOption = ''.obs;
   var fullCastOption = ''.obs;
+  var bridgeType = ''.obs;
   var dentureType = ''.obs;
   var dentureConstructionOption = ''.obs;
   var isLoading = false.obs;
@@ -30,9 +32,19 @@ class AddCaseController extends GetxController {
   var showConventionalBridgeDropdown = false.obs;
   var showFullCastSingleUnit = false.obs;
   var showFullCastBridge = false.obs;
+  var showBridge = false.obs;
+  var showMetalBridge = false.obs;
   var showPostAndCore = false.obs;
   var showDentureConstruction = false.obs;
   var showDentureOther = false.obs;
+  var biteBlockUpper = false.obs;
+  var biteBlockLower = false.obs;
+  var specialTrayUpper = false.obs;
+  var specialTrayLower = false.obs;
+  var meshReinforcement = false.obs;
+  var tryInSelected = false.obs;
+  var reTryInSelected = false.obs;
+  var finishSelected = false.obs;
 
   /// ========= Teeth & Attachments =========
   var singleUnitTeeth = <String>[].obs;
@@ -42,15 +54,41 @@ class AddCaseController extends GetxController {
   var marylandWingTeeth = <String>[].obs;
   var marylandAttachments = <File>[].obs;
 
-  var fullCastSingleUnitTeeth = <File>[].obs;
-
   /// ========= Conventional Bridge =========
   var conventionalBridgeTeeth = <String>[].obs;
   var conventionalBridgeAttachments = <File>[].obs;
 
+  /// ========= Full Cast Single unit =========
+  var fullCastSingleUnitTeeth = <String>[].obs;
+  var fullCastSingleUnitAttachments = <File>[].obs;
+
   /// ========= Full Cast Post & Core =========
   var postAndCoreTeeth = <String>[].obs;
   var postAndCoreAttachments = <File>[].obs;
+
+  /// ========= Full Cast Bridge =========
+  var bridgeTeeth = <String>[].obs;
+  var bridgeAttachments = <File>[].obs;
+
+  /// ========= Full Cast Bridge =========
+  var metalBridgeTeeth = <String>[].obs;
+  var metalBridgeAttachments = <File>[].obs;
+
+  /// ========= Teeth Selection =========
+  var dentureTeeth = <String>[].obs;
+
+  /// ========= File Attachments =========
+  var dentureAttachments = <File>[].obs;
+
+  /// ========= New Separate TryIn / ReTryIn / Finish Lists =========
+  var tryInTeeth = <String>[].obs;
+  var tryInAttachments = <File>[].obs;
+
+  var reTryInTeeth = <String>[].obs;
+  var reTryInAttachments = <File>[].obs;
+
+  var finishTeeth = <String>[].obs;
+  var finishAttachments = <File>[].obs;
 
   /// ========= Multi-file Upload =========
   var selectedFiles = <File>[].obs;
@@ -63,6 +101,8 @@ class AddCaseController extends GetxController {
     marylandWingTeeth.assignAll([]);
     conventionalBridgeTeeth.assignAll([]);
     fullCastSingleUnitTeeth.assignAll([]);
+    bridgeTeeth.assignAll([]);
+    metalBridgeTeeth.assignAll([]);
     postAndCoreTeeth.assignAll([]);
   }
 
@@ -127,18 +167,18 @@ class AddCaseController extends GetxController {
   }
 
   /// ========= Pick Conventional Bridge Files =========
-  Future<void> pickConventionalBridgeFiles() async {
-    FilePickerResult? result = await FilePicker.platform.pickFiles(
-      type: FileType.custom,
-      allowMultiple: true,
-      allowedExtensions: ['jpg', 'jpeg', 'png', 'pdf'],
-    );
-
-    if (result != null) {
-      conventionalBridgeAttachments.clear();
-      conventionalBridgeAttachments.addAll(result.paths.map((p) => File(p!)));
-    }
-  }
+  // Future<void> pickConventionalBridgeFiles() async {
+  //   FilePickerResult? result = await FilePicker.platform.pickFiles(
+  //     type: FileType.custom,
+  //     allowMultiple: true,
+  //     allowedExtensions: ['jpg', 'jpeg', 'png', 'pdf'],
+  //   );
+  //
+  //   if (result != null) {
+  //     conventionalBridgeAttachments.clear();
+  //     conventionalBridgeAttachments.addAll(result.paths.map((p) => File(p!)));
+  //   }
+  // }
 
   /// ========= Snackbar =========
   void showMessage(String message, {bool isError = false}) {
@@ -203,36 +243,68 @@ class AddCaseController extends GetxController {
           },
         },
         "fullCast": {
-          "singleUnitCrown": {"teeth": [], "attachments": []},
-          "bridge": {"teeth": [], "attachments": []},
+          "singleUnitCrown": {
+            "enabled": showFullCastSingleUnit.value,
+            "teeth": fullCastSingleUnitTeeth.toList(),
+            "attachments": fullCastSingleUnitAttachments.map((f) => f.path).toList()
+          },
+          "bridge": {
+            "enabled": showFullCastBridge.value,
+            "teeth": bridgeTeeth.toList(),
+            "attachments": bridgeAttachments.map((f) => f.path).toList()
+          },
           "postAndCore": {
             "enabled": showPostAndCore.value,
             "teeth": postAndCoreTeeth.toList(),
             "attachments": postAndCoreAttachments.map((f) => f.path).toList()
           },
-          "conventionalBridge": {"teeth": [], "attachments": []}
+          "conventionalBridge": {
+            "enabled": showConventionalBridgeDropdown.value,
+            "teeth": conventionalBridgeTeeth.toList(),
+            "attachments": conventionalBridgeAttachments.map((f) => f.path).toList()
+          }
         },
-        "metalFree": {"teeth": [], "attachments": []},
-        "dentures": {
-          "construction": {"selectedOptions": [], "teethSelection": [], "attachments": []},
-          "other": {"selectedOptions": [], "teethSelection": [], "attachments": []}
-        }
+        "metalFree": {
+          // "enabled": showMetalBridge.value,
+          "teeth": metalBridgeTeeth.toList(),
+          "attachments": metalBridgeAttachments.map((f) => f.path).toList()
+        },
+        // "dentures": {
+        //   "construction": {"selectedOptions": [], "teethSelection": [], "attachments": []},
+        //   "other": {"selectedOptions": [], "teethSelection": [], "attachments": []}
+        // }
       },
       "Dentures": {
         "construction": {
-          "biteBlock": {"upper": false, "lower": false},
-          "specialTray": {"upper": false, "lower": false},
-          "enabled": false,
-          "selectedOptions": [],
-          "meshReinforcement": false,
-          "tryIn": false,
-          "reTryIn": false,
-          "finish": false,
-          "teethSelection": [],
-          "attachments": []
+          "enabled": dentureType.value == "Denture Construction",
+          "biteBlock": {"upper": biteBlockUpper.value, "lower": biteBlockLower.value},
+          "specialTray": {"upper": specialTrayUpper.value, "lower": specialTrayLower.value},
+          "meshReinforcement": meshReinforcement.value,
+
+          "tryIn": {
+            "enabled": tryInSelected.value,
+            "teethSelection": tryInTeeth.toList(),
+            "attachments": tryInAttachments.map((f) => f.path).toList(),
+          },
+          "reTryIn": {
+            "enabled": reTryInSelected.value,
+            "teethSelection": reTryInTeeth.toList(),
+            "attachments": reTryInAttachments.map((f) => f.path).toList(),
+          },
+          "finish": {
+            "enabled": finishSelected.value,
+            "teethSelection": finishTeeth.toList(),
+            "attachments": finishAttachments.map((f) => f.path).toList(),
+          },
         },
-        "other": {"enabled": false, "selectedOptions": [], "teethSelection": [], "attachments": []}
+
+        "other": {
+          "enabled": dentureType.value == "Denture Other",
+          "teethSelection": dentureTeeth.toList(),
+          "attachments": dentureAttachments.map((f) => f.path).toList(),
+        }
       }
+
     };
 
     isLoading.value = true;

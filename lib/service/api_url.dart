@@ -21,8 +21,8 @@ class ApiUrl {
   static const String changePassword = "/api/v1/user/user-change-password";
   static const String updateProfileWithPhoto = "/api/v1/user/user-update-personal-info";
   static const String updateProfile = "/api/v1/user/user-update-personal-info";
-  static const String privacyPolicy = "/api/v1/setting/privacy-policy/68e17257cc3c9c85e5f6bde4";
-  static const String termsCondition = "/api/v1/setting/trams/68e17b2c0d7e5dbfa4404203";
-  static const String aboutUs = "/api/v1/setting/about-us/68e17a540d7e5dbfa44041ff";
+  static const String privacyPolicy = "/api/v1/setting/privacy-policy";
+  static const String termsCondition = "/api/v1/setting/about-us";
+  static const String aboutUs = "/api/v1/setting/trams";
 
 }

@@ -309,12 +309,12 @@ class AddCaseScreen extends StatelessWidget {
                           children: ["A1", "A2", "A3", "B1", "C1"].map((shade) {
                             return Obx(() => FilterChip(
                               label: Text(shade),
-                              selected: controller.singleUnitTeeth.contains(shade),
+                              selected: controller.conventionalBridgeTeeth.contains(shade),
                               onSelected: (selected) {
                                 if (selected) {
-                                  controller.singleUnitTeeth.add(shade);
+                                  controller.conventionalBridgeTeeth.add(shade);
                                 } else {
-                                  controller.singleUnitTeeth.remove(shade);
+                                  controller.conventionalBridgeTeeth.remove(shade);
                                 }
                               },
                             ));
@@ -412,12 +412,12 @@ class AddCaseScreen extends StatelessWidget {
                           children: ["A1", "A2", "A3", "B1", "C1"].map((shade) {
                             return Obx(() => FilterChip(
                               label: Text(shade),
-                              selected: controller.singleUnitTeeth.contains(shade),
+                              selected: controller.fullCastSingleUnitTeeth.contains(shade),
                               onSelected: (selected) {
                                 if (selected) {
-                                  controller.singleUnitTeeth.add(shade);
+                                  controller.fullCastSingleUnitTeeth.add(shade);
                                 } else {
-                                  controller.singleUnitTeeth.remove(shade);
+                                  controller.fullCastSingleUnitTeeth.remove(shade);
                                 }
                               },
                             ));
@@ -504,12 +504,12 @@ class AddCaseScreen extends StatelessWidget {
                           children: ["A1", "A2", "A3", "B1", "C1"].map((shade) {
                             return Obx(() => FilterChip(
                               label: Text(shade),
-                              selected: controller.singleUnitTeeth.contains(shade),
+                              selected: controller.bridgeTeeth.contains(shade),
                               onSelected: (selected) {
                                 if (selected) {
-                                  controller.singleUnitTeeth.add(shade);
+                                  controller.bridgeTeeth.add(shade);
                                 } else {
-                                  controller.singleUnitTeeth.remove(shade);
+                                  controller.bridgeTeeth.remove(shade);
                                 }
                               },
                             ));
@@ -675,7 +675,7 @@ class AddCaseScreen extends StatelessWidget {
                     ],
 
                     /// ========== METAL Options ==========
-                    /*if (controller.crownType.value == "METAL") ...[
+                    if (controller.crownType.value == "METAL") ...[
                       CustomDropdown(
                         label: "Pontic Design",
                         hint: "Select teeth",
@@ -763,13 +763,12 @@ class AddCaseScreen extends StatelessWidget {
                           ),
                         );
                       }),
-                    ],*/
-
+                    ],
 
                   ],
 
                   /// Dentures
-                  /*if (controller.standardType.value == "DENTURES") ...[
+                  if (controller.standardType.value == "DENTURES") ...[
                     CustomDropdown(
                       label: "Denture Type",
                       hint: "Select option",
@@ -911,12 +910,12 @@ class AddCaseScreen extends StatelessWidget {
                           children: ["A1", "A2", "A3", "B1", "C1"].map((shade) {
                             return Obx(() => FilterChip(
                               label: Text(shade),
-                              selected: controller.tryInTeeth.contains(shade),
+                              selected: controller.tryInTeeth .contains(shade),
                               onSelected: (selected) {
                                 if (selected) {
-                                  controller.tryInTeeth.add(shade);
+                                  controller.tryInTeeth .add(shade);
                                 } else {
-                                  controller.tryInTeeth.remove(shade);
+                                  controller.tryInTeeth .remove(shade);
                                 }
                               },
                             ));
@@ -928,7 +927,7 @@ class AddCaseScreen extends StatelessWidget {
                           title: "Description",
                           hintText: "Describe your Try In",
                           maxLine: 4,
-                          controller: controller.tryInDescriptionController,
+                          controller: TextEditingController(),
                         ),
                         SizedBox(height: 15.h),
 
@@ -945,7 +944,7 @@ class AddCaseScreen extends StatelessWidget {
                         Obx(() {
                           return GestureDetector(
                             onTap: () async {
-                              await controller.pickTryInFiles();
+                              await controller.selectedFiles();
                             },
                             child: Container(
                               width: double.infinity,
@@ -955,11 +954,11 @@ class AddCaseScreen extends StatelessWidget {
                                 border: Border.all(color: AppColors.grey1),
                                 borderRadius: BorderRadius.circular(15),
                               ),
-                              child: controller.tryInAttachments.isNotEmpty
+                              child: controller.tryInAttachments .isNotEmpty
                                   ? Wrap(
                                 spacing: 8,
                                 runSpacing: 8,
-                                children: controller.tryInAttachments.map((file) {
+                                children: controller.tryInAttachments .map((file) {
                                   String fileName = file.path.split('/').last;
                                   return Chip(
                                     label: Text(fileName, overflow: TextOverflow.ellipsis),
@@ -971,7 +970,7 @@ class AddCaseScreen extends StatelessWidget {
                                       color: AppColors.primary,
                                     ),
                                     onDeleted: () {
-                                      controller.tryInAttachments.remove(file);
+                                      controller.tryInAttachments .remove(file);
                                     },
                                   );
                                 }).toList(),
@@ -1003,12 +1002,12 @@ class AddCaseScreen extends StatelessWidget {
                           children: ["A1", "A2", "A3", "B1", "C1"].map((shade) {
                             return Obx(() => FilterChip(
                               label: Text(shade),
-                              selected: controller.reTryTeeth.contains(shade),
+                              selected: controller.reTryInTeeth .contains(shade),
                               onSelected: (selected) {
                                 if (selected) {
-                                  controller.reTryTeeth.add(shade);
+                                  controller.reTryInTeeth .add(shade);
                                 } else {
-                                  controller.reTryTeeth.remove(shade);
+                                  controller.reTryInTeeth .remove(shade);
                                 }
                               },
                             ));
@@ -1020,7 +1019,7 @@ class AddCaseScreen extends StatelessWidget {
                           title: "Description",
                           hintText: "Describe your Re-Try In",
                           maxLine: 4,
-                          controller: controller.reTryDescriptionController,
+                          controller: TextEditingController(),
                         ),
                         SizedBox(height: 15.h),
 
@@ -1037,7 +1036,7 @@ class AddCaseScreen extends StatelessWidget {
                         Obx(() {
                           return GestureDetector(
                             onTap: () async {
-                              await controller.pickReTryFiles();
+                              await controller.selectedFiles();
                             },
                             child: Container(
                               width: double.infinity,
@@ -1047,11 +1046,11 @@ class AddCaseScreen extends StatelessWidget {
                                 border: Border.all(color: AppColors.grey1),
                                 borderRadius: BorderRadius.circular(15),
                               ),
-                              child: controller.reTryAttachments.isNotEmpty
+                              child: controller.reTryInAttachments .isNotEmpty
                                   ? Wrap(
                                 spacing: 8,
                                 runSpacing: 8,
-                                children: controller.reTryAttachments.map((file) {
+                                children: controller.reTryInAttachments .map((file) {
                                   String fileName = file.path.split('/').last;
                                   return Chip(
                                     label: Text(fileName, overflow: TextOverflow.ellipsis),
@@ -1063,7 +1062,7 @@ class AddCaseScreen extends StatelessWidget {
                                       color: AppColors.primary,
                                     ),
                                     onDeleted: () {
-                                      controller.reTryAttachments.remove(file);
+                                      controller.reTryInAttachments .remove(file);
                                     },
                                   );
                                 }).toList(),
@@ -1095,12 +1094,12 @@ class AddCaseScreen extends StatelessWidget {
                           children: ["A1", "A2", "A3", "B1", "C1"].map((shade) {
                             return Obx(() => FilterChip(
                               label: Text(shade),
-                              selected: controller.finishTeeth.contains(shade),
+                              selected: controller.finishTeeth .contains(shade),
                               onSelected: (selected) {
                                 if (selected) {
-                                  controller.finishTeeth.add(shade);
+                                  controller.finishTeeth .add(shade);
                                 } else {
-                                  controller.finishTeeth.remove(shade);
+                                  controller.finishTeeth .remove(shade);
                                 }
                               },
                             ));
@@ -1112,7 +1111,7 @@ class AddCaseScreen extends StatelessWidget {
                           title: "Description",
                           hintText: "Describe your Finish",
                           maxLine: 4,
-                          controller: controller.finishDescriptionController,
+                          controller: TextEditingController(),
                         ),
                         SizedBox(height: 15.h),
 
@@ -1129,7 +1128,7 @@ class AddCaseScreen extends StatelessWidget {
                         Obx(() {
                           return GestureDetector(
                             onTap: () async {
-                              await controller.pickFinishFiles();
+                              await controller.selectedFiles();
                             },
                             child: Container(
                               width: double.infinity,
@@ -1139,11 +1138,11 @@ class AddCaseScreen extends StatelessWidget {
                                 border: Border.all(color: AppColors.grey1),
                                 borderRadius: BorderRadius.circular(15),
                               ),
-                              child: controller.finishAttachments.isNotEmpty
+                              child: controller.finishAttachments .isNotEmpty
                                   ? Wrap(
                                 spacing: 8,
                                 runSpacing: 8,
-                                children: controller.finishAttachments.map((file) {
+                                children: controller.finishAttachments .map((file) {
                                   String fileName = file.path.split('/').last;
                                   return Chip(
                                     label: Text(fileName, overflow: TextOverflow.ellipsis),
@@ -1155,7 +1154,7 @@ class AddCaseScreen extends StatelessWidget {
                                       color: AppColors.primary,
                                     ),
                                     onDeleted: () {
-                                      controller.finishAttachments.remove(file);
+                                      controller.finishAttachments .remove(file);
                                     },
                                   );
                                 }).toList(),
@@ -1332,7 +1331,7 @@ class AddCaseScreen extends StatelessWidget {
                           title: "Description",
                           hintText: "Describe your Try In",
                           maxLine: 4,
-                          controller: controller.tryInDescriptionController,
+                          controller: TextEditingController(),
                         ),
                         SizedBox(height: 15.h),
                         Align(
@@ -1347,7 +1346,7 @@ class AddCaseScreen extends StatelessWidget {
                         Obx(() {
                           return GestureDetector(
                             onTap: () async {
-                              await controller.pickTryInFiles();
+                              await controller.tryInAttachments ();
                             },
                             child: Container(
                               width: double.infinity,
@@ -1357,11 +1356,11 @@ class AddCaseScreen extends StatelessWidget {
                                 border: Border.all(color: AppColors.grey1),
                                 borderRadius: BorderRadius.circular(15),
                               ),
-                              child: controller.tryInAttachments.isNotEmpty
+                              child: controller.tryInAttachments .isNotEmpty
                                   ? Wrap(
                                 spacing: 8,
                                 runSpacing: 8,
-                                children: controller.tryInAttachments.map((file) {
+                                children: controller.tryInAttachments .map((file) {
                                   String fileName = file.path.split('/').last;
                                   return Chip(
                                     label: Text(fileName, overflow: TextOverflow.ellipsis),
@@ -1371,7 +1370,7 @@ class AddCaseScreen extends StatelessWidget {
                                       color: AppColors.primary,
                                     ),
                                     onDeleted: () {
-                                      controller.tryInAttachments.remove(file);
+                                      controller.dentureAttachments.remove(file);
                                     },
                                   );
                                 }).toList(),
@@ -1403,12 +1402,12 @@ class AddCaseScreen extends StatelessWidget {
                           children: ["A1", "A2", "A3", "B1", "C1"].map((shade) {
                             return Obx(() => FilterChip(
                               label: Text(shade),
-                              selected: controller.reTryTeeth.contains(shade),
+                              selected: controller.reTryInTeeth .contains(shade),
                               onSelected: (selected) {
                                 if (selected) {
-                                  controller.reTryTeeth.add(shade);
+                                  controller.reTryInTeeth .add(shade);
                                 } else {
-                                  controller.reTryTeeth.remove(shade);
+                                  controller.reTryInTeeth .remove(shade);
                                 }
                               },
                             ));
@@ -1419,7 +1418,7 @@ class AddCaseScreen extends StatelessWidget {
                           title: "Description",
                           hintText: "Describe your Re-Try In",
                           maxLine: 4,
-                          controller: controller.reTryDescriptionController,
+                          controller: TextEditingController(),
                         ),
                         SizedBox(height: 15.h),
                         Align(
@@ -1434,7 +1433,7 @@ class AddCaseScreen extends StatelessWidget {
                         Obx(() {
                           return GestureDetector(
                             onTap: () async {
-                              await controller.pickReTryFiles();
+                              await controller.selectedFiles();
                             },
                             child: Container(
                               width: double.infinity,
@@ -1444,11 +1443,11 @@ class AddCaseScreen extends StatelessWidget {
                                 border: Border.all(color: AppColors.grey1),
                                 borderRadius: BorderRadius.circular(15),
                               ),
-                              child: controller.reTryAttachments.isNotEmpty
+                              child: controller.reTryInAttachments .isNotEmpty
                                   ? Wrap(
                                 spacing: 8,
                                 runSpacing: 8,
-                                children: controller.reTryAttachments.map((file) {
+                                children: controller.reTryInAttachments .map((file) {
                                   String fileName = file.path.split('/').last;
                                   return Chip(
                                     label: Text(fileName, overflow: TextOverflow.ellipsis),
@@ -1458,7 +1457,7 @@ class AddCaseScreen extends StatelessWidget {
                                       color: AppColors.primary,
                                     ),
                                     onDeleted: () {
-                                      controller.reTryAttachments.remove(file);
+                                      controller.reTryInAttachments .remove(file);
                                     },
                                   );
                                 }).toList(),
@@ -1490,12 +1489,12 @@ class AddCaseScreen extends StatelessWidget {
                           children: ["A1", "A2", "A3", "B1", "C1"].map((shade) {
                             return Obx(() => FilterChip(
                               label: Text(shade),
-                              selected: controller.finishTeeth.contains(shade),
+                              selected: controller.finishTeeth .contains(shade),
                               onSelected: (selected) {
                                 if (selected) {
-                                  controller.finishTeeth.add(shade);
+                                  controller.finishTeeth .add(shade);
                                 } else {
-                                  controller.finishTeeth.remove(shade);
+                                  controller.finishTeeth .remove(shade);
                                 }
                               },
                             ));
@@ -1506,7 +1505,7 @@ class AddCaseScreen extends StatelessWidget {
                           title: "Description",
                           hintText: "Describe your Finish",
                           maxLine: 4,
-                          controller: controller.finishDescriptionController,
+                          controller: TextEditingController(),
                         ),
                         SizedBox(height: 15.h),
                         Align(
@@ -1521,7 +1520,7 @@ class AddCaseScreen extends StatelessWidget {
                         Obx(() {
                           return GestureDetector(
                             onTap: () async {
-                              await controller.pickFinishFiles();
+                              await controller.selectedFiles();
                             },
                             child: Container(
                               width: double.infinity,
@@ -1531,11 +1530,11 @@ class AddCaseScreen extends StatelessWidget {
                                 border: Border.all(color: AppColors.grey1),
                                 borderRadius: BorderRadius.circular(15),
                               ),
-                              child: controller.finishAttachments.isNotEmpty
+                              child: controller.finishAttachments .isNotEmpty
                                   ? Wrap(
                                 spacing: 8,
                                 runSpacing: 8,
-                                children: controller.finishAttachments.map((file) {
+                                children: controller.finishAttachments .map((file) {
                                   String fileName = file.path.split('/').last;
                                   return Chip(
                                     label: Text(fileName, overflow: TextOverflow.ellipsis),
@@ -1545,7 +1544,7 @@ class AddCaseScreen extends StatelessWidget {
                                       color: AppColors.primary,
                                     ),
                                     onDeleted: () {
-                                      controller.finishAttachments.remove(file);
+                                      controller.finishAttachments .remove(file);
                                     },
                                   );
                                 }).toList(),
@@ -1571,7 +1570,8 @@ class AddCaseScreen extends StatelessWidget {
                       ],
                     ],
 
-                  ],*/
+                  ],
+
                 ],
 
                 /// ================= Premium Section =================
