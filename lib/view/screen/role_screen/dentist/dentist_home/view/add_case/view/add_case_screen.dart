@@ -1581,12 +1581,12 @@ class AddCaseScreen extends StatelessWidget {
                     hint: "Select Type",
                     items: ["CROWN/BRIDGE", "DENTURES", "IMPLANTS", "ORTHODONTIC"],
                     onChanged: (val) =>
-                        controller.onStandardTypeChange(val ?? ''),
+                        controller.onPremiumTypeChange(val ?? ''),
                   ),
                   SizedBox(height: 20.h),
 
                   /// Premium Crown/Bridge
-                  if (controller.standardType.value == "CROWN/BRIDGE") ...[
+                  if (controller.premiumType.value == "CROWN/BRIDGE") ...[
                     /*CustomDropdown(
                       label: "Premium Crown Type",
                       hint: "Select Crown Type",
@@ -1626,11 +1626,11 @@ class AddCaseScreen extends StatelessWidget {
                       label: "Crown / BRIDGE Type",
                       hint: "Select Crown Type",
                       items: ["PFM (NP)", "FULL CAST", "METAL"],
-                      onChanged: (val) => controller.onCrownTypeChange(val),
+                      onChanged: (val) => controller.onPremiumCrownTypeChange(val),
                     ),
                     SizedBox(height: 20.h),
                     /// PFM Options
-                    if (controller.crownType.value == "PFM (NP)") ...[
+                    if (controller.premiumCrownType.value == "PFM (NP)") ...[
                       CustomDropdown(
                         label: "PFM (NP) Type",
                         hint: "Select option",
@@ -1640,7 +1640,7 @@ class AddCaseScreen extends StatelessWidget {
                           "Conventional Bridge"
                         ],
                         onChanged: (val) =>
-                            controller.onPFMOptionChange(val),
+                            controller.onPremiumPFMOptionChange(val),
                       ),
                       SizedBox(height: 20.h),
 
@@ -1657,12 +1657,12 @@ class AddCaseScreen extends StatelessWidget {
                           children: ["A1", "A2", "A3", "B1", "C1"].map((shade) {
                             return Obx(() => FilterChip(
                               label: Text(shade),
-                              selected: controller.singleUnitTeeth.contains(shade),
+                              selected: controller.premiumSingleUnitTeeth.contains(shade),
                               onSelected: (selected) {
                                 if (selected) {
-                                  controller.singleUnitTeeth.add(shade);
+                                  controller.premiumSingleUnitTeeth.add(shade);
                                 } else {
-                                  controller.singleUnitTeeth.remove(shade);
+                                  controller.premiumSingleUnitTeeth.remove(shade);
                                 }
                               },
                             ));

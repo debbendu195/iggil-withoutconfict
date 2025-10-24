@@ -24,6 +24,7 @@ class AddCaseController extends GetxController {
   var bridgeType = ''.obs;
   var dentureType = ''.obs;
   var dentureConstructionOption = ''.obs;
+  var isTypeSelect = "";
   var isLoading = false.obs;
 
   /// ========= Visibility Flags =========
@@ -82,6 +83,43 @@ class AddCaseController extends GetxController {
 
   /// ========= Multi-file Upload =========
   var selectedFiles = <File>[].obs;
+
+  /// ========= Premium Section Observables =========
+  var premiumType = ''.obs;
+  var premiumCrownType = ''.obs;
+  var premiumPFMOption = ''.obs;
+  var premiumFullCastOption = ''.obs;
+  var premiumDentureType = ''.obs;
+  var premiumShowDentureConstruction = false.obs;
+  var premiumShowDentureOther = false.obs;
+
+  /// ========= Premium Teeth & Attachments =========
+  var premiumSingleUnitTeeth = <String>[].obs;
+  var premiumSingleUnitAttachments = <File>[].obs;
+
+  var premiumMarylandPonticTeeth = <String>[].obs;
+  var premiumMarylandWingTeeth = <String>[].obs;
+  var premiumMarylandAttachments = <File>[].obs;
+
+  var premiumConventionalBridgeTeeth = <String>[].obs;
+  var premiumConventionalBridgeAttachments = <File>[].obs;
+
+  var premiumFullCastSingleUnitTeeth = <String>[].obs;
+  var premiumFullCastSingleUnitAttachments = <File>[].obs;
+
+  var premiumBridgeTeeth = <String>[].obs;
+  var premiumBridgeAttachments = <File>[].obs;
+
+  var premiumMetalBridgeTeeth = <String>[].obs;
+  var premiumMetalBridgeAttachments = <File>[].obs;
+
+  var premiumPostAndCoreTeeth = <String>[].obs;
+  var premiumPostAndCoreAttachments = <File>[].obs;
+
+  /// ========= Premium Denture =========
+  var premiumDentureTeeth = <String>[].obs;
+  var premiumDentureAttachments = <File>[].obs;
+
 
   @override
   void onInit() {
@@ -142,6 +180,35 @@ class AddCaseController extends GetxController {
     dentureConstructionOption.value = val ?? '';
   }
 
+  void onPremiumTypeChange(String? val) {
+    premiumType.value = val ?? '';
+    premiumCrownType.value = '';
+  }
+
+  void onPremiumCrownTypeChange(String? val) {
+    premiumCrownType.value = val ?? '';
+    premiumPFMOption.value = '';
+    premiumFullCastOption.value = '';
+  }
+
+  void onPremiumPFMOptionChange(String? val) {
+    premiumPFMOption.value = val ?? '';
+    showSingleUnitDropdown.value = premiumPFMOption.value == "Single unit crown";
+    showMarylandBridgeDropdown.value = premiumPFMOption.value == "Maryland bridge";
+    showConventionalBridgeDropdown.value = premiumPFMOption.value == "Conventional Bridge";
+  }
+
+  void onPremiumFullCastOptionChange(String? val) {
+    premiumFullCastOption.value = val ?? '';
+  }
+
+  void onPremiumDentureTypeChange(String? val) {
+    premiumDentureType.value = val ?? '';
+    premiumShowDentureConstruction.value = val == "Denture Construction";
+    premiumShowDentureOther.value = val == "Denture Other";
+  }
+
+
   /// ========= Pick multiple files =========
   Future<void> pickFiles() async {
     FilePickerResult? result = await FilePicker.platform.pickFiles(
@@ -196,15 +263,17 @@ class AddCaseController extends GetxController {
     }
 
     Map<String, dynamic> body = {
-      "patientID": patientIdController.text.trim(),
+      "case_type": caseType.value,
       "gender": gender.value,
       "age": int.tryParse(ageController.text.trim()) ?? 0,
-      "tier": tier.value,
-      "standard_type": standardType.value,
-      "crown_type": crownType.value,
-      "pfm_option": pfmOption.value,
-      "full_cast_option": fullCastOption.value,
-      "case_type": caseType.value,
+      "patientID": patientIdController.text.trim(),
+      "selectedTier": tier.value,
+      "standard": [],
+      "premium": [],
+      // "standard_type": standardType.value,
+      // "crown_type": crownType.value,
+      // "pfm_option": pfmOption.value,
+      // "full_cast_option": fullCastOption.value,
     };
 
     if (scanNumberController.text.trim().isNotEmpty) {
@@ -212,6 +281,7 @@ class AddCaseController extends GetxController {
     }
 
     /// ========== Standard JSON ==========
+    (isTypeSelect == "Standard" ?
     body["standard"] = {
       "CrownBridge": {
         "pfm": {
@@ -219,6 +289,78 @@ class AddCaseController extends GetxController {
             "enabled": showSingleUnitDropdown.value,
             "teeth": singleUnitTeeth.toList(),
             "attachments": singleUnitAttachments.map((f) => f.path).toList()
+          },
+          "marylandBridge": {
+            "enabled": showMarylandBridgeDropdown.value,
+            "ponticTeeth": marylandPonticTeeth.toList(),
+            "wingTeeth": marylandWingTeeth.toList(),
+            "attachments": marylandAttachments.map((f) => f.path).toList()
+          },
+          "conventionalBridge": {
+            "enabled": showConventionalBridgeDropdown.value,
+            "teeth": conventionalBridgeTeeth.toList(),
+            "attachments": conventionalBridgeAttachments.map((f) => f.path).toList()
+          },
+        },
+        "fullCast": {
+          "singleUnitCrown": {
+            "enabled": showFullCastSingleUnit.value,
+            "teeth": fullCastSingleUnitTeeth.toList(),
+            "attachments": fullCastSingleUnitAttachments.map((f) => f.path).toList()
+          },
+          "bridge": {
+            "enabled": showFullCastBridge.value,
+            "teeth": bridgeTeeth.toList(),
+            "attachments": bridgeAttachments.map((f) => f.path).toList()
+          },
+          "postAndCore": {
+            "enabled": showPostAndCore.value,
+            "teeth": postAndCoreTeeth.toList(),
+            "attachments": postAndCoreAttachments.map((f) => f.path).toList()
+          },
+          "conventionalBridge": {
+            "enabled": showConventionalBridgeDropdown.value,
+            "teeth": conventionalBridgeTeeth.toList(),
+            "attachments": conventionalBridgeAttachments.map((f) => f.path).toList()
+          }
+        },
+        "metalFree": {
+          "enabled": showMetalBridge.value,
+          "teeth": metalBridgeTeeth.toList(),
+          "attachments": metalBridgeAttachments.map((f) => f.path).toList()
+        },
+        "dentures": {
+          "construction": {"enabled": false, "selectedOptions": [], "teethSelection": [], "attachments": []},
+          "other": {"selectedOptions": [], "teethSelection": [], "attachments": []}
+        }
+      },
+      "Dentures": {
+        "construction": {
+          "enabled": dentureType.value == "Denture Construction",
+          "biteBlock": {"upper": biteBlockUpper.value, "lower": biteBlockLower.value},
+          "specialTray": {"upper": specialTrayUpper.value, "lower": specialTrayLower.value},
+          "meshReinforcement": meshReinforcement.value,
+          "tryIn": tryInSelected.value,
+          "reTryIn": reTryInSelected.value,
+          "finish": finishSelected.value,
+          "teethSelection": dentureTeeth.toList(),
+          "attachments": dentureAttachments.map((f) => f.path).toList()
+        },
+        "other": {
+          "enabled": dentureType.value == "Denture Other",
+          "teethSelection": dentureTeeth.toList(),
+          "attachments": dentureAttachments.map((f) => f.path).toList()
+        }
+      }
+    }
+    :
+    body["premium"] = {
+      "CrownBridge": {
+        "pfm": {
+          "singleUnitCrown": {
+            "enabled": showSingleUnitDropdown.value,
+            "teeth": premiumSingleUnitTeeth.toList(),
+            "attachments": premiumSingleUnitAttachments.map((f) => f.path).toList()
           },
           "marylandBridge": {
             "enabled": showMarylandBridgeDropdown.value,
@@ -282,7 +424,7 @@ class AddCaseController extends GetxController {
           "attachments": dentureAttachments.map((f) => f.path).toList()
         }
       }
-    };
+    });
 
     isLoading.value = true;
 
