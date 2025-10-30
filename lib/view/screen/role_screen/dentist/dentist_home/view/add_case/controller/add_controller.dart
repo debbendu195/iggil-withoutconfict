@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:file_picker/file_picker.dart';
 import '../../../../../../../../service/api_client.dart';
 import '../../../../../../../../service/api_url.dart';
+import '../../../../../../../../utils/ToastMsg/toast_message.dart';
 
 class AddCaseController extends GetxController {
   /// ========= Text Controllers =========
@@ -81,8 +82,7 @@ class AddCaseController extends GetxController {
   /// ========= File Attachments =========
   var dentureAttachments = <File>[].obs;
 
-  /// ========= Multi-file Upload =========
-  var selectedFiles = <File>[].obs;
+
 
   /// ========= Premium Section Observables =========
   var premiumType = ''.obs;
@@ -208,6 +208,8 @@ class AddCaseController extends GetxController {
     premiumShowDentureOther.value = val == "Denture Other";
   }
 
+  /// ========= Multi-file Upload =========
+  var selectedFiles = <File>[].obs;
 
   /// ========= Pick multiple files =========
   Future<void> pickFiles() async {
@@ -268,8 +270,8 @@ class AddCaseController extends GetxController {
       "age": int.tryParse(ageController.text.trim()) ?? 0,
       "patientID": patientIdController.text.trim(),
       "selectedTier": tier.value,
-      "standard": [],
-      "premium": [],
+      // "standard": [],
+      // "premium": [],
       // "standard_type": standardType.value,
       // "crown_type": crownType.value,
       // "pfm_option": pfmOption.value,
@@ -280,8 +282,10 @@ class AddCaseController extends GetxController {
       body["scan_number"] = scanNumberController.text.trim();
     }
 
+    debugPrint("Tier value===============================================: $tier");
+
     /// ========== Standard JSON ==========
-    (isTypeSelect == "Standard" ?
+    (tier == "Standard" ?
     body["standard"] = {
       "CrownBridge": {
         "pfm": {
@@ -401,10 +405,10 @@ class AddCaseController extends GetxController {
           "teeth": metalBridgeTeeth.toList(),
           "attachments": metalBridgeAttachments.map((f) => f.path).toList()
         },
-        // "dentures": {
-        //   "construction": {"selectedOptions": [], "teethSelection": [], "attachments": []},
-        //   "other": {"selectedOptions": [], "teethSelection": [], "attachments": []}
-        // }
+        "dentures": {
+          "construction": {"selectedOptions": [], "teethSelection": [], "attachments": []},
+          "other": {"selectedOptions": [], "teethSelection": [], "attachments": []}
+        }
       },
       "Dentures": {
         "construction": {
@@ -426,28 +430,48 @@ class AddCaseController extends GetxController {
       }
     });
 
+    debugPrint("Selected files: ${selectedFiles.map((f) => f.path).toList()}");
+
+    debugPrint("Request body ==================================: ${jsonEncode(body)}");
+
     isLoading.value = true;
 
     try {
       dynamic response;
 
+      // ✅ Prepare final body
+      Map<String, dynamic> bodyData = Map.from(body);
+
       if (selectedFiles.isNotEmpty) {
+        // ✅ Multipart case
         List<MultipartBody> multipart = [];
         for (var file in selectedFiles) {
           multipart.add(MultipartBody("attachments", file));
         }
 
+        // ✅ Convert bodyData to Map<String, String>
+        final Map<String, String> stringBody = bodyData.map(
+              (key, value) => MapEntry(key, value is String ? value : jsonEncode(value)),
+        );
+
+        debugPrint("=== Multipart API Body ===> $stringBody");
+
         response = await ApiClient.postMultipartData(
           ApiUrl.createCaseUrl,
-          {"data": jsonEncode(body)},
+          stringBody, // ✅ now safe to send
           multipartBody: multipart,
         );
       } else {
-        response = await ApiClient.postData(ApiUrl.createCaseUrl, jsonEncode(body));
+        // ✅ Normal JSON request
+        response = await ApiClient.postData(
+          ApiUrl.createCaseUrl,
+          jsonEncode(bodyData),
+        );
       }
 
       isLoading.value = false;
 
+      // ✅ Parse Response
       Map<String, dynamic> jsonResponse = {};
       if (response.body != null && response.body.isNotEmpty) {
         if (response.body is String) {
@@ -457,10 +481,12 @@ class AddCaseController extends GetxController {
         }
       }
 
+      debugPrint("========================Submit Case Response: $jsonResponse");
       if (response.statusCode == 200 || response.statusCode == 201) {
         showMessage(jsonResponse['message']?.toString() ?? "Case created successfully!");
+        Get.back();
 
-        // Clear form
+        // ✅ Clear all fields
         patientIdController.clear();
         ageController.clear();
         scanNumberController.clear();
@@ -486,9 +512,11 @@ class AddCaseController extends GetxController {
       }
     } catch (e) {
       isLoading.value = false;
-      showMessage("An error occurred. Please try again.", isError: true);
       print("Submit Case Error: $e");
+      showMessage("An error occurred. Please try again.", isError: true);
     }
+
+
   }
 
   @override
