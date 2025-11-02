@@ -3,9 +3,9 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:file_picker/file_picker.dart';
+// TODO: Apnar real project-er path import korun
 import '../../../../../../../../service/api_client.dart';
 import '../../../../../../../../service/api_url.dart';
-import '../../../../../../../../utils/ToastMsg/toast_message.dart';
 
 class AddCaseController extends GetxController {
   /// ========= Text Controllers =========
@@ -13,20 +13,151 @@ class AddCaseController extends GetxController {
   final ageController = TextEditingController();
   final scanNumberController = TextEditingController();
 
-  /// ========= Observables =========
+  // ✅ TOP-LEVEL DESCRIPTION CONTROLLER
+  final descriptionController = TextEditingController();
+
+  // (Nested) Instruction Controllers
+  final pfmSingleUnitInstructionsController = TextEditingController();
+  final pfmMarylandInstructionsController = TextEditingController();
+  final pfmConventionalBridgeDescController = TextEditingController();
+  final fcSingleUnitInstructionsController = TextEditingController();
+  final fcBridgeDescController = TextEditingController();
+  final fcPostAndCoreInstructionsController = TextEditingController();
+  final metalBridgeDescController = TextEditingController();
+  final dentureTryInDescController = TextEditingController();
+  final dentureReTryInDescController = TextEditingController();
+  final dentureFinishDescController = TextEditingController();
+
+  // ✅ =================================
+  // ✅ NOTUN VARIABLES (Premium Denture)
+  // ✅ =================================
+  var premiumDentureConstructionType =
+      ''.obs; // "Try In with metal...", "Re-try In", etc.
+
+  // --- New fields for Premium Denture Stages ---
+  final premiumDentureTryInMetalController = TextEditingController();
+  var premiumDentureTryInMetalTeeth = <String>[].obs;
+  var premiumDentureTryInMetalAttachments = <File>[].obs;
+
+  final premiumDentureReTryInController = TextEditingController();
+  var premiumDentureReTryInTeeth = <String>[].obs;
+  var premiumDentureReTryInAttachments = <File>[].obs;
+
+  final premiumDentureFinishAcrylicController = TextEditingController();
+  var premiumDentureFinishAcrylicTeeth = <String>[].obs;
+  var premiumDentureFinishAcrylicAttachments = <File>[].obs;
+
+  final premiumDentureFinishFlexiController = TextEditingController();
+  var premiumDentureFinishFlexiTeeth = <String>[].obs;
+  var premiumDentureFinishFlexiAttachments = <File>[].obs;
+
+  // ✅ =================================
+  // ✅ NEW VARIABLES (Premium Orthodontic)
+  // ✅ =================================
+  var premiumOrthodonticType = ''.obs; // "Fixed Retainer", "Essix Retainer"
+  final orthoFixedRetainerController = TextEditingController();
+  var orthoFixedRetainerAttachments = <File>[].obs;
+  final orthoEssixRetainerController = TextEditingController();
+  var orthoEssixRetainerAttachments = <File>[].obs;
+
+  // ✅ =================================
+  // ✅ NEW VARIABLES (Premium Misc) - Updated for Radio Buttons
+  // ✅ =================================
+  var premiumMiscType = ''.obs; // "Study Module", "Sports Guard", etc.
+
+  // Misc - Study Module
+  var miscStudyModuleSelection = ''.obs;
+  var miscStudyModuleTeeth = <String>[].obs;
+  final miscStudyModuleController = TextEditingController();
+  var miscStudyModuleAttachments = <File>[].obs;
+
+  // Misc - Sports Guard
+  // No selection variable needed, only description for "Color"
+  final miscSportsGuardController = TextEditingController();
+  var miscSportsGuardAttachments = <File>[].obs;
+
+  // Misc - TW
+  var miscTwSelection = ''.obs;
+  final miscTwController = TextEditingController();
+  var miscTwAttachments = <File>[].obs;
+
+  // Misc - Night Guard
+  var miscNightGuardSelection = ''.obs;
+  final miscNightGuardController = TextEditingController();
+  var miscNightGuardAttachments = <File>[].obs;
+
+  // Misc - Vacuum Formed Stent (NEW)
+  final miscVacuumStentController = TextEditingController();
+  var miscVacuumStentAttachments = <File>[].obs;
+
+  // Misc - Re-etch
+  var miscReEtchSelection = ''.obs;
+  final miscReEtchController = TextEditingController();
+  var miscReEtchAttachments = <File>[].obs;
+
+  /// ========= Metal/Pontic Design Variables =========
+  var ponticDesign = ''.obs; // "Emax", "Zirconia", or "Composite Onlay"
+
+  // Emax (Original - now used for Single Unit)
+  var emaxTeeth = <String>[].obs;
+  final emaxInstructionsController = TextEditingController();
+  var emaxAttachments = <File>[].obs;
+
+  // Zirconia (Original - now used for Single Unit)
+  var zirconiaTeeth = <String>[].obs;
+  final zirconiaInstructionsController = TextEditingController();
+  var zirconiaAttachments = <File>[].obs;
+
+  // Composite Onlay (Original)
+  var compositeOnlayTeeth = <String>[].obs;
+  final compositeOnlayInstructionsController = TextEditingController();
+  var compositeOnlayAttachments = <File>[].obs;
+
+  // ✅ =================================
+  // ✅ NOTUN VARIABLES (Metal)
+  // ✅ =================================
+
+  // --- New Sub-Type Trackers ---
+  var emaxType = ''.obs; // Stores "Single unit crown" or "Veneer"
+  var zirconiaType = ''.obs; // Stores "Single unit crown", "Veneer", etc.
+
+  // --- New fields for Emax -> Veneer ---
+  var emaxVeneerTeeth = <String>[].obs;
+  final emaxVeneerInstructionsController = TextEditingController();
+  var emaxVeneerAttachments = <File>[].obs;
+
+  // --- New fields for Zirconia -> Veneer ---
+  var zirconiaVeneerTeeth = <String>[].obs;
+  final zirconiaVeneerInstructionsController = TextEditingController();
+  var zirconiaVeneerAttachments = <File>[].obs;
+
+  // --- New fields for Zirconia -> Maryland bridge ---
+  var zirconiaMarylandBridgeTeeth = <String>[].obs;
+  final zirconiaMarylandBridgeInstructionsController = TextEditingController();
+  var zirconiaMarylandBridgeAttachments = <File>[].obs;
+
+  // --- New fields for Zirconia -> Conventional Bridge ---
+  var zirconiaConventionalBridgeTeeth = <String>[].obs;
+  final zirconiaConventionalBridgeDescController = TextEditingController();
+  var zirconiaConventionalBridgeAttachments = <File>[].obs;
+
+  /// ========= Observables (Dropdowns) =========
   var caseType = ''.obs;
+  var caseTypeSend = ''.obs;
   var gender = ''.obs;
   var tier = ''.obs;
+
+  /// ========= Standard / Reusable Observables =========
   var standardType = ''.obs;
-  var porcelainButtMargin = ''.obs;
   var crownType = ''.obs;
   var pfmOption = ''.obs;
   var fullCastOption = ''.obs;
-  var bridgeType = ''.obs;
   var dentureType = ''.obs;
-  var dentureConstructionOption = ''.obs;
-  var isTypeSelect = "";
-  var isLoading = false.obs;
+  var porcelainButtMargin = ''.obs; // Denture stage selection
+
+  /// ========= Premium Observables =========
+  var premiumType = ''.obs;
+  // ========= Metal/Pontic Design Variables (already declared above) =========
 
   /// ========= Visibility Flags =========
   var showSingleUnitDropdown = false.obs;
@@ -34,135 +165,252 @@ class AddCaseController extends GetxController {
   var showConventionalBridgeDropdown = false.obs;
   var showFullCastSingleUnit = false.obs;
   var showFullCastBridge = false.obs;
-  var showBridge = false.obs;
-  var showMetalBridge = false.obs;
   var showPostAndCore = false.obs;
+  var showMetalBridge =
+      false.obs; // This flag seems to be for the *old* metal bridge
   var showDentureConstruction = false.obs;
   var showDentureOther = false.obs;
+
+  /// ========= Denture Checkboxes (OLD - Keep for backward compatibility) =========
   var biteBlockUpper = false.obs;
   var biteBlockLower = false.obs;
   var specialTrayUpper = false.obs;
   var specialTrayLower = false.obs;
   var meshReinforcement = false.obs;
-  var tryInSelected = false.obs;
-  var reTryInSelected = false.obs;
-  var finishSelected = false.obs;
 
-  /// ========= Teeth & Attachments =========
+  /// ✅ ========= NEW: Denture Other Radio Button Selections =========
+  var dentureOtherSelections =
+      <String>[].obs; // "Reline", "Repair", or "Addition"
+
+  /// ========= Common Teeth & Attachments =========
   var singleUnitTeeth = <String>[].obs;
-  var singleUnitAttachments = <File>[].obs;
-
   var marylandPonticTeeth = <String>[].obs;
   var marylandWingTeeth = <String>[].obs;
-  var marylandAttachments = <File>[].obs;
-
-  /// ========= Conventional Bridge =========
   var conventionalBridgeTeeth = <String>[].obs;
-  var conventionalBridgeAttachments = <File>[].obs;
-
-  /// ========= Full Cast Single unit =========
   var fullCastSingleUnitTeeth = <String>[].obs;
-  var fullCastSingleUnitAttachments = <File>[].obs;
-
-  /// ========= Full Cast Post & Core =========
   var postAndCoreTeeth = <String>[].obs;
-  var postAndCoreAttachments = <File>[].obs;
-
-  /// ========= Full Cast Bridge =========
   var bridgeTeeth = <String>[].obs;
-  var bridgeAttachments = <File>[].obs;
-
-  /// ========= Full Cast Bridge =========
-  var metalBridgeTeeth = <String>[].obs;
-  var metalBridgeAttachments = <File>[].obs;
-
-  /// ========= Teeth Selection =========
+  var metalBridgeTeeth =
+      <String>[].obs; // This seems to be for the *old* metal bridge
   var dentureTeeth = <String>[].obs;
 
   /// ========= File Attachments =========
+  var selectedFiles = <File>[].obs; // Fallback for PFM, FullCast
   var dentureAttachments = <File>[].obs;
 
+  var isLoading = false.obs;
 
+  /// ========= Helper: Reset All Product Data =========
+  void _clearAllProductData() {
+    // Dropdowns
+    standardType.value = '';
+    crownType.value = '';
+    pfmOption.value = '';
+    fullCastOption.value = '';
+    dentureType.value = '';
+    premiumType.value = '';
+    porcelainButtMargin.value = '';
+    ponticDesign.value = '';
 
-  /// ========= Premium Section Observables =========
-  var premiumType = ''.obs;
-  var premiumCrownType = ''.obs;
-  var premiumPFMOption = ''.obs;
-  var premiumFullCastOption = ''.obs;
-  var premiumDentureType = ''.obs;
-  var premiumShowDentureConstruction = false.obs;
-  var premiumShowDentureOther = false.obs;
+    // ✅ Clear Premium Denture
+    premiumDentureConstructionType.value = '';
+    premiumDentureTryInMetalTeeth.clear();
+    premiumDentureTryInMetalController.clear();
+    premiumDentureTryInMetalAttachments.clear();
+    premiumDentureReTryInTeeth.clear();
+    premiumDentureReTryInController.clear();
+    premiumDentureReTryInAttachments.clear();
+    premiumDentureFinishAcrylicTeeth.clear();
+    premiumDentureFinishAcrylicController.clear();
+    premiumDentureFinishAcrylicAttachments.clear();
+    premiumDentureFinishFlexiTeeth.clear();
+    premiumDentureFinishFlexiController.clear();
+    premiumDentureFinishFlexiAttachments.clear();
 
-  /// ========= Premium Teeth & Attachments =========
-  var premiumSingleUnitTeeth = <String>[].obs;
-  var premiumSingleUnitAttachments = <File>[].obs;
+    // ✅ Clear Premium Orthodontic
+    premiumOrthodonticType.value = '';
+    orthoFixedRetainerController.clear();
+    orthoFixedRetainerAttachments.clear();
+    orthoEssixRetainerController.clear();
+    orthoEssixRetainerAttachments.clear();
 
-  var premiumMarylandPonticTeeth = <String>[].obs;
-  var premiumMarylandWingTeeth = <String>[].obs;
-  var premiumMarylandAttachments = <File>[].obs;
+    // ✅ Clear Premium Misc (Updated)
+    premiumMiscType.value = '';
+    miscStudyModuleSelection.value = '';
+    miscStudyModuleTeeth.clear();
+    miscStudyModuleController.clear();
+    miscStudyModuleAttachments.clear();
+    miscSportsGuardController.clear();
+    miscSportsGuardAttachments.clear();
+    miscTwSelection.value = '';
+    miscTwController.clear();
+    miscTwAttachments.clear();
+    miscNightGuardSelection.value = '';
+    miscNightGuardController.clear();
+    miscNightGuardAttachments.clear();
+    miscVacuumStentController.clear();
+    miscVacuumStentAttachments.clear();
+    miscReEtchSelection.value = '';
+    miscReEtchController.clear();
+    miscReEtchAttachments.clear();
 
-  var premiumConventionalBridgeTeeth = <String>[].obs;
-  var premiumConventionalBridgeAttachments = <File>[].obs;
+    // ✅ Clear Emax
+    emaxType.value = '';
+    emaxTeeth.clear();
+    emaxInstructionsController.clear();
+    emaxAttachments.clear();
+    emaxVeneerTeeth.clear();
+    emaxVeneerInstructionsController.clear();
+    emaxVeneerAttachments.clear();
 
-  var premiumFullCastSingleUnitTeeth = <String>[].obs;
-  var premiumFullCastSingleUnitAttachments = <File>[].obs;
+    // ✅ Clear Zirconia
+    zirconiaType.value = '';
+    zirconiaTeeth.clear();
+    zirconiaInstructionsController.clear();
+    zirconiaAttachments.clear();
+    zirconiaVeneerTeeth.clear();
+    zirconiaVeneerInstructionsController.clear();
+    zirconiaVeneerAttachments.clear();
+    zirconiaMarylandBridgeTeeth.clear();
+    zirconiaMarylandBridgeInstructionsController.clear();
+    zirconiaMarylandBridgeAttachments.clear();
+    zirconiaConventionalBridgeTeeth.clear();
+    zirconiaConventionalBridgeDescController.clear();
+    zirconiaConventionalBridgeAttachments.clear();
 
-  var premiumBridgeTeeth = <String>[].obs;
-  var premiumBridgeAttachments = <File>[].obs;
+    // ✅ Clear Composite
+    compositeOnlayTeeth.clear();
+    compositeOnlayInstructionsController.clear();
+    compositeOnlayAttachments.clear();
 
-  var premiumMetalBridgeTeeth = <String>[].obs;
-  var premiumMetalBridgeAttachments = <File>[].obs;
+    // ✅ Clear Denture Other Radio Selection
+    dentureOtherSelections.clear();
 
-  var premiumPostAndCoreTeeth = <String>[].obs;
-  var premiumPostAndCoreAttachments = <File>[].obs;
+    // Visibility
+    showSingleUnitDropdown.value = false;
+    showMarylandBridgeDropdown.value = false;
+    showConventionalBridgeDropdown.value = false;
+    showFullCastSingleUnit.value = false;
+    showFullCastBridge.value = false;
+    showPostAndCore.value = false;
+    showMetalBridge.value = false;
+    showDentureConstruction.value = false;
+    showDentureOther.value = false;
 
-  /// ========= Premium Denture =========
-  var premiumDentureTeeth = <String>[].obs;
-  var premiumDentureAttachments = <File>[].obs;
+    // Teeth Lists
+    singleUnitTeeth.clear();
+    marylandPonticTeeth.clear();
+    marylandWingTeeth.clear();
+    conventionalBridgeTeeth.clear();
+    fullCastSingleUnitTeeth.clear();
+    bridgeTeeth.clear();
+    postAndCoreTeeth.clear();
+    metalBridgeTeeth.clear();
+    dentureTeeth.clear();
 
+    // File Lists
+    selectedFiles.clear();
+    dentureAttachments.clear();
 
-  @override
-  void onInit() {
-    super.onInit();
-    singleUnitTeeth.assignAll([]);
-    marylandPonticTeeth.assignAll([]);
-    marylandWingTeeth.assignAll([]);
-    conventionalBridgeTeeth.assignAll([]);
-    fullCastSingleUnitTeeth.assignAll([]);
-    bridgeTeeth.assignAll([]);
-    metalBridgeTeeth.assignAll([]);
-    postAndCoreTeeth.assignAll([]);
+    // Instruction Controllers
+    pfmSingleUnitInstructionsController.clear();
+    pfmMarylandInstructionsController.clear();
+    pfmConventionalBridgeDescController.clear();
+    fcSingleUnitInstructionsController.clear();
+    fcBridgeDescController.clear();
+    fcPostAndCoreInstructionsController.clear();
+    metalBridgeDescController.clear();
+    dentureTryInDescController.clear();
+    dentureReTryInDescController.clear();
+    dentureFinishDescController.clear();
+  }
+
+  /// ========= Helper: Reset Crown/Bridge Data =========
+  void _clearCrownBridgeData() {
+    pfmOption.value = '';
+    fullCastOption.value = '';
+    showSingleUnitDropdown.value = false;
+    showMarylandBridgeDropdown.value = false;
+    showConventionalBridgeDropdown.value = false;
+    showFullCastSingleUnit.value = false;
+    showFullCastBridge.value = false;
+    showPostAndCore.value = false;
+    showMetalBridge.value = false;
+
+    // ✅ Clear Metal/Pontic data as well
+    ponticDesign.value = '';
+    emaxType.value = '';
+    zirconiaType.value = '';
+    emaxTeeth.clear();
+    emaxInstructionsController.clear();
+    emaxAttachments.clear();
+    emaxVeneerTeeth.clear();
+    emaxVeneerInstructionsController.clear();
+    emaxVeneerAttachments.clear();
+    zirconiaTeeth.clear();
+    zirconiaInstructionsController.clear();
+    zirconiaAttachments.clear();
+    zirconiaVeneerTeeth.clear();
+    zirconiaVeneerInstructionsController.clear();
+    zirconiaVeneerAttachments.clear();
+    zirconiaMarylandBridgeTeeth.clear();
+    zirconiaMarylandBridgeInstructionsController.clear();
+    zirconiaMarylandBridgeAttachments.clear();
+    zirconiaConventionalBridgeTeeth.clear();
+    zirconiaConventionalBridgeDescController.clear();
+    zirconiaConventionalBridgeAttachments.clear();
+    compositeOnlayTeeth.clear();
+    compositeOnlayInstructionsController.clear();
+    compositeOnlayAttachments.clear();
+
+    singleUnitTeeth.clear();
+    marylandPonticTeeth.clear();
+    marylandWingTeeth.clear();
+    conventionalBridgeTeeth.clear();
+    fullCastSingleUnitTeeth.clear();
+    bridgeTeeth.clear();
+    postAndCoreTeeth.clear();
+    metalBridgeTeeth.clear();
+    selectedFiles.clear();
+
+    pfmSingleUnitInstructionsController.clear();
+    pfmMarylandInstructionsController.clear();
+    pfmConventionalBridgeDescController.clear();
+    fcSingleUnitInstructionsController.clear();
+    fcBridgeDescController.clear();
+    fcPostAndCoreInstructionsController.clear();
+    metalBridgeDescController.clear();
   }
 
   /// ========= Dropdown Logic =========
   void onTierChange(String? val) {
     tier.value = val ?? '';
-    standardType.value = '';
-    crownType.value = '';
+    _clearAllProductData();
   }
 
   void onStandardTypeChange(String val) {
     standardType.value = val;
     crownType.value = '';
+    dentureType.value = '';
+    _clearCrownBridgeData();
   }
 
   void onCrownTypeChange(String? val) {
     crownType.value = val ?? '';
-    pfmOption.value = '';
-    showSingleUnitDropdown.value = false;
-    showMarylandBridgeDropdown.value = false;
-    showConventionalBridgeDropdown.value = false;
+    _clearCrownBridgeData();
+    // This flag seems obsolete with the new Metal options,
+    // but we keep it for backward compatibility if it's used elsewhere.
+    showMetalBridge.value = crownType.value == "METAL";
   }
 
-  /// ========= PFM Option =========
   void onPFMOptionChange(String? val) {
     pfmOption.value = val ?? '';
     showSingleUnitDropdown.value = pfmOption.value == "Single unit crown";
     showMarylandBridgeDropdown.value = pfmOption.value == "Maryland bridge";
-    showConventionalBridgeDropdown.value = pfmOption.value == "Conventional Bridge";
+    showConventionalBridgeDropdown.value =
+        pfmOption.value == "Conventional Bridge";
   }
 
-  /// ========= Full Cast =========
   void onFullCastChange(String? val) {
     fullCastOption.value = val ?? '';
     showFullCastSingleUnit.value = val == "Single unit crown";
@@ -174,44 +422,47 @@ class AddCaseController extends GetxController {
     dentureType.value = val ?? '';
     showDentureConstruction.value = val == "Denture Construction";
     showDentureOther.value = val == "Denture Other";
+
+    // ✅ Clear radio selection when switching denture types
+    if (val != "Denture Other") {
+      dentureOtherSelections.clear();
+    }
   }
 
-  void onDentureConstructionChange(String? val) {
-    dentureConstructionOption.value = val ?? '';
-  }
-
+  /// ========= Premium Logic =========
   void onPremiumTypeChange(String? val) {
     premiumType.value = val ?? '';
-    premiumCrownType.value = '';
+    crownType.value = '';
+    dentureType.value = '';
+    // ✅ Reset premium denture stage on type change
+    premiumDentureConstructionType.value = '';
+
+    // ✅ Reset Ortho and Misc types
+    premiumOrthodonticType.value = '';
+    premiumMiscType.value = '';
+
+    _clearCrownBridgeData();
   }
 
-  void onPremiumCrownTypeChange(String? val) {
-    premiumCrownType.value = val ?? '';
-    premiumPFMOption.value = '';
-    premiumFullCastOption.value = '';
-  }
-
-  void onPremiumPFMOptionChange(String? val) {
-    premiumPFMOption.value = val ?? '';
-    showSingleUnitDropdown.value = premiumPFMOption.value == "Single unit crown";
-    showMarylandBridgeDropdown.value = premiumPFMOption.value == "Maryland bridge";
-    showConventionalBridgeDropdown.value = premiumPFMOption.value == "Conventional Bridge";
-  }
-
-  void onPremiumFullCastOptionChange(String? val) {
-    premiumFullCastOption.value = val ?? '';
-  }
-
+  void onPremiumCrownTypeChange(String? val) => onCrownTypeChange(val);
+  void onPremiumPFMOptionChange(String? val) => onPFMOptionChange(val);
+  void onPremiumFullCastOptionChange(String? val) => onFullCastChange(val);
+  // ✅ Updated Premium Denture Logic
   void onPremiumDentureTypeChange(String? val) {
-    premiumDentureType.value = val ?? '';
-    premiumShowDentureConstruction.value = val == "Denture Construction";
-    premiumShowDentureOther.value = val == "Denture Other";
+    dentureType.value = val ?? '';
+    showDentureConstruction.value = val == "Denture Construction";
+    showDentureOther.value = val == "Denture Other";
+
+    // ✅ Clear radio selection when switching denture types
+    if (val != "Denture Other") {
+      dentureOtherSelections.clear();
+    }
+    // ✅ Clear stage selection when switching
+    premiumDentureConstructionType.value = '';
   }
 
-  /// ========= Multi-file Upload =========
-  var selectedFiles = <File>[].obs;
-
-  /// ========= Pick multiple files =========
+  /// ========= File Upload Logic (Updated) =========
+  /// ✅ This function now adds files to the correct list based on UI state
   Future<void> pickFiles() async {
     FilePickerResult? result = await FilePicker.platform.pickFiles(
       type: FileType.custom,
@@ -220,40 +471,146 @@ class AddCaseController extends GetxController {
     );
 
     if (result != null) {
-      selectedFiles.clear();
-      selectedFiles.addAll(result.paths.map((p) => File(p!)));
+      List<File> newFiles = result.paths.map((p) => File(p!)).toList();
+
+      // Determine target list
+      // 1. Dentures (Standard)
+      if (tier.value == "Standard" &&
+          (showDentureConstruction.value || showDentureOther.value)) {
+        dentureAttachments.addAll(newFiles);
+        return;
+      }
+
+      // ✅ 2. Dentures (Premium)
+      if (tier.value == "Premium" && premiumType.value == "DENTURES") {
+        if (showDentureOther.value) {
+          // Special case for "Denture Other"
+          premiumDentureTryInMetalAttachments.addAll(newFiles);
+          return;
+        }
+        final stage = premiumDentureConstructionType.value;
+        if (stage == "Try In with metal framework CoCr") {
+          premiumDentureTryInMetalAttachments.addAll(newFiles);
+          return;
+        }
+        if (stage == "Re-try In") {
+          premiumDentureReTryInAttachments.addAll(newFiles);
+          return;
+        }
+        if (stage == "Finish Acrylic") {
+          premiumDentureFinishAcrylicAttachments.addAll(newFiles);
+          return;
+        }
+        if (stage == "Finish Flexi") {
+          premiumDentureFinishFlexiAttachments.addAll(newFiles);
+          return;
+        }
+      }
+
+      // ✅ 3. Orthodontic (Premium)
+      if (tier.value == "Premium" && premiumType.value == "ORTHODONTIC") {
+        if (premiumOrthodonticType.value == "Fixed Retainer") {
+          orthoFixedRetainerAttachments.addAll(newFiles);
+          return;
+        }
+        if (premiumOrthodonticType.value == "Essix Retainer") {
+          orthoEssixRetainerAttachments.addAll(newFiles);
+          return;
+        }
+      }
+
+      // ✅ 4. Misc (Premium)
+      if (tier.value == "Premium" && premiumType.value == "MISC") {
+        if (premiumMiscType.value == "Study Module") {
+          miscStudyModuleAttachments.addAll(newFiles);
+          return;
+        }
+        if (premiumMiscType.value == "Sports Guard") {
+          miscSportsGuardAttachments.addAll(newFiles);
+          return;
+        }
+        if (premiumMiscType.value == "TW") {
+          miscTwAttachments.addAll(newFiles);
+          return;
+        }
+        if (premiumMiscType.value == "Night Guard") {
+          miscNightGuardAttachments.addAll(newFiles);
+          return;
+        }
+        if (premiumMiscType.value == "Vacuum Formed Stent") {
+          // ✅ NEW
+          miscVacuumStentAttachments.addAll(newFiles);
+          return;
+        }
+        if (premiumMiscType.value == "Re-etch") {
+          miscReEtchAttachments.addAll(newFiles);
+          return;
+        }
+      }
+
+      // ✅ 5. Metal Options (Premium or Standard)
+      if (crownType.value == "METAL") {
+        if (ponticDesign.value == "Emax") {
+          if (emaxType.value == "Single unit crown") {
+            emaxAttachments.addAll(newFiles);
+            return;
+          }
+          if (emaxType.value == "Veneer") {
+            emaxVeneerAttachments.addAll(newFiles);
+            return;
+          }
+        }
+        if (ponticDesign.value == "Zirconia") {
+          if (zirconiaType.value == "Single unit crown") {
+            zirconiaAttachments.addAll(newFiles);
+            return;
+          }
+          if (zirconiaType.value == "Veneer") {
+            zirconiaVeneerAttachments.addAll(newFiles);
+            return;
+          }
+          if (zirconiaType.value == "Maryland bridge") {
+            zirconiaMarylandBridgeAttachments.addAll(newFiles);
+            return;
+          }
+          if (zirconiaType.value == "Conventional Bridge") {
+            zirconiaConventionalBridgeAttachments.addAll(newFiles);
+            return;
+          }
+        }
+        if (ponticDesign.value == "Composite Onlay") {
+          compositeOnlayAttachments.addAll(newFiles);
+          return;
+        }
+      }
+
+      // ✅ 6. PFM / Full Cast / Other Standard options
+      // This is the default/fallback list for PFM, Full Cast, etc.
+      selectedFiles.addAll(newFiles);
     }
   }
 
-  /// ========= Pick Conventional Bridge Files =========
-  // Future<void> pickConventionalBridgeFiles() async {
-  //   FilePickerResult? result = await FilePicker.platform.pickFiles(
-  //     type: FileType.custom,
-  //     allowMultiple: true,
-  //     allowedExtensions: ['jpg', 'jpeg', 'png', 'pdf'],
-  //   );
-  //
-  //   if (result != null) {
-  //     conventionalBridgeAttachments.clear();
-  //     conventionalBridgeAttachments.addAll(result.paths.map((p) => File(p!)));
-  //   }
-  // }
+  void removeFile(File fileToRemove, RxList<File> targetAttachmentList) {
+    targetAttachmentList.remove(fileToRemove);
+  }
 
   /// ========= Snackbar =========
   void showMessage(String message, {bool isError = false}) {
-    Get.snackbar(
-      isError ? "Error" : "Success",
-      message,
-      snackPosition: SnackPosition.BOTTOM,
-      backgroundColor: isError ? Colors.red : Colors.green,
-      colorText: Colors.white,
-      margin: const EdgeInsets.all(10),
-      borderRadius: 8,
-      duration: const Duration(seconds: 3),
-    );
+    if (isError) {
+      // ToastMessage.showErrorToast(Get.context!, message);
+      Get.snackbar("Error", message,
+          backgroundColor: Colors.red, colorText: Colors.white);
+    } else {
+      // ToastMessage.showSuccessToast(Get.context!, message);
+      Get.snackbar("Success", message,
+          backgroundColor: Colors.green, colorText: Colors.white);
+    }
   }
 
-  /// ========= Submit Case =========
+  // =================================================================
+  // ========= SUBMIT CASE (Updated) =========
+  // =================================================================
+
   Future<void> submitCase() async {
     if (patientIdController.text.isEmpty) {
       showMessage("Please enter Patient ID", isError: true);
@@ -264,214 +621,89 @@ class AddCaseController extends GetxController {
       return;
     }
 
-    Map<String, dynamic> body = {
-      "case_type": caseType.value,
-      "gender": gender.value,
-      "age": int.tryParse(ageController.text.trim()) ?? 0,
-      "patientID": patientIdController.text.trim(),
-      "selectedTier": tier.value,
-      // "standard": [],
-      // "premium": [],
-      // "standard_type": standardType.value,
-      // "crown_type": crownType.value,
-      // "pfm_option": pfmOption.value,
-      // "full_cast_option": fullCastOption.value,
-    };
-
-    if (scanNumberController.text.trim().isNotEmpty) {
-      body["scan_number"] = scanNumberController.text.trim();
-    }
-
-    debugPrint("Tier value===============================================: $tier");
-
-    /// ========== Standard JSON ==========
-    (tier == "Standard" ?
-    body["standard"] = {
-      "CrownBridge": {
-        "pfm": {
-          "singleUnitCrown": {
-            "enabled": showSingleUnitDropdown.value,
-            "teeth": singleUnitTeeth.toList(),
-            "attachments": singleUnitAttachments.map((f) => f.path).toList()
-          },
-          "marylandBridge": {
-            "enabled": showMarylandBridgeDropdown.value,
-            "ponticTeeth": marylandPonticTeeth.toList(),
-            "wingTeeth": marylandWingTeeth.toList(),
-            "attachments": marylandAttachments.map((f) => f.path).toList()
-          },
-          "conventionalBridge": {
-            "enabled": showConventionalBridgeDropdown.value,
-            "teeth": conventionalBridgeTeeth.toList(),
-            "attachments": conventionalBridgeAttachments.map((f) => f.path).toList()
-          },
-        },
-        "fullCast": {
-          "singleUnitCrown": {
-            "enabled": showFullCastSingleUnit.value,
-            "teeth": fullCastSingleUnitTeeth.toList(),
-            "attachments": fullCastSingleUnitAttachments.map((f) => f.path).toList()
-          },
-          "bridge": {
-            "enabled": showFullCastBridge.value,
-            "teeth": bridgeTeeth.toList(),
-            "attachments": bridgeAttachments.map((f) => f.path).toList()
-          },
-          "postAndCore": {
-            "enabled": showPostAndCore.value,
-            "teeth": postAndCoreTeeth.toList(),
-            "attachments": postAndCoreAttachments.map((f) => f.path).toList()
-          },
-          "conventionalBridge": {
-            "enabled": showConventionalBridgeDropdown.value,
-            "teeth": conventionalBridgeTeeth.toList(),
-            "attachments": conventionalBridgeAttachments.map((f) => f.path).toList()
-          }
-        },
-        "metalFree": {
-          "enabled": showMetalBridge.value,
-          "teeth": metalBridgeTeeth.toList(),
-          "attachments": metalBridgeAttachments.map((f) => f.path).toList()
-        },
-        "dentures": {
-          "construction": {"enabled": false, "selectedOptions": [], "teethSelection": [], "attachments": []},
-          "other": {"selectedOptions": [], "teethSelection": [], "attachments": []}
-        }
-      },
-      "Dentures": {
-        "construction": {
-          "enabled": dentureType.value == "Denture Construction",
-          "biteBlock": {"upper": biteBlockUpper.value, "lower": biteBlockLower.value},
-          "specialTray": {"upper": specialTrayUpper.value, "lower": specialTrayLower.value},
-          "meshReinforcement": meshReinforcement.value,
-          "tryIn": tryInSelected.value,
-          "reTryIn": reTryInSelected.value,
-          "finish": finishSelected.value,
-          "teethSelection": dentureTeeth.toList(),
-          "attachments": dentureAttachments.map((f) => f.path).toList()
-        },
-        "other": {
-          "enabled": dentureType.value == "Denture Other",
-          "teethSelection": dentureTeeth.toList(),
-          "attachments": dentureAttachments.map((f) => f.path).toList()
-        }
-      }
-    }
-    :
-    body["premium"] = {
-      "CrownBridge": {
-        "pfm": {
-          "singleUnitCrown": {
-            "enabled": showSingleUnitDropdown.value,
-            "teeth": premiumSingleUnitTeeth.toList(),
-            "attachments": premiumSingleUnitAttachments.map((f) => f.path).toList()
-          },
-          "marylandBridge": {
-            "enabled": showMarylandBridgeDropdown.value,
-            "ponticTeeth": marylandPonticTeeth.toList(),
-            "wingTeeth": marylandWingTeeth.toList(),
-            "attachments": marylandAttachments.map((f) => f.path).toList()
-          },
-          "conventionalBridge": {
-            "enabled": showConventionalBridgeDropdown.value,
-            "teeth": conventionalBridgeTeeth.toList(),
-            "attachments": conventionalBridgeAttachments.map((f) => f.path).toList()
-          },
-        },
-        "fullCast": {
-          "singleUnitCrown": {
-            "enabled": showFullCastSingleUnit.value,
-            "teeth": fullCastSingleUnitTeeth.toList(),
-            "attachments": fullCastSingleUnitAttachments.map((f) => f.path).toList()
-          },
-          "bridge": {
-            "enabled": showFullCastBridge.value,
-            "teeth": bridgeTeeth.toList(),
-            "attachments": bridgeAttachments.map((f) => f.path).toList()
-          },
-          "postAndCore": {
-            "enabled": showPostAndCore.value,
-            "teeth": postAndCoreTeeth.toList(),
-            "attachments": postAndCoreAttachments.map((f) => f.path).toList()
-          },
-          "conventionalBridge": {
-            "enabled": showConventionalBridgeDropdown.value,
-            "teeth": conventionalBridgeTeeth.toList(),
-            "attachments": conventionalBridgeAttachments.map((f) => f.path).toList()
-          }
-        },
-        "metalFree": {
-          // "enabled": showMetalBridge.value,
-          "teeth": metalBridgeTeeth.toList(),
-          "attachments": metalBridgeAttachments.map((f) => f.path).toList()
-        },
-        "dentures": {
-          "construction": {"selectedOptions": [], "teethSelection": [], "attachments": []},
-          "other": {"selectedOptions": [], "teethSelection": [], "attachments": []}
-        }
-      },
-      "Dentures": {
-        "construction": {
-          "enabled": dentureType.value == "Denture Construction",
-          "biteBlock": {"upper": biteBlockUpper.value, "lower": biteBlockLower.value},
-          "specialTray": {"upper": specialTrayUpper.value, "lower": specialTrayLower.value},
-          "meshReinforcement": meshReinforcement.value,
-          "tryIn": tryInSelected.value,
-          "reTryIn": reTryInSelected.value,
-          "finish": finishSelected.value,
-          "teethSelection": dentureTeeth.toList(),
-          "attachments": dentureAttachments.map((f) => f.path).toList()
-        },
-        "other": {
-          "enabled": dentureType.value == "Denture Other",
-          "teethSelection": dentureTeeth.toList(),
-          "attachments": dentureAttachments.map((f) => f.path).toList()
-        }
-      }
-    });
-
-    debugPrint("Selected files: ${selectedFiles.map((f) => f.path).toList()}");
-
-    debugPrint("Request body ==================================: ${jsonEncode(body)}");
-
     isLoading.value = true;
 
     try {
+      // 1. Build the main body
+      Map<String, dynamic> body = {
+        "caseType": caseType.value,
+        "gender": gender.value,
+        "age": int.tryParse(ageController.text.trim()) ?? 0,
+        "patientID": patientIdController.text.trim(),
+        "selectedTier": tier.value,
+        "standard": tier.value == "Standard" ? _buildStandardData() : null,
+        "premium": tier.value == "Premium" ? _buildPremiumData() : null,
+        "description": descriptionController.text.trim(),
+      };
+
+      if (scanNumberController.text.trim().isNotEmpty) {
+        body["scan_number"] = scanNumberController.text.trim();
+      }
+
+      debugPrint(
+          "Request body ==================================: ${jsonEncode(body)}");
+
+      // 2. Prepare API call
       dynamic response;
+      Map<String, String> stringBody = body.map(
+            (key, value) =>
+            MapEntry(key, value is String ? value : jsonEncode(value)),
+      );
 
-      // ✅ Prepare final body
-      Map<String, dynamic> bodyData = Map.from(body);
+      // ✅ GATHER ALL FILES from all lists
+      List<File> allFiles = [];
+      allFiles.addAll(selectedFiles); // PFM, FullCast
+      allFiles.addAll(dentureAttachments); // Standard Dentures
 
-      if (selectedFiles.isNotEmpty) {
-        // ✅ Multipart case
+      // Metal
+      allFiles.addAll(emaxAttachments); // Emax Single
+      allFiles.addAll(emaxVeneerAttachments); // Emax Veneer
+      allFiles.addAll(zirconiaAttachments); // Zirconia Single
+      allFiles.addAll(zirconiaVeneerAttachments); // Zirconia Veneer
+      allFiles.addAll(zirconiaMarylandBridgeAttachments); // Zirc Maryland
+      allFiles.addAll(zirconiaConventionalBridgeAttachments); // Zirc Conventional
+      allFiles.addAll(compositeOnlayAttachments); // Composite
+
+      // ✅ Premium Dentures
+      allFiles.addAll(premiumDentureTryInMetalAttachments);
+      allFiles.addAll(premiumDentureReTryInAttachments);
+      allFiles.addAll(premiumDentureFinishAcrylicAttachments);
+      allFiles.addAll(premiumDentureFinishFlexiAttachments);
+
+      // ✅ Premium Orthodontic
+      allFiles.addAll(orthoFixedRetainerAttachments);
+      allFiles.addAll(orthoEssixRetainerAttachments);
+
+      // ✅ Premium Misc
+      allFiles.addAll(miscStudyModuleAttachments);
+      allFiles.addAll(miscSportsGuardAttachments);
+      allFiles.addAll(miscTwAttachments);
+      allFiles.addAll(miscNightGuardAttachments);
+      allFiles.addAll(miscVacuumStentAttachments);
+      allFiles.addAll(miscReEtchAttachments);
+
+      if (allFiles.isNotEmpty) {
         List<MultipartBody> multipart = [];
-        for (var file in selectedFiles) {
-          multipart.add(MultipartBody("attachments", file));
+        for (var file in allFiles) {
+          multipart.add(MultipartBody("globalAttachments", file));
         }
-
-        // ✅ Convert bodyData to Map<String, String>
-        final Map<String, String> stringBody = bodyData.map(
-              (key, value) => MapEntry(key, value is String ? value : jsonEncode(value)),
-        );
-
-        debugPrint("=== Multipart API Body ===> $stringBody");
-
+        debugPrint(
+            "Total files to upload ========================: ${allFiles.length}");
         response = await ApiClient.postMultipartData(
           ApiUrl.createCaseUrl,
-          stringBody, // ✅ now safe to send
+          stringBody,
           multipartBody: multipart,
         );
       } else {
-        // ✅ Normal JSON request
         response = await ApiClient.postData(
           ApiUrl.createCaseUrl,
-          jsonEncode(bodyData),
+          jsonEncode(body),
         );
       }
 
       isLoading.value = false;
 
-      // ✅ Parse Response
+      // 3. Handle Response
       Map<String, dynamic> jsonResponse = {};
       if (response.body != null && response.body.isNotEmpty) {
         if (response.body is String) {
@@ -481,42 +713,424 @@ class AddCaseController extends GetxController {
         }
       }
 
-      debugPrint("========================Submit Case Response: $jsonResponse");
+      debugPrint(
+          "========================Submit Case Response: $jsonResponse");
       if (response.statusCode == 200 || response.statusCode == 201) {
-        showMessage(jsonResponse['message']?.toString() ?? "Case created successfully!");
+        showMessage(
+            jsonResponse['message']?.toString() ?? "Case created successfully!");
         Get.back();
-
-        // ✅ Clear all fields
-        patientIdController.clear();
-        ageController.clear();
-        scanNumberController.clear();
-        gender.value = '';
-        tier.value = '';
-        standardType.value = '';
-        crownType.value = '';
-        pfmOption.value = '';
-        fullCastOption.value = '';
-        caseType.value = '';
-        singleUnitTeeth.clear();
-        singleUnitAttachments.clear();
-        marylandPonticTeeth.clear();
-        marylandWingTeeth.clear();
-        marylandAttachments.clear();
-        conventionalBridgeTeeth.clear();
-        conventionalBridgeAttachments.clear();
-        postAndCoreTeeth.clear();
-        postAndCoreAttachments.clear();
-        selectedFiles.clear();
+        _clearAllFields();
       } else {
-        showMessage(jsonResponse['message']?.toString() ?? "Failed to create case", isError: true);
+        showMessage(
+            jsonResponse['message']?.toString() ?? "Failed to create case",
+            isError: true);
       }
     } catch (e) {
       isLoading.value = false;
       print("Submit Case Error: $e");
       showMessage("An error occurred. Please try again.", isError: true);
     }
+  }
 
+  void _clearAllFields() {
+    patientIdController.clear();
+    ageController.clear();
+    scanNumberController.clear();
+    descriptionController.clear();
+    gender.value = '';
+    caseType.value = '';
+    tier.value = '';
+    _clearAllProductData();
+  }
 
+  // =================================================================
+  // ========= Private JSON Builders (Updated) =========
+  // =================================================================
+
+  List<String> _getFilePaths(RxList<File> fileList) {
+    return []; // Files are sent as multipart, no need to send paths in JSON
+  }
+
+  Map<String, dynamic>? _buildStandardData() {
+    return {
+      "CrownBridge": standardType.value == "CROWN/BRIDGE"
+          ? _buildStandardCrownBridgeData()
+          : null,
+      "Dentures": standardType.value == "DENTURES"
+          ? _buildStandardDenturesData()
+          : null,
+      "Misc": null, // Standard Misc not implemented in UI
+    };
+  }
+
+  Map<String, dynamic>? _buildPremiumData() {
+    return {
+      "crownBridge": premiumType.value == "CROWN/BRIDGE"
+          ? _buildPremiumCrownBridgeData()
+          : null,
+      "dentures": premiumType.value == "DENTURES"
+          ? _buildPremiumDenturesData()
+          : null,
+      "implants": premiumType.value == "IMPLANTS"
+          ? {"attachments": _getFilePaths(selectedFiles)} // Placeholder
+          : null,
+      // ✅ UPDATED to call new JSON builder
+      "orthodontic": premiumType.value == "ORTHODONTIC"
+          ? _buildPremiumOrthodonticData()
+          : null,
+      // ✅ UPDATED to call new JSON builder
+      "misc": premiumType.value == "MISC"
+          ? _buildPremiumMiscData()
+          : null,
+    };
+  }
+
+  // ✅ UPDATED to use new Metal Free builder
+  Map<String, dynamic>? _buildStandardCrownBridgeData() {
+    return {
+      "pfm": crownType.value == "PFM (NP)" ? _buildPfmData() : null,
+      "fullCast": crownType.value == "FULL CAST" ? _buildFullCastData() : null,
+      "metalFree": crownType.value == "METAL"
+          ? _buildMetalFreeData()
+          : null,
+      "dentures": null,
+    };
+  }
+
+  // ✅ UPDATED to use new Metal Free builder
+  Map<String, dynamic>? _buildPremiumCrownBridgeData() {
+    if (crownType.value.isNotEmpty) {
+      return {
+        "pfm": crownType.value == "PFM (NP)" ? _buildPfmData() : null,
+        "fullCast": crownType.value == "FULL CAST" ? _buildFullCastData() : null,
+        "metalFree": crownType.value == "METAL"
+            ? _buildMetalFreeData()
+            : null,
+      };
+    }
+    return null;
+  }
+
+  // ✅ =================================================================
+  // ✅ NEW: Premium Orthodontic JSON Builder
+  // ✅ =================================================================
+  Map<String, dynamic>? _buildPremiumOrthodonticData() {
+    return {
+      "type": premiumOrthodonticType.value,
+      "fixedRetainer": premiumOrthodonticType.value == "Fixed Retainer" ? {
+        "description": orthoFixedRetainerController.text,
+        "attachments": _getFilePaths(orthoFixedRetainerAttachments),
+      } : null,
+      "essixRetainer": premiumOrthodonticType.value == "Essix Retainer" ? {
+        "description": orthoEssixRetainerController.text,
+        "attachments": _getFilePaths(orthoEssixRetainerAttachments),
+      } : null,
+    };
+  }
+
+  // ✅ =================================================================
+  // ✅ NEW: Premium Misc JSON Builder (Updated for Radio Buttons)
+  // ✅ =================================================================
+  Map<String, dynamic>? _buildPremiumMiscData() {
+    return {
+      "type": premiumMiscType.value,
+      "studyModule": premiumMiscType.value == "Study Module" ? {
+        "selection": miscStudyModuleSelection.value,
+        "teeth": miscStudyModuleTeeth.toList(),
+        "description": miscStudyModuleController.text,
+        "attachments": _getFilePaths(miscStudyModuleAttachments),
+      } : null,
+      "sportsGuard": premiumMiscType.value == "Sports Guard" ? {
+        // "selection" field removed
+        "description": miscSportsGuardController.text, // This is the "Color" field
+        "attachments": _getFilePaths(miscSportsGuardAttachments),
+      } : null,
+      "tw": premiumMiscType.value == "TW" ? {
+        "selection": miscTwSelection.value,
+        "description": miscTwController.text,
+        "attachments": _getFilePaths(miscTwAttachments),
+      } : null,
+      "nightGuard": premiumMiscType.value == "Night Guard" ? {
+        "selection": miscNightGuardSelection.value,
+        "description": miscNightGuardController.text,
+        "attachments": _getFilePaths(miscNightGuardAttachments),
+      } : null,
+      "vacuumFormedStent": premiumMiscType.value == "Vacuum Formed Stent" ? {
+        "description": miscVacuumStentController.text,
+        "attachments": _getFilePaths(miscVacuumStentAttachments),
+      } : null,
+      "reEtch": premiumMiscType.value == "Re-etch" ? {
+        "selection": miscReEtchSelection.value,
+        "description": miscReEtchController.text,
+        "attachments": _getFilePaths(miscReEtchAttachments),
+      } : null,
+    };
+  }
+
+  // ✅ NEW HELPER FUNCTION for complex "METAL" JSON
+  Map<String, dynamic>? _buildMetalFreeData() {
+    Map<String, dynamic>? emaxData;
+    if (ponticDesign.value == 'Emax') {
+      emaxData = {
+        "type": emaxType.value, // "Single unit crown" or "Veneer"
+        "singleUnitCrown": emaxType.value == 'Single unit crown'
+            ? {
+          "teeth": emaxTeeth.toList(),
+          "description": emaxInstructionsController.text,
+          "attachments": _getFilePaths(emaxAttachments)
+        }
+            : null,
+        "veneer": emaxType.value == 'Veneer'
+            ? {
+          "teeth": emaxVeneerTeeth.toList(),
+          "instructions": emaxVeneerInstructionsController.text,
+          "attachments": _getFilePaths(emaxVeneerAttachments)
+        }
+            : null,
+      };
+    }
+
+    Map<String, dynamic>? zirconiaData;
+    if (ponticDesign.value == 'Zirconia') {
+      zirconiaData = {
+        "type": zirconiaType.value, // "Single unit crown", "Veneer", etc.
+        "singleUnitCrown": zirconiaType.value == 'Single unit crown'
+            ? {
+          "teeth": zirconiaTeeth.toList(),
+          "instructions": zirconiaInstructionsController.text,
+          "attachments": _getFilePaths(zirconiaAttachments)
+        }
+            : null,
+        "veneer": zirconiaType.value == 'Veneer'
+            ? {
+          "teeth": zirconiaVeneerTeeth.toList(),
+          "instructions": zirconiaVeneerInstructionsController.text,
+          "attachments": _getFilePaths(zirconiaVeneerAttachments)
+        }
+            : null,
+        "marylandBridge": zirconiaType.value == 'Maryland bridge'
+            ? {
+          "teeth": zirconiaMarylandBridgeTeeth.toList(),
+          "instructions":
+          zirconiaMarylandBridgeInstructionsController.text,
+          "attachments": _getFilePaths(zirconiaMarylandBridgeAttachments)
+        }
+            : null,
+        "conventionalBridge": zirconiaType.value == 'Conventional Bridge'
+            ? {
+          "teeth": zirconiaConventionalBridgeTeeth.toList(),
+          "description": zirconiaConventionalBridgeDescController.text,
+          "attachments":
+          _getFilePaths(zirconiaConventionalBridgeAttachments)
+        }
+            : null,
+      };
+    }
+
+    Map<String, dynamic>? compositeOnlayData;
+    if (ponticDesign.value == 'Composite Onlay') {
+      compositeOnlayData = {
+        "teeth": compositeOnlayTeeth.toList(),
+        "instructions": compositeOnlayInstructionsController.text,
+        "attachments": _getFilePaths(compositeOnlayAttachments),
+      };
+    }
+
+    return {
+      "design": ponticDesign.value, // "Emax", "Zirconia", "Composite Onlay"
+      "emax": emaxData,
+      "zirconia": zirconiaData,
+      "compositeOnlay": compositeOnlayData,
+    };
+  }
+
+  Map<String, dynamic>? _buildPfmData() {
+    return {
+      "singleUnitCrown": showSingleUnitDropdown.value
+          ? {
+        "enabled": true,
+        "teeth": singleUnitTeeth.toList(),
+        "instructions": pfmSingleUnitInstructionsController.text,
+        "attachments": _getFilePaths(selectedFiles),
+      }
+          : null,
+      "marylandBridge": showMarylandBridgeDropdown.value
+          ? {
+        "enabled": true,
+        "ponticTeeth": marylandPonticTeeth.toList(),
+        "wingTeeth": marylandWingTeeth.toList(),
+        "instructions": pfmMarylandInstructionsController.text,
+        "attachments": _getFilePaths(selectedFiles),
+      }
+          : null,
+      "conventionalBridge": showConventionalBridgeDropdown.value
+          ? {
+        "enabled": true,
+        "teeth": conventionalBridgeTeeth.toList(),
+        "description": pfmConventionalBridgeDescController.text,
+        "attachments": _getFilePaths(selectedFiles),
+      }
+          : null,
+    };
+  }
+
+  Map<String, dynamic>? _buildFullCastData() {
+    return {
+      "singleUnitCrown": showFullCastSingleUnit.value
+          ? {
+        "enabled": true,
+        "teeth": fullCastSingleUnitTeeth.toList(),
+        "instructions": fcSingleUnitInstructionsController.text,
+        "attachments": _getFilePaths(selectedFiles),
+      }
+          : null,
+      "bridge": showFullCastBridge.value
+          ? {
+        "enabled": true,
+        "teeth": bridgeTeeth.toList(),
+        "description": fcBridgeDescController.text,
+        "attachments": _getFilePaths(selectedFiles),
+      }
+          : null,
+      "postAndCore": showPostAndCore.value
+          ? {
+        "enabled": true,
+        "teeth": postAndCoreTeeth.toList(),
+        "instructions": fcPostAndCoreInstructionsController.text,
+        "attachments": _getFilePaths(selectedFiles),
+      }
+          : null,
+    };
+  }
+
+  // ✅ =================================================================
+  // ✅ UPDATED: Standard Denture JSON Builder (THE FIX)
+  // ✅ =================================================================
+  Map<String, dynamic>? _buildStandardDenturesData() {
+
+    // 1. Determine which description controller is active
+    TextEditingController activeDescController = dentureTryInDescController; // Default
+    if (porcelainButtMargin.value == "Re-try In") {
+      activeDescController = dentureReTryInDescController;
+    } else if (porcelainButtMargin.value == "Finish") {
+      activeDescController = dentureFinishDescController;
+    }
+
+    // 2. Build the construction object
+    Map<String, dynamic>? constructionData = showDentureConstruction.value
+        ? {
+      "enabled": true,
+      "biteBlock": {
+        "upper": biteBlockUpper.value,
+        "lower": biteBlockLower.value
+      },
+      "specialTray": {
+        "upper": specialTrayUpper.value,
+        "lower": specialTrayLower.value
+      },
+      "meshReinforcement": meshReinforcement.value,
+
+      // ✅ THE FIX: Send booleans for stages, not objects
+      "tryIn": porcelainButtMargin.value == "Try In",
+      "reTryIn": porcelainButtMargin.value == "Re-try In",
+      "finish": porcelainButtMargin.value == "Finish",
+
+      // ✅ Send the data at the root of 'construction'
+      "teethSelection": dentureTeeth.toList(),
+      "description": activeDescController.text,
+      "attachments": _getFilePaths(dentureAttachments),
+
+      "selectedOptions": porcelainButtMargin.value.isNotEmpty
+          ? [porcelainButtMargin.value]
+          : [],
+    }
+        : null;
+
+    // 3. Build the 'other' object
+    Map<String, dynamic>? otherData = showDentureOther.value
+        ? {
+      "enabled": true,
+      "selectedOptions": dentureOtherSelections.toList(), // ["Reline", "Repair", ...]
+
+      // ✅ Add data from the UI widgets as seen in the screen
+      "teethSelection": dentureTeeth.toList(),
+      "description": dentureTryInDescController.text, // Re-using 'tryIn' controller as per UI
+      "attachments": _getFilePaths(dentureAttachments),
+    }
+        : null;
+
+    return {
+      "construction": constructionData,
+      "other": otherData,
+    };
+  }
+
+  // ✅ =================================================================
+  // ✅ UPDATED: Premium Denture JSON Builder (THE FIX)
+  // ✅ =================================================================
+  Map<String, dynamic>? _buildPremiumDenturesData() {
+
+    // 1. Determine which premium description controller is active
+    TextEditingController activeDescController = premiumDentureTryInMetalController;
+    RxList<String> activeTeethList = premiumDentureTryInMetalTeeth;
+    RxList<File> activeAttachmentList = premiumDentureTryInMetalAttachments;
+
+    if (premiumDentureConstructionType.value == "Re-try In") {
+      activeDescController = premiumDentureReTryInController;
+      activeTeethList = premiumDentureReTryInTeeth;
+      activeAttachmentList = premiumDentureReTryInAttachments;
+    } else if (premiumDentureConstructionType.value == "Finish Acrylic") {
+      activeDescController = premiumDentureFinishAcrylicController;
+      activeTeethList = premiumDentureFinishAcrylicTeeth;
+      activeAttachmentList = premiumDentureFinishAcrylicAttachments;
+    } else if (premiumDentureConstructionType.value == "Finish Flexi") {
+      activeDescController = premiumDentureFinishFlexiController;
+      activeTeethList = premiumDentureFinishFlexiTeeth;
+      activeAttachmentList = premiumDentureFinishFlexiAttachments;
+    }
+
+    // 2. Build the construction object
+    Map<String, dynamic>? constructionData = showDentureConstruction.value
+        ? {
+      "enabled": true,
+      "biteBlock": {
+        "upper": biteBlockUpper.value,
+        "lower": biteBlockLower.value
+      },
+      "specialTray": {
+        "upper": specialTrayUpper.value,
+        "lower": specialTrayLower.value
+      },
+      "meshReinforcement": meshReinforcement.value,
+
+      // ✅ THE FIX: Send the selected stage name
+      "selectedStage": premiumDentureConstructionType.value,
+
+      // ✅ Send the data for the *active* stage
+      "teeth": activeTeethList.toList(),
+      "description": activeDescController.text,
+      "attachments": _getFilePaths(activeAttachmentList),
+    }
+        : null;
+
+    // 3. Build the 'other' object
+    Map<String, dynamic>? otherData = showDentureOther.value
+        ? {
+      "enabled": true,
+      "selection": dentureOtherSelections.toList(), // ["Reline", "Repair", ...]
+
+      // ✅ Add data from the UI widgets (re-using 'TryIn' variables as per UI)
+      "teeth": premiumDentureTryInMetalTeeth.toList(),
+      "description": premiumDentureTryInMetalController.text,
+      "attachments": _getFilePaths(premiumDentureTryInMetalAttachments),
+    }
+        : null;
+
+    return {
+      "type": dentureType.value, // "Denture Construction" or "Denture Other"
+      "construction": constructionData,
+      "other": otherData,
+    };
   }
 
   @override
@@ -524,6 +1138,50 @@ class AddCaseController extends GetxController {
     patientIdController.dispose();
     ageController.dispose();
     scanNumberController.dispose();
+    descriptionController.dispose();
+
+    // Dispose Metal controllers
+    emaxInstructionsController.dispose();
+    zirconiaInstructionsController.dispose();
+    compositeOnlayInstructionsController.dispose();
+
+    // ✅ Dispose NEW Metal controllers
+    emaxVeneerInstructionsController.dispose();
+    zirconiaVeneerInstructionsController.dispose();
+    zirconiaMarylandBridgeInstructionsController.dispose();
+    zirconiaConventionalBridgeDescController.dispose();
+
+    // ✅ Dispose NEW Premium Denture controllers
+    premiumDentureTryInMetalController.dispose();
+    premiumDentureReTryInController.dispose();
+    premiumDentureFinishAcrylicController.dispose();
+    premiumDentureFinishFlexiController.dispose();
+
+    // ✅ Dispose NEW Premium Orthodontic controllers
+    orthoFixedRetainerController.dispose();
+    orthoEssixRetainerController.dispose();
+
+    // ✅ Dispose NEW Premium Misc controllers
+    miscStudyModuleController.dispose();
+    miscSportsGuardController.dispose();
+    miscTwController.dispose();
+    miscNightGuardController.dispose();
+    miscVacuumStentController.dispose();
+    miscReEtchController.dispose();
+
+
+    // Dispose nested instruction controllers
+    pfmSingleUnitInstructionsController.dispose();
+    pfmMarylandInstructionsController.dispose();
+    pfmConventionalBridgeDescController.dispose();
+    fcSingleUnitInstructionsController.dispose();
+    fcBridgeDescController.dispose();
+    fcPostAndCoreInstructionsController.dispose();
+    metalBridgeDescController.dispose();
+    dentureTryInDescController.dispose();
+    dentureReTryInDescController.dispose();
+    dentureFinishDescController.dispose();
+
     super.onClose();
   }
 }
