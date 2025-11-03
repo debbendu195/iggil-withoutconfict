@@ -7,6 +7,7 @@ import 'package:event_platform/view/components/custom_text/custom_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import '../../../../../../../components/custom_loader/custom_loader.dart';
 import '../controller/add_controller.dart';
 import '../widget/custom_dropdown.dart';
@@ -155,6 +156,7 @@ class AddCaseScreen extends StatelessWidget {
           _buildStandardCrownBridge(),
         if (controller.standardType.value == "DENTURES")
           _buildStandardDentures(),
+        // TODO: Add Standard MISC form if needed
       ],
     );
   }
@@ -173,7 +175,7 @@ class AddCaseScreen extends StatelessWidget {
         if (controller.crownType.value == "PFM (NP)") _buildPfmNpOptions(),
         if (controller.crownType.value == "FULL CAST") _buildFullCastOptions(),
         // ✅ This will now render the new, complex metal options
-        if (controller.crownType.value == "METAL") _buildMetalOptions(),
+        if (controller.crownType.value == "METAL") _buildStandardBuildMetalOptions(),
       ],
     );
   }
@@ -200,7 +202,9 @@ class AddCaseScreen extends StatelessWidget {
                 label: "Porcelain Butt Margin",
                 hint: "Select detail",
                 items: ["360", "Buccal Only"],
-                onChanged: (val) {},
+                onChanged: (val) {
+                  controller.pfmSingleUnitPorcelainButtMargin.value = val ?? '';
+                },
               ),
               SizedBox(height: 20.h),
               Align(
@@ -208,6 +212,15 @@ class AddCaseScreen extends StatelessWidget {
                   child: _TeethSelectionWidget(
                       selectedTeeth: controller.singleUnitTeeth)),
               SizedBox(height: 20.h),
+
+              // ✅ NEW: Single Shade Selector
+              SingleShadeSelector(
+                selectedShade: controller.shadeController,
+                title: "Select Shade",
+                hint: "Choose shade for selected teeth",
+              ),
+              SizedBox(height: 20.h),
+
               _InstructionCardWidget(
                 // ✅ FIXED
                 controller: controller.descriptionController,
@@ -238,24 +251,36 @@ class AddCaseScreen extends StatelessWidget {
                   "Point contact",
                   "Point in socket (ovate)"
                 ],
-                onChanged: (val) {},
+                onChanged: (val) {
+                  controller.marylandponticTeeth.value = val ?? '';
+                },
               ),
               SizedBox(height: 20.h),
               CustomDropdown(
                 label: "Select Wing Teeth",
                 hint: "Select teeth",
                 items: ["A1", "A2", "B1", "C1"],
-                onChanged: (val) {},
+                onChanged: (val) {
+                  controller.marylandwingTeeth.value = val ?? '';
+                },
               ),
               SizedBox(height: 20.h),
               Align(
                   alignment: Alignment.centerLeft,
-                  child: ShadeSelectionDropdown(
-                      selectedShades: controller.singleUnitTeeth)),
+                  child: _TeethSelectionWidget(
+                      selectedTeeth: controller.singleUnitTeeth)),
+              SizedBox(height: 20.h),
+
+              //select shade widget (global usage) just copy and paste where shade needed
+              SingleShadeSelector(
+                selectedShade: controller.shadeController,
+                title: "Select Shade",
+                hint: "Choose shade for selected teeth",
+              ),
               SizedBox(height: 20.h),
               _InstructionCardWidget(
                 // ✅ FIXED
-                controller: controller.pfmMarylandInstructionsController,
+                controller: controller.descriptionController,
                 title: "Special Instructions",
                 hintText: "Describe Your Instructions",
               ),
@@ -283,7 +308,9 @@ class AddCaseScreen extends StatelessWidget {
                   "Point contact",
                   "Point in socket (ovate)"
                 ],
-                onChanged: (val) {},
+                onChanged: (val) {
+                  controller.ponticDesign.value = val??"";
+                },
               ),
               SizedBox(height: 20.h),
               Align(
@@ -292,12 +319,19 @@ class AddCaseScreen extends StatelessWidget {
                     selectedTeeth: controller.conventionalBridgeTeeth),
               ),
               SizedBox(height: 20.h),
-              // _InstructionCardWidget(
-              //  // ✅ FIXED
-              //  controller: controller.pfmConventionalBridgeDescController,
-              //  title: "Description",
-              //  hintText: "Describe your case",
-              // ),
+              //select shade widget (global usage) just copy and paste where shade needed
+              SingleShadeSelector(
+                selectedShade: controller.shadeController,
+                title: "Select Shade",
+                hint: "Choose shade for selected teeth",
+              ),
+              SizedBox(height: 20.h),
+              _InstructionCardWidget(
+                // ✅ FIXED
+                controller: controller.descriptionController,
+                title: "Description",
+                hintText: "Describe your case",
+              ),
               _FileUploadWidget(
                 selectedFiles: controller.selectedFiles,
                 onTap: controller.pickFiles,
@@ -320,7 +354,7 @@ class AddCaseScreen extends StatelessWidget {
         CustomDropdown(
           label: "Full Cast Type",
           hint: "Select option",
-          items: ["Single unit crown", "Bridge"],
+          items: ["Single unit crown", "Bridge", "Post & Core"],
           onChanged: (val) => controller.onFullCastChange(val),
         ),
         SizedBox(height: 20.h),
@@ -344,7 +378,7 @@ class AddCaseScreen extends StatelessWidget {
               SizedBox(height: 20.h),
               _InstructionCardWidget(
                 // ✅ FIXED
-                controller: controller.fcSingleUnitInstructionsController,
+                controller: controller.descriptionController,
                 title: "Special Instructions",
                 hintText: "Describe Your Instructions",
               ),
@@ -372,7 +406,9 @@ class AddCaseScreen extends StatelessWidget {
                   "Point contact",
                   "Point in socket (ovate)"
                 ],
-                onChanged: (val) {},
+                onChanged: (val) {
+                  controller.ponticDesign.value = val??"";
+                },
               ),
               SizedBox(
                 height: 20.h,
@@ -386,7 +422,7 @@ class AddCaseScreen extends StatelessWidget {
               ),
               _InstructionCardWidget(
                 // ✅ FIXED
-                controller: controller.fcBridgeDescController,
+                controller: controller.descriptionController,
                 title: "Description",
                 hintText: "Describe your case",
               ),
@@ -417,7 +453,7 @@ class AddCaseScreen extends StatelessWidget {
               SizedBox(height: 20.h),
               _InstructionCardWidget(
                 // ✅ FIXED
-                controller: controller.fcPostAndCoreInstructionsController,
+                controller: controller.descriptionController,
                 title: "Instructions",
                 hintText: "Describe your Post & Core",
               ),
@@ -436,6 +472,114 @@ class AddCaseScreen extends StatelessWidget {
     );
   }
 
+  /// ========================================================================
+  /// ✅ STANDARD BUILD METAL OPTIONS (Horizontal Radio Buttons)
+  /// ========================================================================
+  Widget _buildStandardBuildMetalOptions() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        // ✅ Step 1: Horizontal Radio Buttons
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            CustomText(
+              text: "Metal Options",
+              fontSize: 16.w,
+              fontWeight: FontWeight.w500,
+              bottom: 8.h,
+            ),
+            Obx(() => Row(
+              children: [
+                // Radio 1: Composite Inlay
+                Row(
+                  children: [
+                    Radio<String>(
+                      value: "Composite Inlay",
+                      groupValue: controller.standardBuildMetalType.value,
+                      onChanged: (val) {
+                        if (val != null) {
+                          controller.standardBuildMetalType.value = val;
+                        }
+                      },
+                      activeColor: AppColors.primary,
+                    ),
+                    CustomText(
+                      text: "Composite Inlay",
+                      fontSize: 14.w,
+                      fontWeight: FontWeight.w400,
+                    ),
+                  ],
+                ),
+                SizedBox(width: 20.w), // Space between radio buttons
+
+                // Radio 2: Composite Onlay
+                Row(
+                  children: [
+                    Radio<String>(
+                      value: "Composite Onlay",
+                      groupValue: controller.standardBuildMetalType.value,
+                      onChanged: (val) {
+                        if (val != null) {
+                          controller.standardBuildMetalType.value = val;
+                        }
+                      },
+                      activeColor: AppColors.primary,
+                    ),
+                    CustomText(
+                      text: "Composite Onlay",
+                      fontSize: 14.w,
+                      fontWeight: FontWeight.w400,
+                    ),
+                  ],
+                ),
+              ],
+            )),
+          ],
+        ),
+        SizedBox(height: 20.h),
+
+        // ✅ Step 2: Show form if type is selected
+        Obx(() {
+          if (controller.standardBuildMetalType.value.isNotEmpty) {
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                // 1. Select Teeth
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: _TeethSelectionWidget(
+                    selectedTeeth: controller.singleUnitTeeth,
+                    title: "Select Teeth",
+                  ),
+                ),
+                SizedBox(height: 20.h),
+
+                // 2. Description
+                _InstructionCardWidget(
+                  controller: controller.descriptionController,
+                  title: "Description",
+                  hintText: "Describe your case",
+                ),
+                SizedBox(height: 15.h),
+
+                // 3. Attachments
+                _FileUploadWidget(
+                  selectedFiles: controller.selectedFiles,
+                  onTap: controller.pickFiles,
+                  onFileDeleted: (file) =>
+                      controller.removeFile(file, controller.selectedFiles),
+                  uploadTitle: "Upload Attachments",
+                  uploadHint: "Upload images or PDFs",
+                ),
+              ],
+            );
+          }
+          return const SizedBox.shrink();
+        }),
+      ],
+    );
+  }
   // ✅ =================================
   // ✅ UPDATED METAL OPTIONS WIDGET
   // ✅ This now contains the full logic for Emax, Zirconia, and Composite Onlay
@@ -514,8 +658,8 @@ class AddCaseScreen extends StatelessWidget {
                       ),
                       SizedBox(height: 15.h),
                       _InstructionCardWidget(
-                        controller: controller
-                            .emaxVeneerInstructionsController, // NEW
+                        controller:
+                        controller.emaxVeneerInstructionsController, // NEW
                         title: "Instructions",
                         hintText: "Describe your Veneer case",
                       ),
@@ -699,17 +843,18 @@ class AddCaseScreen extends StatelessWidget {
               // 2. Select Teeth (using standard dentureTeeth list)
               Align(
                   alignment: Alignment.centerLeft,
-                  child:
-                  _TeethSelectionWidget(selectedTeeth: controller.dentureTeeth)),
+                  child: _TeethSelectionWidget(
+                      selectedTeeth: controller.dentureTeeth)),
               SizedBox(height: 15.h),
 
               // 3. Select Shade (using singleUnitTeeth as per pattern)
-              ShadeSelectionDropdown(selectedShades: controller.singleUnitTeeth),
+              ShadeSelectionDropdown(
+                  selectedShades: controller.singleUnitTeeth),
               SizedBox(height: 15.h),
 
               // 4. Description (reusing one of the denture controllers)
               _InstructionCardWidget(
-                controller: controller.dentureTryInDescController,
+                controller: controller.descriptionController,
                 title: "Description",
                 hintText: "Describe your case (Reline, Repair, etc.)",
               ),
@@ -744,16 +889,16 @@ class AddCaseScreen extends StatelessWidget {
           upperValue: controller.specialTrayUpper,
           lowerValue: controller.specialTrayLower,
         ),
-        Text(
-          "Clasps(selected number)",
-          style: TextStyle(fontSize: 16.h, fontWeight: FontWeight.w600),
-        ),
-        SizedBox(height: 20.h),
-        Text(
-          "Mesh Reinforcement",
-          style: TextStyle(fontSize: 16.h, fontWeight: FontWeight.w600),
-        ),
-        SizedBox(height: 20.h),
+        // Text(
+        //   "Clasps(selected number)",
+        //   style: TextStyle(fontSize: 16.h, fontWeight: FontWeight.w600),
+        // ),
+        // SizedBox(height: 20.h),
+        // Text(
+        //   "Mesh Reinforcement",
+        //   style: TextStyle(fontSize: 16.h, fontWeight: FontWeight.w600),
+        // ),
+        // SizedBox(height: 20.h),
         // _TeethSelectionWidget(
         //   selectedTeeth: controller.singleUnitTeeth), // Reusing
         // SizedBox(height: 15.h),
@@ -787,7 +932,7 @@ class AddCaseScreen extends StatelessWidget {
             descriptionTitle: "Description",
             descriptionHint: "Describe your Try In",
             // ✅ FIXED
-            descController: controller.dentureTryInDescController,
+            descController: controller.descriptionController,
             uploadTitle: "Upload Try In Attachments",
             fileList: controller.dentureAttachments,
             onUploadTap: controller.pickFiles,
@@ -801,7 +946,7 @@ class AddCaseScreen extends StatelessWidget {
             descriptionTitle: "Description",
             descriptionHint: "Describe your Re-Try In",
             // ✅ FIXED
-            descController: controller.dentureReTryInDescController,
+            descController: controller.descriptionController,
             uploadTitle: "Upload Re-Try In Attachments",
             fileList: controller.dentureAttachments,
             onUploadTap: controller.pickFiles,
@@ -918,7 +1063,7 @@ class AddCaseScreen extends StatelessWidget {
             alignment: Alignment.centerLeft,
             child: _TeethSelectionWidget(selectedTeeth: teethList)),
         SizedBox(height: 15.h),
-        ShadeSelectionDropdown(selectedShades: controller.singleUnitTeeth),
+        SingleShadeSelector(selectedShade: controller.shadeController),
         _InstructionCardWidget(
           controller: descController, // ✅ FIXED
           title: descriptionTitle,
@@ -1078,20 +1223,330 @@ class AddCaseScreen extends StatelessWidget {
         CustomDropdown(
           label: "Premium Type",
           hint: "Select Type",
-          items: ["CROWN/BRIDGE", "DENTURES", "IMPLANTS", "ORTHODONTIC"],
+          items: [
+            "CROWN/BRIDGE",
+            "DENTURES",
+            "IMPLANTS",
+            "ORTHODONTIC",
+            "MISC"
+          ],
           onChanged: (val) => controller.onPremiumTypeChange(val ?? ''),
         ),
         SizedBox(height: 20.h),
         if (controller.premiumType.value == "CROWN/BRIDGE")
           _buildPremiumCrownBridge(),
 
-        // ✅ ==========================================================
-        // ✅ CHANGED: Now calls the new _buildPremiumDentures widget
-        // ✅ ==========================================================
-        if (controller.premiumType.value == "DENTURES")
-          _buildPremiumDentures(),
+        if (controller.premiumType.value == "DENTURES") _buildPremiumDentures(),
 
-        // TODO: Add IMPLANTS, ORTHODONTIC forms
+        // ✅ ==========================================================
+        // ✅ NEW: Added ORTHODONTIC flow
+        // ✅ ==========================================================
+        if (controller.premiumType.value == "ORTHODONTIC")
+          _buildPremiumOrthodontic(),
+
+        // ✅ ==========================================================
+        // ✅ NEW: Added MISC flow
+        // ✅ ==========================================================
+        if (controller.premiumType.value == "MISC") _buildPremiumMisc(),
+
+        // TODO: Add IMPLANTS form
+      ],
+    );
+  }
+
+  // ✅ ==========================================================
+  // ✅ NEW WIDGET: _buildPremiumOrthodontic
+  // ✅ ==========================================================
+  Widget _buildPremiumOrthodontic() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        CustomDropdown(
+          label: "Orthodontic Type",
+          hint: "Select option",
+          items: ["Fixed Retainer", "Essix Retainer"],
+          onChanged: (val) =>
+          controller.premiumOrthodonticType.value = val ?? '',
+        ),
+        SizedBox(height: 20.h),
+
+        // --- 1. Fixed Retainer ---
+        Obx(() {
+          if (controller.premiumOrthodonticType.value == "Fixed Retainer") {
+            return Column(
+              children: [
+                _InstructionCardWidget(
+                  controller: controller.orthoFixedRetainerController,
+                  title: "Description",
+                  hintText: "Describe your Fixed Retainer case",
+                ),
+                SizedBox(height: 15.h),
+                _FileUploadWidget(
+                  selectedFiles: controller.orthoFixedRetainerAttachments,
+                  onTap: controller.pickFiles,
+                  onFileDeleted: (file) => controller.removeFile(
+                      file, controller.orthoFixedRetainerAttachments),
+                  uploadTitle: "Upload Attachments",
+                  uploadHint: "Upload images or PDFs",
+                ),
+              ],
+            );
+          }
+          return const SizedBox.shrink();
+        }),
+
+        // --- 2. Essix Retainer ---
+        Obx(() {
+          if (controller.premiumOrthodonticType.value == "Essix Retainer") {
+            return Column(
+              children: [
+                _InstructionCardWidget(
+                  controller: controller.orthoEssixRetainerController,
+                  title: "Description",
+                  hintText: "Describe your Essix Retainer case",
+                ),
+                SizedBox(height: 15.h),
+                _FileUploadWidget(
+                  selectedFiles: controller.orthoEssixRetainerAttachments,
+                  onTap: controller.pickFiles,
+                  onFileDeleted: (file) => controller.removeFile(
+                      file, controller.orthoEssixRetainerAttachments),
+                  uploadTitle: "Upload Attachments",
+                  uploadHint: "Upload images or PDFs",
+                ),
+              ],
+            );
+          }
+          return const SizedBox.shrink();
+        }),
+      ],
+    );
+  }
+
+  // ✅ ==========================================================
+  // ✅ NEW WIDGET: _buildPremiumMisc (Updated)
+  // ✅ ==========================================================
+  Widget _buildPremiumMisc() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        CustomDropdown(
+          label: "Misc Type",
+          hint: "Select option",
+          items: [
+            // ✅ UPDATED LIST
+            "Study Module",
+            "Sports Guard",
+            "TW",
+            "Night Guard",
+            "Vacuum Formed Stent", // ✅ NEW
+            "Re-etch"
+          ],
+          onChanged: (val) {
+            controller.premiumMiscType.value = val ?? '';
+            // ✅ Reset all single-choice values when dropdown changes
+            controller.miscStudyModuleSelection.value = '';
+            controller.miscTwSelection.value = '';
+            controller.miscNightGuardSelection.value = '';
+            controller.miscReEtchSelection.value = '';
+          },
+        ),
+        SizedBox(height: 20.h),
+
+        // --- 1. Study Module ---
+        Obx(() {
+          if (controller.premiumMiscType.value == "Study Module") {
+            return Column(
+              children: [
+                _buildSingleSelectRadioList(
+                  // ✅ CHANGED to Radio
+                  title: "Study Module Options",
+                  options: ["Diagnostic Wax", "Select Teeth"],
+                  groupValue: controller.miscStudyModuleSelection,
+                ),
+                // ✅ Conditionally show TeethSelectionWidget
+                Obx(() {
+                  if (controller.miscStudyModuleSelection.value ==
+                      "Select Teeth") {
+                    return Column(
+                      children: [
+                        SizedBox(height: 15.h),
+                        _TeethSelectionWidget(
+                          selectedTeeth: controller.miscStudyModuleTeeth,
+                        ),
+                      ],
+                    );
+                  }
+                  return const SizedBox.shrink();
+                }),
+                SizedBox(height: 15.h),
+                _InstructionCardWidget(
+                  controller: controller.miscStudyModuleController,
+                  title: "Description",
+                  hintText: "Describe your Study Module case",
+                ),
+                SizedBox(height: 15.h),
+                _FileUploadWidget(
+                  selectedFiles: controller.miscStudyModuleAttachments,
+                  onTap: controller.pickFiles,
+                  onFileDeleted: (file) => controller.removeFile(
+                      file, controller.miscStudyModuleAttachments),
+                  uploadTitle: "Upload Attachments",
+                  uploadHint: "Upload images or PDFs",
+                ),
+              ],
+            );
+          }
+          return const SizedBox.shrink();
+        }),
+
+        // --- 2. Sports Guard ---
+        Obx(() {
+          if (controller.premiumMiscType.value == "Sports Guard") {
+            return Column(
+              children: [
+                // ✅ No radio buttons per user request "sports guard => color"
+                _InstructionCardWidget(
+                  controller: controller.miscSportsGuardController,
+                  title: "Color", // ✅ Changed title
+                  hintText: "Specify desired color(s)", // ✅ Changed hint
+                ),
+                SizedBox(height: 15.h),
+                _FileUploadWidget(
+                  selectedFiles: controller.miscSportsGuardAttachments,
+                  onTap: controller.pickFiles,
+                  onFileDeleted: (file) => controller.removeFile(
+                      file, controller.miscSportsGuardAttachments),
+                  uploadTitle: "Upload Attachments",
+                  uploadHint: "Upload images or PDFs",
+                ),
+              ],
+            );
+          }
+          return const SizedBox.shrink();
+        }),
+
+        // --- 3. TW (Tray Whitening) ---
+        Obx(() {
+          if (controller.premiumMiscType.value == "TW") {
+            return Column(
+              children: [
+                _buildSingleSelectRadioList(
+                  // ✅ CHANGED to Radio
+                  title: "TW Options",
+                  options: ["With Reservoirs", "Without Reservoirs"],
+                  groupValue: controller.miscTwSelection,
+                ),
+                SizedBox(height: 15.h),
+                _InstructionCardWidget(
+                  controller: controller.miscTwController,
+                  title: "Description",
+                  hintText: "Describe your TW case",
+                ),
+                SizedBox(height: 15.h),
+                _FileUploadWidget(
+                  selectedFiles: controller.miscTwAttachments,
+                  onTap: controller.pickFiles,
+                  onFileDeleted: (file) =>
+                      controller.removeFile(file, controller.miscTwAttachments),
+                  uploadTitle: "Upload Attachments",
+                  uploadHint: "Upload images or PDFs",
+                ),
+              ],
+            );
+          }
+          return const SizedBox.shrink();
+        }),
+
+        // --- 4. Night Guard ---
+        Obx(() {
+          if (controller.premiumMiscType.value == "Night Guard") {
+            return Column(
+              children: [
+                _buildSingleSelectRadioList(
+                  // ✅ CHANGED to Radio
+                  title: "Night Guard Options",
+                  options: ["Soft", "Hard Acrylic"],
+                  groupValue: controller.miscNightGuardSelection,
+                ),
+                SizedBox(height: 15.h),
+                _InstructionCardWidget(
+                  controller: controller.miscNightGuardController,
+                  title: "Description",
+                  hintText: "Describe your Night Guard case",
+                ),
+                SizedBox(height: 15.h),
+                _FileUploadWidget(
+                  selectedFiles: controller.miscNightGuardAttachments,
+                  onTap: controller.pickFiles,
+                  onFileDeleted: (file) => controller.removeFile(
+                      file, controller.miscNightGuardAttachments),
+                  uploadTitle: "Upload Attachments",
+                  uploadHint: "Upload images or PDFs",
+                ),
+              ],
+            );
+          }
+          return const SizedBox.shrink();
+        }),
+
+        // --- 5. Vacuum Formed Stent --- (NEW)
+        Obx(() {
+          if (controller.premiumMiscType.value == "Vacuum Formed Stent") {
+            return Column(
+              children: [
+                // ✅ No radio buttons for this one
+                _InstructionCardWidget(
+                  controller: controller.miscVacuumStentController,
+                  title: "Description",
+                  hintText: "Describe your Vacuum Formed Stent case",
+                ),
+                SizedBox(height: 15.h),
+                _FileUploadWidget(
+                  selectedFiles: controller.miscVacuumStentAttachments,
+                  onTap: controller.pickFiles,
+                  onFileDeleted: (file) => controller.removeFile(
+                      file, controller.miscVacuumStentAttachments),
+                  uploadTitle: "Upload Attachments",
+                  uploadHint: "Upload images or PDFs",
+                ),
+              ],
+            );
+          }
+          return const SizedBox.shrink();
+        }),
+
+        // --- 6. Re-etch ---
+        Obx(() {
+          if (controller.premiumMiscType.value == "Re-etch") {
+            return Column(
+              children: [
+                _buildSingleSelectRadioList(
+                  // ✅ CHANGED to Radio
+                  title: "Re-etch Options",
+                  options: ["Crown", "Bridge"],
+                  groupValue: controller.miscReEtchSelection,
+                ),
+                SizedBox(height: 15.h),
+                _InstructionCardWidget(
+                  controller: controller.miscReEtchController,
+                  title: "Description",
+                  hintText: "Describe your Re-etch case",
+                ),
+                SizedBox(height: 15.h),
+                _FileUploadWidget(
+                  selectedFiles: controller.miscReEtchAttachments,
+                  onTap: controller.pickFiles,
+                  onFileDeleted: (file) => controller.removeFile(
+                      file, controller.miscReEtchAttachments),
+                  uploadTitle: "Upload Attachments",
+                  uploadHint: "Upload images or PDFs",
+                ),
+              ],
+            );
+          }
+          return const SizedBox.shrink();
+        }),
       ],
     );
   }
@@ -1140,7 +1595,8 @@ class AddCaseScreen extends StatelessWidget {
               SizedBox(height: 15.h),
 
               // 3. Select Shade (using singleUnitTeeth as per pattern)
-              ShadeSelectionDropdown(selectedShades: controller.singleUnitTeeth),
+              ShadeSelectionDropdown(
+                  selectedShades: controller.singleUnitTeeth),
               SizedBox(height: 15.h),
 
               // 4. Description (reusing one of the premium denture controllers)
@@ -1375,8 +1831,6 @@ class AddCaseScreen extends StatelessWidget {
 
   // ✅ =================================
   // ✅ NOTUN HELPER WIDGETS (ZIRCONIA)
-  // ✅ Ei widget-gulo copy kora hoyeche _buildPfmNpOptions theke
-  // ✅ ebong Zirconia-r jonno notun controller variable use korar jonno modify kora hoyeche.
   // ✅ =================================
   Widget _buildReusableMarylandBridgeForm() {
     return Column(
@@ -1409,18 +1863,17 @@ class AddCaseScreen extends StatelessWidget {
             alignment: Alignment.centerLeft,
             // Using ShadeSelectionDropdown as per your PFM Maryland Bridge code
             child: ShadeSelectionDropdown(
-                selectedShades:
-                controller.zirconiaMarylandBridgeTeeth) // NEW
+                selectedShades: controller.zirconiaMarylandBridgeTeeth) // NEW
         ),
         SizedBox(height: 20.h),
         _InstructionCardWidget(
           controller:
-          controller.zirconiaMarylandBridgeInstructionsController,
+          controller.zirconiaMarylandBridgeInstructionsController, // NEW
           title: "Special Instructions",
           hintText: "Describe Your Instructions",
         ),
         _FileUploadWidget(
-          selectedFiles: controller.zirconiaMarylandBridgeAttachments,
+          selectedFiles: controller.zirconiaMarylandBridgeAttachments, // NEW
           onTap: controller.pickFiles,
           onFileDeleted: (file) => controller.removeFile(
               file, controller.zirconiaMarylandBridgeAttachments),
@@ -1476,7 +1929,7 @@ class AddCaseScreen extends StatelessWidget {
       ],
     );
   }
-}
+} // ✅ End of AddCaseScreen class
 
 ///Shades selection widget
 /// ✅ Professional Shade Selector Dropdown Widget
@@ -1659,11 +2112,11 @@ class ShadeSelectionDropdown extends StatelessWidget {
 class _TeethSelectionWidget extends StatelessWidget {
   final RxList<String> selectedTeeth;
   final List<String> availableShades;
-  final String title;
+  final String title; // ✅ New: Title parameter
   const _TeethSelectionWidget(
       {required this.selectedTeeth,
         this.availableShades = const ["A1", "A2", "A3", "B1", "C1"],
-        this.title = 'Select Teeth'
+        this.title = 'Select Teeth' // ✅ Default title
       });
   @override
   Widget build(BuildContext context) {
@@ -1716,7 +2169,7 @@ class _InstructionCardWidget extends StatelessWidget {
       title: title,
       hintText: hintText,
       maxLine: maxLine,
-      controller: controller,
+      controller: controller, // ✅ Ekhon controller pass hocche
     );
   }
 }
@@ -1724,13 +2177,13 @@ class _InstructionCardWidget extends StatelessWidget {
 class _FileUploadWidget extends StatelessWidget {
   final RxList<File> selectedFiles;
   final VoidCallback onTap;
-  final Function(File) onFileDeleted;
+  final Function(File) onFileDeleted; // ✅ FIXED
   final String uploadTitle;
   final String uploadHint;
   const _FileUploadWidget({
     required this.selectedFiles,
     required this.onTap,
-    required this.onFileDeleted,
+    required this.onFileDeleted, // ✅ FIXED
     required this.uploadTitle,
     required this.uploadHint,
   });
@@ -1776,7 +2229,7 @@ class _FileUploadWidget extends StatelessWidget {
                       color: AppColors.primary,
                     ),
                     onDeleted: () {
-                      onFileDeleted(file);
+                      onFileDeleted(file); // ✅ FIXED
                     },
                   );
                 }).toList(),
@@ -1797,6 +2250,168 @@ class _FileUploadWidget extends StatelessWidget {
                   SizedBox(height: 40.h),
                 ],
               ),
+            ),
+          );
+        }),
+      ],
+    );
+  }
+}
+
+// ✅ ==========================================================
+// ✅ NEW REUSABLE WIDGET: _buildSingleSelectRadioList
+// ✅ ==========================================================
+Widget _buildSingleSelectRadioList({
+  required String title,
+  required List<String> options,
+  required RxString groupValue, // Use RxString for single selection
+}) {
+  return Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      CustomText(
+        text: title,
+        fontSize: 16.w,
+        fontWeight: FontWeight.w500,
+        bottom: 8.h,
+      ),
+      Obx(() => Column(
+        children: options.map((option) {
+          return RadioListTile<String>(
+            title: Text(option),
+            value: option,
+            groupValue: groupValue.value,
+            onChanged: (val) {
+              if (val != null) {
+                groupValue.value = val;
+              }
+            },
+            activeColor: AppColors.primary,
+            contentPadding: EdgeInsets.zero,
+            dense: true,
+          );
+        }).toList(),
+      )),
+      SizedBox(height: 15.h),
+    ],
+  );
+}
+
+/// ✅ SINGLE SHADE SELECTOR DROPDOWN
+/// Reusable widget for selecting ONE shade
+class SingleShadeSelector extends StatelessWidget {
+  final RxString selectedShade;
+  final String title;
+  final String hint;
+
+  // ✅ Complete shade list (A1-A4, B1-B4, C1-C4, D1-D4)
+  static const List<String> allShades = [
+    "A1",
+    "A2",
+    "A3",
+    "A4",
+    "B1",
+    "B2",
+    "B3",
+    "B4",
+    "C1",
+    "C2",
+    "C3",
+    "C4",
+    "D1",
+    "D2",
+    "D3",
+    "D4",
+  ];
+
+  const SingleShadeSelector({
+    Key? key,
+    required this.selectedShade,
+    this.title = "Select Shade",
+    this.hint = "Choose shade",
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        CustomText(
+          text: title,
+          fontSize: 16.w,
+          fontWeight: FontWeight.w600,
+          bottom: 8.h,
+        ),
+        Obx(() => Container(
+          width: double.infinity,
+          padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 4.h),
+          decoration: BoxDecoration(
+            border: Border.all(color: AppColors.grey1),
+            borderRadius: BorderRadius.circular(8.r),
+            color: Colors.white,
+          ),
+          child: DropdownButtonHideUnderline(
+            child: DropdownButton<String>(
+              isExpanded: true,
+              hint: Text(
+                hint,
+                style: TextStyle(
+                  fontSize: 14.sp,
+                  color: AppColors.grey1,
+                ),
+              ),
+              value:
+              selectedShade.value.isEmpty ? null : selectedShade.value,
+              icon: Icon(Icons.arrow_drop_down, color: AppColors.primary),
+              items: allShades.map((shade) {
+                return DropdownMenuItem<String>(
+                  value: shade,
+                  child: Text(
+                    shade,
+                    style: TextStyle(
+                      fontSize: 14.sp,
+                      fontWeight: FontWeight.w500,
+                      color: AppColors.black,
+                    ),
+                  ),
+                );
+              }).toList(),
+              onChanged: (val) {
+                if (val != null) {
+                  selectedShade.value = val;
+                }
+              },
+            ),
+          ),
+        )),
+
+        // ✅ Selected Shade Display (Optional but nice UX)
+        SizedBox(height: 8.h),
+        Obx(() {
+          if (selectedShade.value.isEmpty) {
+            return const SizedBox.shrink();
+          }
+          return Container(
+            padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 8.h),
+            decoration: BoxDecoration(
+              color: AppColors.primary.withOpacity(0.1),
+              borderRadius: BorderRadius.circular(6.r),
+              border: Border.all(color: AppColors.primary, width: 1),
+            ),
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Icon(Icons.check_circle, color: AppColors.primary, size: 16.sp),
+                SizedBox(width: 6.w),
+                Text(
+                  "Selected: ${selectedShade.value}",
+                  style: TextStyle(
+                    fontSize: 13.sp,
+                    fontWeight: FontWeight.w600,
+                    color: AppColors.primary,
+                  ),
+                ),
+              ],
             ),
           );
         }),

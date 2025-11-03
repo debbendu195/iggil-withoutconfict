@@ -6,6 +6,7 @@ import 'package:file_picker/file_picker.dart';
 // TODO: Apnar real project-er path import korun
 import '../../../../../../../../service/api_client.dart';
 import '../../../../../../../../service/api_url.dart';
+import '../../../../../../../../utils/ToastMsg/toast_message.dart';
 
 class AddCaseController extends GetxController {
   /// ========= Text Controllers =========
@@ -17,6 +18,7 @@ class AddCaseController extends GetxController {
   final descriptionController = TextEditingController();
 
   // (Nested) Instruction Controllers
+
   final pfmSingleUnitInstructionsController = TextEditingController();
   final pfmMarylandInstructionsController = TextEditingController();
   final pfmConventionalBridgeDescController = TextEditingController();
@@ -27,6 +29,9 @@ class AddCaseController extends GetxController {
   final dentureTryInDescController = TextEditingController();
   final dentureReTryInDescController = TextEditingController();
   final dentureFinishDescController = TextEditingController();
+
+  /// ========= Standard Build Metal Variables =========
+  var standardBuildMetalType = ''.obs; // "Composite Inlay" or "Composite Onlay"
 
   // ✅ =================================
   // ✅ NOTUN VARIABLES (Premium Denture)
@@ -66,8 +71,8 @@ class AddCaseController extends GetxController {
   var premiumMiscType = ''.obs; // "Study Module", "Sports Guard", etc.
 
   // Misc - Study Module
-  var miscStudyModuleSelection = ''.obs;
-  var miscStudyModuleTeeth = <String>[].obs;
+  var miscStudyModuleSelection = ''.obs; // ✅ CHANGED: Radio button selection
+  var miscStudyModuleTeeth = <String>[].obs; // ✅ NEW: For "Select Teeth"
   final miscStudyModuleController = TextEditingController();
   var miscStudyModuleAttachments = <File>[].obs;
 
@@ -77,12 +82,12 @@ class AddCaseController extends GetxController {
   var miscSportsGuardAttachments = <File>[].obs;
 
   // Misc - TW
-  var miscTwSelection = ''.obs;
+  var miscTwSelection = ''.obs; // ✅ CHANGED: Radio button selection
   final miscTwController = TextEditingController();
   var miscTwAttachments = <File>[].obs;
 
   // Misc - Night Guard
-  var miscNightGuardSelection = ''.obs;
+  var miscNightGuardSelection = ''.obs; // ✅ CHANGED: Radio button selection
   final miscNightGuardController = TextEditingController();
   var miscNightGuardAttachments = <File>[].obs;
 
@@ -91,12 +96,14 @@ class AddCaseController extends GetxController {
   var miscVacuumStentAttachments = <File>[].obs;
 
   // Misc - Re-etch
-  var miscReEtchSelection = ''.obs;
+  var miscReEtchSelection = ''.obs; // ✅ CHANGED: Radio button selection
   final miscReEtchController = TextEditingController();
   var miscReEtchAttachments = <File>[].obs;
 
   /// ========= Metal/Pontic Design Variables =========
   var ponticDesign = ''.obs; // "Emax", "Zirconia", or "Composite Onlay"
+  var marylandponticTeeth = ''.obs;
+  var marylandwingTeeth = ''.obs;
 
   // Emax (Original - now used for Single Unit)
   var emaxTeeth = <String>[].obs;
@@ -116,6 +123,9 @@ class AddCaseController extends GetxController {
   // ✅ =================================
   // ✅ NOTUN VARIABLES (Metal)
   // ✅ =================================
+
+  // ========= Shade Variables (Single Selection) =========
+  var shadeController = ''.obs;
 
   // --- New Sub-Type Trackers ---
   var emaxType = ''.obs; // Stores "Single unit crown" or "Veneer"
@@ -153,6 +163,8 @@ class AddCaseController extends GetxController {
   var pfmOption = ''.obs;
   var fullCastOption = ''.obs;
   var dentureType = ''.obs;
+  // ✅ NEW VARIABLE for Porcelain Butt Margin
+  var pfmSingleUnitPorcelainButtMargin = ''.obs;
   var porcelainButtMargin = ''.obs; // Denture stage selection
 
   /// ========= Premium Observables =========
@@ -336,6 +348,7 @@ class AddCaseController extends GetxController {
     showFullCastBridge.value = false;
     showPostAndCore.value = false;
     showMetalBridge.value = false;
+    shadeController.value = '';
 
     // ✅ Clear Metal/Pontic data as well
     ponticDesign.value = '';
@@ -415,7 +428,7 @@ class AddCaseController extends GetxController {
     fullCastOption.value = val ?? '';
     showFullCastSingleUnit.value = val == "Single unit crown";
     showFullCastBridge.value = val == "Bridge";
-    showPostAndCore.value = val == "Post and Core";
+    showPostAndCore.value = val == "Post & Core";
   }
 
   void onDentureTypeChange(String? val) {
@@ -679,7 +692,7 @@ class AddCaseController extends GetxController {
       allFiles.addAll(miscSportsGuardAttachments);
       allFiles.addAll(miscTwAttachments);
       allFiles.addAll(miscNightGuardAttachments);
-      allFiles.addAll(miscVacuumStentAttachments);
+      allFiles.addAll(miscVacuumStentAttachments); // ✅ NEW
       allFiles.addAll(miscReEtchAttachments);
 
       if (allFiles.isNotEmpty) {
@@ -718,6 +731,7 @@ class AddCaseController extends GetxController {
       if (response.statusCode == 200 || response.statusCode == 201) {
         showMessage(
             jsonResponse['message']?.toString() ?? "Case created successfully!");
+        Get.snackbar("Success", "Case Created Successfully");
         Get.back();
         _clearAllFields();
       } else {
@@ -791,7 +805,7 @@ class AddCaseController extends GetxController {
       "pfm": crownType.value == "PFM (NP)" ? _buildPfmData() : null,
       "fullCast": crownType.value == "FULL CAST" ? _buildFullCastData() : null,
       "metalFree": crownType.value == "METAL"
-          ? _buildMetalFreeData()
+          ? _buildStandardMetalFreeData() // ✅ Using new helper
           : null,
       "dentures": null,
     };
@@ -804,7 +818,7 @@ class AddCaseController extends GetxController {
         "pfm": crownType.value == "PFM (NP)" ? _buildPfmData() : null,
         "fullCast": crownType.value == "FULL CAST" ? _buildFullCastData() : null,
         "metalFree": crownType.value == "METAL"
-            ? _buildMetalFreeData()
+            ? _buildMetalFreeData() // ✅ Using new helper
             : null,
       };
     }
@@ -828,6 +842,7 @@ class AddCaseController extends GetxController {
     };
   }
 
+
   // ✅ =================================================================
   // ✅ NEW: Premium Misc JSON Builder (Updated for Radio Buttons)
   // ✅ =================================================================
@@ -835,10 +850,10 @@ class AddCaseController extends GetxController {
     return {
       "type": premiumMiscType.value,
       "studyModule": premiumMiscType.value == "Study Module" ? {
-        "selection": miscStudyModuleSelection.value,
-        "teeth": miscStudyModuleTeeth.toList(),
+        "selection": miscStudyModuleSelection.value, // ✅ CHANGED
+        "teeth": miscStudyModuleTeeth.toList(), // ✅ NEW
         "description": miscStudyModuleController.text,
-        "attachments": _getFilePaths(miscStudyModuleAttachments),
+        // "attachments": _getFilePaths(),
       } : null,
       "sportsGuard": premiumMiscType.value == "Sports Guard" ? {
         // "selection" field removed
@@ -846,24 +861,54 @@ class AddCaseController extends GetxController {
         "attachments": _getFilePaths(miscSportsGuardAttachments),
       } : null,
       "tw": premiumMiscType.value == "TW" ? {
-        "selection": miscTwSelection.value,
+        "selection": miscTwSelection.value, // ✅ CHANGED
         "description": miscTwController.text,
         "attachments": _getFilePaths(miscTwAttachments),
       } : null,
       "nightGuard": premiumMiscType.value == "Night Guard" ? {
-        "selection": miscNightGuardSelection.value,
+        "selection": miscNightGuardSelection.value, // ✅ CHANGED
         "description": miscNightGuardController.text,
         "attachments": _getFilePaths(miscNightGuardAttachments),
       } : null,
-      "vacuumFormedStent": premiumMiscType.value == "Vacuum Formed Stent" ? {
+      "vacuumFormedStent": premiumMiscType.value == "Vacuum Formed Stent" ? { // ✅ NEW
         "description": miscVacuumStentController.text,
         "attachments": _getFilePaths(miscVacuumStentAttachments),
       } : null,
       "reEtch": premiumMiscType.value == "Re-etch" ? {
-        "selection": miscReEtchSelection.value,
+        "selection": miscReEtchSelection.value, // ✅ CHANGED
         "description": miscReEtchController.text,
         "attachments": _getFilePaths(miscReEtchAttachments),
       } : null,
+    };
+  }
+  Map<String, dynamic>? _buildStandardMetalFreeData(){
+    return {
+      "singleUnitCrown": showFullCastSingleUnit.value
+          ? {
+        "enabled": true,
+        "teeth": fullCastSingleUnitTeeth.toList(),
+        "description": descriptionController.text,
+        "shade" : shadeController.value,
+        "attachments": _getFilePaths(selectedFiles),
+      }
+          : null,
+      "bridge": showFullCastBridge.value
+          ? {
+        "enabled": true,
+        "ponticDesign" : ponticDesign.value,
+        "teeth": bridgeTeeth.toList(),
+        "description": descriptionController.text,
+        "attachments": _getFilePaths(selectedFiles),
+      }
+          : null,
+      "postAndCore": showPostAndCore.value
+          ? {
+        "enabled": true,
+        "teeth": postAndCoreTeeth.toList(),
+        "instructions": descriptionController.text,
+        "attachments": _getFilePaths(selectedFiles),
+      }
+          : null,
     };
   }
 
@@ -919,7 +964,8 @@ class AddCaseController extends GetxController {
         "conventionalBridge": zirconiaType.value == 'Conventional Bridge'
             ? {
           "teeth": zirconiaConventionalBridgeTeeth.toList(),
-          "description": zirconiaConventionalBridgeDescController.text,
+          "shade" : shadeController.value,
+          "description": descriptionController.text,
           "attachments":
           _getFilePaths(zirconiaConventionalBridgeAttachments)
         }
@@ -950,24 +996,29 @@ class AddCaseController extends GetxController {
           ? {
         "enabled": true,
         "teeth": singleUnitTeeth.toList(),
-        "instructions": pfmSingleUnitInstructionsController.text,
+        "shade" : shadeController.value,
+        "porcelainButtMargin": pfmSingleUnitPorcelainButtMargin.value,
+        "instructions": descriptionController.text,
         "attachments": _getFilePaths(selectedFiles),
-      }
-          : null,
+      } : null,
       "marylandBridge": showMarylandBridgeDropdown.value
           ? {
         "enabled": true,
-        "ponticTeeth": marylandPonticTeeth.toList(),
-        "wingTeeth": marylandWingTeeth.toList(),
-        "instructions": pfmMarylandInstructionsController.text,
+        "ponticTeeth": marylandponticTeeth.value,
+        "wingTeeth": marylandwingTeeth.value,
+        "teeth" : singleUnitTeeth.toList(),
+        "shade" : shadeController.value,
+        "instructions": descriptionController.text,
         "attachments": _getFilePaths(selectedFiles),
       }
           : null,
       "conventionalBridge": showConventionalBridgeDropdown.value
           ? {
         "enabled": true,
+        "ponticDesign": ponticDesign.value,
         "teeth": conventionalBridgeTeeth.toList(),
-        "description": pfmConventionalBridgeDescController.text,
+        "shade" : shadeController.value,
+        "description": descriptionController.text,
         "attachments": _getFilePaths(selectedFiles),
       }
           : null,
@@ -980,15 +1031,17 @@ class AddCaseController extends GetxController {
           ? {
         "enabled": true,
         "teeth": fullCastSingleUnitTeeth.toList(),
-        "instructions": fcSingleUnitInstructionsController.text,
+        "description": descriptionController.text,
+        "shade" : shadeController.value,
         "attachments": _getFilePaths(selectedFiles),
       }
           : null,
       "bridge": showFullCastBridge.value
           ? {
         "enabled": true,
+        "ponticDesign" : ponticDesign.value,
         "teeth": bridgeTeeth.toList(),
-        "description": fcBridgeDescController.text,
+        "description": descriptionController.text,
         "attachments": _getFilePaths(selectedFiles),
       }
           : null,
@@ -996,7 +1049,7 @@ class AddCaseController extends GetxController {
           ? {
         "enabled": true,
         "teeth": postAndCoreTeeth.toList(),
-        "instructions": fcPostAndCoreInstructionsController.text,
+        "instructions": descriptionController.text,
         "attachments": _getFilePaths(selectedFiles),
       }
           : null,
@@ -1037,9 +1090,9 @@ class AddCaseController extends GetxController {
 
       // ✅ Send the data at the root of 'construction'
       "teethSelection": dentureTeeth.toList(),
-      "description": activeDescController.text,
+      "description": descriptionController.text,
       "attachments": _getFilePaths(dentureAttachments),
-
+      "shade": shadeController.value,
       "selectedOptions": porcelainButtMargin.value.isNotEmpty
           ? [porcelainButtMargin.value]
           : [],
@@ -1166,7 +1219,7 @@ class AddCaseController extends GetxController {
     miscSportsGuardController.dispose();
     miscTwController.dispose();
     miscNightGuardController.dispose();
-    miscVacuumStentController.dispose();
+    miscVacuumStentController.dispose(); // ✅ NEW
     miscReEtchController.dispose();
 
 
