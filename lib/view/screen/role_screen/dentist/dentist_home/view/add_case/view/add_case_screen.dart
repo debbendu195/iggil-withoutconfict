@@ -318,7 +318,7 @@ class AddCaseScreen extends StatelessWidget {
                 hint: "Select teeth",
                 items: [
                   "Full ridge",
-                  "Modify Ridge Lap",
+                  "Modify ridge lap",
                   "No contact",
                   "Point contact",
                   "Point in socket (ovate)"
@@ -406,10 +406,10 @@ class AddCaseScreen extends StatelessWidget {
                 hint: "Select teeth",
                 items: [
                   "Full ridge",
-                  "Modify Ridge Lap",
+                  "Modify ridge lap",
                   "No contact",
                   "Point contact",
-                  "Point in socket (ovate)"
+                  "Point in socket (ovate)",
                 ],
                 onChanged: (val) {
                   controller.ponticDesign.value = val??"";
@@ -948,11 +948,24 @@ class AddCaseScreen extends StatelessWidget {
                 if (controller.emaxType.value == "Single unit crown")
                   Column(
                     children: [
-                      ShadeSelectionDropdown(
+                      Align(
+                        alignment: Alignment.centerLeft,
+                        child: _TeethSelectionWidget(
+                          selectedTeeth: controller.emaxTeeth, // ✅ এটা use করুন
+                          title: "Select Teeth",
+                        ),
+                      ),
+                      SingleShadeSelector(
+                        selectedShade: controller.shadeController,
+                        title: "Select Shade",
+                        hint: "Choose shade for selected teeth",
+
+                      ),
+                      /*ShadeSelectionDropdown(
                         selectedShades: controller.emaxTeeth,
                         title: "Select Teeth & Shade",
                         hint: "Choose teeth for Emax",
-                      ),
+                      ),*/
                       SizedBox(height: 15.h),
                       // ✅ UPDATED: Uses global description controller
                       // _InstructionCardWidget(
@@ -976,19 +989,21 @@ class AddCaseScreen extends StatelessWidget {
                 if (controller.emaxType.value == "Veneer")
                   Column(
                     children: [
-                      ShadeSelectionDropdown(
-                        selectedShades: controller.emaxVeneerTeeth, // NEW
-                        title: "Select Teeth & Shade",
-                        hint: "Choose teeth for Veneer",
+                      Align(
+                        alignment: Alignment.centerLeft,
+                        child: _TeethSelectionWidget(
+                          selectedTeeth: controller.emaxTeeth, // ✅ এটা use করুন
+                          title: "Select Teeth",
+                        ),
+                      ),
+                      SingleShadeSelector(
+                        selectedShade: controller.shadeController,
+                        title: "Select Shade",
+                        hint: "Choose shade for selected teeth",
+
                       ),
                       SizedBox(height: 15.h),
-                      // ✅ UPDATED: Uses global description controller
-                      // _InstructionCardWidget(
-                      //   controller: controller.descriptionController, // NEW
-                      //   title: "Instructions",
-                      //   hintText: "Describe your Veneer case",
-                      // ),
-                      // SizedBox(height: 15.h),
+
                       _FileUploadWidget(
                         selectedFiles: controller.emaxVeneerAttachments, // NEW
                         onTap: controller.pickFiles,
@@ -1030,10 +1045,17 @@ class AddCaseScreen extends StatelessWidget {
                 if (controller.zirconiaType.value == "Single unit crown")
                   Column(
                     children: [
-                      ShadeSelectionDropdown(
-                        selectedShades: controller.zirconiaTeeth,
-                        title: "Select Teeth & Shade",
-                        hint: "Choose teeth for Zirconia",
+                      Align(
+                        alignment: Alignment.centerLeft,
+                        child: _TeethSelectionWidget(
+                          selectedTeeth: controller.zirconiaTeeth,
+                          title: "Select Teeth",
+                        ),
+                      ),
+                      SingleShadeSelector(
+                        selectedShade: controller.shadeController,
+                        title: "Select Shade",
+                        hint: "Choose shade for selected teeth",
                       ),
                       SizedBox(height: 15.h),
                       // ✅ UPDATED: Uses global description controller
@@ -1059,10 +1081,17 @@ class AddCaseScreen extends StatelessWidget {
                 if (controller.zirconiaType.value == "Veneer")
                   Column(
                     children: [
-                      ShadeSelectionDropdown(
-                        selectedShades: controller.zirconiaVeneerTeeth, // NEW
-                        title: "Select Teeth & Shade",
-                        hint: "Choose teeth for Veneer",
+                      Align(
+                        alignment: Alignment.centerLeft,
+                        child: _TeethSelectionWidget(
+                          selectedTeeth: controller.zirconiaVeneerTeeth,
+                          title: "Select Teeth",
+                        ),
+                      ),
+                      SingleShadeSelector(
+                        selectedShade: controller.shadeController,
+                        title: "Select Shade",
+                        hint: "Choose shade for selected teeth",
                       ),
                       SizedBox(height: 15.h),
                       // ✅ UPDATED: Uses global description controller
@@ -1599,8 +1628,16 @@ class AddCaseScreen extends StatelessWidget {
             "Point in socket (ovate)"
           ],
           onChanged: (val) {
-            // TODO: Connect to controller if needed
+            controller.marylandponticTeeth.value = val ?? '';
           },
+        ),
+        SizedBox(height: 20.h),
+        Align(
+          alignment: Alignment.centerLeft,
+          child: _TeethSelectionWidget(
+            selectedTeeth: controller.zirconiaMarylandBridgeTeeth,
+            title: "Select Teeth",
+          ),
         ),
         SizedBox(height: 20.h),
         CustomDropdown(
@@ -1608,14 +1645,14 @@ class AddCaseScreen extends StatelessWidget {
           hint: "Select teeth",
           items: ["A1", "A2", "B1", "C1"], // This list seems to be shades
           onChanged: (val) {
-            // TODO: Connect to controller if needed
+            controller.marylandwingTeeth.value = val ?? '';
           },
         ),
         SizedBox(height: 20.h),
-        Align(
-            alignment: Alignment.centerLeft,
-            child: ShadeSelectionDropdown(
-                selectedShades: controller.zirconiaMarylandBridgeTeeth) // NEW
+        SingleShadeSelector(
+          selectedShade: controller.shadeController,
+          title: "Select Shade",
+          hint: "Choose shade for selected teeth",
         ),
         SizedBox(height: 20.h),
         // ✅ UPDATED: Use global controller
@@ -1696,6 +1733,7 @@ class ShadeSelectionDropdown extends StatelessWidget {
     "A1",
     "A2",
     "A3",
+    "A3.5",
     "A4",
     "B1",
     "B2",
@@ -2051,6 +2089,7 @@ class SingleShadeSelector extends StatelessWidget {
     "A1",
     "A2",
     "A3",
+    "A3.5",
     "A4",
     "B1",
     "B2",
