@@ -56,7 +56,7 @@ class AddCaseScreen extends StatelessWidget {
         } else if (val == "Continue Case") {
           apiValue2 = "Continue";
           apiValue =
-          "Continue"; // "Continue Case" select korle "Continuation" save hobe
+              "Continue"; // "Continue Case" select korle "Continuation" save hobe
         } else if (val == "Remake") {
           apiValue2 = "Remake";
           apiValue = "Remake"; // "Remake" select korle "Remake" save hobe
@@ -137,10 +137,10 @@ class AddCaseScreen extends StatelessWidget {
     return Obx(() => controller.isLoading.value
         ? const CustomLoader()
         : CustomButton(
-      onTap: controller.submitCase,
-      title: 'Submit Case',
-      fillColor: AppColors.primary,
-    ));
+            onTap: controller.submitCase,
+            title: 'Submit Case',
+            fillColor: AppColors.primary,
+          ));
   }
 
   // ============================================
@@ -183,7 +183,8 @@ class AddCaseScreen extends StatelessWidget {
         if (controller.crownType.value == "PFM (NP)") _buildPfmNpOptions(),
         if (controller.crownType.value == "FULL CAST") _buildFullCastOptions(),
         // ✅ This will now render the new, complex metal options
-        if (controller.crownType.value == "METAL") _buildStandardBuildMetalOptions(),
+        if (controller.crownType.value == "METAL")
+          _buildStandardBuildMetalOptions(),
       ],
     );
   }
@@ -205,7 +206,8 @@ class AddCaseScreen extends StatelessWidget {
         SizedBox(height: 20.h),
         if (controller.showSingleUnitDropdown.value)
           Column(
-            crossAxisAlignment: CrossAxisAlignment.start, // ✅ Added for alignment
+            crossAxisAlignment:
+                CrossAxisAlignment.start, // ✅ Added for alignment
             children: [
               // ✅ ADDED TEXT WIDGET AS REQUESTED
               CustomText(
@@ -324,7 +326,7 @@ class AddCaseScreen extends StatelessWidget {
                   "Point in socket (ovate)"
                 ],
                 onChanged: (val) {
-                  controller.ponticDesign.value = val??"";
+                  controller.ponticDesign.value = val ?? "";
                 },
               ),
               SizedBox(height: 20.h),
@@ -412,7 +414,7 @@ class AddCaseScreen extends StatelessWidget {
                   "Point in socket (ovate)",
                 ],
                 onChanged: (val) {
-                  controller.ponticDesign.value = val??"";
+                  controller.ponticDesign.value = val ?? "";
                 },
               ),
               SizedBox(
@@ -481,48 +483,48 @@ class AddCaseScreen extends StatelessWidget {
               bottom: 8.h,
             ),
             Obx(() => Row(
-              children: [
-                Row(
                   children: [
-                    Radio<String>(
-                      value: "Composite Inlay",
-                      groupValue: controller.standardBuildMetalType.value,
-                      onChanged: (val) {
-                        if (val != null) {
-                          controller.standardBuildMetalType.value = val;
-                        }
-                      },
-                      activeColor: AppColors.primary,
+                    Row(
+                      children: [
+                        Radio<String>(
+                          value: "Composite Inlay",
+                          groupValue: controller.standardBuildMetalType.value,
+                          onChanged: (val) {
+                            if (val != null) {
+                              controller.standardBuildMetalType.value = val;
+                            }
+                          },
+                          activeColor: AppColors.primary,
+                        ),
+                        CustomText(
+                          text: "Composite Inlay",
+                          fontSize: 14.w,
+                          fontWeight: FontWeight.w400,
+                        ),
+                      ],
                     ),
-                    CustomText(
-                      text: "Composite Inlay",
-                      fontSize: 14.w,
-                      fontWeight: FontWeight.w400,
+                    SizedBox(width: 20.w), // Space between radio buttons
+                    Row(
+                      children: [
+                        Radio<String>(
+                          value: "Composite Onlay",
+                          groupValue: controller.standardBuildMetalType.value,
+                          onChanged: (val) {
+                            if (val != null) {
+                              controller.standardBuildMetalType.value = val;
+                            }
+                          },
+                          activeColor: AppColors.primary,
+                        ),
+                        CustomText(
+                          text: "Composite Onlay",
+                          fontSize: 14.w,
+                          fontWeight: FontWeight.w400,
+                        ),
+                      ],
                     ),
                   ],
-                ),
-                SizedBox(width: 20.w), // Space between radio buttons
-                Row(
-                  children: [
-                    Radio<String>(
-                      value: "Composite Onlay",
-                      groupValue: controller.standardBuildMetalType.value,
-                      onChanged: (val) {
-                        if (val != null) {
-                          controller.standardBuildMetalType.value = val;
-                        }
-                      },
-                      activeColor: AppColors.primary,
-                    ),
-                    CustomText(
-                      text: "Composite Onlay",
-                      fontSize: 14.w,
-                      fontWeight: FontWeight.w400,
-                    ),
-                  ],
-                ),
-              ],
-            )),
+                )),
           ],
         ),
         SizedBox(height: 20.h),
@@ -589,16 +591,20 @@ class AddCaseScreen extends StatelessWidget {
                   child: _TeethSelectionWidget(
                       selectedTeeth: controller.dentureTeeth)),
               SizedBox(height: 15.h),
-              SingleShadeSelector(selectedShade: controller.shadeController),
+              SingleShadeSelector(
+                selectedShade: controller.shadeController,
+                title: "Select Shade",
+                hint: "Choose shade for selected teeth",
+              ),
               SizedBox(height: 15.h),
               // This UI part seems to have a bug in your original code.
               // It uses descriptionController, but the API sends dentureTryInDescController.
               // As requested, I am NOT changing the standard part.
-              _InstructionCardWidget(
-                controller: controller.descriptionController,
-                title: "Description",
-                hintText: "Describe your case (Reline, Repair, etc.)",
-              ),
+              // _InstructionCardWidget(
+              //   controller: controller.descriptionController,
+              //   title: "Description",
+              //   hintText: "Describe your case (Reline, Repair, etc.)",
+              // ),
               SizedBox(height: 15.h),
               _FileUploadWidget(
                 selectedFiles: controller.dentureAttachments,
@@ -669,13 +675,14 @@ class AddCaseScreen extends StatelessWidget {
                 controller.removeFile(file, controller.dentureAttachments),
           ),
         if (controller.porcelainButtMargin.value == "Finish")
-        // This part has a bug in your original code (uses dentureFinishDescController
-        // while API sends descriptionController). Per your request, I am not changing it.
+          // This part has a bug in your original code (uses dentureFinishDescController
+          // while API sends descriptionController). Per your request, I am not changing it.
           _buildDentureStageWidget(
             teethList: controller.dentureTeeth,
             // descriptionTitle: "Description", (Removed, global desc used)
             // descriptionHint: "Describe your Finish", (Removed, global desc used)
-            descController: controller.dentureFinishDescController, // Bug in original
+            descController:
+                controller.dentureFinishDescController, // Bug in original
             uploadTitle: "Upload Finish Attachments",
             fileList: controller.dentureAttachments,
             onUploadTap: controller.pickFiles,
@@ -736,32 +743,32 @@ class AddCaseScreen extends StatelessWidget {
           bottom: 8.h,
         ),
         Obx(() => Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(children: [
-              Checkbox(
-                value: upperValue.value,
-                activeColor: AppColors.primary,
-                onChanged: (val) => upperValue.value = val ?? false,
-              ),
-              CustomText(
-                  text: "Upper",
-                  fontSize: 14.w,
-                  fontWeight: FontWeight.w400),
-            ]),
-            Row(children: [
-              Checkbox(
-                value: lowerValue.value,
-                activeColor: AppColors.primary,
-                onChanged: (val) => lowerValue.value = val ?? false,
-              ),
-              CustomText(
-                  text: "Lower",
-                  fontSize: 14.w,
-                  fontWeight: FontWeight.w400),
-            ]),
-          ],
-        )),
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(children: [
+                  Checkbox(
+                    value: upperValue.value,
+                    activeColor: AppColors.primary,
+                    onChanged: (val) => upperValue.value = val ?? false,
+                  ),
+                  CustomText(
+                      text: "Upper",
+                      fontSize: 14.w,
+                      fontWeight: FontWeight.w400),
+                ]),
+                Row(children: [
+                  Checkbox(
+                    value: lowerValue.value,
+                    activeColor: AppColors.primary,
+                    onChanged: (val) => lowerValue.value = val ?? false,
+                  ),
+                  CustomText(
+                      text: "Lower",
+                      fontSize: 14.w,
+                      fontWeight: FontWeight.w400),
+                ]),
+              ],
+            )),
         SizedBox(height: 15.h),
       ],
     );
@@ -781,75 +788,75 @@ class AddCaseScreen extends StatelessWidget {
           bottom: 8.h,
         ),
         Obx(() => Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            // ✅ Reline Checkbox
-            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Checkbox(
-                  value: selectedValues.contains("Reline"),
-                  activeColor: AppColors.primary,
-                  onChanged: (val) {
-                    if (val == true) {
-                      selectedValues.add("Reline");
-                    } else {
-                      selectedValues.remove("Reline");
-                    }
-                  },
+                // ✅ Reline Checkbox
+                Row(
+                  children: [
+                    Checkbox(
+                      value: selectedValues.contains("Reline"),
+                      activeColor: AppColors.primary,
+                      onChanged: (val) {
+                        if (val == true) {
+                          selectedValues.add("Reline");
+                        } else {
+                          selectedValues.remove("Reline");
+                        }
+                      },
+                    ),
+                    CustomText(
+                      text: "Reline",
+                      fontSize: 14.w,
+                      fontWeight: FontWeight.w400,
+                    ),
+                    SizedBox(width: 10.w),
+                  ],
                 ),
-                CustomText(
-                  text: "Reline",
-                  fontSize: 14.w,
-                  fontWeight: FontWeight.w400,
+                // ✅ Repair Checkbox
+                Row(
+                  children: [
+                    Checkbox(
+                      value: selectedValues.contains("Repair"),
+                      activeColor: AppColors.primary,
+                      onChanged: (val) {
+                        if (val == true) {
+                          selectedValues.add("Repair");
+                        } else {
+                          selectedValues.remove("Repair");
+                        }
+                      },
+                    ),
+                    CustomText(
+                      text: "Repair",
+                      fontSize: 14.w,
+                      fontWeight: FontWeight.w400,
+                    ),
+                    SizedBox(width: 10.w),
+                  ],
                 ),
-                SizedBox(width: 10.w),
+                // ✅ Addition Checkbox
+                Row(
+                  children: [
+                    Checkbox(
+                      value: selectedValues.contains("Addition"),
+                      activeColor: AppColors.primary,
+                      onChanged: (val) {
+                        if (val == true) {
+                          selectedValues.add("Addition");
+                        } else {
+                          selectedValues.remove("Addition");
+                        }
+                      },
+                    ),
+                    CustomText(
+                      text: "Addition",
+                      fontSize: 14.w,
+                      fontWeight: FontWeight.w400,
+                    ),
+                  ],
+                ),
               ],
-            ),
-            // ✅ Repair Checkbox
-            Row(
-              children: [
-                Checkbox(
-                  value: selectedValues.contains("Repair"),
-                  activeColor: AppColors.primary,
-                  onChanged: (val) {
-                    if (val == true) {
-                      selectedValues.add("Repair");
-                    } else {
-                      selectedValues.remove("Repair");
-                    }
-                  },
-                ),
-                CustomText(
-                  text: "Repair",
-                  fontSize: 14.w,
-                  fontWeight: FontWeight.w400,
-                ),
-                SizedBox(width: 10.w),
-              ],
-            ),
-            // ✅ Addition Checkbox
-            Row(
-              children: [
-                Checkbox(
-                  value: selectedValues.contains("Addition"),
-                  activeColor: AppColors.primary,
-                  onChanged: (val) {
-                    if (val == true) {
-                      selectedValues.add("Addition");
-                    } else {
-                      selectedValues.remove("Addition");
-                    }
-                  },
-                ),
-                CustomText(
-                  text: "Addition",
-                  fontSize: 14.w,
-                  fontWeight: FontWeight.w400,
-                ),
-              ],
-            ),
-          ],
-        )),
+            )),
         SizedBox(height: 15.h),
       ],
     );
@@ -959,7 +966,6 @@ class AddCaseScreen extends StatelessWidget {
                         selectedShade: controller.shadeController,
                         title: "Select Shade",
                         hint: "Choose shade for selected teeth",
-
                       ),
                       /*ShadeSelectionDropdown(
                         selectedShades: controller.emaxTeeth,
@@ -1000,10 +1006,8 @@ class AddCaseScreen extends StatelessWidget {
                         selectedShade: controller.shadeController,
                         title: "Select Shade",
                         hint: "Choose shade for selected teeth",
-
                       ),
                       SizedBox(height: 15.h),
-
                       _FileUploadWidget(
                         selectedFiles: controller.emaxVeneerAttachments, // NEW
                         onTap: controller.pickFiles,
@@ -1066,8 +1070,7 @@ class AddCaseScreen extends StatelessWidget {
                       // ),
                       // SizedBox(height: 15.h),
                       _FileUploadWidget(
-                        selectedFiles:
-                        controller.zirconiaAttachments,
+                        selectedFiles: controller.zirconiaAttachments,
                         onTap: controller.pickFiles,
                         onFileDeleted: (file) => controller.removeFile(
                             file, controller.zirconiaAttachments),
@@ -1103,7 +1106,7 @@ class AddCaseScreen extends StatelessWidget {
                       // SizedBox(height: 15.h),
                       _FileUploadWidget(
                         selectedFiles:
-                        controller.zirconiaVeneerAttachments, // NEW
+                            controller.zirconiaVeneerAttachments, // NEW
                         onTap: controller.pickFiles,
                         onFileDeleted: (file) => controller.removeFile(
                             file, controller.zirconiaVeneerAttachments),
@@ -1133,11 +1136,19 @@ class AddCaseScreen extends StatelessWidget {
           if (controller.ponticDesign.value == "Composite Onlay") {
             return Column(
               children: [
-                ShadeSelectionDropdown(
-                  selectedShades: controller.compositeOnlayTeeth, // NEW
-                  title: "Select Teeth & Shade",
-                  hint: "Choose teeth for Composite Onlay",
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: _TeethSelectionWidget(
+                    selectedTeeth: controller.compositeOnlayTeeth,
+                    title: "Select Teeth",
+                  ),
                 ),
+                SingleShadeSelector(
+                  selectedShade: controller.shadeController,
+                  title: "Select Shade",
+                  hint: "Choose shade for selected teeth",
+                ),
+
                 SizedBox(height: 15.h),
                 // ✅ UPDATED: Uses global description controller
                 // _InstructionCardWidget(
@@ -1173,7 +1184,7 @@ class AddCaseScreen extends StatelessWidget {
           hint: "Select option",
           items: ["Fixed Retainer", "Essix Retainer"],
           onChanged: (val) =>
-          controller.premiumOrthodonticType.value = val ?? '',
+              controller.premiumOrthodonticType.value = val ?? '',
         ),
         SizedBox(height: 20.h),
 
@@ -1446,6 +1457,40 @@ class AddCaseScreen extends StatelessWidget {
     );
   }
 
+  Widget _buildCheckboxMeshReinforcement({
+    required String title,
+    required RxBool upperValue,
+  }) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        CustomText(
+          text: title,
+          fontSize: 16.w,
+          fontWeight: FontWeight.w500,
+          bottom: 8.h,
+        ),
+        Obx(() => Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(children: [
+                  Checkbox(
+                    value: upperValue.value,
+                    activeColor: AppColors.primary,
+                    onChanged: (val) => upperValue.value = val ?? false,
+                  ),
+                  CustomText(
+                      text: "Mesh Reinforcement",
+                      fontSize: 14.w,
+                      fontWeight: FontWeight.w400),
+                ]),
+              ],
+            )),
+        SizedBox(height: 15.h),
+      ],
+    );
+  }
+
   Widget _buildPremiumDentures() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -1459,7 +1504,6 @@ class AddCaseScreen extends StatelessWidget {
         SizedBox(height: 20.h),
         if (controller.showDentureConstruction.value)
           _buildPremiumDentureConstructionForm(),
-
         if (controller.showDentureOther.value)
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -1468,23 +1512,23 @@ class AddCaseScreen extends StatelessWidget {
                 title: "Denture Other",
                 selectedValues: controller.dentureOtherSelections,
               ),
-              SizedBox(height: 20.h),
-
               Align(
                   alignment: Alignment.centerLeft,
                   child: _TeethSelectionWidget(
                       selectedTeeth: controller.premiumDentureTryInMetalTeeth)),
               SizedBox(height: 15.h),
-
-              SingleShadeSelector(selectedShade: controller.shadeController),
-              SizedBox(height: 15.h),
+              SingleShadeSelector(
+                selectedShade: controller.shadeController,
+                title: "Select Shade",
+                hint: "Choose shade for selected teeth",
+              ),
 
               // ✅ This specific "other" description uses its own controller
-              _InstructionCardWidget(
+              /* _InstructionCardWidget(
                 controller: controller.premiumDentureTryInMetalController,
                 title: "Description",
                 hintText: "Describe your case (Reline, Repair, etc.)",
-              ),
+              ),*/
               SizedBox(height: 15.h),
 
               _FileUploadWidget(
@@ -1515,14 +1559,9 @@ class AddCaseScreen extends StatelessWidget {
           upperValue: controller.specialTrayUpper,
           lowerValue: controller.specialTrayLower,
         ),
-        Text(
-          "Clasps(selected number)",
-          style: TextStyle(fontSize: 16.h, fontWeight: FontWeight.w600),
-        ),
-        SizedBox(height: 20.h),
-        Text(
-          "Mesh Reinforcement",
-          style: TextStyle(fontSize: 16.h, fontWeight: FontWeight.w600),
+        _buildCheckboxMeshReinforcement(
+          title: "Mesh Reinforcement",
+          upperValue: controller.meshReinforcement,
         ),
         SizedBox(height: 20.h),
         _buildPremiumDentureStageSelectionForms(),
@@ -1544,7 +1583,7 @@ class AddCaseScreen extends StatelessWidget {
             "Finish Flexi"
           ],
           onChanged: (val) =>
-          controller.premiumDentureConstructionType.value = val ?? '',
+              controller.premiumDentureConstructionType.value = val ?? '',
         ),
         SizedBox(height: 20.h),
 
@@ -1643,7 +1682,7 @@ class AddCaseScreen extends StatelessWidget {
         CustomDropdown(
           label: "Select Wing Teeth",
           hint: "Select teeth",
-          items: ["A1", "A2", "B1", "C1"], // This list seems to be shades
+          items: ["A1", "A2", "B1", "C1"],
           onChanged: (val) {
             controller.marylandwingTeeth.value = val ?? '';
           },
@@ -1696,7 +1735,7 @@ class AddCaseScreen extends StatelessWidget {
           alignment: Alignment.centerLeft,
           child: ShadeSelectionDropdown(
               selectedShades:
-              controller.zirconiaConventionalBridgeTeeth), // NEW
+                  controller.zirconiaConventionalBridgeTeeth), // NEW
         ),
         SizedBox(height: 20.h),
         // ✅ UPDATED: Use global controller
@@ -1708,7 +1747,7 @@ class AddCaseScreen extends StatelessWidget {
         // ),
         _FileUploadWidget(
           selectedFiles:
-          controller.zirconiaConventionalBridgeAttachments, // NEW
+              controller.zirconiaConventionalBridgeAttachments, // NEW
           onTap: controller.pickFiles,
           onFileDeleted: (file) => controller.removeFile(
               file, controller.zirconiaConventionalBridgeAttachments),
@@ -1767,87 +1806,87 @@ class ShadeSelectionDropdown extends StatelessWidget {
         ),
         // ✅ Dropdown Button
         Obx(() => Container(
-          width: double.infinity,
-          padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 4.h),
-          decoration: BoxDecoration(
-            border: Border.all(color: AppColors.grey1),
-            borderRadius: BorderRadius.circular(8.r),
-            color: Colors.white,
-          ),
-          child: DropdownButtonHideUnderline(
-            child: DropdownButton<String>(
-              isExpanded: true,
-              hint: Text(
-                selectedShades.isEmpty
-                    ? hint
-                    : "${selectedShades.length} shade(s) selected",
-                style: TextStyle(
-                  fontSize: 14.sp,
-                  color: selectedShades.isEmpty
-                      ? AppColors.grey1
-                      : AppColors.black,
+              width: double.infinity,
+              padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 4.h),
+              decoration: BoxDecoration(
+                border: Border.all(color: AppColors.grey1),
+                borderRadius: BorderRadius.circular(8.r),
+                color: Colors.white,
+              ),
+              child: DropdownButtonHideUnderline(
+                child: DropdownButton<String>(
+                  isExpanded: true,
+                  hint: Text(
+                    selectedShades.isEmpty
+                        ? hint
+                        : "${selectedShades.length} shade(s) selected",
+                    style: TextStyle(
+                      fontSize: 14.sp,
+                      color: selectedShades.isEmpty
+                          ? AppColors.grey1
+                          : AppColors.black,
+                    ),
+                  ),
+                  icon: Icon(Icons.arrow_drop_down, color: AppColors.primary),
+                  items: allShades.map((shade) {
+                    final isSelected = selectedShades.contains(shade);
+                    return DropdownMenuItem<String>(
+                      value: shade,
+                      // ✅ This ensures the dropdown doesn't close on item click
+                      // ✅ We handle the logic in onChanged
+                      child: StatefulBuilder(
+                        builder: (context, setState) {
+                          return InkWell(
+                            onTap: () {
+                              // This is where we manually toggle the state
+                              if (selectedShades.contains(shade)) {
+                                selectedShades.remove(shade);
+                              } else {
+                                selectedShades.add(shade);
+                              }
+                              // We call setState to rebuild the checkbox
+                              setState(() {});
+                            },
+                            child: Row(
+                              children: [
+                                Checkbox(
+                                  value: isSelected,
+                                  activeColor: AppColors.primary,
+                                  onChanged: (val) {
+                                    // Toggle state
+                                    if (val == true) {
+                                      selectedShades.add(shade);
+                                    } else {
+                                      selectedShades.remove(shade);
+                                    }
+                                  },
+                                ),
+                                SizedBox(width: 8.w),
+                                Text(
+                                  shade,
+                                  style: TextStyle(
+                                    fontSize: 14.sp,
+                                    fontWeight: isSelected
+                                        ? FontWeight.w600
+                                        : FontWeight.w400,
+                                    color: AppColors.black,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          );
+                        },
+                      ),
+                    );
+                  }).toList(),
+                  onChanged: (value) {
+                    // This callback is still triggered, but we don't need to
+                    // close the dropdown. The state is already updated.
+                  },
+                  value: null,
                 ),
               ),
-              icon: Icon(Icons.arrow_drop_down, color: AppColors.primary),
-              items: allShades.map((shade) {
-                final isSelected = selectedShades.contains(shade);
-                return DropdownMenuItem<String>(
-                  value: shade,
-                  // ✅ This ensures the dropdown doesn't close on item click
-                  // ✅ We handle the logic in onChanged
-                  child: StatefulBuilder(
-                    builder: (context, setState) {
-                      return InkWell(
-                        onTap: () {
-                          // This is where we manually toggle the state
-                          if (selectedShades.contains(shade)) {
-                            selectedShades.remove(shade);
-                          } else {
-                            selectedShades.add(shade);
-                          }
-                          // We call setState to rebuild the checkbox
-                          setState(() {});
-                        },
-                        child: Row(
-                          children: [
-                            Checkbox(
-                              value: isSelected,
-                              activeColor: AppColors.primary,
-                              onChanged: (val) {
-                                // Toggle state
-                                if (val == true) {
-                                  selectedShades.add(shade);
-                                } else {
-                                  selectedShades.remove(shade);
-                                }
-                              },
-                            ),
-                            SizedBox(width: 8.w),
-                            Text(
-                              shade,
-                              style: TextStyle(
-                                fontSize: 14.sp,
-                                fontWeight: isSelected
-                                    ? FontWeight.w600
-                                    : FontWeight.w400,
-                                color: AppColors.black,
-                              ),
-                            ),
-                          ],
-                        ),
-                      );
-                    },
-                  ),
-                );
-              }).toList(),
-              onChanged: (value) {
-                // This callback is still triggered, but we don't need to
-                // close the dropdown. The state is already updated.
-              },
-              value: null,
-            ),
-          ),
-        )),
+            )),
         // ✅ Selected Shades Display (Chips)
         SizedBox(height: 12.h),
         Obx(() {
@@ -1895,8 +1934,8 @@ class _TeethSelectionWidget extends StatelessWidget {
   final String title; // ✅ New: Title parameter
   const _TeethSelectionWidget(
       {required this.selectedTeeth,
-        this.availableShades = const ["A1", "A2", "A3", "B1", "C1"],
-        this.title = 'Select Teeth' // ✅ Default title
+      this.availableShades = const ["A1", "A2", "A3", "B1", "C1"],
+      this.title = 'Select Teeth' // ✅ Default title
       });
   @override
   Widget build(BuildContext context) {
@@ -1915,16 +1954,16 @@ class _TeethSelectionWidget extends StatelessWidget {
           spacing: 15,
           children: availableShades.map((shade) {
             return Obx(() => FilterChip(
-              label: Text(shade),
-              selected: selectedTeeth.contains(shade),
-              onSelected: (selected) {
-                if (selected) {
-                  selectedTeeth.add(shade);
-                } else {
-                  selectedTeeth.remove(shade);
-                }
-              },
-            ));
+                  label: Text(shade),
+                  selected: selectedTeeth.contains(shade),
+                  onSelected: (selected) {
+                    if (selected) {
+                      selectedTeeth.add(shade);
+                    } else {
+                      selectedTeeth.remove(shade);
+                    }
+                  },
+                ));
           }).toList(),
         ),
       ],
@@ -1992,44 +2031,44 @@ class _FileUploadWidget extends StatelessWidget {
               ),
               child: selectedFiles.isNotEmpty
                   ? Wrap(
-                spacing: 8,
-                runSpacing: 8,
-                children: selectedFiles.map((file) {
-                  String fileName = file.path.split('/').last;
-                  return Chip(
-                    label: Text(
-                      fileName,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                    avatar: Icon(
-                      file.path.endsWith(".pdf")
-                          ? Icons.picture_as_pdf
-                          : Icons.image,
-                      size: 20,
-                      color: AppColors.primary,
-                    ),
-                    onDeleted: () {
-                      onFileDeleted(file); // ✅ FIXED
-                    },
-                  );
-                }).toList(),
-              )
+                      spacing: 8,
+                      runSpacing: 8,
+                      children: selectedFiles.map((file) {
+                        String fileName = file.path.split('/').last;
+                        return Chip(
+                          label: Text(
+                            fileName,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                          avatar: Icon(
+                            file.path.endsWith(".pdf")
+                                ? Icons.picture_as_pdf
+                                : Icons.image,
+                            size: 20,
+                            color: AppColors.primary,
+                          ),
+                          onDeleted: () {
+                            onFileDeleted(file); // ✅ FIXED
+                          },
+                        );
+                      }).toList(),
+                    )
                   : Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  SizedBox(height: 40.h),
-                  Icon(Icons.upload_file,
-                      size: 50, color: AppColors.grey1),
-                  SizedBox(height: 10.h),
-                  CustomText(
-                    text: uploadHint,
-                    fontWeight: FontWeight.w400,
-                    fontSize: 16,
-                    color: AppColors.black,
-                  ),
-                  SizedBox(height: 40.h),
-                ],
-              ),
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        SizedBox(height: 40.h),
+                        Icon(Icons.upload_file,
+                            size: 50, color: AppColors.grey1),
+                        SizedBox(height: 10.h),
+                        CustomText(
+                          text: uploadHint,
+                          fontWeight: FontWeight.w400,
+                          fontSize: 16,
+                          color: AppColors.black,
+                        ),
+                        SizedBox(height: 40.h),
+                      ],
+                    ),
             ),
           );
         }),
@@ -2056,22 +2095,22 @@ Widget _buildSingleSelectRadioList({
         bottom: 8.h,
       ),
       Obx(() => Column(
-        children: options.map((option) {
-          return RadioListTile<String>(
-            title: Text(option),
-            value: option,
-            groupValue: groupValue.value,
-            onChanged: (val) {
-              if (val != null) {
-                groupValue.value = val;
-              }
-            },
-            activeColor: AppColors.primary,
-            contentPadding: EdgeInsets.zero,
-            dense: true,
-          );
-        }).toList(),
-      )),
+            children: options.map((option) {
+              return RadioListTile<String>(
+                title: Text(option),
+                value: option,
+                groupValue: groupValue.value,
+                onChanged: (val) {
+                  if (val != null) {
+                    groupValue.value = val;
+                  }
+                },
+                activeColor: AppColors.primary,
+                contentPadding: EdgeInsets.zero,
+                dense: true,
+              );
+            }).toList(),
+          )),
       SizedBox(height: 15.h),
     ],
   );
@@ -2124,47 +2163,47 @@ class SingleShadeSelector extends StatelessWidget {
           bottom: 8.h,
         ),
         Obx(() => Container(
-          width: double.infinity,
-          padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 4.h),
-          decoration: BoxDecoration(
-            border: Border.all(color: AppColors.grey1),
-            borderRadius: BorderRadius.circular(8.r),
-            color: Colors.white,
-          ),
-          child: DropdownButtonHideUnderline(
-            child: DropdownButton<String>(
-              isExpanded: true,
-              hint: Text(
-                hint,
-                style: TextStyle(
-                  fontSize: 14.sp,
-                  color: AppColors.grey1,
-                ),
+              width: double.infinity,
+              padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 4.h),
+              decoration: BoxDecoration(
+                border: Border.all(color: AppColors.grey1),
+                borderRadius: BorderRadius.circular(8.r),
+                color: Colors.white,
               ),
-              value:
-              selectedShade.value.isEmpty ? null : selectedShade.value,
-              icon: Icon(Icons.arrow_drop_down, color: AppColors.primary),
-              items: allShades.map((shade) {
-                return DropdownMenuItem<String>(
-                  value: shade,
-                  child: Text(
-                    shade,
+              child: DropdownButtonHideUnderline(
+                child: DropdownButton<String>(
+                  isExpanded: true,
+                  hint: Text(
+                    hint,
                     style: TextStyle(
                       fontSize: 14.sp,
-                      fontWeight: FontWeight.w500,
-                      color: AppColors.black,
+                      color: AppColors.grey1,
                     ),
                   ),
-                );
-              }).toList(),
-              onChanged: (val) {
-                if (val != null) {
-                  selectedShade.value = val;
-                }
-              },
-            ),
-          ),
-        )),
+                  value:
+                      selectedShade.value.isEmpty ? null : selectedShade.value,
+                  icon: Icon(Icons.arrow_drop_down, color: AppColors.primary),
+                  items: allShades.map((shade) {
+                    return DropdownMenuItem<String>(
+                      value: shade,
+                      child: Text(
+                        shade,
+                        style: TextStyle(
+                          fontSize: 14.sp,
+                          fontWeight: FontWeight.w500,
+                          color: AppColors.black,
+                        ),
+                      ),
+                    );
+                  }).toList(),
+                  onChanged: (val) {
+                    if (val != null) {
+                      selectedShade.value = val;
+                    }
+                  },
+                ),
+              ),
+            )),
 
         // ✅ Selected Shade Display (Optional but nice UX)
         SizedBox(height: 8.h),

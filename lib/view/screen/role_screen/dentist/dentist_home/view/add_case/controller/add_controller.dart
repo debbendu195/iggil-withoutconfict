@@ -1001,6 +1001,9 @@ class AddCaseController extends GetxController {
     if (ponticDesign.value == 'Composite Onlay') {
       compositeOnlayData = {
         "teeth": compositeOnlayTeeth.toList(),
+        "shade2D" : shadeController.value,
+        "shade3D" : shadeController.value,
+        // "ponticTeeth": marylandponticTeeth.value,
         "instructions": compositeOnlayInstructionsController.text,
         "attachments": _getFilePaths(compositeOnlayAttachments),
       };
@@ -1140,6 +1143,7 @@ class AddCaseController extends GetxController {
       "teethSelection": dentureTeeth.toList(),
       "description": dentureTryInDescController.text, // Re-using 'tryIn' controller as per UI
       "attachments": _getFilePaths(dentureAttachments),
+      "shade": shadeController.value,
     }
         : null;
 
@@ -1186,7 +1190,7 @@ class AddCaseController extends GetxController {
         "lower": specialTrayLower.value
       },
       "meshReinforcement": meshReinforcement.value,
-
+      "shade": shadeController.value,
       // ✅ THE FIX: Send the selected stage name
       "selectedStage": premiumDentureConstructionType.value,
 
@@ -1201,10 +1205,11 @@ class AddCaseController extends GetxController {
     Map<String, dynamic>? otherData = showDentureOther.value
         ? {
       "enabled": true,
-      "selection": dentureOtherSelections.toList(), // ["Reline", "Repair", ...]
+      "selectedOptions": dentureOtherSelections.toList(), // ["Reline", "Repair", ...]
 
       // ✅ Add data from the UI widgets (re-using 'TryIn' variables as per UI)
-      "teeth": premiumDentureTryInMetalTeeth.toList(),
+      "teethSelection": premiumDentureTryInMetalTeeth.toList(),
+      "shade": shadeController.value,
       "description": premiumDentureTryInMetalController.text,
       "attachments": _getFilePaths(premiumDentureTryInMetalAttachments),
     }
