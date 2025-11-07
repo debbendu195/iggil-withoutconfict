@@ -144,9 +144,11 @@ class TechnicianMyCaseScreen extends StatelessWidget {
                       Column(
                         children: List.generate(2, (value) {
                           return CustomLabManagerCaseCard(
-                            all: false,
+                            onTapCase :() {},
+                            newStatus: false,
                             inProgress: true,
                             complete: true,
+                            doctorName: "Newksadgjdfgkj",
                           );
                         }),
                       ),
@@ -154,7 +156,8 @@ class TechnicianMyCaseScreen extends StatelessWidget {
                       Column(
                         children: List.generate(2, (value) {
                           return CustomLabManagerCaseCard(
-                            all: true,
+                            onTapCase :() {},
+                            newStatus: false,
                             inProgress: false,
                             complete: true,
                             progress: 0.5,
@@ -165,7 +168,8 @@ class TechnicianMyCaseScreen extends StatelessWidget {
                       Column(
                         children: List.generate(2, (value) {
                           return CustomLabManagerCaseCard(
-                            all: true,
+                            onTapCase :() {},
+                            newStatus: false,
                             inProgress: true,
                             complete: false,
                             progress: 1,

@@ -49,15 +49,16 @@ class DentistHomeScreen extends StatelessWidget {
                           ),
                           GestureDetector(
                             onTap: () {
-                              Get.toNamed(AppRoutes.dentistMyCaseScreen);
+                                Get.toNamed(AppRoutes.dentistMyCaseScreen);
                             },
                             child: CustomText(
-                              text: 'viewAll'.tr, // ✅ localization
+                              text: 'viewAll'.tr,
                               fontSize: 13,
                               fontWeight: FontWeight.w700,
                               color: AppColors.primary,
                             ),
                           ),
+
                         ],
                       ),
 
@@ -74,12 +75,10 @@ class DentistHomeScreen extends StatelessWidget {
                            inProgress: true,
                            complete: true,
                            doctorName: data.patientID,
-                           title: data.clinicId?.name??"",
+                           // title: data.clinicId?.name??"",
                            description: data.standard?.crownBridge.toString()??'',
                            timeAgo: data.createdAt.toString(),
                            status: data.status.toString(),
-
-
                            // inProgress: data.caseType ? true : false,
                            // complete: data.caseType ? true : false,
                             //all: false,

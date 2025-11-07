@@ -14,8 +14,9 @@ class ApiUrl {
   static const String newPassword = "/api/v1/user/reset_password";
 
   /// ================= CASE MANAGEMENT =================
-  static const String getAllCase = "/api/v1/case/all-case";
-  static const String createCaseUrl = "/api/v1/case/create-case";
+  static String getAllCase({required int page}) => "/api/v1/case/all-case?page=${page}&limit=10";
+  static String getSingleCase({required String caseId}) => "/api/v1/case/single-case/${caseId}";
+  static  String createCaseUrl = "/api/v1/case/create-case";
 
   /// ================= USER SETTINGS =================
   static const String changePassword = "/api/v1/user/user-change-password";

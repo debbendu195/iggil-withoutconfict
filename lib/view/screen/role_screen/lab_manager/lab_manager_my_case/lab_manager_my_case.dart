@@ -80,7 +80,8 @@ class _MyCaseScreenState extends State<LabManagerMyCase> {
                     Column(
                       children: List.generate(2, (value) {
                         return CustomLabManagerCaseCard(
-                          all: false,
+                          onTapCase :() {},
+                          newStatus: false,
                           inProgress: true,
                           complete: true,
                         );
@@ -90,7 +91,8 @@ class _MyCaseScreenState extends State<LabManagerMyCase> {
                     Column(
                       children: List.generate(2, (value) {
                         return CustomLabManagerCaseCard(
-                          all: true,
+                          onTapCase :() {},
+                          newStatus: false,
                           inProgress: false,
                           complete: true,
                           progress: 0.5,
@@ -101,7 +103,8 @@ class _MyCaseScreenState extends State<LabManagerMyCase> {
                     Column(
                       children: List.generate(2, (value) {
                         return CustomLabManagerCaseCard(
-                          all: true,
+                          onTapCase :() {},
+                          newStatus: false,
                           inProgress: true,
                           complete: false,
                           progress: 1,

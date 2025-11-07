@@ -7,7 +7,9 @@ class CaseModel {
 
   factory CaseModel.fromJson(Map<String, dynamic> json) => CaseModel(
     success: json['success'],
-    data: (json['data'] as List?)?.map((e) => CaseData.fromJson(e)).toList(),
+    data: (json['data'] as List?)
+        ?.map((e) => CaseData.fromJson(e))
+        .toList(),
     pagination: json['pagination'] != null
         ? Pagination.fromJson(json['pagination'])
         : null,
@@ -21,94 +23,83 @@ class CaseModel {
 }
 
 class CaseData {
-  CaseType? caseType;
+  String? id;
+  dynamic dentist;
   Standard? standard;
   Premium? premium;
   AdminApproval? adminApproval;
-  String? id;
+  String? status;
+  String? createdAt;
+  List<GlobalAttachment>? globalAttachments;
+  String? caseType;
+  String? gender;
+  int? age;
   String? patientID;
   String? selectedTier;
-  ClinicId? clinicId;
-  String? status;
-  String? assignedTo;
+  String? description;
   bool? isArchived;
-  String? createdBy;
-  String? createdAt;
-  String? updatedAt;
-  int? v;
 
   CaseData({
-    this.caseType,
+    this.id,
+    this.dentist,
     this.standard,
     this.premium,
     this.adminApproval,
-    this.id,
+    this.status,
+    this.createdAt,
+    this.globalAttachments,
+    this.caseType,
+    this.gender,
+    this.age,
     this.patientID,
     this.selectedTier,
-    this.clinicId,
-    this.status,
-    this.assignedTo,
+    this.description,
     this.isArchived,
-    this.createdBy,
-    this.createdAt,
-    this.updatedAt,
-    this.v,
   });
 
   factory CaseData.fromJson(Map<String, dynamic> json) => CaseData(
-    caseType: json['caseType'] != null
-        ? CaseType.fromJson(json['caseType'])
+    id: json['_id'],
+    dentist: json['dentist'],
+    standard: json['standard'] != null
+        ? Standard.fromJson(json['standard'])
         : null,
-    standard:
-    json['standard'] != null ? Standard.fromJson(json['standard']) : null,
     premium:
     json['premium'] != null ? Premium.fromJson(json['premium']) : null,
     adminApproval: json['adminApproval'] != null
         ? AdminApproval.fromJson(json['adminApproval'])
         : null,
-    id: json['_id'],
+    status: json['status'],
+    createdAt: json['createdAt'],
+    globalAttachments: (json['globalAttachments'] as List?)
+        ?.map((e) => GlobalAttachment.fromJson(e))
+        .toList(),
+    caseType: json['caseType'],
+    gender: json['gender'],
+    age: json['age'],
     patientID: json['patientID'],
     selectedTier: json['selectedTier'],
-    clinicId: json['clinicId'] != null
-        ? ClinicId.fromJson(json['clinicId'])
-        : null,
-    status: json['status'],
-    assignedTo: json['assignedTo'],
+    description: json['description'],
     isArchived: json['isArchived'],
-    createdBy: json['createdBy'],
-    createdAt: json['createdAt'],
-    updatedAt: json['updatedAt'],
-    v: json['__v'],
   );
 
   Map<String, dynamic> toJson() => {
-    'caseType': caseType?.toJson(),
+    '_id': id,
+    'dentist': dentist,
     'standard': standard?.toJson(),
     'premium': premium?.toJson(),
     'adminApproval': adminApproval?.toJson(),
-    '_id': id,
+    'status': status,
+    'createdAt': createdAt,
+    'globalAttachments':
+    globalAttachments?.map((e) => e.toJson()).toList(),
+    'caseType': caseType,
+    'gender': gender,
+    'age': age,
     'patientID': patientID,
     'selectedTier': selectedTier,
-    'clinicId': clinicId?.toJson(),
-    'status': status,
-    'assignedTo': assignedTo,
+    'description': description,
     'isArchived': isArchived,
-    'createdBy': createdBy,
-    'createdAt': createdAt,
-    'updatedAt': updatedAt,
-    '__v': v,
   };
-}
-
-class CaseType {
-  List<dynamic>? enumList;
-
-  CaseType({this.enumList});
-
-  factory CaseType.fromJson(Map<String, dynamic> json) =>
-      CaseType(enumList: json['enum'] ?? []);
-
-  Map<String, dynamic> toJson() => {'enum': enumList};
 }
 
 class Standard {
@@ -147,7 +138,7 @@ class Premium {
   });
 
   factory Premium.fromJson(Map<String, dynamic> json) => Premium(
-    crownBridge: json['crownBridge'],
+    crownBridge: json['CrownBridge'],
     dentures: json['dentures'],
     implants: json['implants'],
     orthodontic: json['orthodontic'],
@@ -155,7 +146,7 @@ class Premium {
   );
 
   Map<String, dynamic> toJson() => {
-    'crownBridge': crownBridge,
+    'CrownBridge': crownBridge,
     'dentures': dentures,
     'implants': implants,
     'orthodontic': orthodontic,
@@ -165,13 +156,43 @@ class Premium {
 
 class AdminApproval {
   String? status;
+  String? approvedAt;
 
-  AdminApproval({this.status});
+  AdminApproval({this.status, this.approvedAt});
 
-  factory AdminApproval.fromJson(Map<String, dynamic> json) =>
-      AdminApproval(status: json['status']);
+  factory AdminApproval.fromJson(Map<String, dynamic> json) => AdminApproval(
+    status: json['status'],
+    approvedAt: json['approvedAt'],
+  );
 
-  Map<String, dynamic> toJson() => {'status': status};
+  Map<String, dynamic> toJson() => {
+    'status': status,
+    'approvedAt': approvedAt,
+  };
+}
+
+class GlobalAttachment {
+  String? fileUrl;
+  String? fileName;
+  String? uploadedAt;
+  String? id;
+
+  GlobalAttachment({this.fileUrl, this.fileName, this.uploadedAt, this.id});
+
+  factory GlobalAttachment.fromJson(Map<String, dynamic> json) =>
+      GlobalAttachment(
+        fileUrl: json['fileUrl'],
+        fileName: json['fileName'],
+        uploadedAt: json['uploadedAt'],
+        id: json['_id'],
+      );
+
+  Map<String, dynamic> toJson() => {
+    'fileUrl': fileUrl,
+    'fileName': fileName,
+    'uploadedAt': uploadedAt,
+    '_id': id,
+  };
 }
 
 class ClinicId {
@@ -187,8 +208,7 @@ class ClinicId {
     email: json['email'],
   );
 
-  Map<String, dynamic> toJson() =>
-      {'_id': id, 'name': name, 'email': email};
+  Map<String, dynamic> toJson() => {'_id': id, 'name': name, 'email': email};
 }
 
 class Pagination {
@@ -197,8 +217,7 @@ class Pagination {
   int? totalItems;
   int? itemsPerPage;
 
-  Pagination(
-      {this.currentPage, this.totalPages, this.totalItems, this.itemsPerPage});
+  Pagination({this.currentPage, this.totalPages, this.totalItems, this.itemsPerPage});
 
   factory Pagination.fromJson(Map<String, dynamic> json) => Pagination(
     currentPage: json['currentPage'],

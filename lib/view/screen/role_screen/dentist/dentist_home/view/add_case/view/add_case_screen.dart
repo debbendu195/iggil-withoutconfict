@@ -1193,12 +1193,6 @@ class AddCaseScreen extends StatelessWidget {
           if (controller.premiumOrthodonticType.value == "Fixed Retainer") {
             return Column(
               children: [
-                _InstructionCardWidget(
-                  controller: controller.orthoFixedRetainerController,
-                  title: "Description",
-                  hintText: "Describe your Fixed Retainer case",
-                ),
-                SizedBox(height: 15.h),
                 _FileUploadWidget(
                   selectedFiles: controller.orthoFixedRetainerAttachments,
                   onTap: controller.pickFiles,

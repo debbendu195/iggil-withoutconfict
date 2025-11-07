@@ -58,7 +58,8 @@ class LabManagerHomeScreen extends StatelessWidget {
                         itemCount: 10,
                         itemBuilder: (context, index) {
                           return CustomLabManagerCaseCard(
-                            all: false,
+                            onTapCase :() {},
+                            newStatus: false,
                             inProgress: true,
                             complete: true,
                           );

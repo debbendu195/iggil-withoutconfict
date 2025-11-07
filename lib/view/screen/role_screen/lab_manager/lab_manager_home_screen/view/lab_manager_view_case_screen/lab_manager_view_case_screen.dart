@@ -12,7 +12,8 @@ import '../../../../../../../core/app_routes/app_routes.dart';
 import '../../../../../../components/custom_button/custom_button.dart';
 
 class LabManagerViewCaseScreen extends StatelessWidget {
-  const LabManagerViewCaseScreen({super.key});
+   LabManagerViewCaseScreen({super.key});
+   final caseId = Get.arguments;
 
   @override
   Widget build(BuildContext context) {
@@ -187,7 +188,7 @@ class LabManagerViewCaseScreen extends StatelessWidget {
                         fontWeight: FontWeight.bold,
                         color: AppColors.black,
                       ),
-                      InkWell( onTap: (){Get.toNamed(AppRoutes.caseDocumentScreen);}, child: Icon(Icons.description)),
+                      InkWell( onTap: (){Get.toNamed(AppRoutes.caseDocumentScreen,arguments: caseId);}, child: Icon(Icons.description)),
                     ],
                   ),
                 ),

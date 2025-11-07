@@ -14,12 +14,12 @@ class CustomLabManagerCaseCard extends StatelessWidget {
     this.description,
     this.progress = 0.0,
     this.timeAgo,
-    this.onTap,
+     required this.onTapCase,
     this.status = "New",
     this.statusColor,
-    this.all = false,
     this.inProgress = false,
     this.complete = false,
+    this.newStatus,
   });
 
   final String? title;
@@ -27,14 +27,14 @@ class CustomLabManagerCaseCard extends StatelessWidget {
   final String? description;
   final double progress;
   final String? timeAgo;
-  final VoidCallback? onTap;
+  final VoidCallback onTapCase;
 
   final String status;
   final Color? statusColor;
-
-  final bool all;
   final bool inProgress;
   final bool complete;
+  final bool? newStatus;
+
 
   @override
   Widget build(BuildContext context) {
@@ -65,7 +65,7 @@ class CustomLabManagerCaseCard extends StatelessWidget {
                 SizedBox(width: 6),
 
                 /// All Badge
-                all == false
+                newStatus == false
                     ? Container(
                         padding:
                             EdgeInsets.symmetric(horizontal: 12, vertical: 4),
@@ -143,9 +143,6 @@ class CustomLabManagerCaseCard extends StatelessWidget {
             SizedBox(height: 16),
             CustomCaseCardDescription(item1: 'Return Date',item2:'10/09/2025',),
             SizedBox(height: 16),
-
-
-
             /// Description
             CustomText(
               textAlign: TextAlign.start,
@@ -160,9 +157,7 @@ class CustomLabManagerCaseCard extends StatelessWidget {
             /// Button
             CustomButton(
               title: "View Case",
-              onTap: () {
-                Get.toNamed(AppRoutes.labManagerViewCaseScreen);
-              },
+              onTap: onTapCase,
               textColor: Colors.white,
               borderRadius: 8,
               height: 45,
