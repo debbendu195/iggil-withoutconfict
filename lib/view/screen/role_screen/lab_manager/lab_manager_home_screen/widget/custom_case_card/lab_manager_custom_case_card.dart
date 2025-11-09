@@ -14,7 +14,7 @@ class CustomLabManagerCaseCard extends StatelessWidget {
     this.description,
     this.progress = 0.0,
     this.timeAgo,
-     required this.onTapCase,
+    required this.onTapCase,
     this.status = "New",
     this.statusColor,
     this.inProgress = false,

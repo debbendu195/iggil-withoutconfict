@@ -11,7 +11,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 class ViewCaseScreen extends StatelessWidget {
-  const ViewCaseScreen({super.key});
+  ViewCaseScreen({super.key});
+  final caseId = Get.arguments;
 
   @override
   Widget build(BuildContext context) {
@@ -178,7 +179,7 @@ class ViewCaseScreen extends StatelessWidget {
                     ),
                     InkWell(
                         onTap: () {
-                          Get.toNamed(AppRoutes.caseDocumentScreen);
+                          Get.toNamed(AppRoutes.caseDocumentScreen, arguments: caseId);
                         },
                         child: Icon(Icons.description)),
                   ],

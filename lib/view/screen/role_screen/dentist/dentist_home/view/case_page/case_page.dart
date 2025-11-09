@@ -1,4 +1,3 @@
-import 'package:event_platform/core/app_routes/app_routes.dart';
 import 'package:event_platform/utils/app_colors/app_colors.dart';
 import 'package:event_platform/view/components/custom_royel_appbar/custom_royel_appbar.dart';
 import 'package:event_platform/view/components/custom_text/custom_text.dart';
@@ -34,7 +33,7 @@ class CaseDocumentScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               CustomText(
-                text: 'caseDocumentTitle'.tr,
+                text: 'Case Document Title'.tr,
                 fontSize: 16,
                 color: AppColors.primary,
                 fontWeight: FontWeight.w700,
@@ -66,11 +65,11 @@ class CaseDocumentScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     buildTextRow('caseType'.tr, caseData.value?.caseType??""),
-                    buildTextRow('patientId'.tr, controller.patientId.value),
-                    buildTextRow('gender'.tr, controller.gender.value),
-                    buildTextRow('age'.tr, controller.age.value),
+                    buildTextRow('patientId'.tr, caseData.value?.patientID??""),
+                    buildTextRow('gender'.tr, caseData.value?.gender??""),
+                    buildTextRow('age'.tr, caseData.value?.age.toString()??""),
                     buildTextRow('scanNumber'.tr, controller.scanNumber.value),
-                    buildTextRow('standardPremium'.tr, controller.standard.value),
+                    buildTextRow('standardPremium'.tr, caseData.value?.selectedTier??""),
                     buildTextRow('crownBridge'.tr, controller.crownBridge.value),
                     buildTextRow('ppm'.tr, controller.ppm.value),
                     buildTextRow('singleUnitCrown'.tr, controller.singleUnit.value),

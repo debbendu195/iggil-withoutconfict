@@ -76,51 +76,51 @@ class _MyCaseScreenState extends State<NurseMyCaseScreen> {
             SizedBox(height: 20.h),
         
             /// ================= Case List =================
-            Expanded(
-              child: ListView(
-                padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-                children: [
-                  if (caseController.currentIndex.value == 0)
-                    Column(
-                      children: List.generate(2, (value) {
-                        return CustomCaseCard(
-                          all: false,
-                          inProgress: true,
-                          complete: true,
-                        );
-                      }),
-                    ),
-                  if (caseController.currentIndex.value == 1)
-                    Column(
-                      children: List.generate(2, (value) {
-                        return CustomCaseCard(
-                          all: true,
-                          inProgress: false,
-                          complete: true,
-                          progress: 0.5,
-                        );
-                      }),
-                    ),
-                  if (caseController.currentIndex.value == 2)
-                    Column(
-                      children: List.generate(2, (value) {
-                        return CustomCaseCard(
-                          all: true,
-                          inProgress: true,
-                          complete: false,
-                          progress: 1,
-                        );
-                      }),
-                    ),
-                  if (caseController.currentIndex.value == 3)
-                    Column(
-                        children: List.generate(2, (value){
-                          return CustomCaseTabbarArchived();
-                        })
-                    ),
-                ],
-              ),
-            ),
+            // Expanded(
+            //   child: ListView(
+            //     padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+            //     children: [
+            //       if (caseController.currentIndex.value == 0)
+            //         Column(
+            //           children: List.generate(2, (value) {
+            //             return CustomCaseCard(
+            //               all: false,
+            //               inProgress: true,
+            //               complete: true,
+            //             );
+            //           }),
+            //         ),
+            //       if (caseController.currentIndex.value == 1)
+            //         Column(
+            //           children: List.generate(2, (value) {
+            //             return CustomCaseCard(
+            //               all: true,
+            //               inProgress: false,
+            //               complete: true,
+            //               progress: 0.5,
+            //             );
+            //           }),
+            //         ),
+            //       if (caseController.currentIndex.value == 2)
+            //         Column(
+            //           children: List.generate(2, (value) {
+            //             return CustomCaseCard(
+            //               all: true,
+            //               inProgress: true,
+            //               complete: false,
+            //               progress: 1,
+            //             );
+            //           }),
+            //         ),
+            //       if (caseController.currentIndex.value == 3)
+            //         Column(
+            //             children: List.generate(2, (value){
+            //               return CustomCaseTabbarArchived();
+            //             })
+            //         ),
+            //     ],
+            //   ),
+            // ),
           ],
         ),
       ),

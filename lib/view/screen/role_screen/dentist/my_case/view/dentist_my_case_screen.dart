@@ -13,6 +13,7 @@ import '../../../../../components/custom_text/custom_text.dart';
 import '../../../../../components/custom_text_field/custom_text_field.dart';
 import '../../../lab_manager/lab_manager_home_screen/widget/custom_case_card/lab_manager_custom_case_card.dart';
 import '../../dentist_home/controller/case_home_controller.dart';
+import '../../dentist_home/widget/custom_case_card/custom_case_card.dart';
 import '../controller/case_controller.dart';
 import '../widget/custom_case_tabbar.dart';
 
@@ -105,7 +106,7 @@ class DentistMyCaseScreen extends StatelessWidget {
                           // controller er list variable ekhane call korbo
                           final caseData = controller.caseList[index];
 
-                          return CustomLabManagerCaseCard(
+                          /*return CustomLabManagerCaseCard(
                             onTapCase :(){
                               Get.toNamed(AppRoutes.labManagerViewCaseScreen,arguments: caseData.id);
                             },
@@ -115,7 +116,19 @@ class DentistMyCaseScreen extends StatelessWidget {
                             doctorName: "Api Thakhe Name Asbe",
                             title:  "Api thakhe asbe KI Title hobe",
                             description: caseData.description,
+                          );*/
+                          return CustomCaseCard(
+                            onTapCase :(){
+                              Get.toNamed(AppRoutes.viewCaseScreen,arguments: caseData.id);
+                            },
+                            newStatus: false,
+                            inProgress: true,
+                            complete: true,
+                            doctorName: "Api Thakhe Name Asbe",
+                            title:  "Api thakhe asbe KI Title hobe",
+                            description: caseData.description,
                           );
+
                         } else {
                           return controller.isLoadingMore.value
                               ? const Padding(

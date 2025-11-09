@@ -15,10 +15,10 @@ class CustomCaseCard extends StatelessWidget {
     this.description,
     this.progress = 0.0,
     this.timeAgo,
-    this.onTap,
+    required this.onTapCase,
     this.status = "New",
     this.statusColor,
-    this.all = false,
+    this.newStatus,
     this.inProgress = false,
     this.complete = false,
   });
@@ -28,12 +28,12 @@ class CustomCaseCard extends StatelessWidget {
   final String? description;
   final double progress;
   final String? timeAgo;
-  final VoidCallback? onTap;
+  final VoidCallback onTapCase;
 
   final String status;
   final Color? statusColor;
 
-  final bool all;
+  final bool? newStatus;
   final bool inProgress;
   final bool complete;
 
@@ -66,7 +66,7 @@ class CustomCaseCard extends StatelessWidget {
                 const SizedBox(width: 6),
 
                 /// All Badge
-                all == false
+                newStatus == false
                     ? Container(
                   padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
                   decoration: BoxDecoration(
@@ -165,6 +165,16 @@ class CustomCaseCard extends StatelessWidget {
             /// Button
             CustomButton(
               title: 'viewCase'.tr,
+              onTap: onTapCase,
+              textColor: Colors.white,
+              borderRadius: 8,
+              height: 45,
+              width: double.infinity,
+              fillColor: statusColor ?? AppColors.primary,
+            ),
+
+           /* CustomButton(
+              title: 'viewCase'.tr,
               onTap: () {
                 Get.toNamed(AppRoutes.viewCaseScreen);
               },
@@ -173,7 +183,9 @@ class CustomCaseCard extends StatelessWidget {
               height: 45,
               width: double.infinity,
               fillColor: statusColor ?? AppColors.primary,
-            ),
+            ),*/
+
+
           ],
         ),
       ),

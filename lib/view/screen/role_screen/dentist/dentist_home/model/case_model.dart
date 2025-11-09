@@ -23,6 +23,7 @@ class CaseModel {
 }
 
 class CaseData {
+  //need one more field for title
   String? id;
   dynamic dentist;
   Standard? standard;

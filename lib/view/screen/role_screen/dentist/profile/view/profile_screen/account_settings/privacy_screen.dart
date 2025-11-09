@@ -45,10 +45,11 @@ class PrivacyScreen extends StatelessWidget {
                     case Status.completed:
                       return Column(
                         children: [
-                          HtmlWidget(
-                            profileController
-                                    .privacyModel.value.privacyPolicy ??
+                          HtmlWidget(     profileController
+                              .privacyModel.value.privacyPolicy ??
+
                                 'Privacy Policy is empty',
+
                             textStyle: TextStyle(
                               color: AppColors.black,
                               fontSize: 18.sp,

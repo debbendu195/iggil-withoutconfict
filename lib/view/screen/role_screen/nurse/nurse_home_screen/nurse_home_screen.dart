@@ -43,19 +43,20 @@ class NurseHomeScreen extends StatelessWidget {
                       ),
 
                       /// Card Section with vertical padding
-                      ListView.builder(
-                        padding: EdgeInsets.only(top: 20.h),
-                        physics: const NeverScrollableScrollPhysics(),
-                        shrinkWrap: true,
-                        itemCount: 10,
-                        itemBuilder: (context, index) {
-                          return CustomCaseCard(
-                            all: false,
-                            inProgress: true,
-                            complete: true,
-                          );
-                        },
-                      )
+                      // ListView.builder(
+                      //   padding: EdgeInsets.only(top: 20.h),
+                      //   physics: const NeverScrollableScrollPhysics(),
+                      //   shrinkWrap: true,
+                      //   itemCount: 10,
+                      //   itemBuilder: (context, index) {
+                      //     return CustomCaseCard(
+                      //       all: false,
+                      //       inProgress: true,
+                      //       complete: true,
+                      //     );
+                      //   },
+                      // )
+
                     ],
                   ),
                 ),
