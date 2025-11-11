@@ -8,9 +8,6 @@ import 'package:get/get.dart';
 import '../../../components/custom_loader/custom_loader.dart';
 import '../controller/login_controller.dart';
 
-
-
-
 class LoginScreen extends StatelessWidget {
   LoginScreen({super.key});
 

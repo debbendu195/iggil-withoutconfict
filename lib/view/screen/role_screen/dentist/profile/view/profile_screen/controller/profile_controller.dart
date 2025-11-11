@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:image_picker/image_picker.dart';
 
 import '../../../../../../../../core/app_routes/app_routes.dart';
@@ -323,31 +324,40 @@ class ProfileController extends GetxController {
   }
   //========== Get Terms & Conditions controller ==========
 
+//========== Get Terms & Conditions controller ==========
+
   final rxTermsStatus = Status.loading.obs;
   void setTermsStatus(Status value) {
     rxTermsStatus.value = value;
   }
 
+  final storage = GetStorage();
   Rx<TermsModel> termsModel = TermsModel().obs;
+
   Future<void> getTermsConditions() async {
     var response = await ApiClient.getData(ApiUrl.termsCondition);
+
     if (response.statusCode == 200) {
       try {
-        rxTermsStatus.value = Status.completed;
-        var data = response.body["data"];
-        termsModel.value = TermsModel.fromJson(data);
-        debugPrint(
-            '======================================>Profile Image ${termsModel.value.toJson()}');
-        refresh();
+        var data = response.body;
+
+        if (data != null && data is Map<String, dynamic>) {
+          termsModel.value = TermsModel.fromJson(data);
+          setTermsStatus(Status.completed);
+
+          await storage.write("terms_condition", termsModel.value.description);
+          debugPrint('==================> Terms and Conditions Loaded: ${termsModel.value.toJson()}');
+        } else {
+          setTermsStatus(Status.error);
+          debugPrint("API response body is null or not a map.");
+        }
       } catch (e) {
-        // Catch parsing issues
         setTermsStatus(Status.error);
-        debugPrint("Parsing error: $e");
-        refresh();
+        debugPrint("Parsing error in getTermsConditions: $e");
       }
-    }else if(response.statusCode == 404){
-      rxTermsStatus.value =Status.error;
-      //  setAboutStatus(Status.error);
+    }
+    else if(response.statusCode == 404){
+      rxTermsStatus.value = Status.error;
       termsModel.value = TermsModel();
     }
     else {
@@ -356,9 +366,13 @@ class ProfileController extends GetxController {
       } else {
         setTermsStatus(Status.error);
       }
-      // ApiChecker.checkApi(response);
       refresh();
     }
+  }
+
+  // Access from local storage when needed
+  String? getStoredTerms() {
+    return storage.read("terms_condition");
   }
 
   //==================== Get Privacy Policy =================

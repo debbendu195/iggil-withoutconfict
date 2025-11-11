@@ -23,7 +23,7 @@ class ApiUrl {
   static const String updateProfileWithPhoto = "/api/v1/user/user-update-personal-info";
   static const String updateProfile = "/api/v1/user/user-update-personal-info";
   static const String privacyPolicy = "/api/v1/setting/privacy-policy";
-  static const String termsCondition = "/api/v1/setting/about-us";
-  static const String aboutUs = "/api/v1/setting/trams";
+  static const String termsCondition = "/api/v1/setting/trams";
+  static const String aboutUs = "/api/v1/setting/about-us";
 
 }

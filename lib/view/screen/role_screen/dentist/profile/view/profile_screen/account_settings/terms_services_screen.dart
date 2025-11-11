@@ -46,8 +46,8 @@ class TermsServicesScreen extends StatelessWidget {
                 return Column(
                   children: [
                     HtmlWidget(
-                      profileController.termsModel.value.termsCondition != null
-                          ? profileController.termsModel.value.termsCondition!
+                      profileController.termsModel.value.description != null
+                          ? profileController.termsModel.value.description!
                           : 'About Us Is Empty Data',
                       textStyle: TextStyle(
                         color: AppColors.black,

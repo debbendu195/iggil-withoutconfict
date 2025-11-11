@@ -16,6 +16,7 @@ class CaseDetailsModel {
 class CaseDetailsData {
   String? id;
   String? caseType;
+  String? caseNumber;
   String? gender;
   int? age;
   String? patientID;
@@ -32,6 +33,7 @@ class CaseDetailsData {
   CaseDetailsData({
     this.id,
     this.caseType,
+    this.caseNumber,
     this.gender,
     this.age,
     this.patientID,
@@ -50,6 +52,7 @@ class CaseDetailsData {
     return CaseDetailsData(
       id: json['_id'],
       caseType: json['caseType'],
+      caseNumber: json['caseNumber'],
       gender: json['gender'],
       age: json['age'],
       patientID: json['patientID'],
