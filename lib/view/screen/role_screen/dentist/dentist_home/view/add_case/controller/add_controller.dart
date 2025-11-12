@@ -55,6 +55,20 @@ class AddCaseController extends GetxController {
   var premiumDentureFinishFlexiTeeth = <String>[].obs;
   var premiumDentureFinishFlexiAttachments = <File>[].obs;
 
+  // MISC Section Variables
+  var miscType = ''.obs;
+  var softNightGuardPosition = 'Upper'.obs; // Default Upper
+
+  void onMiscTypeChange(String value) {
+    miscType.value = value;
+    update();
+  }
+
+  void onSoftNightGuardPositionChange(String value) {
+    softNightGuardPosition.value = value;
+    update();
+  }
+
   // ✅ =================================
   // ✅ NEW VARIABLES (Premium Orthodontic)
   // ✅ =================================

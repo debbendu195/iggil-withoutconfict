@@ -1,14 +1,14 @@
-import 'package:event_platform/core/app_routes/app_routes.dart';
-import 'package:event_platform/utils/app_colors/app_colors.dart';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../../../../../utils/app_strings/app_strings.dart';
-import '../../../../../../components/custom_button/custom_button.dart';
-import '../../../../../../components/custom_text/custom_text.dart';
-import '../custom_case_card_description/custom_case_card_description.dart';
+import '../../../../../../utils/app_colors/app_colors.dart';
+import '../../../../../components/custom_button/custom_button.dart';
+import '../../../../../components/custom_text/custom_text.dart';
+import '../../../dentist/dentist_home/widget/custom_case_card_description/custom_case_card_description.dart';
 
-class CustomCaseCard extends StatelessWidget {
-  const CustomCaseCard({
+class CustomNurseCard extends StatelessWidget {
+  const CustomNurseCard({
     super.key,
     this.title,
     this.doctorName,

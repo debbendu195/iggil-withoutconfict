@@ -1,16 +1,14 @@
+import 'package:event_platform/view/components/custom_royel_appbar/custom_royel_appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-
+import '../../../../../../../core/app_routes/app_routes.dart';
 import '../../../../../../../utils/app_colors/app_colors.dart';
-import '../../../../../../components/custom_nav_bar/practice_managet_navbar.dart';
 import '../../../../../../components/custom_text/custom_text.dart';
 import '../../../../../../components/custom_text_field/custom_text_field.dart';
 import '../../../../dentist/my_case/controller/case_controller.dart';
 import '../../../../dentist/my_case/widget/custom_case_tabbar.dart';
-import '../../../../dentist/my_case/widget/custom_case_tabbar_archived.dart';
-import '../../../../lab_manager/lab_manager_home_screen/widget/custom_case_card/lab_manager_custom_case_card.dart';
-
+import '../../widget/custom_case_card/custom_practice_manager_custom_case_card.dart';
 
 class PracticeManagerMyCase extends StatefulWidget {
   const PracticeManagerMyCase({super.key});
@@ -25,6 +23,7 @@ class _MyCaseScreenState extends State<PracticeManagerMyCase> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: CustomRoyelAppbar(leftIcon: true, titleName: "All My Case",),
       body: SafeArea(
         child: Column(
           children: [
@@ -44,18 +43,18 @@ class _MyCaseScreenState extends State<PracticeManagerMyCase> {
                     prefixIcon: Icon(Icons.search, color: AppColors.black),
                   ),
                   SizedBox(height: 24),
-        
+
                   CustomText(
                     text: 'All Cases Posted by Dentists',
                     color: AppColors.primary,
                     fontSize: 16,
                     fontWeight: FontWeight.w600,
                   ),
-        
+
                   SizedBox(height: 24),
-        
+
                   /// ============= Custom Tab Bar =============
-        
+
                   CustomCaseTabbar(
                     textColor: AppColors.white,
                     tabs: caseController.tabNamelist,
@@ -69,9 +68,9 @@ class _MyCaseScreenState extends State<PracticeManagerMyCase> {
                 ],
               ),
             ),
-        
+
             SizedBox(height: 20.h),
-        
+
             /// ================= Case List =================
             Expanded(
               child: ListView(
@@ -80,8 +79,10 @@ class _MyCaseScreenState extends State<PracticeManagerMyCase> {
                   if (caseController.currentIndex.value == 0)
                     Column(
                       children: List.generate(2, (value) {
-                        return CustomLabManagerCaseCard(
-                          onTapCase :() {},
+                        return CustomPracticeManagerCustomCaseCard(
+                          onTapCase: () {
+                            Get.toNamed(AppRoutes.viewCaseScreen);
+                          },
                           newStatus: false,
                           inProgress: true,
                           complete: true,
@@ -91,32 +92,28 @@ class _MyCaseScreenState extends State<PracticeManagerMyCase> {
                   if (caseController.currentIndex.value == 1)
                     Column(
                       children: List.generate(2, (value) {
-                        return CustomLabManagerCaseCard(
-                          onTapCase :() {},
-                          newStatus: false,
+                        return CustomPracticeManagerCustomCaseCard(
+                          onTapCase: () {
+                            Get.toNamed(AppRoutes.viewCaseScreen);
+                          },
+                          newStatus: true,
                           inProgress: false,
                           complete: true,
-                          progress: 0.5,
                         );
                       }),
                     ),
                   if (caseController.currentIndex.value == 2)
                     Column(
                       children: List.generate(2, (value) {
-                        return CustomLabManagerCaseCard(
-                          onTapCase :() {},
-                          newStatus: false,
+                        return CustomPracticeManagerCustomCaseCard(
+                          onTapCase: () {
+                            Get.toNamed(AppRoutes.viewCaseScreen);
+                          },
+                          newStatus: true,
                           inProgress: true,
                           complete: false,
-                          progress: 1,
                         );
                       }),
-                    ),
-                  if (caseController.currentIndex.value == 3)
-                    Column(
-                        children: List.generate(2, (value){
-                          return CustomCaseTabbarArchived();
-                        })
                     ),
                 ],
               ),
@@ -124,7 +121,6 @@ class _MyCaseScreenState extends State<PracticeManagerMyCase> {
           ],
         ),
       ),
-      bottomNavigationBar: PracticeManagetNavbar(currentIndex: 1),
     );
   }
 }

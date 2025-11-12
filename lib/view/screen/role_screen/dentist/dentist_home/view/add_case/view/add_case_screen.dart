@@ -1,14 +1,13 @@
-import 'dart:io'; // Import File for _FileUploadWidget
-import 'package:event_platform/utils/app_colors/app_colors.dart';
-import 'package:event_platform/view/components/custom_button/custom_button.dart';
-import 'package:event_platform/view/components/custom_from_card/custom_from_card.dart';
-import 'package:event_platform/view/components/custom_royel_appbar/custom_royel_appbar.dart';
-import 'package:event_platform/view/components/custom_text/custom_text.dart';
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
+import '../../../../../../../../utils/app_colors/app_colors.dart';
+import '../../../../../../../components/custom_button/custom_button.dart';
+import '../../../../../../../components/custom_from_card/custom_from_card.dart';
 import '../../../../../../../components/custom_loader/custom_loader.dart';
+import '../../../../../../../components/custom_royel_appbar/custom_royel_appbar.dart';
+import '../../../../../../../components/custom_text/custom_text.dart';
 import '../controller/add_controller.dart';
 import '../widget/custom_dropdown.dart';
 
@@ -164,7 +163,8 @@ class AddCaseScreen extends StatelessWidget {
           _buildStandardCrownBridge(),
         if (controller.standardType.value == "DENTURES")
           _buildStandardDentures(),
-        // TODO: Add Standard MISC form if needed
+        if (controller.standardType.value == "MISC")
+          _buildStandardMisc(),
       ],
     );
   }
@@ -1751,7 +1751,89 @@ class AddCaseScreen extends StatelessWidget {
       ],
     );
   }
+
+  /// MARK: Standard MISC Widget
+  Widget _buildStandardMisc() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        CustomDropdown(
+          label: "MISC Type",
+          hint: "Select MISC Type",
+          items: ["Soft Night Guard"], // Add more items if needed
+          onChanged: (val) => controller.onMiscTypeChange(val ?? ''),
+        ),
+        SizedBox(height: 20.h),
+
+        if (controller.miscType.value == "Soft Night Guard")
+          _buildSoftNightGuardForm(),
+      ],
+    );
+  }
+
+  /// MARK: Soft Night Guard Form
+  Widget _buildSoftNightGuardForm() {
+    return Obx(() {
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          CustomText(
+            text: "Select Position",
+            fontSize: 16,
+            fontWeight: FontWeight.w600,
+          ),
+          SizedBox(height: 12.h),
+
+          // Radio Buttons Side by Side (Compact)
+          Row(
+            children: [
+              // Upper Radio Button
+              Expanded(
+                child: InkWell(
+                  onTap: () => controller.onSoftNightGuardPositionChange('Upper'),
+                  child: Row(
+                    children: [
+                      Radio<String>(
+                        value: "Upper",
+                        groupValue: controller.softNightGuardPosition.value,
+                        onChanged: (val) => controller.onSoftNightGuardPositionChange(val ?? 'Upper'),
+                        activeColor: AppColors.primary,
+                      ),
+                      CustomText(text: "Upper", fontSize: 14),
+                    ],
+                  ),
+                ),
+              ),
+
+              SizedBox(width: 20.w),
+
+              // Lower Radio Button
+              Expanded(
+                child: InkWell(
+                  onTap: () => controller.onSoftNightGuardPositionChange('Lower'),
+                  child: Row(
+                    children: [
+                      Radio<String>(
+                        value: "Lower",
+                        groupValue: controller.softNightGuardPosition.value,
+                        onChanged: (val) => controller.onSoftNightGuardPositionChange(val ?? 'Lower'),
+                        activeColor: AppColors.primary,
+                      ),
+                      CustomText(text: "Lower", fontSize: 14),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ],
+      );
+    });
+  }
+
 } // ✅ End of AddCaseScreen class
+
+
 
 ///Shades selection widget
 /// ✅ Professional Shade Selector Dropdown Widget

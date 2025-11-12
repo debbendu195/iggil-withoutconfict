@@ -1,12 +1,12 @@
 import 'package:event_platform/view/components/custom_nav_bar/technician_navbar.dart';
+import 'package:event_platform/view/screen/role_screen/technician/technician_home/widget/custom_technician_case_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
+import '../../../../../../core/app_routes/app_routes.dart';
 import '../../../../../../utils/app_colors/app_colors.dart';
-import '../../../../../../utils/app_const/app_const.dart';
-import '../../../../../components/custom_button/custom_button.dart';
-import '../../../../../components/custom_netwrok_image/custom_network_image.dart';
+import '../../../../../components/custom_royel_appbar/custom_royel_appbar.dart';
 import '../../../../../components/custom_text/custom_text.dart';
 import '../../../../../components/custom_text_field/custom_text_field.dart';
 import '../../../dentist/my_case/controller/case_controller.dart';
@@ -21,75 +21,10 @@ class TechnicianMyCaseScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: CustomRoyelAppbar(leftIcon: true, titleName: "All Case List",),
       body: SafeArea(
         child: Column(
           children: [
-            /// ================= Top Profile Section =================
-            Padding(
-              padding: const EdgeInsets.only(left: 10, right: 10, top: 30),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Row(
-                    children: [
-                      CustomNetworkImage(
-                        imageUrl: AppConstants.profileImage,
-                        boxShape: BoxShape.circle,
-                        height: 60.h,
-                        width: 60.w,
-                      ),
-                      SizedBox(width: 10.w),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          CustomText(
-                            text: "Welcome,",
-                            fontSize: 16.w,
-                            fontWeight: FontWeight.w700,
-                            color: AppColors.primary,
-                          ),
-                          CustomText(
-                            text: "Debbendu Paul",
-                            fontSize: 14.w,
-                            fontWeight: FontWeight.w500,
-                            color: AppColors.primary,
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      CustomButton(
-                        title: "EN",
-                        fontSize: 14,
-                        fontWeight: FontWeight.w500,
-                        onTap: () {},
-                        fillColor: AppColors.green,
-                        textColor: AppColors.primary,
-                        borderRadius: 30,
-                        height: 40,
-                        width: 60,
-                      ),
-                      SizedBox(width: 16.w),
-                      GestureDetector(
-                        onTap: () {},
-                        child: Icon(
-                          Icons.notifications,
-                          color: AppColors.black,
-                          size: 24,
-                        ),
-                      )
-                    ],
-                  ),
-                ],
-              ),
-            ),
-
-            SizedBox(height: 24),
-            Divider(thickness: 2),
-            SizedBox(height: 24),
-
             /// ================= Search + Tabs =================
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10),
@@ -143,8 +78,10 @@ class TechnicianMyCaseScreen extends StatelessWidget {
                     if (caseController.currentIndex.value == 0)
                       Column(
                         children: List.generate(2, (value) {
-                          return CustomLabManagerCaseCard(
-                            onTapCase :() {},
+                          return CustomTechnicianCaseCard(
+                            onTapCase: () {
+                              Get.toNamed(AppRoutes.technicianViewCaseScreen);
+                            },
                             newStatus: false,
                             inProgress: true,
                             complete: true,
@@ -155,9 +92,11 @@ class TechnicianMyCaseScreen extends StatelessWidget {
                     if (caseController.currentIndex.value == 1)
                       Column(
                         children: List.generate(2, (value) {
-                          return CustomLabManagerCaseCard(
-                            onTapCase :() {},
-                            newStatus: false,
+                          return CustomTechnicianCaseCard(
+                            onTapCase: () {
+                              Get.toNamed(AppRoutes.technicianViewCaseScreen);
+                            },
+                            newStatus: true,
                             inProgress: false,
                             complete: true,
                             progress: 0.5,
@@ -167,9 +106,11 @@ class TechnicianMyCaseScreen extends StatelessWidget {
                     if (caseController.currentIndex.value == 2)
                       Column(
                         children: List.generate(2, (value) {
-                          return CustomLabManagerCaseCard(
-                            onTapCase :() {},
-                            newStatus: false,
+                          return CustomTechnicianCaseCard(
+                            onTapCase: () {
+                              Get.toNamed(AppRoutes.technicianViewCaseScreen);
+                            },
+                            newStatus: true,
                             inProgress: true,
                             complete: false,
                             progress: 1,
@@ -183,7 +124,6 @@ class TechnicianMyCaseScreen extends StatelessWidget {
           ],
         ),
       ),
-      bottomNavigationBar: TechnicianNavbar(currentIndex: 1),
     );
   }
 }

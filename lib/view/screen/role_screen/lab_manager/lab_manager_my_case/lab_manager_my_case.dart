@@ -1,3 +1,4 @@
+/*
 import 'package:event_platform/view/components/custom_nav_bar/lab_manager_navbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -8,7 +9,7 @@ import '../../../../components/custom_text/custom_text.dart';
 import '../../../../components/custom_text_field/custom_text_field.dart';
 import '../../dentist/my_case/controller/case_controller.dart';
 import '../../dentist/my_case/widget/custom_case_tabbar.dart';
-import '../lab_manager_home_screen/widget/custom_case_card/lab_manager_custom_case_card.dart';
+import '../lab_manager_home_screen/widget/custom_case_card/custom_practice_manager_custom_case_card.dart';
 
 class LabManagerMyCase extends StatefulWidget {
   const LabManagerMyCase({super.key});
@@ -45,7 +46,7 @@ class _MyCaseScreenState extends State<LabManagerMyCase> {
                   SizedBox(height: 24),
         
                   CustomText(
-                    text: 'All Cases Posted by Dentists',
+                    text: '',
                     color: AppColors.primary,
                     fontSize: 16,
                     fontWeight: FontWeight.w600,
@@ -121,3 +122,4 @@ class _MyCaseScreenState extends State<LabManagerMyCase> {
     );
   }
 }
+*/

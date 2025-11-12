@@ -2,8 +2,8 @@ import 'package:event_platform/utils/app_colors/app_colors.dart';
 import 'package:event_platform/view/components/custom_royel_appbar/custom_royel_appbar.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../../components/custom_text/custom_text.dart';
-import '../../../lab_manager/lab_manager_home_screen/widget/lab_managment_archives/custom_lab_managment_archived.dart';
+import '../../../../../../components/custom_text/custom_text.dart';
+import '../../../../lab_manager/lab_manager_home_screen/widget/lab_managment_archives/custom_lab_managment_archived.dart';
 
 class NurseArchives extends StatelessWidget {
   const NurseArchives({super.key});

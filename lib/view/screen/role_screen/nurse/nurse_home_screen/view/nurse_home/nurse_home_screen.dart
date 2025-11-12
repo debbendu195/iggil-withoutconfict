@@ -1,17 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-
+import '../../../../../../../../../utils/app_colors/app_colors.dart';
 import '../../../../../../../core/app_routes/app_routes.dart';
-import '../../../../../../../utils/app_colors/app_colors.dart';
-import '../../../../../../components/custom_nav_bar/technician_navbar.dart';
+import '../../../../../../components/custom_nav_bar/nurse_navbar.dart';
 import '../../../../../../components/custom_text/custom_text.dart';
 import '../../../../../../components/custom_text_field/custom_text_field.dart';
-import '../../widget/custom_technician_case_card.dart';
+import '../../widget/custom_nurse_card.dart';
 
-class TechnicianHomeScreen extends StatelessWidget {
-  const TechnicianHomeScreen({super.key});
+class NurseHomeScreen extends StatelessWidget {
+  const NurseHomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -40,19 +38,25 @@ class TechnicianHomeScreen extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           CustomText(
-                            text: 'Recent Cases Posted by Dentists',
+                            text: 'recentCasesPostedByDentists'.tr, // ✅ localization
                             color: AppColors.primary,
                             fontSize: 16,
                             fontWeight: FontWeight.w600,
                           ),
-                          GestureDetector(onTap: (){
-                            Get.toNamed(AppRoutes.technicianMyCaseScreen);
-                          },
-                              child: CustomText(text: 'View', fontSize: 13, fontWeight: FontWeight.w700, color: AppColors.primary)
-                          )
+                          GestureDetector(
+                            onTap: () {
+                              Get.toNamed(AppRoutes.nurseMyCaseScreen);
+                            },
+                            child: CustomText(
+                              text: 'viewAll'.tr, // ✅ localization
+                              fontSize: 13,
+                              fontWeight: FontWeight.w700,
+                              color: AppColors.primary,
+                            ),
+                          ),
                         ],
                       ),
-        
+
                       /// Card Section with vertical padding
                       ListView.builder(
                         padding: EdgeInsets.only(top: 20.h),
@@ -60,9 +64,9 @@ class TechnicianHomeScreen extends StatelessWidget {
                         shrinkWrap: true,
                         itemCount: 10,
                         itemBuilder: (context, index) {
-                          return CustomTechnicianCaseCard(
+                          return CustomNurseCard(
                             onTapCase: () {
-                                Get.toNamed(AppRoutes.technicianViewCaseScreen);
+                              Get.toNamed(AppRoutes.viewCaseScreen);
                             },
                             newStatus: false,
                             inProgress: true,
@@ -70,6 +74,7 @@ class TechnicianHomeScreen extends StatelessWidget {
                           );
                         },
                       )
+
                     ],
                   ),
                 ),
@@ -78,7 +83,9 @@ class TechnicianHomeScreen extends StatelessWidget {
           ],
         ),
       ),
-      bottomNavigationBar: TechnicianNavbar(currentIndex: 1),
+      bottomNavigationBar: NurseNavbar(currentIndex: 1),
     );
   }
 }
+
+

@@ -43,12 +43,12 @@ import '../../view/screen/role_screen/lab_manager/lab_manager_profile/view/lab_m
 import '../../view/screen/role_screen/lab_manager/lab_manager_profile/view/lab_manager_profile_screen.dart';
 import '../../view/screen/role_screen/lab_manager/lab_manager_profile/view/lab_manager_profile_screen/lab_manager_notification_screen.dart';
 import '../../view/screen/role_screen/lab_manager/lab_managment_massage/lab_massage_list.dart';
-import '../../view/screen/role_screen/nurse/nurse_home_screen/nurse/nurse_list_screen.dart';
-import '../../view/screen/role_screen/nurse/nurse_home_screen/nurse_archives/nurse_archives.dart';
-import '../../view/screen/role_screen/nurse/nurse_home_screen/nurse_contract/nurse_contract_page.dart';
-import '../../view/screen/role_screen/nurse/nurse_home_screen/nurse_download/nurse_downloads.dart';
-import '../../view/screen/role_screen/nurse/nurse_home_screen/nurse_home_screen.dart';
-import '../../view/screen/role_screen/nurse/nurse_profile/account_settings/change_pass_screen.dart';
+import '../../view/screen/role_screen/nurse/nurse_home_screen/view/nurse/nurse_list_screen.dart';
+import '../../view/screen/role_screen/nurse/nurse_home_screen/view/nurse_archives/nurse_archives.dart';
+import '../../view/screen/role_screen/nurse/nurse_home_screen/view/nurse_contract/nurse_contract_page.dart';
+import '../../view/screen/role_screen/nurse/nurse_home_screen/view/nurse_download/nurse_downloads.dart';
+import '../../view/screen/role_screen/nurse/nurse_home_screen/view/nurse_home/nurse_home_screen.dart';
+import '../../view/screen/role_screen/nurse/nurse_my_case/nurse_my_case_screen.dart';
 import '../../view/screen/role_screen/nurse/nurse_profile/nurse_profile_screen.dart';
 import '../../view/screen/role_screen/practice_manager/practice_manager_home_screen/view/invoice/invoice_list_view/invoice_list_view.dart';
 import '../../view/screen/role_screen/practice_manager/practice_manager_home_screen/view/practice_manager_contact/practice_manager_contact.dart';
@@ -148,6 +148,7 @@ class AppRoutes {
  //========================= Nurse Part ================================//
   static const String nurseListScreen ="/NurseListScreen";
   static const String nurseHomeScreen ="/NurseHomeScreen";
+  static const String nurseMyCaseScreen ="/NurseMyCaseScreen";
   static const String nurseArchives ="/NurseArchives";
   static const String nurseContractPage ="/NurseContractPage";
   static const String nurseDownloads ="/NurseDownloads";
@@ -234,6 +235,7 @@ class AppRoutes {
 //========================= Nurse Part ================================//
     GetPage(name: nurseListScreen, page: () => NurseListScreen()),
     GetPage(name: nurseHomeScreen, page: () => NurseHomeScreen()),
+    GetPage(name: nurseMyCaseScreen, page: () => NurseMyCaseScreen()),
     GetPage(name: nurseArchives, page: () => NurseArchives()),
     GetPage(name: nurseContractPage, page: () => NurseContractPage()),
     GetPage(name: nurseDownloads, page: () => NurseDownloads()),

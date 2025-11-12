@@ -17,9 +17,10 @@ class CustomTechnicianCaseCard extends StatelessWidget {
     this.progress = 0.0,
     this.timeAgo,
     this.onTap,
+    required this.onTapCase,
     this.status = "New",
     this.statusColor,
-    this.all = false,
+    this.newStatus = false,
     this.inProgress = false,
     this.complete = false,
   });
@@ -30,11 +31,12 @@ class CustomTechnicianCaseCard extends StatelessWidget {
   final double progress;
   final String? timeAgo;
   final VoidCallback? onTap;
+  final VoidCallback onTapCase;
 
   final String status;
   final Color? statusColor;
 
-  final bool all;
+  final bool newStatus;
   final bool inProgress;
   final bool complete;
 
@@ -67,7 +69,7 @@ class CustomTechnicianCaseCard extends StatelessWidget {
                 SizedBox(width: 6),
 
                 /// All Badge
-                all == false
+                newStatus == false
                     ? Container(
                   padding:
                   EdgeInsets.symmetric(horizontal: 12, vertical: 4),
@@ -162,9 +164,7 @@ class CustomTechnicianCaseCard extends StatelessWidget {
             /// Button
             CustomButton(
               title: "View Case",
-              onTap: () {
-                Get.toNamed(AppRoutes.technicianViewCaseScreen);
-              },
+              onTap: onTapCase,
               textColor: Colors.white,
               borderRadius: 8,
               height: 45,

@@ -107,11 +107,19 @@ class LoginController extends GetxController {
           debugPrint('Saved User ID: $savedUserId');
           debugPrint('Saved Role: $savedRole');
 
-          // Navigate based on role
-          if (userRole.toLowerCase() == "dentist") {
+          // ✅ Navigate based on user role (using if–else)
+          if (userRole == "dentist") {
             Get.offAllNamed(AppRoutes.dentistListScreen);
-          } else {
+          } else if (userRole == "labmanager") {
             Get.offAllNamed(AppRoutes.labManagerListScreen);
+          } else if (userRole == "practicenurse") {
+            Get.offAllNamed(AppRoutes.nurseListScreen);
+          } else if (userRole == "labtechnician") {
+            Get.offAllNamed(AppRoutes.technicianListScreen);
+          } else if (userRole == "practicemanager") {
+            Get.offAllNamed(AppRoutes.practiceManagerListScreen);
+          } else {
+            showCustomSnackBar("Unknown user role: $userRole", isError: true);
           }
 
         } catch (tokenError) {

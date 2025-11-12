@@ -1,13 +1,11 @@
-import 'package:event_platform/core/app_routes/app_routes.dart';
-import 'package:event_platform/utils/app_colors/app_colors.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import '../../../../../../../utils/app_colors/app_colors.dart';
 import '../../../../../../components/custom_button/custom_button.dart';
 import '../../../../../../components/custom_text/custom_text.dart';
 import '../custom_case_card_description/custom_case_card_description.dart';
 
-class CustomLabManagerCaseCard extends StatelessWidget {
-  const CustomLabManagerCaseCard({
+class CustomPracticeManagerCustomCaseCard extends StatelessWidget {
+  const CustomPracticeManagerCustomCaseCard({
     super.key,
     this.title,
     this.doctorName,
@@ -15,9 +13,10 @@ class CustomLabManagerCaseCard extends StatelessWidget {
     this.progress = 0.0,
     this.timeAgo,
     this.onTap,
+    required this.onTapCase,
     this.status = "New",
     this.statusColor,
-    this.all = false,
+    this.newStatus = false,
     this.inProgress = false,
     this.complete = false,
   });
@@ -28,11 +27,12 @@ class CustomLabManagerCaseCard extends StatelessWidget {
   final double progress;
   final String? timeAgo;
   final VoidCallback? onTap;
+  final VoidCallback onTapCase;
 
   final String status;
   final Color? statusColor;
 
-  final bool all;
+  final bool newStatus;
   final bool inProgress;
   final bool complete;
 
@@ -65,7 +65,7 @@ class CustomLabManagerCaseCard extends StatelessWidget {
                 SizedBox(width: 6),
 
                 /// All Badge
-                all == false
+                newStatus == false
                     ? Container(
                         padding:
                             EdgeInsets.symmetric(horizontal: 12, vertical: 4),
@@ -160,9 +160,7 @@ class CustomLabManagerCaseCard extends StatelessWidget {
             /// Button
             CustomButton(
               title: "View Case",
-              onTap: () {
-                Get.toNamed(AppRoutes.viewCaseScreen);
-              },
+              onTap: onTapCase,
               textColor: Colors.white,
               borderRadius: 8,
               height: 45,

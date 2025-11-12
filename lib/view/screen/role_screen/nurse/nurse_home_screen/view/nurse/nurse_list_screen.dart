@@ -5,11 +5,10 @@ import 'package:get/get.dart';
 import '../../../../../../../utils/app_colors/app_colors.dart';
 import '../../../../../../../utils/app_const/app_const.dart';
 import '../../../../../../../utils/app_images/app_images.dart';
-import '../../../../../components/custom_button/custom_button.dart';
-import '../../../../../components/custom_nav_bar/nurse_navbar.dart';
-import '../../../../../components/custom_netwrok_image/custom_network_image.dart';
-import '../../../../../components/custom_text/custom_text.dart';
-
+import '../../../../../../components/custom_button/custom_button.dart';
+import '../../../../../../components/custom_nav_bar/nurse_navbar.dart';
+import '../../../../../../components/custom_netwrok_image/custom_network_image.dart';
+import '../../../../../../components/custom_text/custom_text.dart';
 class NurseListScreen extends StatelessWidget {
   NurseListScreen({super.key});
 

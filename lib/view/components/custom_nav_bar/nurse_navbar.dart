@@ -1,12 +1,11 @@
-import 'package:event_platform/view/screen/role_screen/nurse/nurse_home_screen/nurse_home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import '../../../utils/app_colors/app_colors.dart';
 import '../../../utils/app_icons/app_icons.dart';
-import '../../screen/role_screen/nurse/nurse_home_screen/nurse/nurse_list_screen.dart';
-import '../../screen/role_screen/nurse/nurse_my_case/nurse_my_case_screen.dart';
+import '../../screen/role_screen/nurse/nurse_home_screen/view/nurse/nurse_list_screen.dart';
+import '../../screen/role_screen/nurse/nurse_home_screen/view/nurse_home/nurse_home_screen.dart';
 import '../../screen/role_screen/nurse/nurse_profile/nurse_profile_screen.dart';
 import '../custom_text/custom_text.dart';
 
