@@ -675,7 +675,7 @@ class AddCaseController extends GetxController {
       };
 
       if (scanNumberController.text.trim().isNotEmpty) {
-        body["scan_number"] = scanNumberController.text.trim();
+        body["caseNumber"] = scanNumberController.text.trim();
       }
 
       debugPrint(

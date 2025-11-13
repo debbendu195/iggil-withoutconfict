@@ -1,6 +1,7 @@
 import 'package:event_platform/utils/app_colors/app_colors.dart';
 import 'package:event_platform/view/components/custom_royel_appbar/custom_royel_appbar.dart';
 import 'package:event_platform/view/components/custom_text/custom_text.dart';
+import 'package:event_platform/view/screen/role_screen/dentist/dentist_home/view/case_page/single_case_model/single_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../../../../../utils/app_const/app_const.dart';
@@ -28,7 +29,17 @@ class CaseDocumentScreen extends StatelessWidget {
           if (caseHomeController.getCaseStatus.value == Status.loading && caseHomeController.caseList.isEmpty) {
             return const Center(child: CircularProgressIndicator());
           }
+
+
+
           final caseData =caseHomeController.singleCaseData;
+          String? temp = caseData.value?.standard?.dentures?.toString();
+          String? crown = temp != null && temp.length >= 5 ? temp.substring(10,temp.length-1) : temp;
+
+
+
+
+
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -70,12 +81,14 @@ class CaseDocumentScreen extends StatelessWidget {
                     buildTextRow('age'.tr, caseData.value?.age.toString()??""),
                     buildTextRow('Case Number'.tr, caseData.value?.caseNumber??""),
                     buildTextRow('standardPremium'.tr, caseData.value?.selectedTier??""),
-                    buildTextRow('crownBridge'.tr, caseData.value?.premium?.crownBridge?.toString()??""),
-                    buildTextRow('ppm'.tr, caseData.value?.premium?.crownBridge?.pfm?.toString()??""),
-                    buildTextRow('singleUnitCrown'.tr, controller.singleUnit.value),
-                    buildTextRow('porcelainButtMargin'.tr, controller.porcelain.value),
-                    buildTextRow('toothNumber'.tr, controller.toothNumber.value),
-                    buildTextRow('shade'.tr, controller.shade.value),
+                    buildTextRow('crownBridge'.tr, getMainCategory(caseData.value)),
+                    buildTextRow('ppm'.tr, getEnabledCrownBridgeSection(caseData.value)),
+                    buildTextRow('singleUnitCrown'.tr, getPFMType(caseData.value)),
+                    // buildTextRow('porcelainButtMargin'.tr, controller.porcelain.value),
+                    buildTextRow('porcelainButtMargin'.tr,getPorcelainButtMargin(caseData.value)),
+                    // buildTextRow('toothNumber'.tr, caseData.value.?toothNumber.toString()??""),
+                    buildTextRow('toothNumber'.tr,getAllTeeth(caseData.value).join(', ')),
+                    buildTextRow('shade'.tr,getAllShades(caseData.value).join(', ')),
                     buildTextRow('specialInstruction'.tr, caseData.value?.description??""),
                     buildTextRow('attachments'.tr, controller.attachment.value),
                     buildTextRow('labSection'.tr, "", isLast: true),
